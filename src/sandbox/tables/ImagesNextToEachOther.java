@@ -24,8 +24,8 @@ public class ImagesNextToEachOther {
         document.open();
         PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
-        table.addCell(createImageCell("resources/javaone2013.jpg"));
-        table.addCell(createImageCell("resources/berlin2013.jpg"));
+        table.addCell(createImageCell("resources/images/javaone2013.jpg"));
+        table.addCell(createImageCell("resources/images/berlin2013.jpg"));
         document.add(table);
         document.close();
     }
