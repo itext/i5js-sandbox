@@ -2,8 +2,7 @@
  * Example written by Bruno Lowagie in answer to:
  * http://stackoverflow.com/questions/19976343/how-to-set-the-paragraph-of-itext-pdf-file-as-rectangle-with-background-color-in
  * 
- * We create a table with two columns and two cells.
- * This way, we can add two images next to each other.
+ * We create a Chunk and add a background color.
  */
 package sandbox.objects;
 
