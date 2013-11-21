@@ -25,7 +25,7 @@ public class DottedLineCell {
         	PdfContentByte canvas = canvases[PdfPTable.LINECANVAS];
         	canvas.setLineDash(3f, 3f);
         	float llx = widths[0][0];
-        	float urx = widths[0][widths.length];
+        	float urx = widths[0][widths[0].length -1];
             for (int i = 0; i < heights.length; i++) {
             	canvas.moveTo(llx, heights[i]);
             	canvas.lineTo(urx, heights[i]);
