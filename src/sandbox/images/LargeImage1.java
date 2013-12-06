@@ -35,6 +35,7 @@ public class LargeImage1 {
         Image img = Image.getInstance(imgObject.getImageAsBytes());
         img.scaleToFit(14400, 14400);
         img.setAbsolutePosition(0, 0);
+        reader.close();
         // We create a new document with the correct size
         Document document = new Document(new Rectangle(img.getScaledWidth(), img.getScaledHeight()));
         PdfWriter.getInstance(document, new FileOutputStream("results/large_image1.pdf"));

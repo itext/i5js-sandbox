@@ -39,10 +39,12 @@ public class LargeImage2 {
         stamper.insertPage(1, new Rectangle(img.getScaledWidth(), img.getScaledHeight()));
         stamper.getOverContent(1).addImage(img);
         stamper.close();
+        reader.close();
         // We create a new file that only contains the new first page
         reader = new PdfReader(tmp.getAbsolutePath());
         reader.selectPages("1");
         stamper = new PdfStamper(reader, new FileOutputStream("results/large_image2.pdf"));
         stamper.close();
+        reader.close();
     }
 }

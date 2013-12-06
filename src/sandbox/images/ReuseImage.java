@@ -26,6 +26,7 @@ public class ReuseImage {
         PRStream imgStream = (PRStream) xobjects.getAsStream(imgRef);
         // We now create a new Image object based on the bytes in the stream
         PdfImageObject imgObject = new PdfImageObject(imgStream);
+        reader.close();
         Image img = Image.getInstance(imgObject.getImageAsBytes());
         img.scaleToFit(842, 595);
         img.setAbsolutePosition((842 - img.getScaledWidth()) / 2, (595 - img.getScaledHeight()) / 2);
