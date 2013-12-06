@@ -13,7 +13,7 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 
-public class LargeImage {
+public class LargeImage2 {
 
     public static void main(String[] args) throws DocumentException, IOException {
         PdfReader reader = new PdfReader("resources/pdfs/large_image.pdf");
@@ -42,7 +42,7 @@ public class LargeImage {
         // We create a new file that only contains the new first page
         reader = new PdfReader(tmp.getAbsolutePath());
         reader.selectPages("1");
-        stamper = new PdfStamper(reader, new FileOutputStream("results/large_image.pdf"));
+        stamper = new PdfStamper(reader, new FileOutputStream("results/large_image2.pdf"));
         stamper.close();
     }
 }
