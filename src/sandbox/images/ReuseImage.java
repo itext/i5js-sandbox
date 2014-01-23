@@ -1,23 +1,29 @@
 package sandbox.images;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.pdf.PRStream;
-import com.itextpdf.text.pdf.PdfDictionary;
-import com.itextpdf.text.pdf.PdfName;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.parser.PdfImageObject;
+import sandbox.SandboxTest;
 
-public class ReuseImage {
+public class ReuseImage  extends SandboxTest {
 
-    public static void main(String[] args) throws DocumentException, IOException {
-        PdfReader reader = new PdfReader("resources/pdfs/single_image.pdf");
+    String inputPdf = "./resources/pdfs/single_image.pdf";
+
+    @Override
+    protected String getOutPdf() {
+        return "./results/images/image_on_A4.pdf";
+    }
+
+    @Override
+    protected String getCmpPdf() {
+        return "./resources/results/images/cmp_image_on_A4.pdf";
+    }
+
+    @Override
+    public void makePdf(String outPdf) throws Exception {
+        PdfReader reader = new PdfReader(inputPdf);
         // We assume that there's a single large picture on the first page
         PdfDictionary page = reader.getPageN(1);
         PdfDictionary resources = page.getAsDict(PdfName.RESOURCES);
@@ -32,9 +38,14 @@ public class ReuseImage {
         img.setAbsolutePosition((842 - img.getScaledWidth()) / 2, (595 - img.getScaledHeight()) / 2);
         // We create a new document with the correct size
         Document document = new Document(PageSize.A4.rotate());
-        PdfWriter.getInstance(document, new FileOutputStream("results/image_on_A4.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(outPdf));
         document.open();
         document.add(img);
         document.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        SandboxTest test = new ReuseImage();
+        test.makePdf();
     }
 }

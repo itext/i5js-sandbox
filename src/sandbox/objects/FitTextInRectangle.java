@@ -7,29 +7,33 @@
 package sandbox.objects;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.SandboxTest;
 
-public class FitTextInRectangle {
+public class FitTextInRectangle extends SandboxTest {
 
-    public static void main(String[] args) throws IOException, DocumentException {
+    @Override
+    protected String getOutPdf() {
+        return "./results/objects/chunk_in_rectangle.pdf";
+    }
 
+    @Override
+    protected String getCmpPdf() {
+        return "./resources/results/objects/cmp_chunk_in_rectangle.pdf";
+    }
+
+
+    @Override
+    public void makePdf(String outPdf) throws Exception {
         Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(
-                "results/chunk_in_rectangle.pdf"));
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(outPdf));
         document.open();
-        
+
         // the direct content
         PdfContentByte cb = writer.getDirectContent();
         // the rectangle and the text we want to fit in the rectangle
@@ -53,7 +57,12 @@ public class FitTextInRectangle {
         cb.rectangle(rect.getLeft(), rect.getBottom(), rect.getWidth(), rect.getHeight());
         cb.stroke();
         cb.restoreState();
-        
+
         document.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        SandboxTest test = new FitTextInRectangle();
+        test.makePdf();
     }
 }

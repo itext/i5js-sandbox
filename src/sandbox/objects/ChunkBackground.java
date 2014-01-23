@@ -7,24 +7,32 @@
 package sandbox.objects;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.SandboxTest;
 
-public class ChunkBackground {
+public class ChunkBackground extends SandboxTest {
 
-    public static void main(String[] args) throws IOException,
-            DocumentException {
+    @Override
+    protected String getOutPdf() {
+        return "./results/objects/chunk_background.pdf";
+    }
+
+    @Override
+    protected String getCmpPdf() {
+        return "./resources/results/objects/cmp_chunk_background.pdf";
+    }
+
+    @Override
+    public void makePdf(String outPdf) throws Exception {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(
-                "results/chunk_background.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(outPdf));
         document.open();
         Font f = new Font(FontFamily.TIMES_ROMAN, 25.0f, Font.BOLD, BaseColor.WHITE);
         Chunk c = new Chunk("White text on red background", f);
@@ -32,5 +40,10 @@ public class ChunkBackground {
         Paragraph p = new Paragraph(c);
         document.add(p);
         document.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        SandboxTest test = new ChunkBackground();
+        test.makePdf();
     }
 }

@@ -7,22 +7,29 @@
 package sandbox.tables;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.SandboxTest;
 
-public class LeadingInCell {
+public class LeadingInCell extends SandboxTest {
 
-    public static void main(String[] args) throws IOException,
-            DocumentException {
+    @Override
+    protected String getOutPdf() {
+        return "./results/tables/leading_in_cell.pdf";
+    }
+
+    @Override
+    protected String getCmpPdf() {
+        return "./resources/results/tables/cmp_leading_in_cell.pdf";
+    }
+
+    @Override
+    public void makePdf(String outPdf) throws Exception {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(
-            "results/leading_in_cell.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(outPdf));
         document.open();
         PdfPTable table = new PdfPTable(1);
         PdfPCell cell = new PdfPCell();
@@ -40,5 +47,10 @@ public class LeadingInCell {
         table.addCell(cell);
         document.add(table);
         document.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        SandboxTest test = new LeadingInCell();
+        test.makePdf();
     }
 }

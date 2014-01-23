@@ -1,10 +1,8 @@
 package sandbox.images;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PRStream;
@@ -13,11 +11,25 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.parser.PdfImageObject;
+import sandbox.SandboxTest;
 
-public class LargeImage1 {
+public class LargeImage1 extends SandboxTest {
 
-    public static void main(String[] args) throws DocumentException, IOException {
-        PdfReader reader = new PdfReader("resources/pdfs/large_image.pdf");
+    String inputPdf = "./resources/pdfs/large_image.pdf";
+
+    @Override
+    protected String getOutPdf() {
+        return "./results/images/large_image1.pdf";
+    }
+
+    @Override
+    protected String getCmpPdf() {
+        return "./resources/results/images/cmp_large_image1.pdf";
+    }
+
+    @Override
+    public void makePdf(String outPdf) throws Exception {
+        PdfReader reader = new PdfReader(inputPdf);
         // The width and the height of a PDF page may not exceed 14400 user units:
         Rectangle rect = reader.getPageSize(1);
         if (rect.getWidth() < 14400 && rect.getHeight() < 14400) {
@@ -38,9 +50,14 @@ public class LargeImage1 {
         reader.close();
         // We create a new document with the correct size
         Document document = new Document(new Rectangle(img.getScaledWidth(), img.getScaledHeight()));
-        PdfWriter.getInstance(document, new FileOutputStream("results/large_image1.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(outPdf));
         document.open();
         document.add(img);
         document.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        SandboxTest test = new LargeImage1();
+        test.makePdf();
     }
 }

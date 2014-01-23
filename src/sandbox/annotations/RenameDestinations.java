@@ -8,22 +8,34 @@
 package sandbox.annotations;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfArray;
 import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfString;
+import sandbox.SandboxTest;
 
-public class RenameDestinations {
+public class RenameDestinations extends SandboxTest {
 
-    public static void main(String[] args) throws IOException, DocumentException {
-        PdfReader reader = new PdfReader("resources/pdfs/nameddestinations.pdf");
+    String inputPdf = "./resources/pdfs/nameddestinations.pdf";
+
+    @Override
+    protected String getOutPdf() {
+        return "./results/annotations/nameddests.pdf";
+    }
+
+    @Override
+    protected String getCmpPdf() {
+        return "./resources/results/annotations/cmp_nameddests.pdf";
+    }
+
+    @Override
+    public void makePdf(String outPdf) throws Exception {
+        PdfReader reader = new PdfReader(inputPdf);
         Map<String, PdfString> renamed = new HashMap<String, PdfString>();
         PdfDictionary catalog = reader.getCatalog();
         PdfDictionary names = catalog.getAsDict(PdfName.NAMES);
@@ -50,7 +62,12 @@ public class RenameDestinations {
                 action.put(PdfName.D, renamed.get(n.toString()));
             }
         }
-        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream("results/nameddests.pdf"));
+        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(outPdf));
         stamper.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        SandboxTest test = new RenameDestinations();
+        test.makePdf();
     }
 }
