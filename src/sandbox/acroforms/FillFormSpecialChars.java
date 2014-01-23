@@ -37,7 +37,7 @@ public class FillFormSpecialChars extends SandboxTest {
                 new FileOutputStream(outPdf));
         AcroFields fields = stamper.getAcroFields();
         fields.setGenerateAppearances(true);
-        BaseFont bf = BaseFont.createFont("c:/windows/fonts/arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        BaseFont bf = BaseFont.createFont("./resources/fonts/FreeSans.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         fields.setFieldProperty("test", "textfont", bf, null);
         fields.setField("test", value);
         fields.setFieldProperty("test2", "textfont", bf, null);

@@ -14,6 +14,7 @@ import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfAction;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.junit.Before;
 import sandbox.SandboxTest;
 
 public class RemoteGoto extends SandboxTest {
@@ -23,7 +24,10 @@ public class RemoteGoto extends SandboxTest {
     String outPdf2 = "./results/annotations/xyz.pdf";
     String cmpPdf2 = "./resources/results/annotations/cmp_xyz.pdf";
 
-    static {
+    @Before
+    @Override
+    public void setup() {
+        super.setup();
         new File("./results/annotations/subdir").mkdirs();
     }
 
@@ -34,7 +38,7 @@ public class RemoteGoto extends SandboxTest {
 
     @Override
     public void makePdf(String outPdf) throws Exception {
-    	// first document
+        // first document
         Document document1 = new Document();
         PdfWriter.getInstance(document1, new FileOutputStream(outPdf1));
         document1.open();

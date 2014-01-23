@@ -14,6 +14,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfAction;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.junit.Before;
 import sandbox.SandboxTest;
 
 public class RemoteGoToPage extends SandboxTest {
@@ -23,7 +24,10 @@ public class RemoteGoToPage extends SandboxTest {
     String outPdf2 = "./results/annotations/xyz2.pdf";
     String cmpPdf2 = "./resources/results/annotations/cmp_xyz2.pdf";
 
-    static {
+    @Before
+    @Override
+    public void setup() {
+        super.setup();
         new File("./results/annotations/subdir").mkdirs();
     }
 

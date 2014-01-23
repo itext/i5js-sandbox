@@ -46,8 +46,7 @@ public abstract class SandboxTest extends ITextTest {
         String testDir = this.getClass().getPackage().getName();
         testDir = testDir.substring(testDir.lastIndexOf('.') + 1);
         File dir = new File(String.format("./results/%s", testDir));
-        if (dir.exists()) super.deleteFiles(dir);
-        else dir.mkdirs();
+        dir.mkdirs();
     }
 
     @Test(timeout = 60000)
