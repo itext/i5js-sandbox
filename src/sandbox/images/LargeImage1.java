@@ -1,5 +1,6 @@
 package sandbox.images;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -16,12 +17,21 @@ import com.itextpdf.text.pdf.parser.PdfImageObject;
 
 public class LargeImage1 {
 
+	public static final String SRC = "../sandbox/resources/pdfs/large_image.pdf";
+	public static final String DEST = "../sandbox/results/images/large_image1.pdf";
+	
     public static void main(String[] args) throws DocumentException, IOException {
-        PdfReader reader = new PdfReader("resources/pdfs/large_image.pdf");
+    	File file = new File(DEST);
+    	file.getParentFile().mkdirs();
+    	new LargeImage1().manipulatePdf(SRC, DEST);
+    }
+    
+    public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
+        PdfReader reader = new PdfReader(src);
         // The width and the height of a PDF page may not exceed 14400 user units:
         Rectangle rect = reader.getPageSize(1);
         if (rect.getWidth() < 14400 && rect.getHeight() < 14400) {
-            System.out.println("The size of the PDF document is withing the accepted limits");
+            System.out.println("The size of the PDF document is within the accepted limits");
             System.exit(0);
         }
         // We assume that there's a single large picture on the first page
@@ -38,7 +48,7 @@ public class LargeImage1 {
         reader.close();
         // We create a new document with the correct size
         Document document = new Document(new Rectangle(img.getScaledWidth(), img.getScaledHeight()));
-        PdfWriter.getInstance(document, new FileOutputStream("results/large_image1.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         document.add(img);
         document.close();
