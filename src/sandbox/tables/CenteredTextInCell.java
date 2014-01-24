@@ -23,7 +23,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class CenteredTextInCell {
 
-	public static final String DEST = "results/tables/centered_text.pdf";
+	public static final String DEST = "../sandbox/results/tables/centered_text.pdf";
 	
     public static void main(String[] args) throws IOException, DocumentException {
     	File file = new File(DEST);
@@ -31,9 +31,9 @@ public class CenteredTextInCell {
     	new CenteredTextInCell().createPdf(DEST);
     }
     
-    public void createPdf(String filename) throws IOException, DocumentException {
+    public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(DEST));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         Font font = new Font(FontFamily.HELVETICA, 12, Font.BOLD);
         Paragraph para = new Paragraph("Test", font);

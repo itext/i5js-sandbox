@@ -7,6 +7,7 @@
  */
 package sandbox.tables;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -18,14 +19,25 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class ImagesNextToEachOther {
-    public static void main(String[] args) throws IOException, DocumentException {
+	public static final String DEST = "../sandbox/results/tables/images_next_to_each_other.pdf";
+	public static final String IMG1 = "../sandbox/resources/images/javaone2013.jpg";
+	public static final String IMG2 = "../sandbox/resources/images/berlin2013.jpg";
+
+    public static void main(String[] args) throws IOException,
+            DocumentException {
+    	File file = new File(DEST);
+    	file.getParentFile().mkdirs();
+    	new ImagesNextToEachOther().createPdf(DEST);
+    }
+    
+    public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("results/images_next_to_each_other.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
-        table.addCell(createImageCell("resources/javaone2013.jpg"));
-        table.addCell(createImageCell("resources/berlin2013.jpg"));
+        table.addCell(createImageCell(IMG1));
+        table.addCell(createImageCell(IMG2));
         document.add(table);
         document.close();
     }

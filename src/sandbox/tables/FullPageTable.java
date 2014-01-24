@@ -7,6 +7,7 @@
  */
 package sandbox.tables;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -22,11 +23,18 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class FullPageTable {
 
+	public static final String DEST = "../sandbox/results/tables/full_page_table.pdf";
+
     public static void main(String[] args) throws IOException,
             DocumentException {
+    	File file = new File(DEST);
+    	file.getParentFile().mkdirs();
+    	new FullPageTable().createPdf(DEST);
+    }
+    
+    public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document(PageSize.A4, 0, 0, 0, 0);
-        PdfWriter.getInstance(document, new FileOutputStream(
-                "results/full_page_table.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         PdfPTable table = new PdfPTable(10);
 

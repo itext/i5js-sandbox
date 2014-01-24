@@ -22,7 +22,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class ChunkBackground {
 
-	public static final String DEST = "results/objects/chunk_background.pdf";
+	public static final String DEST = "../sandbox/results/objects/chunk_background.pdf";
 	
     public static void main(String[] args) throws IOException,
             DocumentException {
@@ -31,9 +31,9 @@ public class ChunkBackground {
     	new ChunkBackground().createPdf(DEST);
     }
     
-    public void createPdf(String filename) throws IOException, DocumentException {
+    public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(filename));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         Font f = new Font(FontFamily.TIMES_ROMAN, 25.0f, Font.BOLD, BaseColor.WHITE);
         Chunk c = new Chunk("White text on red background", f);

@@ -1,5 +1,6 @@
 package sandbox.tables;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -16,6 +17,8 @@ import com.itextpdf.text.pdf.PdfPTableEvent;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class DottedLineCell {
+
+	public static final String DEST = "../sandbox/results/tables/dotted_line_cell.pdf";
 	
     class DottedCells implements PdfPTableEvent {
         @Override
@@ -53,10 +56,15 @@ public class DottedLineCell {
     }
     
     public static void main(String[] args) throws IOException, DocumentException {
+    	File file = new File(DEST);
+    	file.getParentFile().mkdirs();
+    	new DottedLineCell().createPdf(DEST);
+    }
+    
+    public void createPdf(String dest) throws IOException, DocumentException {
     	DottedLineCell app = new DottedLineCell();
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(
-                "results/dotted_line_cell.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         document.add(new Paragraph("Table event"));
         PdfPTable table = new PdfPTable(3);
