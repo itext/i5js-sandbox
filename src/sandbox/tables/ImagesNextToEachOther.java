@@ -10,45 +10,29 @@ package sandbox.tables;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import sandbox.SandboxTest;
 
-public class ImagesNextToEachOther extends SandboxTest {
-
-    @Override
-    protected String getOutPdf() {
-        return "./results/tables/images_next_to_each_other.pdf";
-    }
-
-    @Override
-    protected String getCmpPdf() {
-        return "./resources/results/tables/cmp_images_next_to_each_other.pdf";
-    }
-
-    @Override
-    public void makePdf(String outPdf) throws Exception {
+public class ImagesNextToEachOther {
+    public static void main(String[] args) throws IOException, DocumentException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(outPdf));
+        PdfWriter.getInstance(document, new FileOutputStream("results/images_next_to_each_other.pdf"));
         document.open();
         PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
-        table.addCell(createImageCell("./resources/images/javaone2013.jpg"));
-        table.addCell(createImageCell("./resources/images/berlin2013.jpg"));
+        table.addCell(createImageCell("resources/javaone2013.jpg"));
+        table.addCell(createImageCell("resources/berlin2013.jpg"));
         document.add(table);
         document.close();
     }
-
-    public PdfPCell createImageCell(String path) throws DocumentException, IOException {
+    
+    public static PdfPCell createImageCell(String path) throws DocumentException, IOException {
         Image img = Image.getInstance(path);
-        PdfPCell cell = new PdfPCell(img, true);
-        return cell;
-    }
-
-    public static void main(String[] args) throws Exception {
-        SandboxTest test = new ImagesNextToEachOther();
-        test.makePdf();
+    	PdfPCell cell = new PdfPCell(img, true);
+    	return cell;
     }
 }

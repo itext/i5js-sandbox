@@ -8,30 +8,23 @@
 package sandbox.tables;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import sandbox.SandboxTest;
 
-public class CenteredTextInCell extends SandboxTest {
+public class CenteredTextInCell {
 
-    @Override
-    protected String getOutPdf() {
-        return "./results/tables/centered_text.pdf";
-    }
-
-    @Override
-    protected String getCmpPdf() {
-        return "./resources/results/tables/cmp_centered_text.pdf";
-    }
-
-    @Override
-    public void makePdf(String outPdf) throws Exception {
+    public static void main(String[] args) throws IOException, DocumentException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(outPdf));
+        PdfWriter.getInstance(document, new FileOutputStream("results/centered_text.pdf"));
         document.open();
         Font font = new Font(FontFamily.HELVETICA, 12, Font.BOLD);
         Paragraph para = new Paragraph("Test", font);
@@ -45,10 +38,5 @@ public class CenteredTextInCell extends SandboxTest {
         table.addCell(cell);
         document.add(table);
         document.close();
-    }
-
-    public static void main(String[] args) throws Exception {
-        SandboxTest test = new CenteredTextInCell();
-        test.makePdf();
     }
 }

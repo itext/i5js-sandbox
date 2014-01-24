@@ -7,37 +7,31 @@
 package sandbox.tables;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 
-import com.itextpdf.text.*;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.HyphenationAuto;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.hyphenation.Hyphenation;
 import com.itextpdf.text.pdf.hyphenation.Hyphenator;
-import sandbox.SandboxTest;
 
-public class HyphenationExample extends SandboxTest {
+public class HyphenationExample {
 
-    @Override
-    protected String getOutPdf() {
-        return "./results/tables/hyphenation_table.pdf";
-    }
-
-    @Override
-    protected String getCmpPdf() {
-        return "./resources/results/tables/cmp_hyphenation_table.pdf";
-    }
-
-    @Override
-    public void makePdf(String outPdf) throws Exception {
+    public static void main(String[] args) throws IOException, DocumentException {
         Hyphenator h = new Hyphenator("de", "DE", 2, 2);
-        Hyphenation s = h.hyphenate("Leistungsscheinziffer");
+        Hyphenation s = h.hyphenate("Leistungsscheinziffer"); 
         System.out.println(s);
 
         Document document = new Document(PageSize.A4, 0, 0, 0, 0);
-        PdfWriter.getInstance(document, new FileOutputStream(outPdf));
+        PdfWriter.getInstance(document, new FileOutputStream(
+                "results/hyphenation_table.pdf"));
         document.open();
-
+        
         PdfPTable table = new PdfPTable(1);
         table.setWidthPercentage(10);
         Chunk chunk = new Chunk("Leistungsscheinziffer");
@@ -49,10 +43,5 @@ public class HyphenationExample extends SandboxTest {
         table.addCell(phrase);
         document.add(table);
         document.close();
-    }
-
-    public static void main(String[] args) throws Exception {
-        SandboxTest test = new HyphenationExample();
-        test.makePdf();
-    }
+	}
 }

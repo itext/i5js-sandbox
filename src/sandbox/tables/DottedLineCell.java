@@ -1,68 +1,62 @@
 package sandbox.tables;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPCellEvent;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPTableEvent;
 import com.itextpdf.text.pdf.PdfWriter;
-import sandbox.SandboxTest;
 
-public class DottedLineCell extends SandboxTest {
-
+public class DottedLineCell {
+	
     class DottedCells implements PdfPTableEvent {
-
+        @Override
         public void tableLayout(PdfPTable table, float[][] widths,
-                                float[] heights, int headerRows, int rowStart,
-                                PdfContentByte[] canvases) {
-            PdfContentByte canvas = canvases[PdfPTable.LINECANVAS];
-            canvas.setLineDash(3f, 3f);
-            float llx = widths[0][0];
-            float urx = widths[0][widths[0].length -1];
+            float[] heights, int headerRows, int rowStart,
+            PdfContentByte[] canvases) {
+        	PdfContentByte canvas = canvases[PdfPTable.LINECANVAS];
+        	canvas.setLineDash(3f, 3f);
+        	float llx = widths[0][0];
+        	float urx = widths[0][widths.length];
             for (int i = 0; i < heights.length; i++) {
-                canvas.moveTo(llx, heights[i]);
-                canvas.lineTo(urx, heights[i]);
+            	canvas.moveTo(llx, heights[i]);
+            	canvas.lineTo(urx, heights[i]);
             }
             for (int i = 0; i < widths.length; i++) {
-                for (int j = 0; j < widths[i].length; j++) {
-                    canvas.moveTo(widths[i][j], heights[i]);
-                    canvas.lineTo(widths[i][j], heights[i+1]);
-                }
+            	for (int j = 0; j < widths[i].length; j++) {
+            	    canvas.moveTo(widths[i][j], heights[i]);
+            	    canvas.lineTo(widths[i][j], heights[i+1]);
+            	}
             }
             canvas.stroke();
         }
     }
-
+	
     class DottedCell implements PdfPCellEvent {
-
+        @Override
         public void cellLayout(PdfPCell cell, Rectangle position,
-                               PdfContentByte[] canvases) {
-            PdfContentByte canvas = canvases[PdfPTable.LINECANVAS];
-            canvas.setLineDash(3f, 3f);
-            canvas.rectangle(position.getLeft(), position.getBottom(),
-                    position.getWidth(), position.getHeight());
-            canvas.stroke();
+            PdfContentByte[] canvases) {
+        	PdfContentByte canvas = canvases[PdfPTable.LINECANVAS];
+        	canvas.setLineDash(3f, 3f);
+        	canvas.rectangle(position.getLeft(), position.getBottom(),
+        	    position.getWidth(), position.getHeight());
+        	canvas.stroke();
         }
     }
-
-    @Override
-    protected String getOutPdf() {
-        return "./results/tables/dotted_line_cell.pdf";
-    }
-
-    @Override
-    protected String getCmpPdf() {
-        return "./resources/results/tables/cmp_dotted_line_cell.pdf";
-    }
-
-    @Override
-    public void makePdf(String outPdf) throws Exception {
-        DottedLineCell app = new DottedLineCell();
+    
+    public static void main(String[] args) throws IOException, DocumentException {
+    	DottedLineCell app = new DottedLineCell();
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(outPdf));
+        PdfWriter.getInstance(document, new FileOutputStream(
+                "results/dotted_line_cell.pdf"));
         document.open();
         document.add(new Paragraph("Table event"));
         PdfPTable table = new PdfPTable(3);
@@ -86,10 +80,5 @@ public class DottedLineCell extends SandboxTest {
         table.addCell(cell);
         document.add(table);
         document.close();
-    }
-
-    public static void main(String[] args) throws Exception {
-        SandboxTest test = new DottedLineCell();
-        test.makePdf();
     }
 }
