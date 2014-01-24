@@ -30,8 +30,6 @@ public class RemoteGoto {
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {
-        File subdir = new File("results/subdir");
-        subdir.mkdirs();
         // first document
         Document document1 = new Document();
         PdfWriter.getInstance(document1, new FileOutputStream(dest));
