@@ -22,8 +22,16 @@ import com.itextpdf.text.pdf.PdfString;
 
 public class RenameDestinations {
 
+	public static final String SRC = "../sandbox/resources/pdfs/nameddestinations.pdf";
+	public static final String DEST = "../sandbox/results/nameddests.pdf";
+	
     public static void main(String[] args) throws IOException, DocumentException {
-        PdfReader reader = new PdfReader("resources/pdfs/nameddestinations.pdf");
+    	RenameDestinations app = new RenameDestinations();
+    	app.manipulatePdf(SRC, DEST);
+    }
+    
+    public void manipulatePdf(String src, String dest) throws IOException, DocumentException {
+        PdfReader reader = new PdfReader(src);
         Map<String, PdfString> renamed = new HashMap<String, PdfString>();
         PdfDictionary catalog = reader.getCatalog();
         PdfDictionary names = catalog.getAsDict(PdfName.NAMES);
@@ -50,7 +58,10 @@ public class RenameDestinations {
                 action.put(PdfName.D, renamed.get(n.toString()));
             }
         }
-        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream("results/nameddests.pdf"));
+        try {
+        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
         stamper.close();
+        }
+        catch(Exception e) { e.printStackTrace(); }
     }
 }
