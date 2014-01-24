@@ -17,13 +17,13 @@ import com.itextpdf.text.pdf.parser.PdfImageObject;
 
 public class LargeImage1 {
 
-	public static final String SRC = "../sandbox/resources/pdfs/large_image.pdf";
-	public static final String DEST = "../sandbox/results/images/large_image1.pdf";
-	
+    public static final String SRC = "../sandbox/resources/pdfs/large_image.pdf";
+    public static final String DEST = "../sandbox/results/images/large_image1.pdf";
+    
     public static void main(String[] args) throws DocumentException, IOException {
-    	File file = new File(DEST);
-    	file.getParentFile().mkdirs();
-    	new LargeImage1().manipulatePdf(SRC, DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new LargeImage1().manipulatePdf(SRC, DEST);
     }
     
     public void manipulatePdf(String src, String dest) throws DocumentException, IOException {

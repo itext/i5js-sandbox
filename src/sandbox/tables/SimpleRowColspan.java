@@ -19,13 +19,13 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class SimpleRowColspan {
-	public static final String DEST = "../sandbox/results/tables/simple_rowspan_colspan.pdf";
+    public static final String DEST = "../sandbox/results/tables/simple_rowspan_colspan.pdf";
 
     public static void main(String[] args) throws IOException,
             DocumentException {
-    	File file = new File(DEST);
-    	file.getParentFile().mkdirs();
-    	new SimpleRowColspan().createPdf(DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new SimpleRowColspan().createPdf(DEST);
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {

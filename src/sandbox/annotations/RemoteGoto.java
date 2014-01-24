@@ -18,22 +18,34 @@ import com.itextpdf.text.pdf.PdfAction;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class RemoteGoto {
+    public static final String DEST = "../sandbox/results/annotations/subdir/abc.pdf";
+    public static final String SRC = "../sandbox/results/annotations/xyz.pdf";
+    
     public static void main(String[] args) throws IOException, DocumentException {
-    	File subdir = new File("results/subdir");
-    	subdir.mkdirs();
-    	// first document
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        RemoteGoto app = new RemoteGoto();
+        app.createPdf(DEST);
+        app.createPdf2(SRC);
+    }
+    
+    public void createPdf(String dest) throws IOException, DocumentException {
+        File subdir = new File("results/subdir");
+        subdir.mkdirs();
+        // first document
         Document document1 = new Document();
-        PdfWriter.getInstance(document1, new FileOutputStream(
-            "results/subdir/abc.pdf"));
+        PdfWriter.getInstance(document1, new FileOutputStream(dest));
         document1.open();
         Anchor anchor = new Anchor("This is a destination");
         anchor.setName("dest");
         document1.add(anchor);
         document1.close();
+    }
+    
+    public void createPdf2(String src) throws IOException, DocumentException {
         // second document (with a link to the first one)
         Document document2 = new Document();
-        PdfWriter.getInstance(document2, new FileOutputStream(
-            "results/xyz.pdf"));
+        PdfWriter.getInstance(document2, new FileOutputStream(src));
         document2.open();
         Chunk chunk = new Chunk("Link");
         chunk.setAction(PdfAction.gotoRemotePage("subdir/abc.pdf", "dest", false,  true));

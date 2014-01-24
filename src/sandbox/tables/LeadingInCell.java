@@ -19,13 +19,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class LeadingInCell {
 
-	public static final String DEST = "../sandbox/results/tables/leading_in_cell.pdf";
+    public static final String DEST = "../sandbox/results/tables/leading_in_cell.pdf";
 
     public static void main(String[] args) throws IOException,
             DocumentException {
-    	File file = new File(DEST);
-    	file.getParentFile().mkdirs();
-    	new LeadingInCell().createPdf(DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new LeadingInCell().createPdf(DEST);
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {

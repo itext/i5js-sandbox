@@ -18,12 +18,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 
 public class FullDottedLine {
-	public static final String DEST = "../sandbox/results/objects/full_dotted_line.pdf";
-	
+    public static final String DEST = "../sandbox/results/objects/full_dotted_line.pdf";
+    
     public static void main(String[] args) throws IOException, DocumentException {
-    	File file = new File(DEST);
-    	file.getParentFile().mkdirs();
-    	new FullDottedLine().createPdf(DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new FullDottedLine().createPdf(DEST);
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {

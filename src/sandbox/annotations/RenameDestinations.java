@@ -7,6 +7,7 @@
  */
 package sandbox.annotations;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,12 +23,14 @@ import com.itextpdf.text.pdf.PdfString;
 
 public class RenameDestinations {
 
-	public static final String SRC = "../sandbox/resources/pdfs/nameddestinations.pdf";
-	public static final String DEST = "../sandbox/results/nameddests.pdf";
-	
+    public static final String SRC = "../sandbox/resources/pdfs/nameddestinations.pdf";
+    public static final String DEST = "../sandbox/results/annotations/nameddests.pdf";
+    
     public static void main(String[] args) throws IOException, DocumentException {
-    	RenameDestinations app = new RenameDestinations();
-    	app.manipulatePdf(SRC, DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        RenameDestinations app = new RenameDestinations();
+        app.manipulatePdf(SRC, DEST);
     }
     
     public void manipulatePdf(String src, String dest) throws IOException, DocumentException {

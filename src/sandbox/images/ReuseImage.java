@@ -17,13 +17,13 @@ import com.itextpdf.text.pdf.parser.PdfImageObject;
 
 public class ReuseImage {
 
-	public static final String SRC = "../sandbox/resources/pdfs/single_image.pdf";
-	public static final String DEST = "../sandbox/results/images/image_on_A4.pdf";
+    public static final String SRC = "../sandbox/resources/pdfs/single_image.pdf";
+    public static final String DEST = "../sandbox/results/images/image_on_A4.pdf";
 
     public static void main(String[] args) throws DocumentException, IOException {
-    	File file = new File(DEST);
-    	file.getParentFile().mkdirs();
-    	new ReuseImage().manipulatePdf(SRC, DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new ReuseImage().manipulatePdf(SRC, DEST);
     }
     
     public void manipulatePdf(String src, String dest) throws DocumentException, IOException {

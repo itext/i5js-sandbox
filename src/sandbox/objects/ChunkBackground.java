@@ -22,13 +22,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class ChunkBackground {
 
-	public static final String DEST = "../sandbox/results/objects/chunk_background.pdf";
-	
+    public static final String DEST = "../sandbox/results/objects/chunk_background.pdf";
+    
     public static void main(String[] args) throws IOException,
             DocumentException {
-    	File file = new File(DEST);
-    	file.getParentFile().mkdirs();
-    	new ChunkBackground().createPdf(DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new ChunkBackground().createPdf(DEST);
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {

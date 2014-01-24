@@ -19,15 +19,15 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class ImagesNextToEachOther {
-	public static final String DEST = "../sandbox/results/tables/images_next_to_each_other.pdf";
-	public static final String IMG1 = "../sandbox/resources/images/javaone2013.jpg";
-	public static final String IMG2 = "../sandbox/resources/images/berlin2013.jpg";
+    public static final String DEST = "../sandbox/results/tables/images_next_to_each_other.pdf";
+    public static final String IMG1 = "../sandbox/resources/images/javaone2013.jpg";
+    public static final String IMG2 = "../sandbox/resources/images/berlin2013.jpg";
 
     public static void main(String[] args) throws IOException,
             DocumentException {
-    	File file = new File(DEST);
-    	file.getParentFile().mkdirs();
-    	new ImagesNextToEachOther().createPdf(DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new ImagesNextToEachOther().createPdf(DEST);
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {
@@ -44,7 +44,7 @@ public class ImagesNextToEachOther {
     
     public static PdfPCell createImageCell(String path) throws DocumentException, IOException {
         Image img = Image.getInstance(path);
-    	PdfPCell cell = new PdfPCell(img, true);
-    	return cell;
+        PdfPCell cell = new PdfPCell(img, true);
+        return cell;
     }
 }

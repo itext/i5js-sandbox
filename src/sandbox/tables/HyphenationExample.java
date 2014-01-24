@@ -23,13 +23,13 @@ import com.itextpdf.text.pdf.hyphenation.Hyphenator;
 
 public class HyphenationExample {
 
-	public static final String DEST = "../sandbox/results/tables/hyphenation_table";
+    public static final String DEST = "../sandbox/results/tables/hyphenation_table";
 
     public static void main(String[] args) throws IOException,
             DocumentException {
-    	File file = new File(DEST);
-    	file.getParentFile().mkdirs();
-    	new HyphenationExample().createPdf(DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new HyphenationExample().createPdf(DEST);
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {
@@ -52,5 +52,5 @@ public class HyphenationExample {
         table.addCell(phrase);
         document.add(table);
         document.close();
-	}
+    }
 }

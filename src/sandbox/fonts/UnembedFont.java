@@ -21,10 +21,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class UnembedFont {
 
+    public static final String SRC = "../sandbox/results/fonts/withTimesNewRoman.pdf";
+    public static final String DEST = "../sandbox/results/fonts/withoutTimesNewRoman.pdf";
+
     public static void main(String[] args) throws DocumentException, IOException {
         UnembedFont app = new UnembedFont();
-        app.createPdf("results/withTimesNewRoman.pdf");
-        app.manipulatePdf("results/withTimesNewRoman.pdf", "results/withoutTimesNewRoman.pdf");
+        app.createPdf(SRC);
+        app.manipulatePdf(SRC, DEST);
     }
     
     /**
