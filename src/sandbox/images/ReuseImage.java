@@ -1,5 +1,6 @@
 package sandbox.images;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -16,8 +17,17 @@ import com.itextpdf.text.pdf.parser.PdfImageObject;
 
 public class ReuseImage {
 
+	public static final String SRC = "../sandbox/resources/pdfs/single_image.pdf";
+	public static final String DEST = "../sandbox/results/images/image_on_A4.pdf";
+
     public static void main(String[] args) throws DocumentException, IOException {
-        PdfReader reader = new PdfReader("resources/pdfs/single_image.pdf");
+    	File file = new File(DEST);
+    	file.getParentFile().mkdirs();
+    	new ReuseImage().manipulatePdf(SRC, DEST);
+    }
+    
+    public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
+        PdfReader reader = new PdfReader(src);
         // We assume that there's a single large picture on the first page
         PdfDictionary page = reader.getPageN(1);
         PdfDictionary resources = page.getAsDict(PdfName.RESOURCES);
@@ -32,7 +42,7 @@ public class ReuseImage {
         img.setAbsolutePosition((842 - img.getScaledWidth()) / 2, (595 - img.getScaledHeight()) / 2);
         // We create a new document with the correct size
         Document document = new Document(PageSize.A4.rotate());
-        PdfWriter.getInstance(document, new FileOutputStream("results/image_on_A4.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         document.add(img);
         document.close();

@@ -15,8 +15,17 @@ import com.itextpdf.text.pdf.PdfStamper;
 
 public class LargeImage2 {
 
+	public static final String SRC = "../sandbox/resources/pdfs/large_image.pdf";
+	public static final String DEST = "../sandbox/results/images/large_image2.pdf";
+	
     public static void main(String[] args) throws DocumentException, IOException {
-        PdfReader reader = new PdfReader("resources/pdfs/large_image.pdf");
+    	File file = new File(DEST);
+    	file.getParentFile().mkdirs();
+    	new LargeImage2().manipulatePdf(SRC, DEST);
+    }
+    
+    public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
+        PdfReader reader = new PdfReader(src);
         // The width and the height of a PDF page may not exceed 14400 user units:
         Rectangle rect = reader.getPageSize(1);
         if (rect.getWidth() < 14400 && rect.getHeight() < 14400) {
@@ -43,7 +52,7 @@ public class LargeImage2 {
         // We create a new file that only contains the new first page
         reader = new PdfReader(tmp.getAbsolutePath());
         reader.selectPages("1");
-        stamper = new PdfStamper(reader, new FileOutputStream("results/large_image2.pdf"));
+        stamper = new PdfStamper(reader, new FileOutputStream(dest));
         stamper.close();
         reader.close();
     }
