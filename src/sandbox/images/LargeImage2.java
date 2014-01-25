@@ -15,8 +15,8 @@ import com.itextpdf.text.pdf.PdfStamper;
 
 public class LargeImage2 {
 
-    public static final String SRC = "../sandbox/resources/pdfs/large_image.pdf";
-    public static final String DEST = "../sandbox/results/images/large_image2.pdf";
+    public static final String SRC = "resources/pdfs/large_image.pdf";
+    public static final String DEST = "results/images/large_image2.pdf";
     
     public static void main(String[] args) throws DocumentException, IOException {
         File file = new File(DEST);

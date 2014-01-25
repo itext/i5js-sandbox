@@ -21,8 +21,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class UnembedFont {
 
-    public static final String SRC = "../sandbox/results/fonts/withTimesNewRoman.pdf";
-    public static final String DEST = "../sandbox/results/fonts/withoutTimesNewRoman.pdf";
+    public static final String SRC = "results/fonts/withTimesNewRoman.pdf";
+    public static final String DEST = "results/fonts/withoutTimesNewRoman.pdf";
 
     public static void main(String[] args) throws DocumentException, IOException {
         UnembedFont app = new UnembedFont();

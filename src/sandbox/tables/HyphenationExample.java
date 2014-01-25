@@ -23,7 +23,7 @@ import com.itextpdf.text.pdf.hyphenation.Hyphenator;
 
 public class HyphenationExample {
 
-    public static final String DEST = "../sandbox/results/tables/hyphenation_table";
+    public static final String DEST = "results/tables/hyphenation_table";
 
     public static void main(String[] args) throws IOException,
             DocumentException {

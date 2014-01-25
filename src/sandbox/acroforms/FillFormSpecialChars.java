@@ -18,10 +18,10 @@ import com.itextpdf.text.pdf.PdfStamper;
 
 public class FillFormSpecialChars {
     
-    public static final String SRC = "../sandbox/resources/pdfs/test.pdf";
-    public static final String DEST = "../sandbox/results/acroforms/test.pdf";
+    public static final String SRC = "resources/pdfs/test.pdf";
+    public static final String DEST = "results/acroforms/test.pdf";
     public static final String VALUE = "\u011b\u0161\u010d\u0159\u017e\u00fd\u00e1\u00ed\u00e9";
-    public static final String FONT = "../sandbox/resources/fonts/FreeSans.ttf";
+    public static final String FONT = "resources/fonts/FreeSans.ttf";
 
     public static void main(String[] args) throws DocumentException, IOException {
         File file = new File(DEST);

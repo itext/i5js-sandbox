@@ -23,7 +23,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class FullPageTable {
 
-    public static final String DEST = "../sandbox/results/tables/full_page_table.pdf";
+    public static final String DEST = "results/tables/full_page_table.pdf";
 
     public static void main(String[] args) throws IOException,
             DocumentException {

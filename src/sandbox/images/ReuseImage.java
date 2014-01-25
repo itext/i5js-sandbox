@@ -17,8 +17,8 @@ import com.itextpdf.text.pdf.parser.PdfImageObject;
 
 public class ReuseImage {
 
-    public static final String SRC = "../sandbox/resources/pdfs/single_image.pdf";
-    public static final String DEST = "../sandbox/results/images/image_on_A4.pdf";
+    public static final String SRC = "resources/pdfs/single_image.pdf";
+    public static final String DEST = "results/images/image_on_A4.pdf";
 
     public static void main(String[] args) throws DocumentException, IOException {
         File file = new File(DEST);

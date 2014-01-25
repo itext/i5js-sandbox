@@ -23,7 +23,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class CenteredTextInCell {
 
-    public static final String DEST = "../sandbox/results/tables/centered_text.pdf";
+    public static final String DEST = "results/tables/centered_text.pdf";
     
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);

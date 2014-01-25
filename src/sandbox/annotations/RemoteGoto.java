@@ -18,8 +18,8 @@ import com.itextpdf.text.pdf.PdfAction;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class RemoteGoto {
-    public static final String DEST = "../sandbox/results/annotations/subdir/abc.pdf";
-    public static final String SRC = "../sandbox/results/annotations/xyz.pdf";
+    public static final String DEST = "results/annotations/subdir/abc.pdf";
+    public static final String SRC = "results/annotations/xyz.pdf";
     
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);

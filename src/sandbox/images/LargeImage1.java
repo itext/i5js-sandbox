@@ -17,8 +17,8 @@ import com.itextpdf.text.pdf.parser.PdfImageObject;
 
 public class LargeImage1 {
 
-    public static final String SRC = "../sandbox/resources/pdfs/large_image.pdf";
-    public static final String DEST = "../sandbox/results/images/large_image1.pdf";
+    public static final String SRC = "resources/pdfs/large_image.pdf";
+    public static final String DEST = "results/images/large_image1.pdf";
     
     public static void main(String[] args) throws DocumentException, IOException {
         File file = new File(DEST);

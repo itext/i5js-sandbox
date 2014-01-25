@@ -19,8 +19,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class SmallCapsExample {
 
-    public static final String DEST = "../sandbox/results/fonts/small_caps.pdf";
-    public static final String FONT = "../sandbox/resources/fonts/Delicious-SmallCaps.otf";
+    public static final String DEST = "results/fonts/small_caps.pdf";
+    public static final String FONT = "resources/fonts/Delicious-SmallCaps.otf";
     
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);

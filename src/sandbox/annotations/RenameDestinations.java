@@ -23,8 +23,8 @@ import com.itextpdf.text.pdf.PdfString;
 
 public class RenameDestinations {
 
-    public static final String SRC = "../sandbox/resources/pdfs/nameddestinations.pdf";
-    public static final String DEST = "../sandbox/results/annotations/nameddests.pdf";
+    public static final String SRC = "resources/pdfs/nameddestinations.pdf";
+    public static final String DEST = "results/annotations/nameddests.pdf";
     
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);

@@ -24,7 +24,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class FitTextInRectangle {
 
-    public static final String DEST = "../sandbox/results/objects/chunk_in_rectangle.pdf";
+    public static final String DEST = "results/objects/chunk_in_rectangle.pdf";
     
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);

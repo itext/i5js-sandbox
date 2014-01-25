@@ -19,9 +19,9 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class ImagesNextToEachOther {
-    public static final String DEST = "../sandbox/results/tables/images_next_to_each_other.pdf";
-    public static final String IMG1 = "../sandbox/resources/images/javaone2013.jpg";
-    public static final String IMG2 = "../sandbox/resources/images/berlin2013.jpg";
+    public static final String DEST = "results/tables/images_next_to_each_other.pdf";
+    public static final String IMG1 = "resources/images/javaone2013.jpg";
+    public static final String IMG2 = "resources/images/berlin2013.jpg";
 
     public static void main(String[] args) throws IOException,
             DocumentException {

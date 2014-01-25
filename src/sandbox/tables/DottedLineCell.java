@@ -18,7 +18,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class DottedLineCell {
 
-    public static final String DEST = "../sandbox/results/tables/dotted_line_cell.pdf";
+    public static final String DEST = "results/tables/dotted_line_cell.pdf";
     
     class DottedCells implements PdfPTableEvent {
         @Override
