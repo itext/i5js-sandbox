@@ -17,6 +17,6 @@ public class LeadingInCell extends GenericTest {
 
     @Override
     protected String getCmpPdf() {
-        return "./test/results/tables/cmp_leading_in_cell.pdf";
+        return "cmpfiles/tables/cmp_leading_in_cell.pdf";
     }
 }

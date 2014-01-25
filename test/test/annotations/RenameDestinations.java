@@ -18,6 +18,6 @@ public class RenameDestinations extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/annotations/cmp_nameddests.pdf";
+        return "cmpfiles/annotations/cmp_nameddests.pdf";
     }
 }

@@ -15,7 +15,7 @@ public class RemoteGoto extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/annotations/subdir/cmp_abc.pdf";
+        return "cmpfiles/annotations/subdir/cmp_abc.pdf";
     }
 
 	/**
@@ -37,7 +37,7 @@ public class RemoteGoto extends GenericTest {
         // Do some further tests on the PDF
         assertPdf(dest);
         // Compare the destination PDF with a reference PDF
-        comparePdf(src, "./test/results/annotations/cmp_xyz.pdf");
+        comparePdf(src, "cmpfiles/annotations/cmp_xyz.pdf");
         comparePdf(dest, getCmpPdf());
     }
 }

@@ -11,6 +11,6 @@ public class LargeImage1 extends GenericTest {
 
     @Override
     protected String getCmpPdf() {
-        return "./test/results/images/cmp_large_image1.pdf";
+        return "cmpfiles/images/cmp_large_image1.pdf";
     }
 }

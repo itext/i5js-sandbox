@@ -17,6 +17,6 @@ public class HyphenationExample extends GenericTest {
 
     @Override
     protected String getCmpPdf() {
-        return "./test/results/tables/cmp_hyphenation_table.pdf";
+        return "cmpfiles/tables/cmp_hyphenation_table.pdf";
     }
 }

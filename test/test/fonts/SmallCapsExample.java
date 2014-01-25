@@ -17,6 +17,6 @@ public class SmallCapsExample extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/fonts/cmp_small_caps.pdf";
+        return "cmpfiles/fonts/cmp_small_caps.pdf";
     }
 }

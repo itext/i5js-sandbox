@@ -11,6 +11,6 @@ public class ReuseImage  extends GenericTest {
 
     @Override
     protected String getCmpPdf() {
-        return "./test/results/images/cmp_image_on_A4.pdf";
+        return "cmpfiles/images/cmp_image_on_A4.pdf";
     }
 }

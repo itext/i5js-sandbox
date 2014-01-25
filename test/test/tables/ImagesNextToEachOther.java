@@ -17,6 +17,6 @@ public class ImagesNextToEachOther extends GenericTest {
 	}
     @Override
     protected String getCmpPdf() {
-        return "./test/results/tables/cmp_images_next_to_each_other.pdf";
+        return "cmpfiles/tables/cmp_images_next_to_each_other.pdf";
     }
 }

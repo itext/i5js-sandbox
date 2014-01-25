@@ -20,7 +20,7 @@ public class FillFormSpecialChars extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/acroforms/cmp_test.pdf";
+        return "cmpfiles/acroforms/cmp_test.pdf";
     }
 
     @Override

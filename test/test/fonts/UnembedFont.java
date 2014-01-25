@@ -19,7 +19,7 @@ public class UnembedFont extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/fonts/withoutTimesNewRoman.pdf";
+        return "cmpfiles/fonts/withoutTimesNewRoman.pdf";
     }
 
 
@@ -39,7 +39,7 @@ public class UnembedFont extends GenericTest {
         // Do some further tests on the PDF
         assertPdf(dest);
         // Compare the destination PDF with a reference PDF
-        comparePdf(src, "./test/results/fonts/withTimesNewRoman.pdf");
+        comparePdf(src, "cmpfiles/fonts/withTimesNewRoman.pdf");
         comparePdf(dest, getCmpPdf());
     }
 }

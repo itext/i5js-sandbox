@@ -17,7 +17,7 @@ public class FullDottedLine extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/objects/cmp_full_dotted_line.pdf";
+        return "cmpfiles/objects/cmp_full_dotted_line.pdf";
     }
 
 }

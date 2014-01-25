@@ -18,6 +18,6 @@ public class FullPageTable extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/tables/cmp_full_page_table.pdf";
+        return "cmpfiles/tables/cmp_full_page_table.pdf";
     }
 }

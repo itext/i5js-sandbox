@@ -18,6 +18,6 @@ public class CenteredTextInCell extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/tables/cmp_centered_text.pdf";
+        return "cmpfiles/tables/cmp_centered_text.pdf";
     }
 }

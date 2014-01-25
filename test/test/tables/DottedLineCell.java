@@ -11,6 +11,6 @@ public class DottedLineCell extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/tables/cmp_dotted_line_cell.pdf";
+        return "cmpfiles/tables/cmp_dotted_line_cell.pdf";
     }
 }

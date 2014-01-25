@@ -17,6 +17,6 @@ public class SimpleRowColspan extends GenericTest {
 
     @Override
     protected String getCmpPdf() {
-        return "./test/results/tables/cmp_simple_rowspan_colspan.pdf";
+        return "cmpfiles/tables/cmp_simple_rowspan_colspan.pdf";
     }
 }

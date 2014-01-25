@@ -17,6 +17,6 @@ public class ChunkBackground extends GenericTest {
 	
     @Override
     protected String getCmpPdf() {
-        return "./test/results/objects/cmp_chunk_background.pdf";
+        return "cmpfiles/objects/cmp_chunk_background.pdf";
     }
 }
