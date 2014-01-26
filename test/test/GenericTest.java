@@ -72,6 +72,7 @@ public abstract class GenericTest {
         // Do some further tests on the PDF
         assertPdf(dest);
         // Compare the destination PDF with a reference PDF
+        System.out.println(dest + "\n" + getCmpPdf());
         comparePdf(dest, getCmpPdf());
         LOGGER.info("Test complete.");
     }
