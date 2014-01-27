@@ -21,6 +21,9 @@ public class UnembedFont extends GenericTest {
     protected String getCmpPdf() {
         return "cmpfiles/fonts/cmp_withoutTimesNewRoman.pdf";
     }
+    protected String getCmpPdf2() {
+        return "cmpfiles/fonts/cmp_withTimesNewRoman.pdf";
+    }
 
 
 	/**
@@ -39,7 +42,7 @@ public class UnembedFont extends GenericTest {
         // Do some further tests on the PDF
         assertPdf(dest);
         // Compare the destination PDF with a reference PDF
-        comparePdf(src, "cmpfiles/fonts/cmp_withTimesNewRoman.pdf");
+        comparePdf(src, getCmpPdf2());
         comparePdf(dest, getCmpPdf());
     }
 }

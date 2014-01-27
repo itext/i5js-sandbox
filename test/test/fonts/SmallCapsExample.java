@@ -14,9 +14,4 @@ public class SmallCapsExample extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.fonts.SmallCapsExample");
 	}
-	
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/fonts/cmp_small_caps.pdf";
-    }
 }

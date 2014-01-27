@@ -14,9 +14,4 @@ public class LeadingInCell extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.tables.LeadingInCell");
 	}
-
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/tables/cmp_leading_in_cell.pdf";
-    }
 }

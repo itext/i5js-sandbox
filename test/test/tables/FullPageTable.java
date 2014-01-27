@@ -15,9 +15,4 @@ public class FullPageTable extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.tables.FullPageTable");
 	}
-	
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/tables/cmp_full_page_table.pdf";
-    }
 }

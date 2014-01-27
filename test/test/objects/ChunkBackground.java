@@ -14,9 +14,4 @@ public class ChunkBackground extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.objects.ChunkBackground");
 	}
-	
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/objects/cmp_chunk_background.pdf";
-    }
 }

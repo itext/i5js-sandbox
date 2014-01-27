@@ -14,10 +14,4 @@ public class FullDottedLine extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.objects.FullDottedLine");
 	}
-	
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/objects/cmp_full_dotted_line.pdf";
-    }
-
 }

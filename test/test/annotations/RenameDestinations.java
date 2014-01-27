@@ -15,9 +15,4 @@ public class RenameDestinations extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.annotations.RenameDestinations");
 	}
-	
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/annotations/cmp_nameddests.pdf";
-    }
 }

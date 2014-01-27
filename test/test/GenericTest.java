@@ -169,7 +169,13 @@ public abstract class GenericTest {
     /**
      * Every test needs to know where to find its reference file.
      */
-    protected abstract String getCmpPdf();
+    protected String getCmpPdf() {
+    	String tmp = getDest();
+    	if (tmp == null)
+    		return null;
+    	int i = tmp.lastIndexOf("/");
+    	return "cmpfiles/" + tmp.substring(8, i + 1) + "cmp_" + tmp.substring(i + 1);
+    }
 
     /**
      * Helper method to construct error messages.

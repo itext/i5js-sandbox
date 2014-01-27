@@ -14,9 +14,4 @@ public class FontTest extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.fonts.FontTest");
 	}
-	
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/fonts/cmp_overview.pdf";
-    }
 }

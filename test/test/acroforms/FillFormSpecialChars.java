@@ -17,11 +17,6 @@ public class FillFormSpecialChars extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.acroforms.FillFormSpecialChars");
 	}
-	
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/acroforms/cmp_test.pdf";
-    }
 
     @Override
     protected void assertPdf(String outPdf) throws Exception {

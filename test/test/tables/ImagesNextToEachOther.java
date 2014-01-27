@@ -15,8 +15,4 @@ public class ImagesNextToEachOther extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.tables.ImagesNextToEachOther");
 	}
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/tables/cmp_images_next_to_each_other.pdf";
-    }
 }

@@ -9,10 +9,10 @@ package test.tables;
 
 import test.GenericTest;
 
-public class CenteredTextInCell extends GenericTest {
+public class UnitedStates extends GenericTest {
 
 	@Override
 	public void setup() {
-		setKlass("sandbox.tables.CenteredTextInCell");
+		setKlass("sandbox.tables.UnitedStates");
 	}
 }

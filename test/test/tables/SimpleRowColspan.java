@@ -14,9 +14,4 @@ public class SimpleRowColspan extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.tables.SimpleRowColspan");
 	}
-
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/tables/cmp_simple_rowspan_colspan.pdf";
-    }
 }

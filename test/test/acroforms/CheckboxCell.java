@@ -14,9 +14,4 @@ public class CheckboxCell extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.acroforms.CheckboxCell");
 	}
-	
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/acroforms/cmp_checkbox_in_cell.pdf";
-    }
 }

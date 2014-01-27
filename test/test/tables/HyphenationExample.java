@@ -14,9 +14,4 @@ public class HyphenationExample extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.tables.HyphenationExample");
 	}
-
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/tables/cmp_hyphenation_table.pdf";
-    }
 }

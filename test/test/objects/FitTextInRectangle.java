@@ -14,9 +14,4 @@ public class FitTextInRectangle extends GenericTest {
 	public void setup() {
 		setKlass("sandbox.objects.FitTextInRectangle");
 	}
-	
-    @Override
-    protected String getCmpPdf() {
-        return "cmpfiles/objects/cmp_chunk_in_rectangle.pdf";
-    }
 }
