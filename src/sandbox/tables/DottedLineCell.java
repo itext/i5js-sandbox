@@ -21,7 +21,7 @@ public class DottedLineCell {
     public static final String DEST = "results/tables/dotted_line_cell.pdf";
     
     class DottedCells implements PdfPTableEvent {
-        @Override
+
         public void tableLayout(PdfPTable table, float[][] widths,
             float[] heights, int headerRows, int rowStart,
             PdfContentByte[] canvases) {
@@ -44,7 +44,6 @@ public class DottedLineCell {
     }
     
     class DottedCell implements PdfPCellEvent {
-        @Override
         public void cellLayout(PdfPCell cell, Rectangle position,
             PdfContentByte[] canvases) {
             PdfContentByte canvas = canvases[PdfPTable.LINECANVAS];
