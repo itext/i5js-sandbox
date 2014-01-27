@@ -47,7 +47,7 @@ public class UnitedStates {
     }
     
     public void process(PdfPTable table, String line) {
-        StringTokenizer tokenizer = new StringTokenizer(line, ":µ;");
+        StringTokenizer tokenizer = new StringTokenizer(line, ";");
         while (tokenizer.hasMoreTokens()) {
             table.addCell(tokenizer.nextToken());
         }

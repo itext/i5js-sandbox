@@ -58,7 +58,7 @@ public abstract class GenericTest {
         // Getting the destination PDF file (must be there!)
         String dest= getDest();
         if (dest == null || dest.length() == 0)
-            throw new OperationsException("outPdf cannot be empty!");
+            throw new OperationsException("DEST cannot be empty!");
         // Getting the source PDF file
         String src = getSrc();
         // if there is none, just create a PDF
