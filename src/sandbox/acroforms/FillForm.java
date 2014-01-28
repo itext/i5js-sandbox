@@ -34,5 +34,6 @@ public class FillForm {
         fields.setField("timezone2", "-");
         fields.setField("dst", "YES");
         stamper.close();
+        reader.close();
     }
 }
