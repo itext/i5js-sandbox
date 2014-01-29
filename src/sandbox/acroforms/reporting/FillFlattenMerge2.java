@@ -1,4 +1,4 @@
-package sandbox.acroforms;
+package sandbox.acroforms.reporting;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -13,25 +13,24 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfSmartCopy;
 import com.itextpdf.text.pdf.PdfStamper;
 
-public class FillFlattenMerge1 {
+public class FillFlattenMerge2 {
 
 	public static final String SRC = "resources/pdfs/state.pdf";
-	public static final String DEST = "results/acroforms/united_states_1.pdf";
+	public static final String DEST = "results/acroforms/reporting/united_states_2.pdf";
     public static final String DATA = "resources/data/united_states.csv";
 
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
-        new FillFlattenMerge1().manipulatePdf(SRC, DEST);
+        new FillFlattenMerge2().manipulatePdf(SRC, DEST);
     }
 
     public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
     	Document document = new Document();
-    	// Using PdfCopy isn't a good idea in this use case.
-    	// Take a look at FillFlattenMerge2 to find out how to do it right!
-    	PdfCopy copy = new PdfCopy(document, new FileOutputStream(dest));
+    	PdfCopy copy = new PdfSmartCopy(document, new FileOutputStream(dest));
     	document.open();
     	ByteArrayOutputStream baos;
     	PdfReader reader;

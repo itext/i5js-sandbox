@@ -4,7 +4,7 @@
  * 
  * Sometimes you need to change the font of a field.
  */
-package test.acroforms;
+package test.acroforms.reporting;
 
 import test.GenericTest;
 
@@ -12,6 +12,6 @@ public class FillForm extends GenericTest {
 
 	@Override
 	public void setup() {
-		setKlass("sandbox.acroforms.FillForm");
+		setKlass("sandbox.acroforms.reporting.FillForm");
 	}
 }

@@ -4,14 +4,14 @@
  * 
  * Sometimes you need to change the font of a field.
  */
-package test.acroforms;
+package test.acroforms.reporting;
 
 import test.GenericTest;
 
-public class FlattenForm extends GenericTest {
+public class FillFlattenMerge2 extends GenericTest {
 
 	@Override
 	public void setup() {
-		setKlass("sandbox.acroforms.FlattenForm");
+		setKlass("sandbox.acroforms.FillFlattenMerge2");
 	}
 }

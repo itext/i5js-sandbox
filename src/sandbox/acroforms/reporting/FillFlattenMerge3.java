@@ -1,4 +1,4 @@
-package sandbox.acroforms;
+package sandbox.acroforms.reporting;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,7 +27,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class FillFlattenMerge3 {
 
 	public static final String SRC = "resources/pdfs/state.pdf";
-	public static final String DEST = "results/acroforms/united_states_3.pdf";
+	public static final String DEST = "results/acroforms/reporting/united_states_3.pdf";
     public static final String DATA = "resources/data/united_states.csv";
     public static final String[] FIELDS = {
     	"name", "abbr", "capital", "city", "population", "surface", "timezone1", "timezone2", "dst"

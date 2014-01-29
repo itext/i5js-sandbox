@@ -1,4 +1,4 @@
-package sandbox.acroforms;
+package sandbox.acroforms.reporting;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,15 +9,15 @@ import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 
-public class FillForm {
+public class FlattenForm {
 
 	public static final String SRC = "resources/pdfs/state.pdf";
-	public static final String DEST = "results/acroforms/california.pdf";
+	public static final String DEST = "results/acroforms/reporting/california2.pdf";
 
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
-        new FillForm().manipulatePdf(SRC, DEST);
+        new FlattenForm().manipulatePdf(SRC, DEST);
     }
     public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
         PdfReader reader = new PdfReader(src);
@@ -33,6 +33,7 @@ public class FillForm {
         fields.setField("timezone1", "PT (UTC-8)");
         fields.setField("timezone2", "-");
         fields.setField("dst", "YES");
+        stamper.setFormFlattening(true);
         stamper.close();
         reader.close();
     }
