@@ -11,8 +11,8 @@ import com.itextpdf.text.pdf.PdfStamper;
 
 public class FillForm {
 
-	public static final String SRC = "resources/pdfs/state.pdf";
-	public static final String DEST = "results/acroforms/reporting/california.pdf";
+    public static final String SRC = "resources/pdfs/state.pdf";
+    public static final String DEST = "results/acroforms/reporting/california.pdf";
 
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);

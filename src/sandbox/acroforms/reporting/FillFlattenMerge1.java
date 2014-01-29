@@ -17,8 +17,8 @@ import com.itextpdf.text.pdf.PdfStamper;
 
 public class FillFlattenMerge1 {
 
-	public static final String SRC = "resources/pdfs/state.pdf";
-	public static final String DEST = "results/acroforms/reporting/united_states_1.pdf";
+    public static final String SRC = "resources/pdfs/state.pdf";
+    public static final String DEST = "results/acroforms/reporting/united_states_1.pdf";
     public static final String DATA = "resources/data/united_states.csv";
 
     public static void main(String[] args) throws IOException, DocumentException {
@@ -28,24 +28,24 @@ public class FillFlattenMerge1 {
     }
 
     public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
-    	Document document = new Document();
-    	// Using PdfCopy isn't a good idea in this use case.
-    	// Take a look at FillFlattenMerge2 to find out how to do it right!
-    	PdfCopy copy = new PdfCopy(document, new FileOutputStream(dest));
-    	document.open();
-    	ByteArrayOutputStream baos;
-    	PdfReader reader;
-    	PdfStamper stamper;
-    	AcroFields fields;
-    	StringTokenizer tokenizer;
+        Document document = new Document();
+        // Using PdfCopy isn't a good idea in this use case.
+        // Take a look at FillFlattenMerge2 to find out how to do it right!
+        PdfCopy copy = new PdfCopy(document, new FileOutputStream(dest));
+        document.open();
+        ByteArrayOutputStream baos;
+        PdfReader reader;
+        PdfStamper stamper;
+        AcroFields fields;
+        StringTokenizer tokenizer;
         BufferedReader br = new BufferedReader(new FileReader(DATA));
         String line = br.readLine();
         while ((line = br.readLine()) != null) {
-        	// create a PDF in memory
-        	baos = new ByteArrayOutputStream();
-        	reader = new PdfReader(SRC);
-        	stamper = new PdfStamper(reader, baos);
-        	fields = stamper.getAcroFields();
+            // create a PDF in memory
+            baos = new ByteArrayOutputStream();
+            reader = new PdfReader(SRC);
+            stamper = new PdfStamper(reader, baos);
+            fields = stamper.getAcroFields();
             tokenizer = new StringTokenizer(line, ";");
             fields.setField("name", tokenizer.nextToken());
             fields.setField("abbr", tokenizer.nextToken());
@@ -56,8 +56,8 @@ public class FillFlattenMerge1 {
             fields.setField("timezone1", tokenizer.nextToken());
             fields.setField("timezone2", tokenizer.nextToken());
             fields.setField("dst", tokenizer.nextToken());
-        	stamper.setFormFlattening(true);
-        	stamper.close();
+            stamper.setFormFlattening(true);
+            stamper.close();
             reader.close();
             // add the PDF to PdfCopy
             reader = new PdfReader(baos.toByteArray());
@@ -65,6 +65,6 @@ public class FillFlattenMerge1 {
             reader.close();
         }
         br.close();
-    	document.close();
+        document.close();
     }
 }

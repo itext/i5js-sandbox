@@ -26,11 +26,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class FillFlattenMerge3 {
 
-	public static final String SRC = "resources/pdfs/state.pdf";
-	public static final String DEST = "results/acroforms/reporting/united_states_3.pdf";
+    public static final String SRC = "resources/pdfs/state.pdf";
+    public static final String DEST = "results/acroforms/reporting/united_states_3.pdf";
     public static final String DATA = "resources/data/united_states.csv";
     public static final String[] FIELDS = {
-    	"name", "abbr", "capital", "city", "population", "surface", "timezone1", "timezone2", "dst"
+        "name", "abbr", "capital", "city", "population", "surface", "timezone1", "timezone2", "dst"
     };
     public static final Font FONT = new Font(FontFamily.HELVETICA, 10);
     
@@ -44,18 +44,18 @@ public class FillFlattenMerge3 {
 
     public class Background extends PdfPageEventHelper {
 
-    	PdfImportedPage background;
-    	
-    	public Background(PdfImportedPage background) {
-    		this.background = background;
-    	}
-    	
-		@Override
-		public void onEndPage(PdfWriter writer, Document document) {
-			PdfContentByte cb = writer.getDirectContentUnder();
-			cb.addTemplate(background, 0, 0);
-		}
-    	
+        PdfImportedPage background;
+        
+        public Background(PdfImportedPage background) {
+            this.background = background;
+        }
+        
+        @Override
+        public void onEndPage(PdfWriter writer, Document document) {
+            PdfContentByte cb = writer.getDirectContentUnder();
+            cb.addTemplate(background, 0, 0);
+        }
+        
     }
     
     public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
@@ -65,7 +65,7 @@ public class FillFlattenMerge3 {
         Rectangle rectangle;
         Map<String, AcroFields.Item> fields = form.getFields();
         for (String name : fields.keySet()) {
-        	rectangle = form.getFieldPositions(name).get(0).position;
+            rectangle = form.getFieldPositions(name).get(0).position;
             positions.put(name, rectangle);
         }
         
@@ -75,14 +75,14 @@ public class FillFlattenMerge3 {
         document.open();
 
         PdfContentByte cb = writer.getDirectContent();
-    	StringTokenizer tokenizer;
+        StringTokenizer tokenizer;
         BufferedReader br = new BufferedReader(new FileReader(DATA));
         String line = br.readLine();
         while ((line = br.readLine()) != null) {
-        	int i = 0;
+            int i = 0;
             tokenizer = new StringTokenizer(line, ";");
             while (tokenizer.hasMoreTokens()) {
-            	process(cb, FIELDS[i++], tokenizer.nextToken());
+                process(cb, FIELDS[i++], tokenizer.nextToken());
             }
             document.newPage();
         }
@@ -93,9 +93,9 @@ public class FillFlattenMerge3 {
     }
     
     protected void process(PdfContentByte cb, String name, String value) throws DocumentException {
-    	Rectangle rect = positions.get(name);
-    	Phrase p = new Phrase(value, FONT);
-    	ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
-    	        p, rect.getLeft() + 2, rect.getBottom() + 2, 0);
+        Rectangle rect = positions.get(name);
+        Phrase p = new Phrase(value, FONT);
+        ColumnText.showTextAligned(cb, Element.ALIGN_LEFT,
+                p, rect.getLeft() + 2, rect.getBottom() + 2, 0);
     }
 }

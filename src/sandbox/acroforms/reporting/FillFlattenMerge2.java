@@ -18,8 +18,8 @@ import com.itextpdf.text.pdf.PdfStamper;
 
 public class FillFlattenMerge2 {
 
-	public static final String SRC = "resources/pdfs/state.pdf";
-	public static final String DEST = "results/acroforms/reporting/united_states_2.pdf";
+    public static final String SRC = "resources/pdfs/state.pdf";
+    public static final String DEST = "results/acroforms/reporting/united_states_2.pdf";
     public static final String DATA = "resources/data/united_states.csv";
 
     public static void main(String[] args) throws IOException, DocumentException {
@@ -29,22 +29,22 @@ public class FillFlattenMerge2 {
     }
 
     public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
-    	Document document = new Document();
-    	PdfCopy copy = new PdfSmartCopy(document, new FileOutputStream(dest));
-    	document.open();
-    	ByteArrayOutputStream baos;
-    	PdfReader reader;
-    	PdfStamper stamper;
-    	AcroFields fields;
-    	StringTokenizer tokenizer;
+        Document document = new Document();
+        PdfCopy copy = new PdfSmartCopy(document, new FileOutputStream(dest));
+        document.open();
+        ByteArrayOutputStream baos;
+        PdfReader reader;
+        PdfStamper stamper;
+        AcroFields fields;
+        StringTokenizer tokenizer;
         BufferedReader br = new BufferedReader(new FileReader(DATA));
         String line = br.readLine();
         while ((line = br.readLine()) != null) {
-        	// create a PDF in memory
-        	baos = new ByteArrayOutputStream();
-        	reader = new PdfReader(SRC);
-        	stamper = new PdfStamper(reader, baos);
-        	fields = stamper.getAcroFields();
+            // create a PDF in memory
+            baos = new ByteArrayOutputStream();
+            reader = new PdfReader(SRC);
+            stamper = new PdfStamper(reader, baos);
+            fields = stamper.getAcroFields();
             tokenizer = new StringTokenizer(line, ";");
             fields.setField("name", tokenizer.nextToken());
             fields.setField("abbr", tokenizer.nextToken());
@@ -55,8 +55,8 @@ public class FillFlattenMerge2 {
             fields.setField("timezone1", tokenizer.nextToken());
             fields.setField("timezone2", tokenizer.nextToken());
             fields.setField("dst", tokenizer.nextToken());
-        	stamper.setFormFlattening(true);
-        	stamper.close();
+            stamper.setFormFlattening(true);
+            stamper.close();
             reader.close();
             // add the PDF to PdfCopy
             reader = new PdfReader(baos.toByteArray());
@@ -64,6 +64,6 @@ public class FillFlattenMerge2 {
             reader.close();
         }
         br.close();
-    	document.close();
+        document.close();
     }
 }
