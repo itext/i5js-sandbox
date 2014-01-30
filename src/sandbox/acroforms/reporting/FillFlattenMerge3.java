@@ -54,6 +54,7 @@ public class FillFlattenMerge3 {
         public void onEndPage(PdfWriter writer, Document document) {
             PdfContentByte cb = writer.getDirectContentUnder();
             cb.addTemplate(background, 0, 0);
+            ColumnText.showTextAligned(cb, Element.ALIGN_RIGHT, new Phrase("page " + writer.getPageNumber()), 550, 800, 0);
         }
         
     }

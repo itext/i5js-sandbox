@@ -12,6 +12,6 @@ public class FillFlattenMerge1 extends GenericTest {
 
 	@Override
 	public void setup() {
-		setKlass("sandbox.acroforms.FillFlattenMerge1");
+		setKlass("sandbox.acroforms.reporting.FillFlattenMerge1");
 	}
 }
