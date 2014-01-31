@@ -17,23 +17,23 @@ public class StampPageXofY {
     public static final String SRC = "resources/pdfs/nameddestinations.pdf";
     public static final String DEST = "results/stamper/pagenumbers.pdf";
 
-	public static void main(String[] args) throws IOException, DocumentException {
+    public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
         new StampPageXofY().manipulatePdf(SRC, DEST);
-	}
+    }
 
-	public void manipulatePdf(String src, String dest) throws IOException, DocumentException {
-		PdfReader reader = new PdfReader(src);
-		int n = reader.getNumberOfPages();
-		PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
-		PdfContentByte pagecontent;
-		for (int i = 0; i < n; ) {
-			pagecontent = stamper.getOverContent(++i);
-			ColumnText.showTextAligned(pagecontent, Element.ALIGN_RIGHT,
-					new Phrase(String.format("page %s of %s", i, n)), 559, 806, 0);
-		}
-		stamper.close();
-		reader.close();
-	}
+    public void manipulatePdf(String src, String dest) throws IOException, DocumentException {
+        PdfReader reader = new PdfReader(src);
+        int n = reader.getNumberOfPages();
+        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
+        PdfContentByte pagecontent;
+        for (int i = 0; i < n; ) {
+            pagecontent = stamper.getOverContent(++i);
+            ColumnText.showTextAligned(pagecontent, Element.ALIGN_RIGHT,
+                    new Phrase(String.format("page %s of %s", i, n)), 559, 806, 0);
+        }
+        stamper.close();
+        reader.close();
+    }
 }
