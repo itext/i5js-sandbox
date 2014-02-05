@@ -7,7 +7,7 @@
  */
 package test.tables;
 
-import test.GenericTest;
+import com.itextpdf.testutils.GenericTest;
 
 public class CenteredTextInCell extends GenericTest {
 

@@ -6,7 +6,7 @@
  */
 package test.fonts;
 
-import test.GenericTest;
+import com.itextpdf.testutils.GenericTest;
 
 public class SmallCapsExample extends GenericTest {
 

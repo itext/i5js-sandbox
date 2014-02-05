@@ -6,7 +6,7 @@
  */
 package test.tables;
 
-import test.GenericTest;
+import com.itextpdf.testutils.GenericTest;
 
 public class HyphenationExample extends GenericTest {
 

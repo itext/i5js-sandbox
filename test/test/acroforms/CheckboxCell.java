@@ -6,7 +6,7 @@
  */
 package test.acroforms;
 
-import test.GenericTest;
+import com.itextpdf.testutils.GenericTest;
 
 public class CheckboxCell extends GenericTest {
 

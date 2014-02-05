@@ -6,7 +6,7 @@
  */
 package test.stamper;
 
-import test.GenericTest;
+import com.itextpdf.testutils.GenericTest;
 
 public class CenterColumnVertically extends GenericTest {
 

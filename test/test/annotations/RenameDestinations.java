@@ -7,7 +7,7 @@
  */
 package test.annotations;
 
-import test.GenericTest;
+import com.itextpdf.testutils.GenericTest;
 
 public class RenameDestinations extends GenericTest {
 

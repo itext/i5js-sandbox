@@ -6,7 +6,7 @@
  */
 package test.objects;
 
-import test.GenericTest;
+import com.itextpdf.testutils.GenericTest;
 
 public class FullDottedLine extends GenericTest {
 
