@@ -6,7 +6,7 @@
  */
 package test.acroforms.reporting;
 
-import com.itextpdf.testutils.GenericTest;
+import test.GenericTest;
 
 public class FillForm extends GenericTest {
 

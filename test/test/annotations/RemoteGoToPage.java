@@ -4,7 +4,8 @@ import java.lang.reflect.Method;
 
 import org.junit.Test;
 
-import com.itextpdf.testutils.GenericTest;
+import test.GenericTest;
+
 
 
 public class RemoteGoToPage extends GenericTest {

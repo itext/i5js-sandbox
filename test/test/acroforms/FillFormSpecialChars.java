@@ -6,10 +6,11 @@
  */
 package test.acroforms;
 
-import com.itextpdf.testutils.GenericTest;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import org.junit.Assert;
+
+import test.GenericTest;
 
 public class FillFormSpecialChars extends GenericTest {
 

@@ -6,7 +6,7 @@
  */
 package test.acroforms.reporting;
 
-import com.itextpdf.testutils.GenericTest;
+import test.GenericTest;
 
 public class FillFlattenMerge2 extends GenericTest {
 

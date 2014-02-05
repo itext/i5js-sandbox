@@ -1,6 +1,6 @@
 package test.images;
 
-import com.itextpdf.testutils.GenericTest;
+import test.GenericTest;
 
 public class ReuseImage  extends GenericTest {
 

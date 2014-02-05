@@ -1,6 +1,6 @@
 package test.tables;
 
-import com.itextpdf.testutils.GenericTest;
+import test.GenericTest;
 
 public class DottedLineCell extends GenericTest {
 

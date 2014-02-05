@@ -6,7 +6,7 @@
  */
 package test.acroforms;
 
-import com.itextpdf.testutils.GenericTest;
+import test.GenericTest;
 
 public class MergeForms2 extends GenericTest {
 

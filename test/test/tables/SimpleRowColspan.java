@@ -6,7 +6,7 @@
  */
 package test.tables;
 
-import com.itextpdf.testutils.GenericTest;
+import test.GenericTest;
 
 public class SimpleRowColspan extends GenericTest {
 

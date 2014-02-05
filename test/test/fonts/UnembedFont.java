@@ -8,7 +8,8 @@ package test.fonts;
 
 import org.junit.Test;
 
-import com.itextpdf.testutils.GenericTest;
+import test.GenericTest;
+
 
 
 public class UnembedFont extends GenericTest {
