@@ -1,5 +1,6 @@
 package sandbox.logging;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -72,6 +73,8 @@ public class CounterDemo {
     }
     
     public static void main(String[] args) throws IOException, DocumentException {
+        File file = new File(HELLO);
+        file.getParentFile().mkdirs();
         CounterDemo app = new CounterDemo();
         app.initCounter();
         app.createPdf(HELLO);

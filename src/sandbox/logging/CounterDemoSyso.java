@@ -1,5 +1,6 @@
 package sandbox.logging;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -22,11 +23,14 @@ public class CounterDemoSyso {
     public static final String HELLO2 = "results/logging/hello2.pdf";
     public static void main(String[] args) throws IOException, DocumentException {
         CounterDemoSyso app = new CounterDemoSyso();
+        app.initCounter();
         app.createPdf(HELLO);
         app.manipulatePdf(HELLO, HELLO2);
     }
 
     public void initCounter() throws IOException {
+        File file = new File(HELLO);
+        file.getParentFile().mkdirs();
         CounterFactory.getInstance().setCounter(new SysoCounter());
     }
 
