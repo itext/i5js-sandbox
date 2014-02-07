@@ -14,7 +14,7 @@ import test.GenericTest;
 
 public class UnembedFont extends GenericTest {
 
-	@Override
+    @Override
 	public void setup() {
 		setKlass("sandbox.fonts.UnembedFont");
 	}

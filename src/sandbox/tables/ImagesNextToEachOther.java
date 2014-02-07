@@ -17,7 +17,9 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ImagesNextToEachOther {
     public static final String DEST = "results/tables/images_next_to_each_other.pdf";
     public static final String IMG1 = "resources/images/javaone2013.jpg";

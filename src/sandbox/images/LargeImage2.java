@@ -12,7 +12,9 @@ import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class LargeImage2 {
 
     public static final String SRC = "resources/pdfs/large_image.pdf";

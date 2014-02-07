@@ -11,7 +11,9 @@ import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class StampPageXofY {
 
     public static final String SRC = "resources/pdfs/nameddestinations.pdf";

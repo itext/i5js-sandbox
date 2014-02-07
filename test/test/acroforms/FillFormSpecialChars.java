@@ -14,7 +14,7 @@ import test.GenericTest;
 
 public class FillFormSpecialChars extends GenericTest {
 
-	@Override
+    @Override
 	public void setup() {
 		setKlass("sandbox.acroforms.FillFormSpecialChars");
 	}

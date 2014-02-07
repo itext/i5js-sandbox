@@ -14,7 +14,9 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.parser.PdfImageObject;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ReuseImage {
 
     public static final String SRC = "resources/pdfs/single_image.pdf";

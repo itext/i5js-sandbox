@@ -23,7 +23,9 @@ import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ListWithLabel {
 
     public static final String DEST = "results/objects/list_with_label.pdf";

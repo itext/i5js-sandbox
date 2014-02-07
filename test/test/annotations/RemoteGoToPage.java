@@ -10,7 +10,7 @@ import test.GenericTest;
 
 public class RemoteGoToPage extends GenericTest {
 
-	@Override
+    @Override
 	public void setup() {
 		setKlass("sandbox.annotations.RemoteGoToPage");
 	}

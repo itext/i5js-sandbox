@@ -14,7 +14,9 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.parser.PdfImageObject;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class LargeImage1 {
 
     public static final String SRC = "resources/pdfs/large_image.pdf";

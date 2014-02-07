@@ -45,26 +45,34 @@
 package test;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URLDecoder;
+import java.util.*;
 
 import javax.management.OperationsException;
 
+import junit.framework.TestSuite;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.itextpdf.testutils.CompareTool;
 import com.itextpdf.text.log.Logger;
 import com.itextpdf.text.log.LoggerFactory;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-public abstract class GenericTest {
+public /*abstract*/ class GenericTest {
 	
 	/** The logger class */
     private final static Logger LOGGER = LoggerFactory.getLogger(GenericTest.class.getName());
 
     /** The class file for the example we're going to test. */
 	protected Class<?> klass;
+    protected String className;
 	/** An error message */
     private String errorMessage;
     /** A prefix that is part of the error message. */
@@ -77,6 +85,7 @@ public abstract class GenericTest {
      */
     @Before
     public void setup() {
+
     }
 
     /**
@@ -84,21 +93,24 @@ public abstract class GenericTest {
      * @param	className	the class you want to test
      */
 	protected void setKlass(String className) {
-		try {
+		this.className = className;
+        try {
 			klass = Class.forName(className);
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(className + " not found");
 		}
 	}
 
-	/**
-	 * Tests the example.
-	 * If SRC and DEST are defined, the example manipulates a PDF;
-	 * if only DEST is defined, the example creates a PDF.
-	 */
-    @Test(timeout = 60000)
+    /**
+         * Tests the example.
+         * If SRC and DEST are defined, the example manipulates a PDF;
+         * if only DEST is defined, the example creates a PDF.
+         */
+    @Test(timeout = 120000)
     public void test() throws Exception {
-        LOGGER.info("Starting test.");
+        if (this.getClass().getName().equals(GenericTest.class.getName()))
+            return;
+        LOGGER.info("Starting test " + className + ".");
         // Getting the destination PDF file (must be there!)
         String dest= getDest();
         if (dest == null || dest.length() == 0)

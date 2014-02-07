@@ -23,7 +23,9 @@ import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class FillFlattenMerge3 {
 
     public static final String SRC = "resources/pdfs/state.pdf";

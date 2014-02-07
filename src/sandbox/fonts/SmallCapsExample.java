@@ -16,7 +16,9 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class SmallCapsExample {
 
     public static final String DEST = "results/fonts/small_caps.pdf";

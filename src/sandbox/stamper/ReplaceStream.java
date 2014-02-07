@@ -20,7 +20,9 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfObject;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ReplaceStream {
     public static final String SRC = "resources/pdfs/hello.pdf";
     public static final String DEST = "results/stamper/hello_changed.pdf";

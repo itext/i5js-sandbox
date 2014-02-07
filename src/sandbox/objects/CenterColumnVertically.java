@@ -12,7 +12,9 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class CenterColumnVertically {
 
     public static final String DEST = "results/objects/center_column_vertically.pdf";

@@ -19,7 +19,9 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ChunkBackground {
 
     public static final String DEST = "results/objects/chunk_background.pdf";

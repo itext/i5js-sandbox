@@ -20,7 +20,9 @@ import com.itextpdf.text.pdf.PdfPCellEvent;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.RadioCheckField;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class CheckboxCell {
     
     public static final String DEST = "results/acroforms/checkbox_in_cell.pdf";

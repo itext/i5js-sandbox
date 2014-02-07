@@ -16,7 +16,9 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.DottedLineSeparator;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class FullDottedLine {
     public static final String DEST = "results/objects/full_dotted_line.pdf";
     

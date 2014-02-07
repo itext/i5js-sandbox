@@ -15,7 +15,9 @@ import java.util.Map;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ChangeInfoDictionary {
 
     public static final String SRC = "resources/pdfs/hello.pdf";

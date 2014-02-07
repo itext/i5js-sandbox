@@ -20,7 +20,9 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfString;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class RenameDestinations {
 
     public static final String SRC = "resources/pdfs/nameddestinations.pdf";

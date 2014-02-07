@@ -20,7 +20,9 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.hyphenation.Hyphenation;
 import com.itextpdf.text.pdf.hyphenation.Hyphenator;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class HyphenationExample {
 
     public static final String DEST = "results/tables/hyphenation_table.pdf";

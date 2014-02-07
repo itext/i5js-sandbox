@@ -21,7 +21,9 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class FitTextInRectangle {
 
     public static final String DEST = "results/objects/chunk_in_rectangle.pdf";
