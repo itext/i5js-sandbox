@@ -11,7 +11,7 @@
 	<name>iText examples</name>
 	<description>iText examples</description>
 	<build>
-<!--		<testSourceDirectory>test</testSourceDirectory>-->
+		<testSourceDirectory>test</testSourceDirectory>
         <sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
