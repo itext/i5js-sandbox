@@ -45,25 +45,18 @@
 package test;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.URLDecoder;
-import java.util.*;
 
 import javax.management.OperationsException;
 
-import junit.framework.TestSuite;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.itextpdf.testutils.CompareTool;
 import com.itextpdf.text.log.Logger;
 import com.itextpdf.text.log.LoggerFactory;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 public /*abstract*/ class GenericTest {
 	
