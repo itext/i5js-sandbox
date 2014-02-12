@@ -22,7 +22,7 @@ import com.itextpdf.text.pdf.hyphenation.Hyphenation;
 import com.itextpdf.text.pdf.hyphenation.Hyphenator;
 import sandbox.WrapToTest;
 
-@WrapToTest
+//@WrapToTest
 public class HyphenationExample {
 
     public static final String DEST = "results/tables/hyphenation_table.pdf";

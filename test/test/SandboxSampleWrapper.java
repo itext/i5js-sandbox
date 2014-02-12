@@ -22,7 +22,7 @@ public class SandboxSampleWrapper extends GenericTest {
         setKlass(className);
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "{index}: {0}")
     public static Collection<Object[]> data() throws UnsupportedEncodingException {
         String classes = new File("").getAbsolutePath() + "/target/classes/";
         List<String> classNames = getClassNamesRecursively(classes, "");
