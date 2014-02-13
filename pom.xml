@@ -7,7 +7,7 @@
 		<version>1.0.0</version>
 	</parent>
 	<artifactId>sandbox</artifactId>
-	<version>5.4.6-SNAPSHOT</version>
+	<version>5.5.0</version>
 	<name>iText examples</name>
 	<description>iText examples</description>
 	<build>
@@ -48,17 +48,17 @@
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
-			<version>5.4.6-SNAPSHOT</version>
+			<version>5.5.0</version>
 		</dependency>
         <dependency>
             <groupId>com.itextpdf.tool</groupId>
             <artifactId>xmlworker</artifactId>
-            <version>5.4.6-SNAPSHOT</version>
+            <version>5.5.0</version>
         </dependency>
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itext-pdfa</artifactId>
-            <version>5.4.6-SNAPSHOT</version>
+            <version>5.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>
