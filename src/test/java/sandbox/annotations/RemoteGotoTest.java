@@ -1,32 +1,27 @@
-/**
- * Example written by Bruno Lowagie in answer to:
- * http://thread.gmane.org/gmane.comp.java.lib.itext.general/65892
- * 
- * Some text displayed using a Small Caps font.
- */
-package test.fonts;
+package sandbox.annotations;
+
+import java.lang.reflect.Method;
 
 import org.junit.Test;
 
-import test.GenericTest;
+import sandbox.GenericTest;
 
 
 
-public class UnembedFont extends GenericTest {
+public class RemoteGotoTest extends GenericTest {
 
     @Override
 	public void setup() {
-		setKlass("sandbox.fonts.UnembedFont");
+		setKlass("sandbox.annotations.RemoteGoto");
 	}
 	
     @Override
     protected String getCmpPdf() {
-        return "cmpfiles/fonts/cmp_withoutTimesNewRoman.pdf";
+        return "cmpfiles/annotations/subdir/cmp_abc.pdf";
     }
     protected String getCmpPdf2() {
-        return "cmpfiles/fonts/cmp_withTimesNewRoman.pdf";
+        return "cmpfiles/annotations/cmp_xyz.pdf";
     }
-
 
 	/**
 	 * Tests the example.
@@ -39,8 +34,11 @@ public class UnembedFont extends GenericTest {
         String dest= getDest();
         // Getting the source PDF file
         String src = getSrc();
-        createPdf(src);
-        manipulatePdf(src, dest);
+
+    	Method method = klass.getDeclaredMethod("createPdf2", String.class);
+    	method.invoke(klass.getConstructor().newInstance(), src);
+        createPdf(dest);
+        
         // Do some further tests on the PDF
         assertPdf(dest);
         // Compare the destination PDF with a reference PDF

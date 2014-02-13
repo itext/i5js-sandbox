@@ -42,7 +42,7 @@
  * For more information, please contact iText Software Corp. at this
  * address: sales@itextpdf.com
  */
-package test;
+package sandbox;
 
 import java.io.File;
 import java.lang.reflect.Field;

@@ -1,14 +1,14 @@
-package test.annotations;
+package sandbox.annotations;
 
 import java.lang.reflect.Method;
 
 import org.junit.Test;
 
-import test.GenericTest;
+import sandbox.GenericTest;
 
 
 
-public class RemoteGoToPage extends GenericTest {
+public class RemoteGoToPageTest extends GenericTest {
 
     @Override
 	public void setup() {

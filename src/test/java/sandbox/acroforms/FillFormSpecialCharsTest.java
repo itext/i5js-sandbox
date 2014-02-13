@@ -4,15 +4,15 @@
  * 
  * Sometimes you need to change the font of a field.
  */
-package test.acroforms;
+package sandbox.acroforms;
 
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import org.junit.Assert;
 
-import test.GenericTest;
+import sandbox.GenericTest;
 
-public class FillFormSpecialChars extends GenericTest {
+public class FillFormSpecialCharsTest extends GenericTest {
 
     @Override
 	public void setup() {
