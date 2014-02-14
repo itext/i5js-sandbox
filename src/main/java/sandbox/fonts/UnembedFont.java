@@ -21,8 +21,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class UnembedFont {
 
-    public static final String SRC = "results/fonts/withTimesNewRoman.pdf";
-    public static final String DEST = "results/fonts/withoutTimesNewRoman.pdf";
+    public static final String SRC = "results/fonts/withSerifFont.pdf";
+    public static final String DEST = "results/fonts/withoutSerifFont.pdf";
 
     public static void main(String[] args) throws DocumentException, IOException {
         UnembedFont app = new UnembedFont();
@@ -42,7 +42,7 @@ public class UnembedFont {
         // step 3
         document.open();
         // step 4
-        BaseFont bf = BaseFont.createFont("c:/windows/fonts/times.ttf", BaseFont.WINANSI, BaseFont.EMBEDDED);
+        BaseFont bf = BaseFont.createFont("resources/fonts/PT_Serif-Web-Regular.ttf", BaseFont.WINANSI, BaseFont.EMBEDDED);
         Font f = new Font(bf, 12);
         document.add(new Paragraph("This is a test with Times New Roman.", f));
         // step 5
