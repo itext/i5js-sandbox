@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import sandbox.WrapToTest;
+
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.CMYKColor;
@@ -18,6 +20,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 
+@WrapToTest
 public class AddSpotColorImage {
     public static final String SRC = "resources/pdfs/image.pdf";
     public static final String DEST = "results/stamper/spot_color_image.pdf";

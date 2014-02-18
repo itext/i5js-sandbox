@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import sandbox.WrapToTest;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.OutputStreamCounter;
 import com.itextpdf.text.pdf.PdfWriter;
 
+@WrapToTest
 public class PdfWithComments {
     public static final String DEST = "results/logging/pdf_comments.pdf";
 
