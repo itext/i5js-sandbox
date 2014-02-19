@@ -29,7 +29,6 @@ public class UnembedFont {
 
     public static void main(String[] args) throws DocumentException, IOException {
         UnembedFont app = new UnembedFont();
-        app.createPdf(SRC);
         app.manipulatePdf(SRC, DEST);
     }
     
@@ -56,6 +55,7 @@ public class UnembedFont {
      * Removes the embedded font
      */
     public void manipulatePdf(String src, String dest) throws IOException, DocumentException {
+	    createPdf(src);
         // we create a reader instance
         PdfReader reader = new PdfReader(src);
         // we loop over all objects
