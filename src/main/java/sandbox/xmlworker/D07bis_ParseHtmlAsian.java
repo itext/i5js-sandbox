@@ -22,10 +22,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+import sandbox.WrapToTest;
+
+@WrapToTest
 public class D07bis_ParseHtmlAsian {
 
     public static final String HTML = "resources/xml/hero.html";
-    public static final String DEST = "results/xmlworker/hero.pdf";
+    public static final String DEST = "results/xmlworker/asian.pdf";
 
     /**
      * Creates a PDF with the words "Hello World"
@@ -46,8 +49,8 @@ public class D07bis_ParseHtmlAsian {
         
         // HTML
         XMLWorkerFontProvider fontProvider = new XMLWorkerFontProvider(XMLWorkerFontProvider.DONTLOOKFORFONTS);
-        fontProvider.register("c:/windows/fonts/msmincho.ttc");
-        fontProvider.addFontSubstitute("MS Mincho", "ms mincho");
+        fontProvider.register("resources/fonts/cfmingeb.ttf", "MS Mincho");
+        fontProvider.register("resources/fonts/PT_Serif-Web-Regular.ttf", "Serif");
         CssAppliers cssAppliers = new CssAppliersImpl(fontProvider);
         HtmlPipelineContext htmlContext = new HtmlPipelineContext(cssAppliers);
         htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());

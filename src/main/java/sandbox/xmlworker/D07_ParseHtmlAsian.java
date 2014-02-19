@@ -14,7 +14,7 @@ import java.nio.charset.Charset;
 public class D07_ParseHtmlAsian {
 
     public static final String HTML = "resources/xml/hero.html";
-    public static final String DEST = "results/xmlworker/asian.pdf";
+    public static final String DEST = "results/xmlworker/hero.pdf";
 
     /**
      * Creates a PDF with the words "Hello World"
