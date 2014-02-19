@@ -11,13 +11,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import sandbox.WrapToTest;
-
-@WrapToTest
 public class D07_ParseHtmlAsian {
 
     public static final String HTML = "resources/xml/hero.html";
-    public static final String DEST = "results/xmlworker/hero.pdf";
+    public static final String DEST = "results/xmlworker/asian.pdf";
 
     /**
      * Creates a PDF with the words "Hello World"
