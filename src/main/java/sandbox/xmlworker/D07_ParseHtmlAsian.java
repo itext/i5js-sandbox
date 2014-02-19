@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import sandbox.WrapToTest;
 
@@ -33,7 +34,7 @@ public class D07_ParseHtmlAsian {
         document.open();
         // step 4
         XMLWorkerHelper.getInstance().parseXHtml(writer, document,
-                new FileInputStream(HTML));
+                new FileInputStream(HTML), Charset.forName("UTF-8"));
         // step 5
         document.close();
     }
