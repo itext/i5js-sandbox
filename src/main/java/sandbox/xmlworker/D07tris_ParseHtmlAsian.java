@@ -5,6 +5,8 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorker;
 import com.itextpdf.tool.xml.XMLWorkerFontProvider;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
+import com.itextpdf.tool.xml.css.CssFile;
 import com.itextpdf.tool.xml.css.StyleAttrCSSResolver;
 import com.itextpdf.tool.xml.html.CssAppliers;
 import com.itextpdf.tool.xml.html.CssAppliersImpl;
@@ -16,6 +18,7 @@ import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -46,11 +49,12 @@ public class D07tris_ParseHtmlAsian {
         // step 4
         // CSS
         CSSResolver cssResolver = new StyleAttrCSSResolver();
+        CssFile cssFile = XMLWorkerHelper.getCSS(new ByteArrayInputStream("body {font-family:tsc fming s tt}".getBytes()));
+        cssResolver.addCss(cssFile);
         
         // HTML
         XMLWorkerFontProvider fontProvider = new XMLWorkerFontProvider(XMLWorkerFontProvider.DONTLOOKFORFONTS);
         fontProvider.register("resources/fonts/cfmingeb.ttf");
-        fontProvider.addFontSubstitute("chinese", "TSC FMing S TT");
         CssAppliers cssAppliers = new CssAppliersImpl(fontProvider);
         HtmlPipelineContext htmlContext = new HtmlPipelineContext(cssAppliers);
         htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
