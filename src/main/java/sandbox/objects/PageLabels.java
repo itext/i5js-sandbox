@@ -33,21 +33,21 @@ public class PageLabels {
         new PageLabels().createPdf(DEST);
     }
     
-	public void createPdf(String filename) throws IOException, DocumentException {
-		Document document = new Document();
-		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filename));
-		writer.setViewerPreferences(PdfWriter.PageLayoutTwoPageLeft | PdfWriter.PageModeUseThumbs);
-		writer.addViewerPreference(PdfName.PRINTSCALING, PdfName.NONE);
-		PdfPageLabels labels = new PdfPageLabels();
+    public void createPdf(String filename) throws IOException, DocumentException {
+        Document document = new Document();
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filename));
+        writer.setViewerPreferences(PdfWriter.PageLayoutTwoPageLeft | PdfWriter.PageModeUseThumbs);
+        writer.addViewerPreference(PdfName.PRINTSCALING, PdfName.NONE);
+        PdfPageLabels labels = new PdfPageLabels();
         labels.addPageLabel(1, PdfPageLabels.UPPERCASE_LETTERS);
         labels.addPageLabel(3, PdfPageLabels.DECIMAL_ARABIC_NUMERALS);
         labels.addPageLabel(4,
             PdfPageLabels.DECIMAL_ARABIC_NUMERALS, "Custom-", 2);
-		writer.setPageLabels(labels);
-		document.open();
-		document.add(new Paragraph("Hello World"));
-		document.add(new Paragraph("Hello People"));
-		document.newPage();
+        writer.setPageLabels(labels);
+        document.open();
+        document.add(new Paragraph("Hello World"));
+        document.add(new Paragraph("Hello People"));
+        document.newPage();
 
         // we add the text to the direct content, but not in the right order
         PdfContentByte cb = writer.getDirectContent();
@@ -74,32 +74,32 @@ public class PageLabels {
                
         document.setPageSize(PageSize.A4.rotate());
         document.newPage();
-		document.add(new Paragraph("Hello World"));
-		
-		document.setPageSize(new Rectangle(842, 595));
-		document.newPage();
-		document.add(new Paragraph("Hello World"));
-		document.setPageSize(PageSize.A4);
-		
-		writer.setCropBoxSize(new Rectangle(40, 40, 565, 795));
-		document.newPage();
-		document.add(new Paragraph("Hello World"));
+        document.add(new Paragraph("Hello World"));
+        
+        document.setPageSize(new Rectangle(842, 595));
+        document.newPage();
+        document.add(new Paragraph("Hello World"));
+        document.setPageSize(PageSize.A4);
+        
+        writer.setCropBoxSize(new Rectangle(40, 40, 565, 795));
+        document.newPage();
+        document.add(new Paragraph("Hello World"));
 
-		writer.setCropBoxSize(null);
-		document.newPage();
-		writer.addPageDictEntry(PdfName.USERUNIT, new PdfNumber(5));
-		document.add(new Paragraph("Hello World"));
+        writer.setCropBoxSize(null);
+        document.newPage();
+        writer.addPageDictEntry(PdfName.USERUNIT, new PdfNumber(5));
+        document.add(new Paragraph("Hello World"));
 
-		writer.setBoxSize("art", new Rectangle(36, 36, 559, 806));
-		document.newPage();
-		Anchor anchor = new Anchor("World");
-		anchor.setReference("http://maps.google.com");
-		Paragraph p = new Paragraph("Hello ");
-		p.add(anchor);
-		document.add(p);
-		Annotation a = new Annotation("Example", "This is a post-it annotation");
-		document.add(a);
-		
-		document.close();
-	}
+        writer.setBoxSize("art", new Rectangle(36, 36, 559, 806));
+        document.newPage();
+        Anchor anchor = new Anchor("World");
+        anchor.setReference("http://maps.google.com");
+        Paragraph p = new Paragraph("Hello ");
+        p.add(anchor);
+        document.add(p);
+        Annotation a = new Annotation("Example", "This is a post-it annotation");
+        document.add(a);
+        
+        document.close();
+    }
 }
