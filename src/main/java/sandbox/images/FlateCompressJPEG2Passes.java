@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import sandbox.WrapToTest;
+
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PRStream;
 import com.itextpdf.text.pdf.PdfArray;
@@ -18,6 +20,7 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 
+@WrapToTest
 public class FlateCompressJPEG2Passes {
     public static final String SRC = "resources/pdfs/image.pdf";
     public static final String DEST = "results/images/flatecompress_image2.pdf";

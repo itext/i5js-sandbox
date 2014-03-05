@@ -8,12 +8,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import sandbox.WrapToTest;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+@WrapToTest
 public class RepeatLastRows {
     public static final String DEST = "results/tables/repeat_last_rows.pdf";
 

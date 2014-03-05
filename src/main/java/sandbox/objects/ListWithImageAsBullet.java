@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import sandbox.WrapToTest;
+
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -11,6 +13,7 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.List;
 import com.itextpdf.text.pdf.PdfWriter;
 
+@WrapToTest
 public class ListWithImageAsBullet {
 
     public static final String IMG = "resources/images/bulb.gif";
