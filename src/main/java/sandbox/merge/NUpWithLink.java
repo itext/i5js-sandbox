@@ -1,5 +1,5 @@
 /**
- * Example written by Bruno Lowagie in answer to a questin on StackOverflow
+ * Example written by Bruno Lowagie in answer to a question on StackOverflow
  * 
  * When concatenating documents, we add a named destination every time
  * a new document is started. After we've finished merging, we add an extra
