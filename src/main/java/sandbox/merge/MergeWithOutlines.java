@@ -14,14 +14,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import sandbox.WrapToTest;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
 
-@WrapToTest
 public class MergeWithOutlines {
 
     public static final String SRC1 = "resources/pdfs/hello.pdf";
