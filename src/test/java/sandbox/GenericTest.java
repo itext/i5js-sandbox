@@ -44,19 +44,17 @@
  */
 package sandbox;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import javax.management.OperationsException;
-
+import com.itextpdf.testutils.CompareTool;
+import com.itextpdf.text.log.Logger;
+import com.itextpdf.text.log.LoggerFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.itextpdf.testutils.CompareTool;
-import com.itextpdf.text.log.Logger;
-import com.itextpdf.text.log.LoggerFactory;
+import javax.management.OperationsException;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public /*abstract*/ class GenericTest {
 	
@@ -202,7 +200,7 @@ public /*abstract*/ class GenericTest {
         CompareTool compareTool = new CompareTool(dest, cmp);
         String outPath = "./target/" + new File(dest).getParent();
         new File(outPath).mkdirs();
-        addError(compareTool.compare(dest, cmp, outPath, differenceImagePrefix));
+        addError(compareTool.compareByContent(dest, cmp, outPath, differenceImagePrefix));
         addError(compareTool.compareDocumentInfo(dest, cmp));
         addError(compareTool.compareLinks(dest, cmp));
 
