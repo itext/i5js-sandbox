@@ -89,6 +89,14 @@ public class SandboxSampleWrapper extends GenericTest {
         public void setCompareRenders(boolean compareRenders) {
             this.compareRenders = compareRenders;
         }
+
+        @Override
+        public String toString() {
+            return "SandboxWrapperParam{" +
+                    "className='" + className + '\'' +
+                    ", compareRenders=" + compareRenders +
+                    '}';
+        }
     }
 
 
