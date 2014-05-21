@@ -64,6 +64,7 @@ public /*abstract*/ class GenericTest {
     /** The class file for the example we're going to test. */
 	protected Class<?> klass;
     protected String className;
+    protected boolean compareRenders = false;
 	/** An error message */
     private String errorMessage;
     /** A prefix that is part of the error message. */
@@ -91,6 +92,10 @@ public /*abstract*/ class GenericTest {
 			throw new RuntimeException(className + " not found");
 		}
 	}
+
+    protected void setCompareRenders(boolean compareRenders) {
+        this.compareRenders = compareRenders;
+    }
 
     /**
          * Tests the example.
@@ -200,7 +205,10 @@ public /*abstract*/ class GenericTest {
         CompareTool compareTool = new CompareTool(dest, cmp);
         String outPath = "./target/" + new File(dest).getParent();
         new File(outPath).mkdirs();
-        addError(compareTool.compareByContent(dest, cmp, outPath, differenceImagePrefix));
+        if (compareRenders)
+            addError(compareTool.compare(dest, cmp, outPath, differenceImagePrefix));
+        else
+            addError(compareTool.compareByContent(dest, cmp, outPath, differenceImagePrefix));
         addError(compareTool.compareDocumentInfo(dest, cmp));
         addError(compareTool.compareLinks(dest, cmp));
 
