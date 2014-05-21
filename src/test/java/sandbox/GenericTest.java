@@ -205,12 +205,14 @@ public /*abstract*/ class GenericTest {
         CompareTool compareTool = new CompareTool(dest, cmp);
         String outPath = "./target/" + new File(dest).getParent();
         new File(outPath).mkdirs();
-        if (compareRenders)
+        if (compareRenders) {
             addError(compareTool.compare(dest, cmp, outPath, differenceImagePrefix));
-        else
+            addError(compareTool.compareLinks(dest, cmp));
+        } else {
             addError(compareTool.compareByContent(dest, cmp, outPath, differenceImagePrefix));
+        }
         addError(compareTool.compareDocumentInfo(dest, cmp));
-        addError(compareTool.compareLinks(dest, cmp));
+
 
         if (errorMessage != null) Assert.fail(errorMessage);
     }
