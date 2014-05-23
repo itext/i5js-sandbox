@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
 
-@WrapToTest(compareRenders = true)
+@WrapToTest(compareRenders = false)
 public class FontTest {
 
     public static final String DEST = "results/fonts/overview.pdf";
