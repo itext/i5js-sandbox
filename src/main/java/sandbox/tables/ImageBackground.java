@@ -25,11 +25,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class ImageBackground {
 
-    class TiledImageBackground implements PdfPCellEvent {
+    class ImageBackgroundEvent implements PdfPCellEvent {
 
         protected Image image;
         
-        public TiledImageBackground(Image image) {
+        public ImageBackgroundEvent(Image image) {
             this.image = image;
         }
         
@@ -68,7 +68,7 @@ public class ImageBackground {
         Paragraph p = new Paragraph("A cell with an image as background color.", font);
         cell.addElement(p);
         Image image = Image.getInstance(IMG1);
-        cell.setCellEvent(new TiledImageBackground(image));
+        cell.setCellEvent(new ImageBackgroundEvent(image));
         cell.setFixedHeight(600 * image.getScaledHeight() / image.getScaledWidth());
         table.addCell(cell);
         document.add(table);
