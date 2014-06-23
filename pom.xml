@@ -8,8 +8,13 @@
     </parent>
     <artifactId>sandbox</artifactId>
     <version>5.5.2-SNAPSHOT</version>
-    <name>iText examples</name>
-    <description>iText examples</description>
+    <name>iText Examples (Sandbox)</name>
+    <description>iText Examples (Sandbox)</description>
+    <url>http://itextpdf.com</url>
+    <scm>
+        <connection>scm:svn:http://svn.code.sf.net/p/itext/code/trunk/sandbox</connection>
+        <url>http://sourceforge.net/p/itext/code</url>
+    </scm>
     <build>
         <plugins>
             <plugin>
@@ -65,5 +70,6 @@
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.language>java</sonar.language>
     </properties>
 </project>
