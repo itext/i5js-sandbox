@@ -15,7 +15,7 @@ public class FillXFA {
 
     public static final String SRC = "resources/pdfs/purchase_order.pdf";
     public static final String XML = "resources/xml/data.xml";
-    public static final String DEST = "results/xfa/purchase_order.pdf";
+    public static final String DEST = "results/xfa/purchase_order_filled.pdf";
 
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
