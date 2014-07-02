@@ -109,6 +109,10 @@ public class FillTemplateHelper extends PdfPageEventHelper {
     public float getmBottom() {
         return mBottom;
     }
+    
+    public Rectangle getBody() {
+        return body;
+    }
         
     @Override
     public void onOpenDocument(PdfWriter writer, Document document) {
