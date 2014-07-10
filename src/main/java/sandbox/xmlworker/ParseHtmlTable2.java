@@ -20,7 +20,6 @@ import com.itextpdf.tool.xml.parser.XMLParser;
 import com.itextpdf.tool.xml.pipeline.css.CSSResolver;
 import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
 import com.itextpdf.tool.xml.pipeline.end.ElementHandlerPipeline;
-import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
 import java.io.ByteArrayInputStream;
