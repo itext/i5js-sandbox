@@ -11,6 +11,9 @@
     <name>iText Examples (Sandbox)</name>
     <description>iText Examples (Sandbox)</description>
     <url>http://itextpdf.com</url>
+    <organization>
+        <url>http://itextpdf.com</url>
+    </organization>
     <scm>
         <connection>scm:svn:http://svn.code.sf.net/p/itext/code/trunk/sandbox</connection>
         <url>http://sourceforge.net/p/itext/code</url>
