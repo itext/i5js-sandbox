@@ -29,6 +29,7 @@ import com.itextpdf.tool.xml.XMLWorker;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.itextpdf.tool.xml.css.CssFile;
 import com.itextpdf.tool.xml.css.StyleAttrCSSResolver;
+import com.itextpdf.tool.xml.html.TagProcessorFactory;
 import com.itextpdf.tool.xml.html.Tags;
 import com.itextpdf.tool.xml.parser.XMLParser;
 import com.itextpdf.tool.xml.pipeline.css.CSSResolver;
@@ -159,14 +160,14 @@ public class FillTemplateHelper extends PdfPageEventHelper {
         ColumnText.showTextAligned(total, Element.ALIGN_LEFT, p, 0.5f, 0, 0);
     }
 
-    public static ElementList parseHtml(String content, String style) throws IOException {
+    public static ElementList parseHtml(String content, String style, TagProcessorFactory tagProcessors) throws IOException {
         // CSS
         CSSResolver cssResolver = new StyleAttrCSSResolver();
         CssFile cssFile = XMLWorkerHelper.getCSS(new FileInputStream(style));
         cssResolver.addCss(cssFile);
         // HTML
         HtmlPipelineContext htmlContext = new HtmlPipelineContext(null);
-        htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
+        htmlContext.setTagFactory(tagProcessors);
         htmlContext.autoBookmark(false);
         // Pipelines
         ElementList elements = new ElementList();

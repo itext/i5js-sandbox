@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package sandbox.xmlworker.reporting;
 
 import com.itextpdf.text.Document;
@@ -11,14 +5,11 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.ElementList;
+import com.itextpdf.tool.xml.html.Tags;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
- *
- * @author iText
- */
 public class FillTemplate1 {
 
     public static final String DEST = "results/xmlworker/report1.pdf";
@@ -39,7 +30,7 @@ public class FillTemplate1 {
         // step 3
         document.open();
         // step 4
-        ElementList elements = FillTemplateHelper.parseHtml(HTML, CSS);
+        ElementList elements = FillTemplateHelper.parseHtml(HTML, CSS, Tags.getHtmlTagProcessorFactory());
         for (Element e : elements) {
             document.add(e);
         }
