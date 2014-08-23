@@ -32,20 +32,28 @@ public class MyRenderListener implements RenderListener {
         this.top = top;
     }
 
-    @Override
+    /**
+     * @see com.itextpdf.text.pdf.parser.RenderListener#beginTextBlock()
+     */
     public void beginTextBlock() { }
 
-    @Override
+    /**
+     * @see com.itextpdf.text.pdf.parser.RenderListener#renderText(com.itextpdf.text.pdf.parser.TextRenderInfo)
+     */
     public void renderText(TextRenderInfo textRenderInfo) {
         items.add(new TextItem(textRenderInfo, top));
     }
 
-    @Override
+    /**
+     * @see com.itextpdf.text.pdf.parser.RenderListener#endTextBlock()
+     */
     public void endTextBlock() {
     }
 
-    @Override
-     public void renderImage(ImageRenderInfo imageRenderInfo) {
+     /**
+     * @see com.itextpdf.text.pdf.parser.RenderListener#renderImage(com.itextpdf.text.pdf.parser.ImageRenderInfo)
+     */
+    public void renderImage(ImageRenderInfo imageRenderInfo) {
         items.add(new ImageItem(imageRenderInfo));
     }
 
