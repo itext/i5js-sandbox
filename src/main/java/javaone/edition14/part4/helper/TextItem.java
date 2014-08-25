@@ -8,6 +8,7 @@
  */
 package javaone.edition14.part4.helper;
 
+import com.itextpdf.awt.geom.Point;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.pdf.parser.TextRenderInfo;
 import java.util.HashMap;
@@ -41,11 +42,11 @@ public class TextItem extends MyItem {
     }
 
     /**
-     * Getter for the base line
-     * @return the Y coordinate of the text snippet
+     * @see MyItem#getLL()
      */
-    public float getBaseline() {
-        return baseline;
+    @Override
+    public Point getLL() {
+        return new Point(getRectangle().getLeft(), baseline);
     }
 
     /**

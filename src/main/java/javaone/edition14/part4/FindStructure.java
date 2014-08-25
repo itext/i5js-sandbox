@@ -16,6 +16,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,6 +39,7 @@ public class FindStructure extends FindLines {
         FindStructure app = new FindStructure();
         PdfReader reader = new PdfReader(SRC);
         List<MyItem> items = app.getContentItems(reader, 1, 48);
+        Collections.sort(items);
         List<Line> lines = app.getLines(items);
         List<Structure> structures = app.getStructures(lines);
         app.highlight(structures, reader, 1, DEST);
@@ -78,7 +80,7 @@ public class FindStructure extends FindLines {
     static boolean areInSameStructure(Line i1, Line i2) {
         if (!i1.getColor().equals(i2.getColor()))
             return false;
-        else if (i2.getRectangle().getLeft() - i1.getRectangle().getLeft() >= 3f)
+        else if (i2.getRectangle().getLeft() - i1.getRectangle().getLeft() >= MyItem.itemPositionTolerance)
             return false;
         return true;
     }

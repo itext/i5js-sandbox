@@ -16,6 +16,8 @@ import com.itextpdf.text.pdf.PdfReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,6 +40,7 @@ public class FindLines extends FindItems {
         FindLines app = new FindLines();
         PdfReader reader = new PdfReader(SRC);
         List<MyItem> items = app.getContentItems(reader, 1, 48);
+        Collections.sort(items);
         List<Line> lines = app.getLines(items);
         app.highlight(lines, reader, 1, DEST);
     }
@@ -76,8 +79,6 @@ public class FindLines extends FindItems {
      * @return true if items are on the same line, otherwise false
      */
     static boolean areOnSameLine(MyItem i1, MyItem i2) {
-        float i1baseline = (i1 instanceof TextItem) ? ((TextItem) i1).getBaseline() : i1.getRectangle().getBottom();
-        float i2baseline = (i2 instanceof TextItem) ? ((TextItem) i2).getBaseline() : i2.getRectangle().getBottom();
-        return Math.abs(i1baseline - i2baseline) <= 3f;
+        return Math.abs(i1.getLL().getY() - i2.getLL().getY()) <= MyItem.itemPositionTolerance;
     }
 }
