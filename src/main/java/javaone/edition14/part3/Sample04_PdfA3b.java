@@ -25,6 +25,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * Creates a PDF that conforms with PDF/A-3 Level B.
+ */
 public class Sample04_PdfA3b {
 
     /** The resulting PDF. */
@@ -33,15 +36,29 @@ public class Sample04_PdfA3b {
     public static final String FOX = "resources/images/fox.bmp";
     /** An image resource. */
     public static final String DOG = "resources/images/dog.bmp";
+    /** A path to a color profile. */
     public static final String ICC = "resources/data/sRGB_CS_profile.icm";
+    /** A font that will be embedded. */
     public static final String FONT = "resources/fonts/FreeSans.ttf";
     
+    /**
+     * Creates a PDF that conforms with PDF/A-3 Level B.
+     * @param args  No arguments needed
+     * @throws IOException
+     * @throws DocumentException 
+     */
     static public void main(String args[]) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
         new Sample04_PdfA3b().createPdf(DEST);
     }
     
+    /**
+     * Creates a PDF that conforms with PDF/A-3 Level B.
+     * @param dest  the path to the resulting PDF
+     * @throws IOException
+     * @throws DocumentException 
+     */
     public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document(PageSize.A4.rotate());
         //PDF/A-3b

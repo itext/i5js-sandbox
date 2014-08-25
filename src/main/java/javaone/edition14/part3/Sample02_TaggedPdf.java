@@ -20,6 +20,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * Creates a Tagged PDF with images and text.
+ */
 public class Sample02_TaggedPdf {
 
     /** The resulting PDF. */
@@ -29,12 +32,24 @@ public class Sample02_TaggedPdf {
     /** An image resource. */
     public static final String DOG = "resources/images/dog.bmp";
 
+    /**
+     * Creates a tagged PDF with images and text.
+     * @param args  no arguments needed
+     * @throws IOException
+     * @throws DocumentException 
+     */
     static public void main(String args[]) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
         new Sample02_TaggedPdf().createPdf(DEST);
     }
-    
+
+    /**
+     * Creates a tagged PDF with images and text.
+     * @param dest  the path to the resulting PDF
+     * @throws IOException
+     * @throws DocumentException 
+     */
     public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document(PageSize.A4.rotate());
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));

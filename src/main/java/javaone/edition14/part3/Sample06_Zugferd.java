@@ -34,6 +34,9 @@ import com.itextpdf.text.xml.xmp.PdfAXmpWriter;
 import com.itextpdf.xmp.XMPException;
 import java.io.File;
 
+/**
+ * Creates a PDF that conforms with the ZUGFeRD standard.
+ */
 public class Sample06_Zugferd {
 
     /** The resulting PDF. */
@@ -42,16 +45,33 @@ public class Sample06_Zugferd {
     public static final String FOX = "resources/images/fox.bmp";
     /** An image resource. */
     public static final String DOG = "resources/images/dog.bmp";
+    /** A path to a color profile. */
     public static final String ICC = "resources/data/sRGB_CS_profile.icm";
+    /** A font that will be embedded. */
     public static final String FONT = "resources/fonts/FreeSans.ttf";
+    /** A path to an XML file that will be attached to the PDF. */
     public static final String XML = "resources/xml/invoice.xml";
     
+    /**
+     * Creates a PDF that conforms with the ZUGFeRD standard.
+     * @param args  no arguments needed
+     * @throws IOException
+     * @throws DocumentException
+     * @throws XMPException 
+     */
     static public void main(String args[]) throws IOException, DocumentException, XMPException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
         new Sample06_Zugferd().createPdf(DEST);
     }
     
+    /**
+     * Creates a PDF that conforms with the ZUGFeRD standard.
+     * @param dest  the path to the resulting PDF
+     * @throws IOException
+     * @throws DocumentException
+     * @throws XMPException 
+     */
     public void createPdf(String dest) throws IOException, DocumentException, XMPException {
         Document document = new Document(PageSize.A4.rotate());
         //PDF/A-3b
