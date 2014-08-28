@@ -1,18 +1,18 @@
 package javaone.edition14.part2;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfStream;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class ContentStreams {
 
@@ -25,6 +25,8 @@ public class ContentStreams {
     public static final String RESULT_REFLOW_LOW = "results/javaone/edition2014/part2/hello-reflow-low.pdf";
     
     public static void main(String[] args) throws DocumentException, IOException {
+        File file = new File(RESULT_HIGH);
+        file.getParentFile().mkdirs();
     	ContentStreams cs = new ContentStreams();
     	cs.createPdfHigh();
     	cs.createPdfLow();
