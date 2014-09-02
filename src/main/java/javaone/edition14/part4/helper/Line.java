@@ -22,7 +22,9 @@ public class Line extends MyItem {
      * @param items a list of MyItem objects
      */
     public Line(List<MyItem> items) {
-        super(getItemsRect(items), items.get(0).getColor());
+        super();
+        rectangle = getItemsRect(items);
+        color = items.get(0).getColor();
     }
 
     /**
@@ -31,7 +33,7 @@ public class Line extends MyItem {
      * @param items the items that belong to a line
      * @return a rectangle that encompasses all items belonging to a line
      */
-    public static Rectangle getItemsRect(List<MyItem> items) {
+    private static Rectangle getItemsRect(List<MyItem> items) {
         float left = Float.MAX_VALUE;
         float right = 0;
         float top = 0;

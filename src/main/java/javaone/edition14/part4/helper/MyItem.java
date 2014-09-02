@@ -12,6 +12,7 @@ import com.itextpdf.awt.geom.Point;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.parser.ImageRenderInfo;
+import com.itextpdf.text.pdf.parser.LineSegment;
 import com.itextpdf.text.pdf.parser.Matrix;
 import com.itextpdf.text.pdf.parser.TextRenderInfo;
 
@@ -33,10 +34,8 @@ public abstract class MyItem implements Comparable<MyItem> {
 
     /**
      * Creates an instance of the MyItem object
-     * @param rectangle the coordinates of the item
-     * @param color     the color that will be used to mark the item
      */
-    protected MyItem(Rectangle rectangle, BaseColor color) {
+    protected MyItem() {
         this.rectangle = rectangle;
         this.color = color;
     }
@@ -55,31 +54,6 @@ public abstract class MyItem implements Comparable<MyItem> {
      */
     public BaseColor getColor() {
         return color;
-    }
-
-    /**
-     * Converts the Matrix containing the coordinates of an image as stored
-     * in an ImageRenderInfo object into a Rectangle.
-     * @param imageRenderInfo   Object that contains info about an image
-     * @return coordinates in the form of a Rectangle object
-     */
-    public static Rectangle getRectangle(ImageRenderInfo imageRenderInfo) {
-        Matrix ctm = imageRenderInfo.getImageCTM();
-        return new Rectangle(ctm.get(6), ctm.get(7), ctm.get(6) + ctm.get(0), ctm.get(7) + ctm.get(4));
-    }
-
-    /**
-     * Stores the start and end points and the ascent and descent info from
-     * a text snippet into a Rectangle object.
-     * @param textRenderInfo    Object that contains info about a text snippet
-     * @return coordinates in the form of a Rectangle object
-     */
-    static Rectangle getRectangle(TextRenderInfo textRenderInfo) {
-        float x0 = textRenderInfo.getBaseline().getStartPoint().get(0);
-        float x1 = textRenderInfo.getBaseline().getEndPoint().get(0);
-        float y0 = textRenderInfo.getDescentLine().getStartPoint().get(1);
-        float y1 = textRenderInfo.getAscentLine().getEndPoint().get(1);
-        return new Rectangle(x0, y0, x1, y1);
     }
 
     /**
