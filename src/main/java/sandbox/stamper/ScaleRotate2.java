@@ -18,16 +18,18 @@ import java.io.IOException;
 public class ScaleRotate2 {
 
     public static final String SRC = "resources/pdfs/hero.pdf";
-    public static final String DEST = "results/stamper/hero_altered.pdf";
+    public static final String SHRINK = "results/stamper/hero_shrink.pdf";
+    public static final String ROTATE = "results/stamper/hero_rotate.pdf";
 
     public static void main(String[] args) throws IOException, DocumentException {
-        File file = new File(DEST);
+        File file = new File(SHRINK);
         file.getParentFile().mkdirs();
-        new ScaleRotate2().manipulatePdf(SRC, DEST);
+        new ScaleRotate2().shrinkPdf(SRC, SHRINK);
+        new ScaleRotate2().rotatePdf(SHRINK, ROTATE);
     }
 
 
-    public void manipulatePdf(String src, String dest) throws IOException, DocumentException {
+    public void shrinkPdf(String src, String dest) throws IOException, DocumentException {
         PdfReader reader = new PdfReader(src);
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
         int n = reader.getNumberOfPages();
@@ -35,7 +37,6 @@ public class ScaleRotate2 {
         PdfArray crop;
         PdfArray media;
         for (int p = 1; p <= n; p++) {
-            stamper.getUnderContent(p).setLiteral("\nq 0.5 0 0 0.5 0 0 cm\nq\n");
             page = reader.getPageN(p);
             media = page.getAsArray(PdfName.CROPBOX);
             if (media == null) {
@@ -46,9 +47,23 @@ public class ScaleRotate2 {
             crop.add(new PdfNumber(media.getAsNumber(1).floatValue() / 2));
             crop.add(new PdfNumber(media.getAsNumber(2).floatValue() / 2));
             crop.add(new PdfNumber(media.getAsNumber(3).floatValue() / 2));
+            page.put(PdfName.MEDIABOX, crop);
             page.put(PdfName.CROPBOX, crop);
-            page.put(PdfName.ROTATE, new PdfNumber(90));
+            stamper.getUnderContent(p).setLiteral("\nq 0.5 0 0 0.5 0 0 cm\nq\n");
             stamper.getOverContent(p).setLiteral("\nQ\nQ\n");
+        }
+        stamper.close();
+        reader.close();
+    }
+    
+    public void rotatePdf(String src, String dest) throws IOException, DocumentException {
+        PdfReader reader = new PdfReader(src);
+        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
+        int n = reader.getNumberOfPages();
+        PdfDictionary page;
+        for (int p = 1; p <= n; p++) {
+            page = reader.getPageN(p);
+            page.put(PdfName.ROTATE, new PdfNumber(90));
         }
         stamper.close();
         reader.close();
