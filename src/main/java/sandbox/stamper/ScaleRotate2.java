@@ -1,8 +1,6 @@
 /**
  * Example written by Bruno Lowagie in answer to:
  * http://stackoverflow.com/questions/25356302/shrink-pdf-pages-with-rotation-using-rectangle-in-existing-pdf
- * 
- * Example that shows how to scale an existing PDF using the UserUnit and how to remove the rotation of a page.
  */
 package sandbox.stamper;
 
@@ -16,9 +14,7 @@ import com.itextpdf.text.pdf.PdfStamper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import sandbox.WrapToTest;
 
-@WrapToTest
 public class ScaleRotate2 {
 
     public static final String SRC = "resources/pdfs/hero.pdf";
