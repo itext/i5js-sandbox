@@ -76,10 +76,10 @@ public class Logo {
         x.lineTo(1056, 36);
         x.stroke();
 
-        Paragraph p = new Paragraph(20, "ITEXT", new Font(t3, 20));
+        Font font = new Font(t3, 20);
+        Paragraph p = new Paragraph("ITEXT", font);
         document.add(p);
-        document.add(Chunk.NEWLINE);
-        p = new Paragraph(20, "I\nT\nE\nX\nT", new Font(t3, 20));
+        p = new Paragraph(20, "I\nT\nE\nX\nT", font);
         document.add(p);
         // step 5: we close the document
         document.close();
