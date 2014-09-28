@@ -40,7 +40,8 @@ public class S01_Watermark {
      * @throws DocumentException
      * @throws IOException 
      */
-    public static void main(String[] args) throws DocumentException, IOException {
+    public static void main(String[] args)
+            throws DocumentException, IOException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
         new S01_Watermark().manipulatePdf(SRC, DEST);
@@ -53,7 +54,8 @@ public class S01_Watermark {
      * @throws DocumentException
      * @throws IOException 
      */
-    public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
+    public void manipulatePdf(String src, String dest)
+            throws DocumentException, IOException {
         PdfReader reader = new PdfReader(src);
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
         PdfContentByte under = stamper.getUnderContent(1);
@@ -63,7 +65,9 @@ public class S01_Watermark {
         under.saveState();
         under.setGState(gs);
         under.setRGBColorFill(200, 200, 0);
-        ColumnText.showTextAligned(under, Element.ALIGN_CENTER, new Phrase("Watermark", new Font(FontFamily.HELVETICA, 120)), 297, 421, 45);
+        ColumnText.showTextAligned(under, Element.ALIGN_CENTER,
+                new Phrase("Watermark", new Font(FontFamily.HELVETICA, 120)),
+                297, 421, 45);
         under.restoreState();
         stamper.close();
         reader.close();

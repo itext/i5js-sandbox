@@ -41,7 +41,8 @@ public class S04_CorrectedWatermark {
      * @throws DocumentException
      * @throws IOException 
      */
-    public static void main(String[] args) throws DocumentException, IOException {
+    public static void main(String[] args)
+            throws DocumentException, IOException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
         new S04_CorrectedWatermark().manipulatePdf(SRC, DEST);
@@ -54,7 +55,8 @@ public class S04_CorrectedWatermark {
      * @throws DocumentException
      * @throws IOException 
      */
-    public void manipulatePdf(String src, String dest) throws DocumentException, IOException {
+    public void manipulatePdf(String src, String dest)
+            throws DocumentException, IOException {
         PdfReader reader = new PdfReader(src);
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
         int n = reader.getNumberOfPages();
@@ -69,7 +71,9 @@ public class S04_CorrectedWatermark {
             over.saveState();
             over.setGState(gs);
             over.setRGBColorFill(200, 200, 0);
-            ColumnText.showTextAligned(over, Element.ALIGN_CENTER, new Phrase("Watermark", new Font(FontFamily.HELVETICA, 120)), x, y, 45);
+            ColumnText.showTextAligned(over, Element.ALIGN_CENTER,
+                    new Phrase("Watermark", new Font(FontFamily.HELVETICA, 120)),
+                    x, y, 45);
             over.restoreState();
         }
         stamper.close();
