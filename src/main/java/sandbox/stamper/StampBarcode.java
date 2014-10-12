@@ -1,9 +1,6 @@
 /*
- * This code sample was written in the context of
- *
- * JavaOne 2014: PDF is dead. Long live PDF... and Java!
- * Tutorial Session by Bruno Lowagie and Raf Hens
- *
+ * Example written by Bruno Lowagie in answer to:
+ * http://stackoverflow.com/questions/26325712/itext-add-image-to-existing-document-using-itext-pdfstamper
  * Copyright 2014, iText Group NV
  */
 package sandbox.stamper;
@@ -16,7 +13,6 @@ import java.io.IOException;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.Barcode;
-import com.itextpdf.text.pdf.Barcode128;
 import com.itextpdf.text.pdf.BarcodeEAN;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfReader;
