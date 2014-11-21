@@ -12,7 +12,6 @@ import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.nio.file.Files;
 
 public class RelativeLink {
     public static final String DEST = "results/annotations/relative_link.pdf";
@@ -20,9 +19,7 @@ public class RelativeLink {
     
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
-        File xml = new File(XML);
         file.getParentFile().mkdirs();
-        Files.copy(xml.toPath(), new File(file.getParentFile(), xml.getName()).toPath());
         new RelativeLink().createPdf(DEST);
     }
     
