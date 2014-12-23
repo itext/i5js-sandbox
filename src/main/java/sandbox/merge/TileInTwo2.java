@@ -50,9 +50,9 @@ public class TileInTwo2 {
         int i = 1;
         while (true) {
             page = writer.getImportedPage(reader, i);
-            content.addTemplate(page, -mediabox.getWidth(), 0);
-            document.newPage();
             content.addTemplate(page, 0, 0);
+            document.newPage();
+            content.addTemplate(page, -mediabox.getWidth(), 0);
             if (++i > n)
                 break;
             mediabox = new Rectangle(getHalfPageSize(reader.getPageSizeWithRotation(i)));
