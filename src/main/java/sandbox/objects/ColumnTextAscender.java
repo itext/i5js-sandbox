@@ -1,3 +1,7 @@
+/*
+ * This example was written by Bruno Lowagie in answer to the following question:
+ * http://stackoverflow.com/questions/27906725/itext-placement-of-phrase-within-columntext
+ */
 package sandbox.objects;
 
 import java.io.File;
