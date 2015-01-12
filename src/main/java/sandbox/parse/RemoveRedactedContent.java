@@ -1,6 +1,6 @@
 /*
  * Example written by Bruno Lowagie in answer to:
- * http://stackoverflow.com/questions/27905740/remove-text-occurrences-contained-in-a-specified-area-with-itext
+ * http://stackoverflow.com/questions/24037282/any-way-to-create-redactions
  */
 
 package sandbox.parse;
