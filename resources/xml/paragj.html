@@ -1,0 +1,148 @@
+<html>
+<head>
+<title>Summary log</title>
+<style type="text/css">
+body, html { border: 0px }
+
+h1, h2, h3, h4, h5, h6 {font-family: Arial, Helvetica, sans-serif }
+body, p { font-family: "verdana", tahoma, arial, sans-serif }
+code { font-family: "Courier New", Courier, monospace }
+
+body            { background-color: #FFFFEE; font-family: "verdana", tahoma, arial, sans-serif;}
+p           { font-size: 11px; font-family: "verdana", tahoma, arial, sans-serif; color: #040404; background-color: #FFFFEE; margin-top: 5px; margin-bottom: 8px; margin-left: 10px; }
+h1          { font-size: 17px; color: #FFA500; margin-bottom: 10px; background-color: #0000EE; padding-top:6px; padding-bottom:7px; padding-left:10px; }    
+h2          { font-size: 15px; color: #0055AA; margin-bottom: 10px; margin-top: 16px;  background-color:#FFCC66; padding-top:0px; padding-bottom:2px; padding-left:10px; }
+h3          { font-size: 15px; color: #660000; margin-bottom: 8px;  margin-top: 15px; }
+h4          { font-size: 12px; color: black; margin-bottom: 8px;  margin-top: 15px; margin-left: 8px; font-style: normal; }
+code        { font-size: 12px; margin-left: 16px; padding-left:16px} 
+hr          { height: 0px; noshade: true; border: 1; width: 100%; }
+
+/* FFCC66 FFEE99 */
+
+.pError {
+ font-size: 11px;
+ font-family: "verdana", tahoma, arial, sans-serif;
+ color: red;
+ background-color: #FFFFEE;
+ margin-top: 5px;
+ margin-bottom: 8px;
+ margin-left: 10px;
+}
+.pSkipped_PrevTaskFailed {/* Process Manager: Task skipped since previous task failed*/
+ font-size: 11px;
+ font-family: "verdana", tahoma, arial, sans-serif;
+ color: #FF9D8B; /*Light red shade color*/
+ background-color: #FFFFEE;
+ margin-top: 5px;
+ margin-bottom: 8px;
+ margin-left: 10px;
+}
+.pSkipped_DateNotInRange {/* Process Manager: Task skipped since run date not in range*/
+ font-size: 11px;
+ font-family: "verdana", tahoma, arial, sans-serif;
+ color:  #00BFFF; /*Light blue shade color*/
+ background-color: #FFFFEE;
+ margin-top: 5px;
+ margin-bottom: 8px;
+ margin-left: 10px;
+}
+.pAbort {/* Process Manager: Task is aborted*/
+ font-size: 11px;
+ font-family: "verdana", tahoma, arial, sans-serif;
+ color: #FFA500; /*Orange color*/
+ background-color: #FFFFEE;
+ margin-top: 5px;
+ margin-bottom: 8px;
+ margin-left: 10px;
+}
+.pNeutral {
+ font-size: 11px;
+ font-family: "verdana", tahoma, arial, sans-serif;
+ color: silver;
+ background-color: #FFFFEE;
+ margin-top: 5px;
+ margin-bottom: 8px;
+ margin-left: 10px;
+}
+.pSummary {
+ font-size: 11px;
+ font-family: "verdana", tahoma, arial, sans-serif;
+ color: blue;
+ background-color: #FFFFEE;
+ margin-top: 0px;
+ margin-bottom: 2px;
+ margin-left: 10px;
+}
+.tableHead {
+ font-size: 15px;
+ font-weight: bold;
+ color: #0055AA;
+ margin-bottom: 10px;
+ margin-top: 16px;
+ background-color:#FFCC66;
+ padding-top:0px;
+ padding-bottom:2px;
+ /*padding-left:10px;*/
+}
+.tdPadding {
+padding-top:0px;
+padding-bottom:0px;
+padding-left:7px;
+padding-right:7px;
+}
+.h2RowHead {
+ background-color: #999999;
+ color: #eeeeee;
+ font-weight: bold
+}
+
+.tableContent {
+ font-size: 11px;
+ font-weight: normal;
+ color: black;
+ margin-bottom: 10px;
+ margin-top: 16px;
+ background-color:#FFCC66;
+ padding-top:0px;
+ padding-bottom:2px;
+ /* padding-left:10px; */
+}
+</style>
+</head>
+<body>
+<table class="tableHead" width="100%">
+<tr>
+<td align="left" class="tdPadding">Summary log</td></tr>
+<tr class="tableContent"> 
+<td align="left" class="tdPadding"><b>User's account name: </b>First.Last</td>
+<td align="center" class="tdPadding"><b>Server: </b>someServer</td>
+<td align="right" class="tdPadding"><b>Execution date: </b>22.01.2015 04:49:37:918</td>
+</tr>
+</table>
+
+<table width="100%">
+<tr><td class="h2RowHead">Running Process for [22.01.2015] </td></tr>
+</table>
+<p><b><h4>MAIN</h4></b></p>
+<hr />
+<p class="pError">(1) Task: <i>StopOnFailure1</i> invoked at 22.01.2015 04:49:37:934 >>  <b>FAILURE!</b> Task finished with return code: 13. Component: StopOnFailure1 timed out.</p>
+<br />
+<p>Record Statistics: Processed: 68680 | Filtered: 0 | Failed: 0 | Running time: 00:00:05</p>
+<hr />
+<p class="pError">(2) Task: <i>DataFlow1</i> invoked at 22.01.2015 04:49:43:254 >>  <b>FAILURE!</b> Task finished with return code: 4. Failed to load Component from file "C:\doc\API\API.txt". Reason: Component now found.</p>
+<br />
+<p class="pError">(3) Task: <i>DataFlow2</i> invoked at 22.01.2015 04:49:43:300 >> <b>FAILURE!</b> Reason: Current object state [Ready] doesn't allow to stop this component.</p>
+<br />
+<table width="100%">
+<tr><td class="h2RowHead">Process execution summary:</td></tr>
+</table>
+<p>Active Tasks: 3</p>
+<br />
+Executed Tasks: 3<br />
+Successful Tasks:  0<br />
+Failed Tasks:  3<br />
+Skipped Tasks based on calendar: 0<br />
+Skipped Tasks based on result of previous Task: 0<br />
+<b>Process completed successfully. Elapsed time: 5 seconds.</b>
+</body>
+</html>
