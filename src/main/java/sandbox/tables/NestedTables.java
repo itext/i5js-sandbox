@@ -35,13 +35,19 @@ public class NestedTables {
         table.setTotalWidth(770F);
         table.setLockedWidth(true);
         buildNestedTables(table);
-        document.add(new Paragraph("Add table in constructor"));
+        document.add(new Paragraph("Add table straight to another table"));
         document.add(table);
         table = new PdfPTable(columnWidths);
         table.setTotalWidth(770F);
         table.setLockedWidth(true);
         buildNestedTables2(table);
-        document.add(new Paragraph("Add table as an element"));
+        document.add(new Paragraph("Add table to the cell constructor"));
+        document.add(table);
+        table = new PdfPTable(columnWidths);
+        table.setTotalWidth(770F);
+        table.setLockedWidth(true);
+        buildNestedTables3(table);
+        document.add(new Paragraph("Add table as an element to a cell"));
         document.add(table);
         document.close();
     }
@@ -62,6 +68,25 @@ public class NestedTables {
    }
     
     private void buildNestedTables2(PdfPTable outerTable) {
+        PdfPTable innerTable1 = new PdfPTable(1);
+        innerTable1.setWidthPercentage(100);
+        PdfPTable innerTable2 = new PdfPTable(2);
+        innerTable2.setWidthPercentage(100);
+        PdfPCell cell;
+        innerTable1.addCell("Cell 1");
+        innerTable1.addCell("Cell 2");
+        cell = new PdfPCell(innerTable1);
+        outerTable.addCell(cell);
+        innerTable2.addCell("Cell 3");
+        innerTable2.addCell("Cell 4");
+        cell = new PdfPCell(innerTable2);
+        outerTable.addCell(cell);
+        cell = new PdfPCell();
+        cell.setColspan(14);
+        outerTable.addCell(cell);
+   }
+    
+    private void buildNestedTables3(PdfPTable outerTable) {
         PdfPTable innerTable1 = new PdfPTable(1);
         innerTable1.setWidthPercentage(100);
         PdfPTable innerTable2 = new PdfPTable(2);
