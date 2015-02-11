@@ -1,3 +1,7 @@
+/**
+ * This example was written by Bruno Lowagie in answer to the following question:
+ * http://stackoverflow.com/questions/28450668/how-to-add-in-reply-to-annotation-using-itextsharp
+ */
 package sandbox.annotations;
 
 import java.io.File;
