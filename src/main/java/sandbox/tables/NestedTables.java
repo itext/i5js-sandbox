@@ -1,12 +1,15 @@
 /**
- * This example was written by Bruno Lowagie in answer to the following question:
+ * This example was written by Bruno Lowagie in answer to the following questions:
  * http://stackoverflow.com/questions/24562448/the-table-width-must-be-greater-than-zero-exception-when-using-nested-tables
+ * and
+ * http://stackoverflow.com/questions/28444598/nested-table-stretches
  */
 package sandbox.tables;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -14,10 +17,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
- *
- * @author iText
- */
 public class NestedTables {
     
     public static final String DEST = "results/tables/nested_tables.pdf";
@@ -36,6 +35,13 @@ public class NestedTables {
         table.setTotalWidth(770F);
         table.setLockedWidth(true);
         buildNestedTables(table);
+        document.add(new Paragraph("Add table in constructor"));
+        document.add(table);
+        table = new PdfPTable(columnWidths);
+        table.setTotalWidth(770F);
+        table.setLockedWidth(true);
+        buildNestedTables2(table);
+        document.add(new Paragraph("Add table as an element"));
         document.add(table);
         document.close();
     }
@@ -50,6 +56,27 @@ public class NestedTables {
         innerTable2.addCell("Cell 3");
         innerTable2.addCell("Cell 4");
         outerTable.addCell(innerTable2);
+        cell = new PdfPCell();
+        cell.setColspan(14);
+        outerTable.addCell(cell);
+   }
+    
+    private void buildNestedTables2(PdfPTable outerTable) {
+        PdfPTable innerTable1 = new PdfPTable(1);
+        innerTable1.setWidthPercentage(100);
+        PdfPTable innerTable2 = new PdfPTable(2);
+        innerTable2.setWidthPercentage(100);
+        PdfPCell cell;
+        innerTable1.addCell("Cell 1");
+        innerTable1.addCell("Cell 2");
+        cell = new PdfPCell();
+        cell.addElement(innerTable1);
+        outerTable.addCell(cell);
+        innerTable2.addCell("Cell 3");
+        innerTable2.addCell("Cell 4");
+        cell = new PdfPCell();
+        cell.addElement(innerTable2);
+        outerTable.addCell(cell);
         cell = new PdfPCell();
         cell.setColspan(14);
         outerTable.addCell(cell);
