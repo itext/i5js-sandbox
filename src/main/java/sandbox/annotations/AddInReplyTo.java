@@ -4,20 +4,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import sandbox.WrapToTest;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfAnnotation;
 import com.itextpdf.text.pdf.PdfArray;
-import com.itextpdf.text.pdf.PdfDestination;
 import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 
-@WrapToTest
 public class AddInReplyTo {
 
     public static final String SRC = "resources/pdfs/hello_sticky_note.pdf";
