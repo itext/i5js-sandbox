@@ -34,5 +34,6 @@ public class AddLinkAnnotation {
                 3, destination);
         stamper.addAnnotation(link, 1);
         stamper.close();
+        reader.close();
     }
 }
