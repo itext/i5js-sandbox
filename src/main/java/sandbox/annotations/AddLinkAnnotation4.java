@@ -17,6 +17,7 @@ import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfAction;
 import com.itextpdf.text.pdf.PdfAnnotation;
 import com.itextpdf.text.pdf.PdfBorderArray;
 import com.itextpdf.text.pdf.PdfContentByte;
@@ -42,7 +43,7 @@ public class AddLinkAnnotation4 {
             transform.transform(pts, 0, pts, 0, 2);
             float[] dstPts = {pts[0], pts[1], pts[2], pts[3]};
             rect = new Rectangle(dstPts[0], dstPts[1], dstPts[2], dstPts[3]);
-            PdfAnnotation annot = PdfAnnotation.createLink(writer, rect, PdfAnnotation.HIGHLIGHT_INVERT, text);
+            PdfAnnotation annot = PdfAnnotation.createLink(writer, rect, PdfAnnotation.HIGHLIGHT_INVERT, new PdfAction(text));
             annot.setBorder(new PdfBorderArray(0, 0, 0));
             stamper.addAnnotation(annot, 1);
         }
