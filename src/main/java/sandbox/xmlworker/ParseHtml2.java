@@ -49,7 +49,7 @@ public class ParseHtml2 {
                 "</body></html>";
         
         XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
-        InputStream is = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
+        InputStream is = new ByteArrayInputStream(str.getBytes("UTF-8"));
         worker.parseXHtml(writer, document, is, Charset.forName("UTF-8"));
         // step 5
         document.close();
