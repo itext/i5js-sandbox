@@ -29,6 +29,7 @@ public class ParseHtml4 {
     
     class Base64ImageProvider extends AbstractImageProvider {
         
+        @Override
         public Image retrieve(String src) {
             int pos = src.indexOf("base64,");
             try {
