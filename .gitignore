@@ -147,3 +147,6 @@ $RECYCLE.BIN/
 /target/
 nbactions*.xml
 /results/
+/resources/zugferd/db/invoices.log
+/resources/zugferd/db/invoices.properties
+/resources/zugferd/db/invoices.lck
