@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class NohoExample {
+public class NotoExample {
         
     public static final String DEST = "results/fonts/chinese.pdf";
     public static final String FONT = "resources/fonts/NotoSansCJKsc-Regular.otf";
@@ -30,7 +30,7 @@ public class NohoExample {
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
-        new NohoExample().createPdf(DEST);
+        new NotoExample().createPdf(DEST);
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {
