@@ -1,0 +1,68 @@
+rsm:CrossIndustryDocument
+	rsm:SpecifiedExchangedDocumentContext
+		ram:TestIndicator
+			udt:Indicator
+	rsm:HeaderExchangedDocument
+		ram:ID
+		ram:Name
+		ram:TypeCode
+		ram:IssueDateTime
+			udt:DateTimeString {format}
+		ram:IncludedNote
+			ram:Content
+	rsm:SpecifiedSupplyChainTradeTransaction
+		ram:ApplicableSupplyChainTradeAgreement
+			ram:SellerTradeParty
+				ram:Name
+				ram:PostalTradeAddress
+					ram:PostcodeCode
+					ram:LineOne
+					ram:LineTwo
+					ram:CityName
+					ram:CountryID
+				ram:SpecifiedTaxRegistration
+					ram:ID {schemeID}
+			ram:BuyerTradeParty
+				ram:Name
+				ram:PostalTradeAddress
+					ram:PostcodeCode
+					ram:LineOne
+					ram:LineTwo
+					ram:CityName
+					ram:CountryID
+				ram:SpecifiedTaxRegistration
+					ram:ID {schemeID}
+		ram:ApplicableSupplyChainTradeDelivery
+			ram:ActualDeliverySupplyChainEvent
+				ram:OccurrenceDateTime
+					udt:DateTimeString {format}
+		ram:ApplicableSupplyChainTradeSettlement
+			ram:PaymentReference
+			ram:InvoiceCurrencyCode
+			ram:SpecifiedTradeSettlementPaymentMeans
+				ram:ID {schemeAgencyID}
+				ram:PayeePartyCreditorFinancialAccount
+					ram:IBANID
+					ram:AccountName
+					ram:ProprietaryID
+				ram:PayeeSpecifiedCreditorFinancialInstitution
+					ram:BICID
+					ram:GermanBankleitzahlID
+					ram:Name
+			ram:ApplicableTradeTax
+				ram:CalculatedAmount {currencyID}
+				ram:TypeCode
+				ram:BasisAmount {currencyID}
+				ram:ApplicablePercent
+			ram:SpecifiedTradeSettlementMonetarySummation
+				ram:LineTotalAmount currencyID
+				ram:ChargeTotalAmount currencyID
+				ram:AllowanceTotalAmount currencyID
+				ram:TaxBasisTotalAmount currencyID
+				ram:TaxTotalAmount currencyID
+				ram:GrandTotalAmount currencyID
+		ram:IncludedSupplyChainTradeLineItem
+			ram:SpecifiedSupplyChainTradeDelivery
+				ram:BilledQuantity {unitCode}
+			ram:SpecifiedTradeProduct
+				ram:Nam
