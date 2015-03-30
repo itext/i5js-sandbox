@@ -65,4 +65,4 @@ rsm:CrossIndustryDocument
 			ram:SpecifiedSupplyChainTradeDelivery
 				ram:BilledQuantity {unitCode}
 			ram:SpecifiedTradeProduct
-				ram:Nam
+				ram:Name
