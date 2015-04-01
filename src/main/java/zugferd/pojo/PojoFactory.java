@@ -68,6 +68,7 @@ public class PojoFactory {
         invoice.setTotal(rs.getDouble("total"));
         invoice.setCustomer(getCustomer(rs.getInt("customerid")));
         invoice.setItems(getItems(rs.getInt("id")));
+        invoice.setInvoiceDate(rs.getDate("invoicedate"));
         return invoice;
     }
     
@@ -91,7 +92,9 @@ public class PojoFactory {
             customer.setFirstName(rs.getString("FirstName"));
             customer.setLastName(rs.getString("LastName"));
             customer.setStreet(rs.getString("Street"));
+            customer.setPostalcode(rs.getString("Postalcode"));
             customer.setCity(rs.getString("City"));
+            customer.setCountryId(rs.getString("CountryID"));
             customerCache.put(id, customer);
             return customer;
         }

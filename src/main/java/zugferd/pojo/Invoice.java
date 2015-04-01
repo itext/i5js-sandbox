@@ -3,6 +3,7 @@
  */
 package zugferd.pojo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ public class Invoice {
     protected Customer customer;
     protected double total;
     protected List<Item> items;
+    protected Date invoiceDate;
 
     public int getId() {
         return id;
@@ -47,10 +49,18 @@ public class Invoice {
         this.items = items;
     }
 
+    public Date getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(Date invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Invoice id: ").append(id).append(" Total cost: ").append(total).append("\n");
+        sb.append("Invoice id: ").append(id).append(" Date: ").append(invoiceDate).append(" Total cost: ").append(total).append("\n");
         sb.append("Customer: ").append(customer.toString()).append("\n");
         for (Item item : items) {
             sb.append(item.toString()).append("\n");
