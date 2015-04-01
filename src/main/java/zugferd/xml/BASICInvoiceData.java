@@ -1,7 +1,7 @@
 /*
  * Code written by Bruno Lowagie in the context of an example.
  */
-package zugferd;
+package zugferd.xml;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -294,5 +294,185 @@ public class BASICInvoiceData implements BASICLevel {
     public String getSpecifiedTradeProductName() {
         return specifiedTradeProductName;
     }
+
+    public void setTest(boolean test) {
+        this.test = test;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public void addNote(String note) {
+        notes.add(note);
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public void setSellerPostcode(String sellerPostcode) {
+        this.sellerPostcode = sellerPostcode;
+    }
+
+    public void setSellerLineOne(String sellerLineOne) {
+        this.sellerLineOne = sellerLineOne;
+    }
+
+    public void setSellerLineTwo(String sellerLineTwo) {
+        this.sellerLineTwo = sellerLineTwo;
+    }
+
+    public void setSellerCityName(String sellerCityName) {
+        this.sellerCityName = sellerCityName;
+    }
+
+    public void setSellerCountryID(String sellerCountryID) {
+        this.sellerCountryID = sellerCountryID;
+    }
+
+    public void addSellerTaxRegistration(String schemeID, String taxId) {
+        sellerTaxRegistrationSchemeID.add(schemeID);
+        sellerTaxRegistrationID.add(taxId);
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public void setBuyerPostcode(String buyerPostcode) {
+        this.buyerPostcode = buyerPostcode;
+    }
+
+    public void setBuyerLineOne(String buyerLineOne) {
+        this.buyerLineOne = buyerLineOne;
+    }
+
+    public void setBuyerLineTwo(String buyerLineTwo) {
+        this.buyerLineTwo = buyerLineTwo;
+    }
+
+    public void setBuyerCityName(String buyerCityName) {
+        this.buyerCityName = buyerCityName;
+    }
+
+    public void setBuyerCountryID(String buyerCountryID) {
+        this.buyerCountryID = buyerCountryID;
+    }
+
+    public void setBuyerTaxRegistration(String schemeID, String taxId) {
+        buyerTaxRegistrationSchemeID.add(schemeID);
+        buyerTaxRegistrationID.add(taxId);
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public void setDeliveryDateFormat(String deliveryDateFormat) {
+        this.deliveryDateFormat = deliveryDateFormat;
+    }
+
+    public void setPaymentReference(String paymentReference) {
+        this.paymentReference = paymentReference;
+    }
+
+    public void setInvoiceCurrencyCode(String invoiceCurrencyCode) {
+        this.invoiceCurrencyCode = invoiceCurrencyCode;
+    }
+
+    public void addPaymentMeans(String schemeAgencyID, String id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
+        paymentMeansID.add(id);
+        paymentMeansSchemeAgencyID.add(schemeAgencyID);
+        paymentMeansPayeeAccountIBAN.add(iban);
+        paymentMeansPayeeAccountName.add(accountname);
+        paymentMeansPayeeAccountProprietaryID.add(proprietaryID);
+        paymentMeansPayeeFinancialInstitutionBIC.add(bic);
+        paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID.add(germanBankleitzahlID);
+        paymentMeansPayeeFinancialInstitutionName.add(institutionname);
+    }
+
+    public void setTaxCalculatedAmount(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
+            String basisAmount, String basisAmountCurrencyID, String applicablePercent) {
+        taxCalculatedAmount.add(calculatedAmount);
+        taxCalculatedAmountCurrencyID.add(calculatedAmountCurrencyID);
+        taxTypeCode.add(typeCode);
+        taxBasisAmount.add(basisAmount);
+        taxBasisAmountCurrencyID.add(basisAmountCurrencyID);
+        taxApplicablePercent.add(applicablePercent);
+    }
+
+    public void setLineTotalAmount(String lineTotalAmount) {
+        this.lineTotalAmount = lineTotalAmount;
+    }
+
+    public void setLineTotalAmountCurrencyID(String lineTotalAmountCurrencyID) {
+        this.lineTotalAmountCurrencyID = lineTotalAmountCurrencyID;
+    }
+
+    public void setChargeTotalAmount(String chargeTotalAmount) {
+        this.chargeTotalAmount = chargeTotalAmount;
+    }
+
+    public void setChargeTotalAmountCurrencyID(String chargeTotalAmountCurrencyID) {
+        this.chargeTotalAmountCurrencyID = chargeTotalAmountCurrencyID;
+    }
+
+    public void setAllowanceTotalAmount(String allowanceTotalAmount) {
+        this.allowanceTotalAmount = allowanceTotalAmount;
+    }
+
+    public void setAllowanceTotalAmountCurrencyID(String allowanceTotalAmountCurrencyID) {
+        this.allowanceTotalAmountCurrencyID = allowanceTotalAmountCurrencyID;
+    }
+
+    public void setTaxBasisTotalAmount(String taxBasisTotalAmount) {
+        this.taxBasisTotalAmount = taxBasisTotalAmount;
+    }
+
+    public void setTaxBasisTotalAmountCurrencyID(String taxBasisTotalAmountCurrencyID) {
+        this.taxBasisTotalAmountCurrencyID = taxBasisTotalAmountCurrencyID;
+    }
+
+    public void setTaxTotalAmount(String taxTotalAmount) {
+        this.taxTotalAmount = taxTotalAmount;
+    }
+
+    public void setTaxTotalAmountCurrencyID(String taxTotalAmountCurrencyID) {
+        this.taxTotalAmountCurrencyID = taxTotalAmountCurrencyID;
+    }
+
+    public void setGrandTotalAmount(String grandTotalAmount) {
+        this.grandTotalAmount = grandTotalAmount;
+    }
+
+    public void setGrandTotalAmountCurrencyID(String grandTotalAmountCurrencyID) {
+        this.grandTotalAmountCurrencyID = grandTotalAmountCurrencyID;
+    }
+
+    public void setBilledQuantity(String billedQuantity) {
+        this.billedQuantity = billedQuantity;
+    }
+
+    public void setBilledQuantityUnitCode(String billedQuantityUnitCode) {
+        this.billedQuantityUnitCode = billedQuantityUnitCode;
+    }
+
+    public void setSpecifiedTradeProductName(String specifiedTradeProductName) {
+        this.specifiedTradeProductName = specifiedTradeProductName;
+    }
+    
     
 }
