@@ -39,12 +39,12 @@ public class TransparentWatermark3 {
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
         stamper.setRotateContents(false);
         // text watermark
-        Font f = new Font(FontFamily.HELVETICA, 15);
+        Font f = new Font(FontFamily.HELVETICA, 30);
         Phrase p = new Phrase("My watermark (text)", f);
         // image watermark
         Image img = Image.getInstance(IMG);
-        float w = img.getScaledWidth() / 2;
-        float h = img.getScaledHeight() / 2;
+        float w = img.getScaledWidth();
+        float h = img.getScaledHeight();
         // transparency
         PdfGState gs1 = new PdfGState();
         gs1.setFillOpacity(0.5f);
