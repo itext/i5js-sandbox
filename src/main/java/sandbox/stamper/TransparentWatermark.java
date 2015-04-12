@@ -31,7 +31,6 @@ public class TransparentWatermark {
 
     public void manipulatePdf(String src, String dest) throws IOException, DocumentException {
         PdfReader reader = new PdfReader(src);
-        int n = reader.getNumberOfPages();
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
         PdfContentByte under = stamper.getUnderContent(1);
         Font f = new Font(FontFamily.HELVETICA, 15);
