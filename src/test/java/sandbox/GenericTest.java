@@ -1,5 +1,5 @@
 /*
- * $Id: GenericTest.java 6208 2014-02-05 14:43:21Z blowagie $
+ * $Id$
  *
  * This file is part of the iText (R) project.
  * Copyright (c) 1998-2014 iText Group NV
