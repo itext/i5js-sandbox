@@ -39,7 +39,7 @@ public class FontTest {
     
     public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(DEST));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         FontFactory.registerDirectory(FONTDIR);
         Set<String> fonts = new TreeSet<String>(FontFactory.getRegisteredFonts());
