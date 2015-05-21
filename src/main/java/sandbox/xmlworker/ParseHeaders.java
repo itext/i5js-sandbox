@@ -8,6 +8,8 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
+import sandbox.WrapToTest;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,6 +19,7 @@ import java.io.IOException;
  *
  * @author iText
  */
+@WrapToTest
 public class ParseHeaders {
     public static final String DEST = "results/xmlworker/headers.pdf";
     public static final String HTML = "resources/xml/headers.html";
