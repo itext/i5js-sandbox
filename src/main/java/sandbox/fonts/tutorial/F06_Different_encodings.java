@@ -23,7 +23,7 @@ public class F06_Different_encodings {
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
-        new F05_Russian_correct_encoding().createPdf(DEST);
+        new F06_Different_encodings().createPdf(DEST);
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {
