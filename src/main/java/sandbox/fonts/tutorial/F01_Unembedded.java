@@ -28,11 +28,11 @@ public class F01_Unembedded {
         PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         document.add(new Paragraph("Vous êtes d'où?"));
-        document.add(new Paragraph("À tout à l'heure.  À bientôt."));
+        document.add(new Paragraph("À tout à l'heure. À bientôt."));
         document.add(new Paragraph("Je me présente."));
         document.add(new Paragraph("C'est un étudiant."));
         document.add(new Paragraph("Ça va?"));
-        document.add(new Paragraph("Il est ingénieur.  Elle est médecin."));
+        document.add(new Paragraph("Il est ingénieur. Elle est médecin."));
         document.add(new Paragraph("C'est une fenêtre."));
         document.add(new Paragraph("Répétez, s'il vous plaît."));
         document.close();

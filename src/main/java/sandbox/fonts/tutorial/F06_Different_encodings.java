@@ -41,7 +41,7 @@ public class F06_Different_encodings {
         document.add(new Paragraph("Je me pr\u00e9sente.", french));
         document.add(new Paragraph("C'est un \u00e9tudiant.", french));
         document.add(new Paragraph("\u00c7a va?", french));
-        document.add(new Paragraph("Il est ing\u00e9nieur.  Elle est m\u00e9decin.", french));
+        document.add(new Paragraph("Il est ing\u00e9nieur. Elle est m\u00e9decin.", french));
         document.add(new Paragraph("C'est une fen\u00eatre.", french));
         document.add(new Paragraph("R\u00e9p\u00e9tez, s'il vous pla\u00eet.", french));
         document.add(new Paragraph("Odkud jste?", czech));
