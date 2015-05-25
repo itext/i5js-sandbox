@@ -27,7 +27,7 @@ public class CzechExample {
     
     public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(DEST));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         Font f1 = FontFactory.getFont(FONT, "Cp1250", true);
         Paragraph p1 = new Paragraph("Testing of letters \u010c,\u0106,\u0160,\u017d,\u0110", f1);
