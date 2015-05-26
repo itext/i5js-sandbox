@@ -66,9 +66,9 @@ public class BASICInvoiceData implements BASICLevel {
     protected String taxTotalAmountCurrencyID;
     protected String grandTotalAmount;
     protected String grandTotalAmountCurrencyID;
-    protected String billedQuantity;
-    protected String billedQuantityUnitCode = "C62";
-    protected String specifiedTradeProductName;
+    protected List<String> billedQuantity = new ArrayList<String>();
+    protected List<String> billedQuantityUnitCode = new ArrayList<String>();
+    protected List<String> specifiedTradeProductName = new ArrayList<String>();
     
     
     public boolean getTestIndicator() {
@@ -283,16 +283,16 @@ public class BASICInvoiceData implements BASICLevel {
         return grandTotalAmount;
     }
 
-    public String getBilledQuantity() {
-        return billedQuantity;
+    public String[] getBilledQuantity() {
+        return (String[])billedQuantity.toArray();
     }
 
-    public String getBilledQuantityUnitCode() {
-        return billedQuantityUnitCode;
+    public String[] getBilledQuantityUnitCode() {
+        return (String[])billedQuantityUnitCode.toArray();
     }
 
-    public String getSpecifiedTradeProductName() {
-        return specifiedTradeProductName;
+    public String[] getSpecifiedTradeProductName() {
+        return (String[])specifiedTradeProductName.toArray();
     }
 
     public void setTest(boolean test) {
@@ -404,7 +404,7 @@ public class BASICInvoiceData implements BASICLevel {
         paymentMeansPayeeFinancialInstitutionName.add(institutionname);
     }
 
-    public void setTaxCalculatedAmount(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
+    public void addTaxCalculatedAmount(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
             String basisAmount, String basisAmountCurrencyID, String applicablePercent) {
         taxCalculatedAmount.add(calculatedAmount);
         taxCalculatedAmountCurrencyID.add(calculatedAmountCurrencyID);
@@ -462,17 +462,10 @@ public class BASICInvoiceData implements BASICLevel {
         this.grandTotalAmountCurrencyID = grandTotalAmountCurrencyID;
     }
 
-    public void setBilledQuantity(String billedQuantity) {
-        this.billedQuantity = billedQuantity;
+    public void addIncludedSupplyChainTradeLineItem(String billedQuantity, String billedQuantityUnitCode, String specifiedTradeProductName) {
+        this.billedQuantity.add(billedQuantity);
+        this.billedQuantityUnitCode.add(billedQuantityUnitCode);
+        this.specifiedTradeProductName.add(specifiedTradeProductName);
     }
-
-    public void setBilledQuantityUnitCode(String billedQuantityUnitCode) {
-        this.billedQuantityUnitCode = billedQuantityUnitCode;
-    }
-
-    public void setSpecifiedTradeProductName(String specifiedTradeProductName) {
-        this.specifiedTradeProductName = specifiedTradeProductName;
-    }
-    
     
 }

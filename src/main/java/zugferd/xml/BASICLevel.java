@@ -57,9 +57,9 @@ public interface BASICLevel {
     public String getTaxTotalAmountCurrencyID();
     public String getGrandTotalAmount();
     public String getGrandTotalAmountCurrencyID();
-    public String getBilledQuantity();
-    public String getBilledQuantityUnitCode();
-    public String getSpecifiedTradeProductName();
+    public String[] getBilledQuantity();
+    public String[] getBilledQuantityUnitCode();
+    public String[] getSpecifiedTradeProductName();
     
     public void setTest(boolean test);
     public void setName(String name);
@@ -86,7 +86,7 @@ public interface BASICLevel {
     public void setPaymentReference(String paymentReference);
     public void setInvoiceCurrencyCode(String invoiceCurrencyCode);
     public void addPaymentMeans(String schemeAgencyID, String id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname);
-    public void setTaxCalculatedAmount(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode, String basisAmount, String basisAmountCurrencyID, String applicablePercent);
+    public void addTaxCalculatedAmount(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode, String basisAmount, String basisAmountCurrencyID, String applicablePercent);
     public void setLineTotalAmount(String lineTotalAmount);
     public void setLineTotalAmountCurrencyID(String lineTotalAmountCurrencyID);
     public void setChargeTotalAmount(String chargeTotalAmount);
@@ -99,9 +99,7 @@ public interface BASICLevel {
     public void setTaxTotalAmountCurrencyID(String taxTotalAmountCurrencyID);
     public void setGrandTotalAmount(String grandTotalAmount);
     public void setGrandTotalAmountCurrencyID(String grandTotalAmountCurrencyID);
-    public void setBilledQuantity(String billedQuantity);
-    public void setBilledQuantityUnitCode(String billedQuantityUnitCode);
-    public void setSpecifiedTradeProductName(String specifiedTradeProductName);
+    public void addIncludedSupplyChainTradeLineItem(String billedQuantity, String billedQuantityUnitCode, String specifiedTradeProductName);
     
 }
 
