@@ -1,7 +1,7 @@
 /*
  * Code written by Bruno Lowagie in the context of an example.
  */
-package zugferd.xml;
+package zugferd.data;
 
 import java.util.ArrayList;
 import java.util.List;

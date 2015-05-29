@@ -1,14 +1,12 @@
 /*
  * Code written by Bruno Lowagie in the context of an example.
  */
-package zugferd;
+package zugferd.data;
 
 import java.text.SimpleDateFormat;
 import zugferd.pojo.Customer;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.Item;
-import zugferd.xml.BASICInvoiceData;
-import zugferd.xml.BASICLevel;
 
 /**
  *
@@ -16,13 +14,11 @@ import zugferd.xml.BASICLevel;
  */
 public class InvoiceData {
     
-    protected BASICLevel invoiceData;
-    
     public InvoiceData() {
     }
     
-    public void importInvoice(Invoice invoice) {
-        invoiceData = new BASICInvoiceData();
+    public BASICLevel importInvoice(Invoice invoice) {
+        BASICLevel invoiceData = new BASICInvoiceData();
         invoiceData.setTest(true);
         invoiceData.setName("INVOICE");
         invoiceData.setTypeCode("380");
@@ -67,6 +63,7 @@ public class InvoiceData {
         for (Item item : invoice.getItems()) {
             invoiceData.addIncludedSupplyChainTradeLineItem(String.valueOf(item.getQuantity()), "C62", item.getProduct().getName());
         }
+        return invoiceData;
     }
     
     public static double round(double d) {
