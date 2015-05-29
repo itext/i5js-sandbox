@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 import zugferd.data.BASICDOM;
 import zugferd.data.BASICLevel;
@@ -21,7 +22,7 @@ import zugferd.pojo.PojoFactory;
  * @author iText
  */
 public class XMLTest {
-    public static void main(String[] args) throws SQLException, ParserConfigurationException, SAXException, IOException {
+    public static void main(String[] args) throws SQLException, ParserConfigurationException, SAXException, IOException, TransformerException {
         PojoFactory factory = PojoFactory.getInstance();
         List<Invoice> invoices = factory.getInvoices();
         InvoiceData invoiceData = new InvoiceData();
@@ -29,8 +30,9 @@ public class XMLTest {
         BASICDOM dom;
         for (Invoice invoice : invoices) {
             basic = invoiceData.importInvoice(invoice);
-            dom = new BASICDOM(basic);
-            System.out.println(invoice.toString());
+            dom = new BASICDOM();
+            dom.importData(basic);
+            System.out.println(new String(dom.exportDoc()));
         }
         factory.close();
     }
