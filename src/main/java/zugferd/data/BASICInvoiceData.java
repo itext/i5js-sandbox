@@ -11,10 +11,9 @@ import java.util.List;
  * @author iText
  */
 public class BASICInvoiceData implements BASICLevel {
-
-    public static final String ID = "urn:ferd:CrossIndustryDocument:invoice:1p0:basic";
     
     protected boolean test = true;
+    protected String id;
     protected String name = "INVOICE";
     protected String typeCode = "380";
     protected String date;
@@ -75,8 +74,8 @@ public class BASICInvoiceData implements BASICLevel {
         return test;
     }
 
-    public String getIdentifier() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -297,6 +296,10 @@ public class BASICInvoiceData implements BASICLevel {
 
     public void setTest(boolean test) {
         this.test = test;
+    }
+    
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {

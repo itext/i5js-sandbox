@@ -5,7 +5,7 @@ package zugferd.data;
 
 public interface BASICLevel {
     public boolean getTestIndicator();
-    public String getIdentifier();
+    public String getId();
     public String getName();
     public String getTypeCode();
     public String getDateTime();
@@ -62,6 +62,7 @@ public interface BASICLevel {
     public String[] getSpecifiedTradeProductName();
     
     public void setTest(boolean test);
+    public void setId(String id);
     public void setName(String name);
     public void setTypeCode(String typeCode);
     public void setDate(String date);

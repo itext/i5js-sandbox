@@ -20,6 +20,7 @@ public class InvoiceData {
     public BASICLevel importInvoice(Invoice invoice) {
         BASICLevel invoiceData = new BASICInvoiceData();
         invoiceData.setTest(true);
+        invoiceData.setId(String.format("I/%05d", invoice.getId()));
         invoiceData.setName("INVOICE");
         invoiceData.setTypeCode("380");
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");

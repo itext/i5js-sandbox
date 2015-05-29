@@ -15,7 +15,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -23,11 +25,6 @@ import org.xml.sax.SAXException;
  */
 public class BASICDOM {
     public static final String XML = "resources/zugferd/basic.xml";
-    
-    public static final String XSI ="http://www.w3.org/2001/XMLSchema-instance";
-    public static final String RSM = "urn:ferd:CrossIndustryDocument:invoice:1p0";
-    public static final String RAM = "urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:12";
-    public static final String UDT = "urn:un:unece:uncefact:data:standard:UnqualifiedDataType:15";
     
     protected Document doc;
     
@@ -38,8 +35,34 @@ public class BASICDOM {
     }
     
     public void importData(BASICLevel data) {
-        Node indicator = doc.getElementsByTagName("udt:Indicator").item(0);
-        indicator.setTextContent(data.getTestIndicator() ? "true" : "false");
+        setNodeContent(doc, "udt:Indicator", 0, data.getTestIndicator() ? "true" : "false");
+        setNodeContent(doc, "ram:ID", 1, data.getId());
+        setNodeContent(doc, "ram:Name", 0, data.getName());
+        setNodeContent(doc, "ram:TypeCode", 0, data.getTypeCode());
+        setNodeContent(doc, "udt:DateTimeString", 0, data.getDateTime(), "format", data.getDateTimeFormat());
+        
+        
+        
+    }
+    
+    public void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
+        Node node = doc.getElementsByTagName(tagname).item(idx);
+        if (node == null)
+            return;
+        node.setTextContent(content);
+        int n = attributes.length;
+        if (n == 0) return;
+        String attrName, attrValue;
+        NamedNodeMap attrs = node.getAttributes();
+        Node attr;
+        for (int i = 0; i < n; i++) {
+            attrName = attributes[i];
+            if (++i == n) continue;
+            attrValue = attributes[i];
+            attr = attrs.getNamedItem(attrName);
+            if (attr != null)
+                attr.setTextContent(attrValue);
+        }
     }
     
     public byte[] exportDoc() throws TransformerException {
