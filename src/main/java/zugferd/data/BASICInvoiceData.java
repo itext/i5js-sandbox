@@ -155,11 +155,11 @@ public class BASICInvoiceData implements BASICLevel {
     }
 
     public String[] getBuyerTaxRegistrationID() {
-        return (String[]) buyerTaxRegistrationID.toArray();
+        return (String[]) buyerTaxRegistrationID.toArray(new String[buyerTaxRegistrationID.size()]);
     }
 
     public String[] getBuyerTaxRegistrationShemeID() {
-        return (String[]) buyerTaxRegistrationSchemeID.toArray();
+        return (String[]) buyerTaxRegistrationSchemeID.toArray(new String[buyerTaxRegistrationSchemeID.size()]);
     }
 
     public String getDeliveryDateTime() {
@@ -179,59 +179,59 @@ public class BASICInvoiceData implements BASICLevel {
     }
 
     public String[] getPaymentMeansID() {
-        return (String[])paymentMeansID.toArray();
+        return (String[])paymentMeansID.toArray(new String[paymentMeansID.size()]);
     }
 
     public String[] getPaymentMeansSchemeAgencyID() {
-        return (String[])paymentMeansSchemeAgencyID.toArray();
+        return (String[])paymentMeansSchemeAgencyID.toArray(new String[paymentMeansSchemeAgencyID.size()]);
     }
 
     public String[] getPaymentMeansPayeeAccountIBAN() {
-        return (String[])paymentMeansPayeeAccountIBAN.toArray();
+        return (String[])paymentMeansPayeeAccountIBAN.toArray(new String[paymentMeansPayeeAccountIBAN.size()]);
     }
 
     public String[] getPaymentMeansPayeeAccountAccountName() {
-        return (String[])paymentMeansPayeeAccountName.toArray();
+        return (String[])paymentMeansPayeeAccountName.toArray(new String[paymentMeansPayeeAccountName.size()]);
     }
 
     public String[] getPaymentMeansPayeeAccountProprietaryID() {
-        return (String[])paymentMeansPayeeAccountProprietaryID.toArray();
+        return (String[])paymentMeansPayeeAccountProprietaryID.toArray(new String[paymentMeansPayeeAccountProprietaryID.size()]);
     }
 
     public String[] getPaymentMeansPayeeFinancialInstitutionBIC() {
-        return (String[])paymentMeansPayeeFinancialInstitutionBIC.toArray();
+        return (String[])paymentMeansPayeeFinancialInstitutionBIC.toArray(new String[paymentMeansPayeeFinancialInstitutionBIC.size()]);
     }
 
     public String[] getPaymentMeansPayeeFinancialInstitutionGermanBankleitzahlID() {
-        return (String[])paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID.toArray();
+        return (String[])paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID.toArray(new String[paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID.size()]);
     }
 
     public String[] getPaymentMeansPayeeFinancialInstitutionName() {
-        return (String[])paymentMeansPayeeFinancialInstitutionName.toArray();
+        return (String[])paymentMeansPayeeFinancialInstitutionName.toArray(new String[paymentMeansPayeeFinancialInstitutionName.size()]);
     }
 
     public String[] getTaxCalculatedAmount() {
-        return (String[])taxCalculatedAmount.toArray();
+        return (String[])taxCalculatedAmount.toArray(new String[taxCalculatedAmount.size()]);
     }
 
     public String[] getTaxCalculatedAmountCurrencyID() {
-        return (String[])taxCalculatedAmountCurrencyID.toArray();
+        return (String[])taxCalculatedAmountCurrencyID.toArray(new String[taxCalculatedAmountCurrencyID.size()]);
     }
 
     public String[] getTaxTypeCode() {
-        return (String[])taxTypeCode.toArray();
+        return (String[])taxTypeCode.toArray(new String[taxTypeCode.size()]);
     }
 
     public String[] getTaxBasisAmount() {
-        return (String[])taxBasisAmount.toArray();
+        return (String[])taxBasisAmount.toArray(new String[taxBasisAmount.size()]);
     }
 
     public String[] getTaxBasisAmountCurrencyID() {
-        return (String[])taxBasisAmountCurrencyID.toArray();
+        return (String[])taxBasisAmountCurrencyID.toArray(new String[taxBasisAmountCurrencyID.size()]);
     }
 
     public String[] getTaxApplicablePercent() {
-        return (String[])taxApplicablePercent.toArray();
+        return (String[])taxApplicablePercent.toArray(new String[taxApplicablePercent.size()]);
     }
 
     public String getLineTotalAmount() {
@@ -283,15 +283,15 @@ public class BASICInvoiceData implements BASICLevel {
     }
 
     public String[] getBilledQuantity() {
-        return (String[])billedQuantity.toArray();
+        return (String[])billedQuantity.toArray(new String[billedQuantity.size()]);
     }
 
     public String[] getBilledQuantityUnitCode() {
-        return (String[])billedQuantityUnitCode.toArray();
+        return (String[])billedQuantityUnitCode.toArray(new String[billedQuantityUnitCode.size()]);
     }
 
     public String[] getSpecifiedTradeProductName() {
-        return (String[])specifiedTradeProductName.toArray();
+        return (String[])specifiedTradeProductName.toArray(new String[specifiedTradeProductName.size()]);
     }
 
     public void setTest(boolean test) {
