@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -42,10 +43,46 @@ public class BASICDOM {
         setNodeContent(doc, "ram:TypeCode", 0, data.getTypeCode());
         setNodeContent(doc, "udt:DateTimeString", 0, data.getDateTime(), "format", data.getDateTimeFormat());
         
+        String[] notes = data.getNotes();
+        if (notes.length > 0) {
+            Node node = doc.getElementsByTagName("ram:IncludedNote").item(0);
+            for (String note : notes) {
+                Node newNode = node.cloneNode(true);
+                NodeList list = newNode.getChildNodes();
+                for (int j = 0; j < list.getLength(); j++) {
+                    Node childNode = list.item(j);
+                    if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                        childNode.setTextContent(note);
+                    }
+                }
+                Node parent = node.getParentNode();
+                parent.insertBefore(newNode, node);
+            }
+        }
         try {
             processPaymentMeans(doc, data);
         }
         catch(ArrayIndexOutOfBoundsException aioobe) {
+        }
+    }
+    
+    public void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
+        Node node = doc.getElementsByTagName(tagname).item(idx);
+        if (node == null)
+            return;
+        node.setTextContent(content);
+        int n = attributes.length;
+        if (n == 0) return;
+        String attrName, attrValue;
+        NamedNodeMap attrs = node.getAttributes();
+        Node attr;
+        for (int i = 0; i < n; i++) {
+            attrName = attributes[i];
+            if (++i == n) continue;
+            attrValue = attributes[i];
+            attr = attrs.getNamedItem(attrName);
+            if (attr != null)
+                attr.setTextContent(attrValue);
         }
     }
     
@@ -83,91 +120,54 @@ public class BASICDOM {
         int counter = 0;
         for (int i = 0; i < list.getLength(); i++) {
             childNode = list.item(i);
-            if (childNode instanceof Element) {
-                switch (counter) {
-                    case 0:
-                        childNode.setTextContent(paymentMeans[counter++]);
-                        childNode.getAttributes().item(0).setTextContent(paymentMeans[counter++]);
-                        break;
-                    case 2:
-                        l = childNode.getChildNodes();
-                        for (int j = 0; j < l.getLength(); j++) {
-                            grandchildNode = l.item(j);
-                            if (grandchildNode instanceof Element) {
-                                switch (counter) {
-                                    case 2:
-                                        grandchildNode.setTextContent(paymentMeans[counter++]);
-                                        break;
-                                    case 3:
-                                        grandchildNode.setTextContent(paymentMeans[counter++]);
-                                        break;
-                                    case 4:
-                                        grandchildNode.setTextContent(paymentMeans[counter++]);
-                                        break;
-                                    default:
-                                        counter++;
-                                }
-                            }
+            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                if (counter == 0) {
+                    childNode.setTextContent(paymentMeans[counter++]);
+                    childNode.getAttributes().item(0).setTextContent(paymentMeans[counter++]);
+                }
+                else {
+                    l = childNode.getChildNodes();
+                    for (int j = 0; j < l.getLength(); j++) {
+                        grandchildNode = l.item(j);
+                        if (grandchildNode.getNodeType() == Node.ELEMENT_NODE) {
+                            grandchildNode.setTextContent(paymentMeans[counter++]);
                         }
-                        break;
-                    case 5:
-                        l = childNode.getChildNodes();
-                        for (int j = 0; j < l.getLength(); j++) {
-                            grandchildNode = l.item(j);
-                            if (grandchildNode instanceof Element) {
-                                switch (counter) {
-                                    case 5:
-                                        grandchildNode.setTextContent(paymentMeans[counter++]);
-                                        break;
-                                    case 6:
-                                        grandchildNode.setTextContent(paymentMeans[counter++]);
-                                        break;
-                                    case 7:
-                                        grandchildNode.setTextContent(paymentMeans[counter++]);
-                                        break;
-                                    default:
-                                        counter++;
-                                }
-                            }
+                        else {
+                            grandchildNode.setTextContent("");
                         }
-                        break;
-                    default:
-                        counter++;
+                    }
                 }
             }
         }
         Node parent = node.getParentNode();
         parent.insertBefore(newNode, node);
-        if (n == 0) parent.removeChild(node);
-    }
-    
-    public void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
-        Node node = doc.getElementsByTagName(tagname).item(idx);
-        if (node == null)
-            return;
-        node.setTextContent(content);
-        int n = attributes.length;
-        if (n == 0) return;
-        String attrName, attrValue;
-        NamedNodeMap attrs = node.getAttributes();
-        Node attr;
-        for (int i = 0; i < n; i++) {
-            attrName = attributes[i];
-            if (++i == n) continue;
-            attrValue = attributes[i];
-            attr = attrs.getNamedItem(attrName);
-            if (attr != null)
-                attr.setTextContent(attrValue);
-        }
     }
     
     public byte[] exportDoc() throws TransformerException {
+        removeNodes(doc);
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 	DOMSource source = new DOMSource(doc);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Result result = new StreamResult(out);
         transformer.transform(source, result);
         return out.toByteArray();
+    }
+    
+    public static void removeNodes(Node node) {
+        NodeList list = node.getChildNodes();
+        for (int i = list.getLength() - 1; i >= 0; i--) {
+            removeNodes(list.item(i));
+        }
+        boolean emptyElement = node.getNodeType() == Node.ELEMENT_NODE
+            && node.getChildNodes().getLength() == 0;
+        boolean emptyText = node.getNodeType() == Node.TEXT_NODE
+            && node.getNodeValue().trim().isEmpty();
+        if (emptyElement || emptyText) {
+            node.getParentNode().removeChild(node);
+        }
     }
 }

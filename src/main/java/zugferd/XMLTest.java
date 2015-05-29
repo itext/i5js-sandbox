@@ -32,7 +32,8 @@ public class XMLTest {
             basic = invoiceData.importInvoice(invoice);
             dom = new BASICDOM();
             dom.importData(basic);
-            System.out.println(new String(dom.exportDoc()));
+            byte[] xml = dom.exportDoc();
+            System.out.println(new String(xml));
         }
         factory.close();
     }

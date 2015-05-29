@@ -95,7 +95,7 @@ public class BASICInvoiceData implements BASICLevel {
     }
 
     public String[] getNotes() {
-        return (String[]) notes.toArray();
+        return (String[]) notes.toArray(new String[notes.size()]);
     }
 
     public String getSellerName() {
