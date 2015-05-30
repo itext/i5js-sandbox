@@ -320,7 +320,7 @@ public class BASICInvoiceData implements BASICInvoice {
     }
 
     public String getGrandTotalAmountCurrencyID() {
-        return grandTotalAmount;
+        return grandTotalAmountCurrencyID;
     }
 
     public String[] getBilledQuantity() {
@@ -448,7 +448,7 @@ public class BASICInvoiceData implements BASICInvoice {
         paymentMeansPayeeFinancialInstitutionName.add(institutionname);
     }
 
-    public void addTaxCalculatedAmount(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
+    public void addApplicableTradeTax(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
             String basisAmount, String basisAmountCurrencyID, String applicablePercent) {
         taxCalculatedAmount.add(calculatedAmount);
         taxCalculatedAmountCurrencyID.add(calculatedAmountCurrencyID);

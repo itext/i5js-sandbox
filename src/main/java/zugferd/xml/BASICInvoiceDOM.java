@@ -97,6 +97,14 @@ public class BASICInvoiceDOM {
         setNodeContent(doc, "ram:PaymentReference", 0, data.getPaymentReference());
         setNodeContent(doc, "ram:InvoiceCurrencyCode", 0, data.getInvoiceCurrencyCode());
         processPaymentMeans(doc, data);
+        processTax(doc, data);
+        setNodeContent(doc, "ram:LineTotalAmount", 0, data.getLineTotalAmount(), "currencyID", data.getLineTotalAmountCurrencyID());
+        setNodeContent(doc, "ram:ChargeTotalAmount", 0, data.getChargeTotalAmount(), "currencyID", data.getChargeTotalAmountCurrencyID());
+        setNodeContent(doc, "ram:AllowanceTotalAmount", 0, data.getAllowanceTotalAmount(), "currencyID", data.getAllowanceTotalAmountCurrencyID());
+        setNodeContent(doc, "ram:TaxBasisTotalAmount", 0, data.getTaxBasisTotalAmount(), "currencyID", data.getTaxBasisTotalAmountCurrencyID());
+        setNodeContent(doc, "ram:TaxTotalAmount", 0, data.getTaxTotalAmount(), "currencyID", data.getTaxTotalAmountCurrencyID());
+        setNodeContent(doc, "ram:GrandTotalAmount", 0, data.getGrandTotalAmount(), "currencyID", data.getGrandTotalAmountCurrencyID());
+        processLines(doc, data);
     }
     
     protected void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
@@ -259,6 +267,77 @@ public class BASICInvoiceDOM {
                             grandchildNode.setTextContent("");
                         }
                     }
+                }
+            }
+        }
+        Node parent = node.getParentNode();
+        parent.insertBefore(newNode, node);
+    }
+    
+    protected void processTax(Document doc, BASICInvoice data) {
+        String[] calculated = data.getTaxCalculatedAmount();
+        String[] calculatedCurr = data.getTaxCalculatedAmountCurrencyID();
+        String[] typeCode = data.getTaxTypeCode();
+        String[] basisAmount = data.getTaxBasisAmount();
+        String[] basisAmountCurr = data.getTaxBasisAmountCurrencyID();
+        String[] percent = data.getTaxApplicablePercent();
+        for (int i = 0; i < calculated.length; i++) {
+            processTax(doc, calculated[i], calculatedCurr[i],
+                    typeCode[i], basisAmount[i], basisAmountCurr[i], percent[i]);
+        }
+    }
+    
+    protected void processTax(Document doc, String... content) {
+        Node node = doc.getElementsByTagName("ram:ApplicableTradeTax").item(0);
+        int counter = 0;
+        Node newNode = node.cloneNode(true);
+        Node childNode;
+        NodeList list = newNode.getChildNodes();
+        for (int i = 0; i < list.getLength(); i++) {
+            childNode = list.item(i);
+            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                childNode.setTextContent(content[counter++]);
+                if (counter == 1 || counter == 4) {
+                    childNode.getAttributes().item(0).setTextContent(content[counter++]);
+                }
+            }
+        }
+        Node parent = node.getParentNode();
+        parent.insertBefore(newNode, node);
+    }
+    
+    protected void processLines(Document doc, BASICInvoice data) {
+        String[] quantity = data.getBilledQuantity();
+        String[] quantityCode = data.getBilledQuantityUnitCode();
+        String[] name = data.getSpecifiedTradeProductName();
+        for (int i = quantity.length - 1; i >= 0; i--) {
+            processLine(doc, quantity[i], quantityCode[i], name[i]);
+        }
+    }
+    
+    protected void processLine(Document doc, String quantity, String code, String name) {
+        Node node = doc.getElementsByTagName("ram:IncludedSupplyChainTradeLineItem").item(0);
+        Node newNode = node.cloneNode(true);
+        Node childNode;
+        NodeList list = newNode.getChildNodes();
+        for (int i = 0; i < list.getLength(); i++) {
+            childNode = list.item(i);
+            if ("ram:SpecifiedSupplyChainTradeDelivery".equals(childNode.getNodeName())) {
+                NodeList l = childNode.getChildNodes();
+                for (int j = 0; j < l.getLength(); j++) {
+                    Node grandchildNode = l.item(j);
+                    if (grandchildNode.getNodeType() == Node.ELEMENT_NODE) {
+                        grandchildNode.setTextContent(quantity);
+                        grandchildNode.getAttributes().item(0).setTextContent(code);
+                    }
+                }
+            }
+            else if ("ram:SpecifiedTradeProduct".equals(childNode.getNodeName())) {
+                NodeList l = childNode.getChildNodes();
+                for (int j = 0; j < l.getLength(); j++) {
+                    Node grandchildNode = l.item(j);
+                    if (grandchildNode.getNodeType() == Node.ELEMENT_NODE)
+                        grandchildNode.setTextContent(name);
                 }
             }
         }

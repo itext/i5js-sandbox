@@ -50,7 +50,7 @@ public class InvoiceData {
         double total = round(invoice.getTotal());
         double tax = round((100 * total) / (100 + taxpercentage));
         double net = total - tax;
-        invoiceData.addTaxCalculatedAmount(format(tax), "EUR", "VAT", format(net), "EUR", format(taxpercentage));
+        invoiceData.addApplicableTradeTax(format(tax), "EUR", "VAT", format(net), "EUR", format(taxpercentage));
         invoiceData.setLineTotalAmount(format(net));
         invoiceData.setLineTotalAmountCurrencyID("EUR");
         invoiceData.setChargeTotalAmount(format(0));
@@ -60,7 +60,7 @@ public class InvoiceData {
         invoiceData.setTaxBasisTotalAmount(format(net));
         invoiceData.setTaxBasisTotalAmountCurrencyID("EUR");
         invoiceData.setTaxTotalAmount(format(tax));
-        invoiceData.setTaxBasisTotalAmountCurrencyID("EUR");
+        invoiceData.setTaxTotalAmountCurrencyID("EUR");
         invoiceData.setGrandTotalAmount(format(total));
         invoiceData.setGrandTotalAmountCurrencyID("EUR");
         for (Item item : invoice.getItems()) {
