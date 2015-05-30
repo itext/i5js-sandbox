@@ -41,29 +41,22 @@ public class BASICDOM {
         setNodeContent(doc, "ram:ID", 1, data.getId());
         setNodeContent(doc, "ram:Name", 0, data.getName());
         setNodeContent(doc, "ram:TypeCode", 0, data.getTypeCode());
-        setNodeContent(doc, "udt:DateTimeString", 0, data.getDateTime(), "format", data.getDateTimeFormat());
-        
-        String[] notes = data.getNotes();
-        if (notes.length > 0) {
-            Node node = doc.getElementsByTagName("ram:IncludedNote").item(0);
-            for (String note : notes) {
-                Node newNode = node.cloneNode(true);
-                NodeList list = newNode.getChildNodes();
-                for (int j = 0; j < list.getLength(); j++) {
-                    Node childNode = list.item(j);
-                    if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-                        childNode.setTextContent(note);
-                    }
-                }
-                Node parent = node.getParentNode();
-                parent.insertBefore(newNode, node);
-            }
-        }
-        try {
-            processPaymentMeans(doc, data);
-        }
-        catch(ArrayIndexOutOfBoundsException aioobe) {
-        }
+        setDateTime(doc, "ram:IssueDateTime", 0, data.getDateTime(), data.getDateTimeFormat());
+        setNodeSubContent(doc, "ram:IncludedNote", 0, data.getNotes(), null);
+        processTraderParty(doc, "ram:SellerTradeParty", 0,
+                data.getSellerName(), data.getSellerPostcode(),
+                data.getSellerLineOne(), data.getSellerLineTwo(),
+                data.getSellerCityName(), data.getSellerCountryID(),
+                data.getSellerTaxRegistrationID(), data.getSellerTaxRegistrationSchemeID());
+        processTraderParty(doc, "ram:BuyerTradeParty", 0,
+                data.getBuyerName(), data.getBuyerPostcode(),
+                data.getBuyerLineOne(), data.getBuyerLineTwo(),
+                data.getBuyerCityName(), data.getBuyerCountryID(),
+                data.getBuyerTaxRegistrationID(), data.getBuyerTaxRegistrationSchemeID());
+        setDateTime(doc, "ram:OccurrenceDateTime", 0, data.getDateTime(), data.getDateTimeFormat());
+        setNodeContent(doc, "ram:PaymentReference", 0, data.getPaymentReference());
+        setNodeContent(doc, "ram:InvoiceCurrencyCode", 0, data.getInvoiceCurrencyCode());
+        processPaymentMeans(doc, data);
     }
     
     public void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
@@ -83,6 +76,96 @@ public class BASICDOM {
             attr = attrs.getNamedItem(attrName);
             if (attr != null)
                 attr.setTextContent(attrValue);
+        }
+    }
+    
+    public void setDateTime(Document doc, String tagname, int idx, String datetime, String format) {
+        Node node = doc.getElementsByTagName(tagname).item(idx);
+        if (node == null)
+            return;
+        NodeList list = node.getChildNodes();
+        for (int i = 0; i < list.getLength(); i++) {
+            Node childNode = list.item(i);
+            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                childNode.setTextContent(datetime);
+                Node attr = childNode.getAttributes().item(0);
+                attr.setTextContent(format);
+            }
+        }
+    }
+    
+    public void setNodeSubContent(Document doc, String tagname, int idx, String[] content, String[] attrs) {
+        if (content.length == 0)
+            return;
+        Node node = doc.getElementsByTagName(tagname).item(idx);
+        for (String text : content) {
+            Node newNode = node.cloneNode(true);
+            NodeList list = newNode.getChildNodes();
+            for (int i = 0; i < list.getLength(); i++) {
+                Node childNode = list.item(i);
+                if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                    childNode.setTextContent(text);
+                    if (attrs != null && attrs.length <= i) {
+                        Node attr = childNode.getAttributes().item(0);
+                        attr.setTextContent(attrs[i]);
+                    }
+                }
+            }
+            Node parent = node.getParentNode();
+            parent.insertBefore(newNode, node);
+        }
+    }
+
+    private void setNodeSubContent(Node parent, Node node, String[] content, String[] attrs) {
+        if (content.length == 0)
+            return;
+        for (String text : content) {
+            Node newNode = node.cloneNode(true);
+            NodeList list = newNode.getChildNodes();
+            for (int i = 0; i < list.getLength(); i++) {
+                Node childNode = list.item(i);
+                if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+                    childNode.setTextContent(text);
+                    if (attrs != null && attrs.length <= i) {
+                        Node attr = childNode.getAttributes().item(0);
+                        attr.setTextContent(attrs[i]);
+                    }
+                }
+            }
+            parent.insertBefore(newNode, node);
+        }
+    }
+    
+    protected void processTraderParty(Document doc, String tagname, int idx,
+        String name, String postcode, String lineOne, String lineTwo,
+        String cityName, String countryID,
+        String[] taxRegistrationID, String[] taxRegistrationSchemeID) {
+        Node node = doc.getElementsByTagName(tagname).item(idx);
+        NodeList list = node.getChildNodes();
+        for (int i = 0; i < list.getLength(); i++) {
+            Node childNode = list.item(i);
+            if (childNode.getNodeType() != Node.ELEMENT_NODE)
+                continue;
+            if ("ram:Name".equals(childNode.getNodeName())) {
+                childNode.setTextContent(name);
+            }
+            else if ("ram:PostalTradeAddress".equals(childNode.getNodeName()))
+                processPostalAddres(childNode, postcode, lineOne, lineTwo, cityName, countryID);
+            else if ("ram:SpecifiedTaxRegistration".equals(childNode.getNodeName())) {
+                setNodeSubContent(node, childNode, taxRegistrationID, taxRegistrationSchemeID);
+                break;
+            }
+        }
+    }
+
+    protected void processPostalAddres(Node node, String... content) {
+        NodeList list = node.getChildNodes();
+        int counter = 0;
+        for (int i = 0; i < list.getLength(); i++) {
+            Node childNode = list.item(i);
+            if (childNode.getNodeType() != Node.ELEMENT_NODE)
+                continue;
+            childNode.setTextContent(content[counter++]);
         }
     }
     

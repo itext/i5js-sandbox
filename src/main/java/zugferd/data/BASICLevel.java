@@ -18,7 +18,7 @@ public interface BASICLevel {
     public String getSellerCityName();
     public String getSellerCountryID();
     public String[] getSellerTaxRegistrationID();
-    public String[] getSellerTaxRegistrationShemeID();
+    public String[] getSellerTaxRegistrationSchemeID();
     public String getBuyerName();
     public String getBuyerPostcode();
     public String getBuyerLineOne();
@@ -26,7 +26,7 @@ public interface BASICLevel {
     public String getBuyerCityName();
     public String getBuyerCountryID();
     public String[] getBuyerTaxRegistrationID();
-    public String[] getBuyerTaxRegistrationShemeID();
+    public String[] getBuyerTaxRegistrationSchemeID();
     public String getDeliveryDateTime();
     public String getDeliveryDateTimeFormat();
     public String getPaymentReference();

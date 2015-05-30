@@ -123,11 +123,11 @@ public class BASICInvoiceData implements BASICLevel {
     }
 
     public String[] getSellerTaxRegistrationID() {
-        return (String[]) sellerTaxRegistrationID.toArray();
+        return (String[]) sellerTaxRegistrationID.toArray(new String[sellerTaxRegistrationID.size()]);
     }
 
-    public String[] getSellerTaxRegistrationShemeID() {
-        return (String[]) sellerTaxRegistrationSchemeID.toArray();
+    public String[] getSellerTaxRegistrationSchemeID() {
+        return (String[]) sellerTaxRegistrationSchemeID.toArray(new String[sellerTaxRegistrationSchemeID.size()]);
     }
 
     public String getBuyerName() {
@@ -158,7 +158,7 @@ public class BASICInvoiceData implements BASICLevel {
         return (String[]) buyerTaxRegistrationID.toArray(new String[buyerTaxRegistrationID.size()]);
     }
 
-    public String[] getBuyerTaxRegistrationShemeID() {
+    public String[] getBuyerTaxRegistrationSchemeID() {
         return (String[]) buyerTaxRegistrationSchemeID.toArray(new String[buyerTaxRegistrationSchemeID.size()]);
     }
 
