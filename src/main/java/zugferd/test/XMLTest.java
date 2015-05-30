@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zugferd;
+package zugferd.test;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,9 +11,9 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
-import zugferd.data.BASICDOM;
-import zugferd.data.BASICLevel;
-import zugferd.data.InvoiceData;
+import zugferd.InvoiceData;
+import zugferd.xml.BASICInvoiceDOM;
+import zugferd.xml.BASICInvoice;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.PojoFactory;
 
@@ -26,11 +26,11 @@ public class XMLTest {
         PojoFactory factory = PojoFactory.getInstance();
         List<Invoice> invoices = factory.getInvoices();
         InvoiceData invoiceData = new InvoiceData();
-        BASICLevel basic;
-        BASICDOM dom;
+        BASICInvoice basic;
+        BASICInvoiceDOM dom;
         for (Invoice invoice : invoices) {
             basic = invoiceData.importInvoice(invoice);
-            dom = new BASICDOM();
+            dom = new BASICInvoiceDOM();
             dom.importData(basic);
             byte[] xml = dom.exportDoc();
             System.out.println(new String(xml));

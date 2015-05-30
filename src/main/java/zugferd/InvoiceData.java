@@ -1,12 +1,14 @@
 /*
  * Code written by Bruno Lowagie in the context of an example.
  */
-package zugferd.data;
+package zugferd;
 
 import java.text.SimpleDateFormat;
 import zugferd.pojo.Customer;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.Item;
+import zugferd.xml.BASICInvoice;
+import zugferd.xml.BASICInvoiceData;
 
 /**
  *
@@ -17,8 +19,8 @@ public class InvoiceData {
     public InvoiceData() {
     }
     
-    public BASICLevel importInvoice(Invoice invoice) {
-        BASICLevel invoiceData = new BASICInvoiceData();
+    public BASICInvoice importInvoice(Invoice invoice) {
+        BASICInvoiceData invoiceData = new BASICInvoiceData();
         invoiceData.setTest(true);
         invoiceData.setId(String.format("I/%05d", invoice.getId()));
         invoiceData.setName("INVOICE");

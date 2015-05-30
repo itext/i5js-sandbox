@@ -1,7 +1,7 @@
 /*
  * This example was written by Bruno Lowagie
  */
-package zugferd;
+package zugferd.test;
 
 import java.sql.SQLException;
 import java.util.List;

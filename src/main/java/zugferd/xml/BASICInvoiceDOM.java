@@ -1,7 +1,48 @@
 /*
- * Code written by Bruno Lowagie in the context of an example.
+ * $Id$
+ *
+ * This file is part of the iText (R) project.
+ * Copyright (c) 2014-2015 iText Group NV
+ * Authors: Bruno Lowagie, et al.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License version 3
+ * as published by the Free Software Foundation with the addition of the
+ * following permission added to Section 15 as permitted in Section 7(a):
+ * FOR ANY PART OF THE COVERED WORK IN WHICH THE COPYRIGHT IS OWNED BY
+ * ITEXT GROUP. ITEXT GROUP DISCLAIMS THE WARRANTY OF NON INFRINGEMENT
+ * OF THIRD PARTY RIGHTS
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program; if not, see http://www.gnu.org/licenses or write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA, 02110-1301 USA, or download the license from the following URL:
+ * http://itextpdf.com/terms-of-use/
+ *
+ * The interactive user interfaces in modified source and object code versions
+ * of this program must display Appropriate Legal Notices, as required under
+ * Section 5 of the GNU Affero General Public License.
+ *
+ * In accordance with Section 7(b) of the GNU Affero General Public License,
+ * a covered work must retain the producer line in every PDF that is created
+ * or manipulated using iText.
+ *
+ * You can be released from the requirements of the license by purchasing
+ * a commercial license. Buying such a license is mandatory as soon as you
+ * develop commercial activities involving the iText software without
+ * disclosing the source code of your own applications.
+ * These activities include: offering paid services to customers as an ASP,
+ * serving PDFs on the fly in a web application, shipping iText with a closed
+ * source product.
+ *
+ * For more information, please contact iText Software Corp. at this
+ * address: sales@itextpdf.com
  */
-package zugferd.data;
+package zugferd.xml;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,7 +57,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -25,18 +65,18 @@ import org.xml.sax.SAXException;
 /**
  * @author iText
  */
-public class BASICDOM {
+public class BASICInvoiceDOM {
     public static final String XML = "resources/zugferd/basic.xml";
     
     protected Document doc;
     
-    public BASICDOM() throws ParserConfigurationException, SAXException, IOException {
+    public BASICInvoiceDOM() throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 	doc = docBuilder.parse(XML);
     }
     
-    public void importData(BASICLevel data) {
+    public void importData(BASICInvoice data) {
         setNodeContent(doc, "udt:Indicator", 0, data.getTestIndicator() ? "true" : "false");
         setNodeContent(doc, "ram:ID", 1, data.getId());
         setNodeContent(doc, "ram:Name", 0, data.getName());
@@ -59,7 +99,7 @@ public class BASICDOM {
         processPaymentMeans(doc, data);
     }
     
-    public void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
+    protected void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
         Node node = doc.getElementsByTagName(tagname).item(idx);
         if (node == null)
             return;
@@ -79,7 +119,7 @@ public class BASICDOM {
         }
     }
     
-    public void setDateTime(Document doc, String tagname, int idx, String datetime, String format) {
+    protected void setDateTime(Document doc, String tagname, int idx, String datetime, String format) {
         Node node = doc.getElementsByTagName(tagname).item(idx);
         if (node == null)
             return;
@@ -94,7 +134,7 @@ public class BASICDOM {
         }
     }
     
-    public void setNodeSubContent(Document doc, String tagname, int idx, String[] content, String[] attrs) {
+    protected void setNodeSubContent(Document doc, String tagname, int idx, String[] content, String[] attrs) {
         if (content.length == 0)
             return;
         Node node = doc.getElementsByTagName(tagname).item(idx);
@@ -116,7 +156,7 @@ public class BASICDOM {
         }
     }
 
-    private void setNodeSubContent(Node parent, Node node, String[] content, String[] attrs) {
+    protected void setNodeSubContent(Node parent, Node node, String[] content, String[] attrs) {
         if (content.length == 0)
             return;
         for (String text : content) {
@@ -169,7 +209,7 @@ public class BASICDOM {
         }
     }
     
-    protected void processPaymentMeans(Document doc, BASICLevel data) {
+    protected void processPaymentMeans(Document doc, BASICInvoice data) {
         String[] pmID = data.getPaymentMeansID();
         String[] pmSchemeAgencyID = data.getPaymentMeansSchemeAgencyID();
         String[] pmIBAN = data.getPaymentMeansPayeeAccountIBAN();
@@ -192,7 +232,7 @@ public class BASICDOM {
         }
     }
     
-    protected void processPaymentMeans(Document doc, BASICLevel data, int n,
+    protected void processPaymentMeans(Document doc, BASICInvoice data, int n,
         String... paymentMeans) {
         Node node = doc.getElementsByTagName("ram:SpecifiedTradeSettlementPaymentMeans").item(0);
         Node newNode = node.cloneNode(true);
@@ -240,7 +280,7 @@ public class BASICDOM {
         return out.toByteArray();
     }
     
-    public static void removeNodes(Node node) {
+    protected static void removeNodes(Node node) {
         NodeList list = node.getChildNodes();
         for (int i = list.getLength() - 1; i >= 0; i--) {
             removeNodes(list.item(i));
