@@ -111,6 +111,7 @@ public class PojoFactory {
             product.setId(id);
             product.setName(rs.getString("Name"));
             product.setPrice(rs.getDouble("Price"));
+            product.setVat(rs.getDouble("Vat"));
             productCache.put(id, product);
             return product;
         }

@@ -11,6 +11,7 @@ public class Product {
     protected int id;
     protected String name;
     protected double price;
+    protected double vat;
 
     public int getId() {
         return id;
@@ -35,11 +36,19 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public double getVat() {
+        return vat;
+    }
+
+    public void setVat(double vat) {
+        this.vat = vat;
+    }
     
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\t(").append(id).append(")\t").append(name).append("\t$").append(price);
+        sb.append("\t(").append(id).append(")\t").append(name).append("\t$").append(price).append("\tvat ").append(vat).append("%");
         return sb.toString();
     }
 }
