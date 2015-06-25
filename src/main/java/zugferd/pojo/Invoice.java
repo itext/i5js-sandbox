@@ -60,7 +60,7 @@ public class Invoice {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Invoice id: ").append(id).append(" Date: ").append(invoiceDate).append(" Total cost: ").append(total).append("\n");
+        sb.append("Invoice id: ").append(id).append(" Date: ").append(invoiceDate).append(" Total cost: ").append(total).append("\u20ac\n");
         sb.append("Customer: ").append(customer.toString()).append("\n");
         for (Item item : items) {
             sb.append(item.toString()).append("\n");

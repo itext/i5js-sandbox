@@ -48,7 +48,7 @@ public class Product {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\t(").append(id).append(")\t").append(name).append("\t$").append(price).append("\tvat ").append(vat).append("%");
+        sb.append("\t(").append(id).append(")\t").append(name).append("\t").append(price).append("\u20ac\tvat ").append(vat).append("%");
         return sb.toString();
     }
 }

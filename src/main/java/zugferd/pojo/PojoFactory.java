@@ -65,9 +65,13 @@ public class PojoFactory {
     public Invoice getInvoice(ResultSet rs) throws SQLException {
         Invoice invoice = new Invoice();
         invoice.setId(rs.getInt("id"));
-        invoice.setTotal(rs.getDouble("total"));
         invoice.setCustomer(getCustomer(rs.getInt("customerid")));
-        invoice.setItems(getItems(rs.getInt("id")));
+        List<Item> items = getItems(rs.getInt("id"));
+        invoice.setItems(items);
+        double total = 0;
+        for (Item item : items)
+            total += item.getCost();
+        invoice.setTotal(total);
         invoice.setInvoiceDate(rs.getDate("invoicedate"));
         return invoice;
     }
@@ -75,9 +79,10 @@ public class PojoFactory {
     public Item getItem(ResultSet rs) throws SQLException {
         Item item = new Item();
         item.setItem(rs.getInt("Item"));
-        item.setProduct(getProduct(rs.getInt("ProductId")));
+        Product product = getProduct(rs.getInt("ProductId"));
+        item.setProduct(product);
         item.setQuantity(rs.getInt("Quantity"));
-        item.setCost(rs.getDouble("Cost"));
+        item.setCost(item.getQuantity() * product.getPrice());
         return item;
     }
     

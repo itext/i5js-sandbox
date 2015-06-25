@@ -51,7 +51,7 @@ public class Item {
         sb.append("  #").append(item);
         sb.append(product.toString());
         sb.append("\tQuantity: ").append(quantity);
-        sb.append("\tCost: $").append(cost);
+        sb.append("\tCost: ").append(cost).append("\u20ac");
         return sb.toString();
     }
 }
