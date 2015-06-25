@@ -4,6 +4,8 @@
 package zugferd;
 
 import java.text.SimpleDateFormat;
+import java.util.Map;
+import java.util.TreeMap;
 import zugferd.pojo.Customer;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.Item;
@@ -46,26 +48,43 @@ public class InvoiceData {
         invoiceData.setInvoiceCurrencyCode("EUR");
         invoiceData.addPaymentMeans("", "", "BE 41 7360 0661 9710", "", "", "KREDBEBB", "", "KBC");
         invoiceData.addPaymentMeans("", "", "BE 56 0015 4298 7888", "", "", "GEBABEBB", "", "BNP Paribas");
-        double taxpercentage = 21;
-        double total = round(invoice.getTotal());
-        double tax = round((100 * total) / (100 + taxpercentage));
-        double net = total - tax;
-        invoiceData.addApplicableTradeTax(format(tax), "EUR", "VAT", format(net), "EUR", format(taxpercentage));
-        invoiceData.setLineTotalAmount(format(net));
+        Map<Double,Double> taxes = new TreeMap<Double, Double>();
+        double tax;
+        for (Item item : invoice.getItems()) {
+            tax = item.getProduct().getVat();
+            if (taxes.containsKey(tax)) {
+                taxes.put(tax, taxes.get(tax) + item.getCost());
+            }
+            else {
+                taxes.put(tax, item.getCost());
+            }
+            invoiceData.addIncludedSupplyChainTradeLineItem(String.valueOf(item.getQuantity()), "C62", item.getProduct().getName());
+        }
+        double total, tA;
+        double ltN = 0;
+        double ttA = 0;
+        double gtA = 0;
+        for (Map.Entry<Double, Double> t : taxes.entrySet()) {
+            tax = t.getKey();
+            total = round(t.getValue());
+            gtA += total;
+            tA = round((100 * total) / (100 + tax));
+            ttA += tA;
+            ltN += (total - tA);
+            invoiceData.addApplicableTradeTax(format(tA), "EUR", "VAT", format(total - tA), "EUR", format(tax));
+        }
+        invoiceData.setLineTotalAmount(format(ltN));
         invoiceData.setLineTotalAmountCurrencyID("EUR");
         invoiceData.setChargeTotalAmount(format(0));
         invoiceData.setChargeTotalAmountCurrencyID("EUR");
         invoiceData.setAllowanceTotalAmount(format(0));
         invoiceData.setAllowanceTotalAmountCurrencyID("EUR");
-        invoiceData.setTaxBasisTotalAmount(format(net));
+        invoiceData.setTaxBasisTotalAmount(format(ltN));
         invoiceData.setTaxBasisTotalAmountCurrencyID("EUR");
-        invoiceData.setTaxTotalAmount(format(tax));
+        invoiceData.setTaxTotalAmount(format(ttA));
         invoiceData.setTaxTotalAmountCurrencyID("EUR");
-        invoiceData.setGrandTotalAmount(format(total));
+        invoiceData.setGrandTotalAmount(format(gtA));
         invoiceData.setGrandTotalAmountCurrencyID("EUR");
-        for (Item item : invoice.getItems()) {
-            invoiceData.addIncludedSupplyChainTradeLineItem(String.valueOf(item.getQuantity()), "C62", item.getProduct().getName());
-        }
         return invoiceData;
     }
     
