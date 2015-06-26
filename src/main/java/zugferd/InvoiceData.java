@@ -69,9 +69,9 @@ public class InvoiceData {
             total = round(t.getValue());
             gtA += total;
             tA = round((100 * total) / (100 + tax));
-            ttA += tA;
-            ltN += (total - tA);
-            invoiceData.addApplicableTradeTax(format(tA), "EUR", "VAT", format(total - tA), "EUR", format(tax));
+            ttA += (total - tA);
+            ltN += tA;
+            invoiceData.addApplicableTradeTax(format(total - tA), "EUR", "VAT", format(tA), "EUR", format(tax));
         }
         invoiceData.setLineTotalAmount(format(ltN));
         invoiceData.setLineTotalAmountCurrencyID("EUR");
@@ -94,7 +94,7 @@ public class InvoiceData {
         return (double) tmp / 100;
     }
     
-    public String format(double d) {
+    public static String format(double d) {
         return String.format("%.2f", d);
     }
     

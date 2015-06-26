@@ -83,12 +83,12 @@ public class BASICInvoiceDOM {
         setNodeContent(doc, "ram:TypeCode", 0, data.getTypeCode());
         setDateTime(doc, "ram:IssueDateTime", 0, data.getDateTime(), data.getDateTimeFormat());
         setNodeSubContent(doc, "ram:IncludedNote", 0, data.getNotes(), null);
-        processTraderParty(doc, "ram:SellerTradeParty", 0,
+        processTradeParty(doc, "ram:SellerTradeParty", 0,
                 data.getSellerName(), data.getSellerPostcode(),
                 data.getSellerLineOne(), data.getSellerLineTwo(),
                 data.getSellerCityName(), data.getSellerCountryID(),
                 data.getSellerTaxRegistrationID(), data.getSellerTaxRegistrationSchemeID());
-        processTraderParty(doc, "ram:BuyerTradeParty", 0,
+        processTradeParty(doc, "ram:BuyerTradeParty", 0,
                 data.getBuyerName(), data.getBuyerPostcode(),
                 data.getBuyerLineOne(), data.getBuyerLineTwo(),
                 data.getBuyerCityName(), data.getBuyerCountryID(),
@@ -167,24 +167,23 @@ public class BASICInvoiceDOM {
     protected void setNodeSubContent(Node parent, Node node, String[] content, String[] attrs) {
         if (content.length == 0)
             return;
-        for (String text : content) {
+        int n = content.length;
+        for (int i = 0; i < n; i++) {
             Node newNode = node.cloneNode(true);
             NodeList list = newNode.getChildNodes();
-            for (int i = 0; i < list.getLength(); i++) {
-                Node childNode = list.item(i);
+            for (int j = 0; j < list.getLength(); j++) {
+                Node childNode = list.item(j);
                 if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-                    childNode.setTextContent(text);
-                    if (attrs != null && attrs.length <= i) {
-                        Node attr = childNode.getAttributes().item(0);
-                        attr.setTextContent(attrs[i]);
-                    }
+                    childNode.setTextContent(content[i]);
+                    Node attr = childNode.getAttributes().item(0);
+                    attr.setTextContent(attrs[i]);
                 }
             }
             parent.insertBefore(newNode, node);
         }
     }
     
-    protected void processTraderParty(Document doc, String tagname, int idx,
+    protected void processTradeParty(Document doc, String tagname, int idx,
         String name, String postcode, String lineOne, String lineTwo,
         String cityName, String countryID,
         String[] taxRegistrationID, String[] taxRegistrationSchemeID) {
