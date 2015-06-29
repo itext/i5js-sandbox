@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rsm:CrossIndustryDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rsm="urn:ferd:CrossIndustryDocument:invoice:1p0" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:12" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:15">
+	<rsm:SpecifiedExchangedDocumentContext>
+		<ram:TestIndicator><udt:Indicator /></ram:TestIndicator>
+		<ram:GuidelineSpecifiedDocumentContextParameter>
+			<ram:ID>urn:ferd:CrossIndustryDocument:invoice:1p0:basic</ram:ID>
+		</ram:GuidelineSpecifiedDocumentContextParameter>
+	</rsm:SpecifiedExchangedDocumentContext>
+	<rsm:HeaderExchangedDocument>
+		<ram:ID />
+		<ram:Name />
+		<ram:TypeCode />
+		<ram:IssueDateTime><udt:DateTimeString format="" /></ram:IssueDateTime>
+		<ram:IncludedNote>
+			<ram:Content />
+			<ram:SubjectCode />
+		</ram:IncludedNote>
+	</rsm:HeaderExchangedDocument>
+	<rsm:SpecifiedSupplyChainTradeTransaction>
+		<ram:ApplicableSupplyChainTradeAgreement>
+			<ram:BuyerReference />
+			<ram:SellerTradeParty>
+				<ram:ID />
+				<ram:GlobalID schemeID="" />
+				<ram:Name />
+				<ram:PostalTradeAddress>
+					<ram:PostcodeCode />
+					<ram:LineOne />
+					<ram:LineTwo />
+					<ram:CityName />
+					<ram:CountryID />
+				</ram:PostalTradeAddress>
+				<ram:SpecifiedTaxRegistration>
+					<ram:ID schemeID="" />
+				</ram:SpecifiedTaxRegistration>
+			</ram:SellerTradeParty>
+			<ram:BuyerTradeParty>
+				<ram:Name />
+				<ram:PostalTradeAddress>
+					<ram:PostcodeCode />
+					<ram:LineOne />
+					<ram:LineTwo />
+					<ram:CityName />
+					<ram:CountryID />
+				</ram:PostalTradeAddress>
+			</ram:BuyerTradeParty>
+			<ram:BuyerOrderReferencedDocument>
+				<ram:IssueDateTime format="" />
+				<ram:ID />
+			</ram:BuyerOrderReferencedDocument>
+			<ram:ContractReferencedDocument>
+				<ram:IssueDateTime format="" />
+				<ram:ID />
+			</ram:ContractReferencedDocument>
+			<ram:CustomerOrderReferencedDocument>
+				<ram:IssueDateTime format="" />
+				<ram:ID />
+			</ram:CustomerOrderReferencedDocument>
+		</ram:ApplicableSupplyChainTradeAgreement>
+		<ram:ApplicableSupplyChainTradeDelivery>
+			<ram:ActualDeliverySupplyChainEvent>
+				<ram:OccurrenceDateTime><udt:DateTimeString format="" /></ram:OccurrenceDateTime>
+			</ram:ActualDeliverySupplyChainEvent>
+			<ram:DeliveryNoteReferencedDocument>
+				<ram:IssueDateTime format="" />
+				<ram:ID />
+			</ram:DeliveryNoteReferencedDocument>
+		</ram:ApplicableSupplyChainTradeDelivery>
+		<ram:ApplicableSupplyChainTradeSettlement>
+			<ram:PaymentReference />
+			<ram:InvoiceCurrencyCode />
+			<ram:InvoiceeTradeParty>
+				<ram:ID />
+				<ram:GlobalID schemeID="" />
+				<ram:Name />
+				<ram:PostalTradeAddress>
+					<ram:PostcodeCode />
+					<ram:LineOne />
+					<ram:LineTwo />
+					<ram:CityName />
+					<ram:CountryID />
+				</ram:PostalTradeAddress>
+				<ram:SpecifiedTaxRegistration>
+					<ram:ID schemeID="" />
+				</ram:SpecifiedTaxRegistration>
+			</ram:InvoiceeTradeParty>
+			<ram:SpecifiedTradeSettlementPaymentMeans>
+				<ram:ID schemeAgencyID="" />
+				<ram:PayeePartyCreditorFinancialAccount>
+					<ram:IBANID />
+					<ram:AccountName />
+					<ram:ProprietaryID />
+				</ram:PayeePartyCreditorFinancialAccount>
+				<ram:PayeeSpecifiedCreditorFinancialInstitution>
+					<ram:BICID />
+					<ram:GermanBankleitzahlID />
+					<ram:Name />
+				</ram:PayeeSpecifiedCreditorFinancialInstitution>
+			</ram:SpecifiedTradeSettlementPaymentMeans>
+			<ram:ApplicableTradeTax>
+				<ram:CalculatedAmount currencyID="" />
+				<ram:TypeCode />
+				<ram:BasisAmount currencyID="" />
+				<ram:ApplicablePercent />
+			</ram:ApplicableTradeTax>
+			<ram:SpecifiedTradeSettlementMonetarySummation>
+				<ram:LineTotalAmount currencyID="" />
+				<ram:ChargeTotalAmount currencyID="" />
+				<ram:AllowanceTotalAmount currencyID="" />
+				<ram:TaxBasisTotalAmount currencyID="" />
+				<ram:TaxTotalAmount currencyID="" />
+				<ram:GrandTotalAmount currencyID="" />
+			</ram:SpecifiedTradeSettlementMonetarySummation>
+		</ram:ApplicableSupplyChainTradeSettlement>
+		<ram:IncludedSupplyChainTradeLineItem>
+			<ram:SpecifiedSupplyChainTradeDelivery>
+				<ram:BilledQuantity unitCode="" />
+			</ram:SpecifiedSupplyChainTradeDelivery>
+			<ram:SpecifiedTradeProduct>
+				<ram:Name />
+			</ram:SpecifiedTradeProduct>
+		</ram:IncludedSupplyChainTradeLineItem>
+	</rsm:SpecifiedSupplyChainTradeTransaction>
+</rsm:CrossIndustryDocument>
