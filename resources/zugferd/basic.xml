@@ -39,6 +39,9 @@
 					<ram:CityName />
 					<ram:CountryID />
 				</ram:PostalTradeAddress>
+				<ram:SpecifiedTaxRegistration>
+					<ram:ID schemeID="" />
+				</ram:SpecifiedTaxRegistration>
 			</ram:BuyerTradeParty>
 		</ram:ApplicableSupplyChainTradeAgreement>
 		<ram:ApplicableSupplyChainTradeDelivery>

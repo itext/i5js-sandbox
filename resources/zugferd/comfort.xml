@@ -35,6 +35,8 @@
 				</ram:SpecifiedTaxRegistration>
 			</ram:SellerTradeParty>
 			<ram:BuyerTradeParty>
+				<ram:ID />
+				<ram:GlobalID schemeID="" />
 				<ram:Name />
 				<ram:PostalTradeAddress>
 					<ram:PostcodeCode />
@@ -43,6 +45,9 @@
 					<ram:CityName />
 					<ram:CountryID />
 				</ram:PostalTradeAddress>
+				<ram:SpecifiedTaxRegistration>
+					<ram:ID schemeID="" />
+				</ram:SpecifiedTaxRegistration>
 			</ram:BuyerTradeParty>
 			<ram:BuyerOrderReferencedDocument>
 				<ram:IssueDateTime format="" />
@@ -85,12 +90,23 @@
 				</ram:SpecifiedTaxRegistration>
 			</ram:InvoiceeTradeParty>
 			<ram:SpecifiedTradeSettlementPaymentMeans>
+				<ram:TypeCode />
+				<ram:Information />
 				<ram:ID schemeAgencyID="" />
+				<ram:PayerPartyDebtorFinancialAccount>
+					<ram:IBANID />
+					<ram:ProprietaryID />
+				</ram:PayerPartyDebtorFinancialAccount>
 				<ram:PayeePartyCreditorFinancialAccount>
 					<ram:IBANID />
 					<ram:AccountName />
 					<ram:ProprietaryID />
 				</ram:PayeePartyCreditorFinancialAccount>
+				<ram:PayerSpecifiedDebtorFinancialInstitution>
+					<ram:BICID />
+					<ram:GermanBankleitzahlID />
+					<ram:Name />
+				</ram:PayerSpecifiedDebtorFinancialInstitution>
 				<ram:PayeeSpecifiedCreditorFinancialInstitution>
 					<ram:BICID />
 					<ram:GermanBankleitzahlID />
@@ -100,9 +116,46 @@
 			<ram:ApplicableTradeTax>
 				<ram:CalculatedAmount currencyID="" />
 				<ram:TypeCode />
+				<ram:ExemptionReason />
 				<ram:BasisAmount currencyID="" />
+				<ram:CategoryCode />
 				<ram:ApplicablePercent />
 			</ram:ApplicableTradeTax>
+			<ram:BillingSpecifiedPeriod>
+				<ram:StartDateTime>
+					<udt:DateTimeString format="" />
+				</ram:StartDateTime>
+				<ram:EndDateTime>
+					<udt:DateTimeString format="" />
+				</ram:EndDateTime>
+			</ram:BillingSpecifiedPeriod>
+			<ram:SpecifiedTradeAllowanceCharge>
+				<ram:ChargeIndicator>
+					<udt:Indicator />
+				</ram:ChargeIndicator>
+				<ram:ActualAmount currencyID="" />
+				<ram:Reason />
+				<ram:CategoryTradeTax>
+					<ram:TypeCode />
+					<ram:CategoryCode />
+					<ram:ApplicablePercent />
+				</ram:CategoryTradeTax>
+			</ram:SpecifiedTradeAllowanceCharge>
+			<ram:SpecifiedLogisticsServiceCharge>
+				<ram:Description />
+				<ram:AppliedAmount currencyID="" />
+				<ram:AppliedTradeTax>
+					<ram:TypeCode />
+					<ram:CategoryCode />
+					<ram:ApplicablePercent />
+				</ram:AppliedTradeTax>
+			</ram:SpecifiedLogisticsServiceCharge>
+			<ram:SpecifiedTradePaymentTerms>
+				<ram:Description />
+				<ram:DueDateDateTime>
+					<udt:DateTimeString format="" />
+				</ram:DueDateDateTime>
+			</ram:SpecifiedTradePaymentTerms>
 			<ram:SpecifiedTradeSettlementMonetarySummation>
 				<ram:LineTotalAmount currencyID="" />
 				<ram:ChargeTotalAmount currencyID="" />
@@ -110,14 +163,54 @@
 				<ram:TaxBasisTotalAmount currencyID="" />
 				<ram:TaxTotalAmount currencyID="" />
 				<ram:GrandTotalAmount currencyID="" />
+				<ram:TotalPrepaidAmount currencyID="" />
+				<ram:DuePayableAmount currencyID="" />
 			</ram:SpecifiedTradeSettlementMonetarySummation>
 		</ram:ApplicableSupplyChainTradeSettlement>
 		<ram:IncludedSupplyChainTradeLineItem>
+			<ram:AssociatedDocumentLineDocument>
+				<ram:LineID />
+				<ram:IncludedNote>
+					<ram:Content />
+				</ram:IncludedNote>
+			</ram:AssociatedDocumentLineDocument>
+			<ram:SpecifiedSupplyChainTradeAgreement>
+				<ram:GrossPriceProductTradePrice>
+					<ram:ChargeAmount currencyID="" />
+					<ram:BasisQuantity unitCode="" />
+					<ram:AppliedTradeAllowanceCharge>
+						<ram:ChargeIndicator>
+							<udt:Indicator />
+						</ram:ChargeIndicator>
+						<ram:ActualAmount currencyID="" />
+						<ram:Reason />
+					<ram:AppliedTradeAllowanceCharge>
+				</ram:GrossPriceProductTradePrice>
+				<ram:NetPriceProductTradePrice>
+					<ram:ChargeAmount currencyID="" />
+					<ram:BasisQuantity unitCode="" />
+				</ram:NetPriceProductTradePrice>
+			</ram:SpecifiedSupplyChainTradeAgreement>
 			<ram:SpecifiedSupplyChainTradeDelivery>
 				<ram:BilledQuantity unitCode="" />
 			</ram:SpecifiedSupplyChainTradeDelivery>
+			<ram:SpecifiedSupplyChainTradeSettlement>
+				<ram:SpecifiedTradeSettlementMonetarySummation>
+					<ram:ApplicableTradeTax>
+						<ram:TypeCode />
+						<ram:ExemptionReason />
+						<ram:CategoryCode />
+						<ram:ApplicablePercent />
+					</ram:ApplicableTradeTax>
+					<ram:LineTotalAmount currencyID="" />
+				</ram:SpecifiedTradeSettlementMonetarySummation>
+			</ram:SpecifiedSupplyChainTradeSettlement>
 			<ram:SpecifiedTradeProduct>
+				<ram:GlobalID schemeID="" />
+				<ram:SellerAssignedID />
+				<ram:BuyerAssignedID />
 				<ram:Name />
+				<ram:Description />
 			</ram:SpecifiedTradeProduct>
 		</ram:IncludedSupplyChainTradeLineItem>
 	</rsm:SpecifiedSupplyChainTradeTransaction>
