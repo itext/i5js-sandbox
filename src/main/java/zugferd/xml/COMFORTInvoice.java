@@ -48,10 +48,22 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String[] getNotesCodes();
     public String getBuyerReference();
     public String getSellerID();
-    public String getSellerGlobalID();
-    public String getSellerGlobalSchemeID();
+    public String[] getSellerGlobalID();
+    public String[] getSellerGlobalSchemeID();
     public String getBuyerID();
-    public String getBuyerGlobalID();
-    public String getBuyerGlobalSchemeID();
+    public String[] getBuyerGlobalID();
+    public String[] getBuyerGlobalSchemeID();
+    public String getBuyerOrderReferencedDocumentIssueDateTime();
+    public String getBuyerOrderReferencedDocumentIssueDateTimeFormat();
+    public String getBuyerOrderReferencedDocumentID();
+    public String getContractReferencedDocumentIssueDateTime();
+    public String getContractReferencedDocumentIssueDateTimeFormat();
+    public String getContractReferencedDocumentID();
+    public String getCustomerOrderReferencedDocumentIssueDateTime();
+    public String getCustomerOrderReferencedDocumentIssueDateTimeFormat();
+    public String getCustomerOrderReferencedDocumentID();
+    public String getDeliveryNoteReferencedDocumentIssueDateTime();
+    public String getDeliveryNoteReferencedDocumentIssueDateTimeFormat();
+    public String getDeliveryNoteReferencedDocumentID();
 }
 

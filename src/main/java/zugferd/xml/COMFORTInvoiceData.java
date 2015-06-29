@@ -56,11 +56,23 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> notesCodes = new ArrayList<String>();
     protected String buyerReference;
     protected String sellerID;
-    protected String sellerGlobalID;
-    protected String sellerGlobalSchemeID;
+    protected List<String> sellerGlobalID;
+    protected List<String> sellerGlobalSchemeID;
     protected String buyerID;
-    protected String buyerGlobalID;
-    protected String buyerGlobalSchemeID;
+    protected List<String> buyerGlobalID;
+    protected List<String> buyerGlobalSchemeID;
+    protected String buyerOrderReferencedDocumentIssueDateTime;
+    protected String buyerOrderReferencedDocumentIssueDateTimeFormat;
+    protected String buyerOrderReferencedDocumentID;
+    protected String contractReferencedDocumentIssueDateTime;
+    protected String contractReferencedDocumentIssueDateTimeFormat;
+    protected String contractReferencedDocumentID;
+    protected String customerOrderReferencedDocumentIssueDateTime;
+    protected String customerOrderReferencedDocumentIssueDateTimeFormat;
+    protected String customerOrderReferencedDocumentID;
+    protected String deliveryNoteReferencedDocumentIssueDateTime;
+    protected String deliveryNoteReferencedDocumentIssueDateTimeFormat;
+    protected String deliveryNoteReferencedDocumentID;
 
     public String[] getNotesCodes() {
         return (String[]) notesCodes.toArray(new String[notesCodes.size()]);
@@ -74,24 +86,72 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return sellerID;
     }
 
-    public String getSellerGlobalID() {
-        return sellerGlobalID;
+    public String[] getSellerGlobalID() {
+        return (String[]) sellerGlobalID.toArray(new String[sellerGlobalID.size()]);
     }
 
-    public String getSellerGlobalSchemeID() {
-        return sellerGlobalSchemeID;
+    public String[] getSellerGlobalSchemeID() {
+        return (String[]) sellerGlobalSchemeID.toArray(new String[sellerGlobalSchemeID.size()]);
     }
 
     public String getBuyerID() {
         return buyerID;
     }
 
-    public String getBuyerGlobalID() {
-        return buyerGlobalID;
+    public String[] getBuyerGlobalID() {
+        return (String[]) buyerGlobalID.toArray(new String[buyerGlobalID.size()]);
     }
 
-    public String getBuyerGlobalSchemeID() {
-        return buyerGlobalSchemeID;
+    public String[] getBuyerGlobalSchemeID() {
+        return (String[]) buyerGlobalSchemeID.toArray(new String[buyerGlobalSchemeID.size()]);
+    }
+
+    public String getBuyerOrderReferencedDocumentIssueDateTime() {
+        return buyerOrderReferencedDocumentIssueDateTime;
+    }
+
+    public String getBuyerOrderReferencedDocumentIssueDateTimeFormat() {
+        return buyerOrderReferencedDocumentIssueDateTimeFormat;
+    }
+
+    public String getBuyerOrderReferencedDocumentID() {
+        return buyerOrderReferencedDocumentID;
+    }
+
+    public String getContractReferencedDocumentIssueDateTime() {
+        return contractReferencedDocumentIssueDateTime;
+    }
+
+    public String getContractReferencedDocumentIssueDateTimeFormat() {
+        return contractReferencedDocumentIssueDateTimeFormat;
+    }
+
+    public String getContractReferencedDocumentID() {
+        return contractReferencedDocumentID;
+    }
+
+    public String getCustomerOrderReferencedDocumentIssueDateTime() {
+        return customerOrderReferencedDocumentIssueDateTime;
+    }
+
+    public String getCustomerOrderReferencedDocumentIssueDateTimeFormat() {
+        return customerOrderReferencedDocumentIssueDateTimeFormat;
+    }
+
+    public String getCustomerOrderReferencedDocumentID() {
+        return customerOrderReferencedDocumentID;
+    }
+
+    public String getDeliveryNoteReferencedDocumentIssueDateTime() {
+        return deliveryNoteReferencedDocumentIssueDateTime;
+    }
+
+    public String getDeliveryNoteReferencedDocumentIssueDateTimeFormat() {
+        return deliveryNoteReferencedDocumentIssueDateTimeFormat;
+    }
+
+    public String getDeliveryNoteReferencedDocumentID() {
+        return deliveryNoteReferencedDocumentID;
     }
 
     @Override
@@ -124,4 +184,39 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.buyerGlobalSchemeID = buyerGlobalSchemeID;
     }
     
+    public void setBuyerOrderReferencedDocumentIssueDateTime(String buyerOrderReferencedDocumentIssueDateTime, String buyerOrderReferencedDocumentIssueDateTimeFormat) {
+        this.buyerOrderReferencedDocumentIssueDateTime = buyerOrderReferencedDocumentIssueDateTime;
+        this.buyerOrderReferencedDocumentIssueDateTimeFormat = buyerOrderReferencedDocumentIssueDateTimeFormat;
+    }
+
+    public void setBuyerOrderReferencedDocumentID(String buyerOrderReferencedDocumentID) {
+        this.buyerOrderReferencedDocumentID = buyerOrderReferencedDocumentID;
+    }
+
+    public void setContractReferencedDocumentIssueDateTime(String contractReferencedDocumentIssueDateTime, String contractReferencedDocumentIssueDateTimeFormat) {
+        this.contractReferencedDocumentIssueDateTime = contractReferencedDocumentIssueDateTime;
+        this.contractReferencedDocumentIssueDateTimeFormat = contractReferencedDocumentIssueDateTimeFormat;
+    }
+
+    public void setContractReferencedDocumentID(String contractReferencedDocumentID) {
+        this.contractReferencedDocumentID = contractReferencedDocumentID;
+    }
+
+    public void setCustomerOrderReferencedDocumentIssueDateTime(String customerOrderReferencedDocumentIssueDateTime, String customerOrderReferencedDocumentIssueDateTimeFormat) {
+        this.customerOrderReferencedDocumentIssueDateTime = customerOrderReferencedDocumentIssueDateTime;
+        this.customerOrderReferencedDocumentIssueDateTimeFormat = customerOrderReferencedDocumentIssueDateTimeFormat;
+    }
+
+    public void setCustomerOrderReferencedDocumentID(String customerOrderReferencedDocumentID) {
+        this.customerOrderReferencedDocumentID = customerOrderReferencedDocumentID;
+    }
+
+    public void setDeliveryNoteReferencedDocumentIssueDateTime(String deliveryNoteReferencedDocumentIssueDateTime, String deliveryNoteReferencedDocumentIssueDateTimeFormat) {
+        this.deliveryNoteReferencedDocumentIssueDateTime = deliveryNoteReferencedDocumentIssueDateTime;
+        this.deliveryNoteReferencedDocumentIssueDateTimeFormat = deliveryNoteReferencedDocumentIssueDateTimeFormat;
+    }
+
+    public void setDeliveryNoteReferencedDocumentID(String deliveryNoteReferencedDocumentID) {
+        this.deliveryNoteReferencedDocumentID = deliveryNoteReferencedDocumentID;
+    }
 }
