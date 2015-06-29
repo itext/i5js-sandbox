@@ -170,9 +170,9 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.sellerID = sellerID;
     }
 
-    public void setSellerGlobaleID(String sellerGlobalSchemeID, String sellerGlobalID) {
-        this.sellerGlobalID = sellerGlobalID;
-        this.sellerGlobalSchemeID = sellerGlobalSchemeID;
+    public void addSellerGlobaleID(String sellerGlobalSchemeID, String sellerGlobalID) {
+        this.sellerGlobalID.add(sellerGlobalID);
+        this.sellerGlobalSchemeID.add(sellerGlobalSchemeID);
     }
 
     public void setBuyerID(String buyerID) {
@@ -180,8 +180,8 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     }
 
     public void setBuyerGlobaleID(String buyerGlobalSchemeID, String buyerGlobalID) {
-        this.buyerGlobalID = buyerGlobalID;
-        this.buyerGlobalSchemeID = buyerGlobalSchemeID;
+        this.buyerGlobalID.add(buyerGlobalID);
+        this.buyerGlobalSchemeID.add(buyerGlobalSchemeID);
     }
     
     public void setBuyerOrderReferencedDocumentIssueDateTime(String buyerOrderReferencedDocumentIssueDateTime, String buyerOrderReferencedDocumentIssueDateTimeFormat) {
