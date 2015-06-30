@@ -56,11 +56,11 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> notesCodes = new ArrayList<String>();
     protected String buyerReference;
     protected String sellerID;
-    protected List<String> sellerGlobalID;
-    protected List<String> sellerGlobalSchemeID;
+    protected List<String> sellerGlobalID = new ArrayList<String>();
+    protected List<String> sellerGlobalSchemeID = new ArrayList<String>();
     protected String buyerID;
-    protected List<String> buyerGlobalID;
-    protected List<String> buyerGlobalSchemeID;
+    protected List<String> buyerGlobalID = new ArrayList<String>();
+    protected List<String> buyerGlobalSchemeID = new ArrayList<String>();
     protected String buyerOrderReferencedDocumentIssueDateTime;
     protected String buyerOrderReferencedDocumentIssueDateTimeFormat;
     protected String buyerOrderReferencedDocumentID;
@@ -73,6 +73,24 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected String deliveryNoteReferencedDocumentIssueDateTime;
     protected String deliveryNoteReferencedDocumentIssueDateTimeFormat;
     protected String deliveryNoteReferencedDocumentID;
+    protected String invoiceeID;
+    protected List<String> invoiceeGlobalID = new ArrayList<String>();
+    protected List<String> invoiceeGlobalSchemeID = new ArrayList<String>();
+    protected String invoiceeName;
+    protected String invoiceePostcode;
+    protected String invoiceeLineOne;
+    protected String invoiceeLineTwo;
+    protected String invoiceeCityName;
+    protected String invoiceeCountryID;
+    protected List<String> invoiceeTaxRegistrationID = new ArrayList<String>();
+    protected List<String> invoiceeTaxRegistrationSchemeID = new ArrayList<String>();
+    protected List<String> paymentMeansTypeCode = new ArrayList<String>();
+    protected List<String[]> paymentMeansInformation = new ArrayList<String[]>();
+    protected List<String> paymentMeansPayerAccountIBAN = new ArrayList<String>();
+    protected List<String> paymentMeansPayerAccountProprietaryID = new ArrayList<String>();
+    protected List<String> paymentMeansPayerFinancialInstitutionBIC;
+    protected List<String> paymentMeansPayerFinancialInstitutionGermanBankleitzahlID;
+    protected List<String> paymentMeansPayerFinancialInstitutionName;
 
     public String[] getNotesCodes() {
         return (String[]) notesCodes.toArray(new String[notesCodes.size()]);
@@ -153,7 +171,83 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     public String getDeliveryNoteReferencedDocumentID() {
         return deliveryNoteReferencedDocumentID;
     }
+    public String getInvoiceeID() {
+        return invoiceeID;
+    }
+    
+    public String[] getInvoiceeGlobalID() {
+        return (String[]) invoiceeGlobalID.toArray(new String[invoiceeGlobalID.size()]);
+    }
 
+    public String[] getInvoiceeGlobalSchemeID() {
+        return (String[]) invoiceeGlobalSchemeID.toArray(new String[invoiceeGlobalSchemeID.size()]);
+    }
+    
+    public String getInvoiceeName() {
+        return invoiceeName;
+    }
+    
+    public String getInvoiceePostcode() {
+        return invoiceePostcode;
+    }
+    
+    public String getInvoiceeLineOne() {
+        return invoiceeLineOne;
+    }
+    
+    public String getInvoiceeLineTwo() {
+        return invoiceeLineTwo;
+    }
+    
+    public String getInvoiceeCityName() {
+        return invoiceeCityName;
+    }
+    
+    public String getInvoiceeCountryID() {
+        return invoiceeCountryID;
+    }
+    
+    public String[] getInvoiceeTaxRegistrationID() {
+        return (String[]) invoiceeTaxRegistrationID.toArray(new String[invoiceeTaxRegistrationID.size()]);
+    }
+    
+    public String[] getInvoiceeTaxRegistrationSchemeID() {
+        return (String[]) invoiceeTaxRegistrationSchemeID.toArray(new String[invoiceeTaxRegistrationSchemeID.size()]);
+    }
+
+    public String[] getPaymentMeansTypeCode() {
+        return (String[]) paymentMeansTypeCode.toArray(new String[paymentMeansTypeCode.size()]);
+    }
+    
+    public String[][] getPaymentMeansInformation() {
+        int n = paymentMeansInformation.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = paymentMeansInformation.get(i);
+        }
+        return array;
+    }
+    
+    public String[] getPaymentMeansPayerAccountIBAN() {
+        return (String[]) paymentMeansPayerAccountIBAN.toArray(new String[paymentMeansPayerAccountIBAN.size()]);
+    }
+    
+    public String[] getPaymentMeansPayerAccountProprietaryID() {
+        return (String[]) paymentMeansPayerAccountProprietaryID.toArray(new String[paymentMeansPayerAccountProprietaryID.size()]);
+    }
+    
+    public String[] getPaymentMeansPayerFinancialInstitutionBIC() {
+        return (String[]) paymentMeansPayerFinancialInstitutionBIC.toArray(new String[paymentMeansPayerFinancialInstitutionBIC.size()]);
+    }
+    
+    public String[] getPaymentMeansPayerFinancialInstitutionGermanBankleitzahlID() {
+        return (String[]) paymentMeansPayerFinancialInstitutionGermanBankleitzahlID.toArray(new String[paymentMeansPayerFinancialInstitutionGermanBankleitzahlID.size()]);
+    }
+    
+    public String[] getPaymentMeansPayerFinancialInstitutionName() {
+        return (String[]) paymentMeansPayerFinancialInstitutionName.toArray(new String[paymentMeansPayerFinancialInstitutionName.size()]);
+    }
+    
     @Override
     public void addNote(String note) {
         throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
@@ -218,5 +312,72 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
 
     public void setDeliveryNoteReferencedDocumentID(String deliveryNoteReferencedDocumentID) {
         this.deliveryNoteReferencedDocumentID = deliveryNoteReferencedDocumentID;
+    }
+    public void setInvoiceeID(String invoiceeID) {
+        this.invoiceeID = invoiceeID;
+    }
+    
+    public void addInvoiceeGlobalID(String invoiceeGlobalSchemeID, String invoiceeGlobalID) {
+        this.invoiceeGlobalSchemeID.add(invoiceeGlobalSchemeID);
+        this.invoiceeGlobalID.add(invoiceeGlobalID);
+    }
+    
+    public void setInvoiceeName(String invoiceeName) {
+        this.invoiceeName = invoiceeName;
+    }
+    
+    public void setInvoiceePostcode(String invoiceePostcode) {
+        this.invoiceePostcode = invoiceePostcode;
+    }
+    
+    public void setInvoiceeLineOne(String invoiceeLineOne) {
+        this.invoiceeLineOne = invoiceeLineOne;
+    }
+    
+    public void setInvoiceeLineTwo(String invoiceeLineTwo) {
+        this.invoiceeLineTwo = invoiceeLineTwo;
+    }
+    
+    public void setInvoiceeCityName(String invoiceeCityName) {
+        this.invoiceeCityName = invoiceeCityName;
+    }
+    
+    public void setInvoiceeCountryID(String invoiceeCountryID) {
+        this.invoiceeCountryID = invoiceeCountryID;
+    }
+    
+    public void addInvoiceeTaxRegistrationID(String schemeID, String taxId) {
+        invoiceeTaxRegistrationSchemeID.add(schemeID);
+        invoiceeTaxRegistrationID.add(taxId);
+    }
+
+    @Override
+    public void addPaymentMeans(String schemeAgencyID, String id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
+        throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
+    }
+
+    public void addPaymentMeans(
+            String typeCode, String[] information,
+            String schemeAgencyID, String id,
+            String ibanDebtor, String proprietaryIDDebtor,
+            String ibanCreditor, String accountnameCreditor, String proprietaryIDCreditor,
+            String bicDebtor, String germanBankleitzahlIDDebtor, String institutionnameDebtor,
+            String bicCreditor, String germanBankleitzahlIDCreditor, String institutionnameCreditor
+    ) {
+        paymentMeansTypeCode.add(typeCode);
+        paymentMeansInformation.add(information);
+        paymentMeansID.add(id);
+        paymentMeansSchemeAgencyID.add(schemeAgencyID);
+        paymentMeansPayerAccountIBAN.add(ibanDebtor);
+        paymentMeansPayerAccountProprietaryID.add(proprietaryIDDebtor);
+        paymentMeansPayeeAccountIBAN.add(ibanCreditor);
+        paymentMeansPayeeAccountName.add(accountnameCreditor);
+        paymentMeansPayeeAccountProprietaryID.add(proprietaryIDCreditor);
+        paymentMeansPayerFinancialInstitutionBIC.add(bicDebtor);
+        paymentMeansPayerFinancialInstitutionGermanBankleitzahlID.add(germanBankleitzahlIDDebtor);
+        paymentMeansPayerFinancialInstitutionName.add(institutionnameDebtor);
+        paymentMeansPayeeFinancialInstitutionBIC.add(bicCreditor);
+        paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID.add(germanBankleitzahlIDCreditor);
+        paymentMeansPayeeFinancialInstitutionName.add(institutionnameCreditor);
     }
 }

@@ -65,5 +65,23 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String getDeliveryNoteReferencedDocumentIssueDateTime();
     public String getDeliveryNoteReferencedDocumentIssueDateTimeFormat();
     public String getDeliveryNoteReferencedDocumentID();
+    public String getInvoiceeID();
+    public String[] getInvoiceeGlobalID();
+    public String[] getInvoiceeGlobalSchemeID();
+    public String getInvoiceeName();
+    public String getInvoiceePostcode();
+    public String getInvoiceeLineOne();
+    public String getInvoiceeLineTwo();
+    public String getInvoiceeCityName();
+    public String getInvoiceeCountryID();
+    public String[] getInvoiceeTaxRegistrationID();
+    public String[] getInvoiceeTaxRegistrationSchemeID();
+    public String[] getPaymentMeansTypeCode();
+    public String[][] getPaymentMeansInformation();
+    public String[] getPaymentMeansPayerAccountIBAN();
+    public String[] getPaymentMeansPayerAccountProprietaryID();
+    public String[] getPaymentMeansPayerFinancialInstitutionBIC();
+    public String[] getPaymentMeansPayerFinancialInstitutionGermanBankleitzahlID();
+    public String[] getPaymentMeansPayerFinancialInstitutionName();
 }
 
