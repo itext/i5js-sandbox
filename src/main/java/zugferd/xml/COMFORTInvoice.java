@@ -85,5 +85,16 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String[] getPaymentMeansPayerFinancialInstitutionName();
     public String[] getTaxExemptionReason();
     public String[] getTaxCategoryCode();
+    public String getBillingStartDateTime();
+    public String getBillingStartDateTimeFormat();
+    public String getBillingEndDateTime();
+    public String getBillingEndDateTimeFormat();
+    public String[] getChargeIndicator();
+    public String[] getChargeActualAmount();
+    public String[] getChargeActualAmountCurrency();
+    public String[] getChargeReason();
+    public String[][] getChargeTaxTypeCode();
+    public String[][] getChargeTaxCategoryCode();
+    public String[][] getChargeTaxApplicablePercent();
 }
 

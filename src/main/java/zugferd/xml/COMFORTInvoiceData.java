@@ -93,7 +93,18 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> paymentMeansPayerFinancialInstitutionName;
     protected List<String> taxExemptionReason;
     protected List<String> taxCategoryCode;
-
+    protected String billingStartDateTime;
+    protected String billingStartDateTimeFormat;
+    protected String billingEndDateTime;
+    protected String billingEndDateTimeFormat;
+    protected List<String> chargeIndicator;
+    protected List<String> chargeActualAmount;
+    protected List<String> chargeActualAmountCurrency;
+    protected List<String> chargeReason;
+    protected List<String[]> chargeTaxTypeCode;
+    protected List<String[]> chargeTaxCategoryCode;
+    protected List<String[]> chargeTaxApplicablePercent;
+            
     public String[] getNotesCodes() {
         return (String[]) notesCodes.toArray(new String[notesCodes.size()]);
     }
@@ -258,6 +269,65 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return (String[])taxCategoryCode.toArray(new String[taxCategoryCode.size()]);
     }
     
+    public String getBillingStartDateTime() {
+        return billingStartDateTime;
+    }
+    
+    public String getBillingStartDateTimeFormat() {
+        return billingStartDateTimeFormat;
+    }
+    
+    public String getBillingEndDateTime() {
+        return billingEndDateTime;
+    }
+    
+    public String getBillingEndDateTimeFormat() {
+        return billingEndDateTimeFormat;
+    }
+    
+    public String[] getChargeIndicator() {
+        return (String[])chargeIndicator.toArray(new String[chargeIndicator.size()]);
+    }
+    
+    public String[] getChargeActualAmount() {
+        return (String[])chargeActualAmount.toArray(new String[chargeActualAmount.size()]);
+    }
+    
+    public String[] getChargeActualAmountCurrency() {
+        return (String[])chargeActualAmountCurrency.toArray(new String[chargeActualAmountCurrency.size()]);
+    }
+    
+    public String[] getChargeReason() {
+        return (String[])chargeReason.toArray(new String[chargeReason.size()]);
+    }
+
+    public String[][] getChargeTaxTypeCode() {
+        int n = chargeTaxTypeCode.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = chargeTaxTypeCode.get(i);
+        }
+        return array;
+    }
+    
+    public String[][] getChargeTaxCategoryCode() {
+        int n = chargeTaxCategoryCode.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = chargeTaxCategoryCode.get(i);
+        }
+        return array;
+    }
+    
+    public String[][] getChargeTaxApplicablePercent() {
+        int n = chargeTaxApplicablePercent.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = chargeTaxApplicablePercent.get(i);
+        }
+        return array;
+    }
+    
     @Override
     public void addNote(String note) {
         throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
@@ -407,5 +477,24 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         taxBasisAmountCurrencyID.add(basisAmountCurrencyID);
         taxCategoryCode.add(categoryCode);
         taxApplicablePercent.add(applicablePercent);
+    }
+    
+    public void setBillingStartEnd(String billingStartDateTime, String billingStartDateTimeFormat,
+            String billingEndDateTime, String billingEndDateTimeFormat) {
+        this.billingStartDateTime = billingStartDateTime;
+        this.billingStartDateTimeFormat = billingStartDateTimeFormat;
+        this.billingEndDateTime = billingEndDateTime;
+        this.billingEndDateTimeFormat = billingEndDateTimeFormat;
+    }
+    
+    public void addCharge(String indicator, String actualAmount, String actualAmountCurrency,
+            String reason, String[] typeCodes, String[] categoryCodes, String[] applicablePercent) {
+        this.chargeIndicator.add(indicator);
+        this.chargeActualAmount.add(actualAmount);
+        this.chargeActualAmountCurrency.add(actualAmountCurrency);
+        this.chargeReason.add(reason);
+        this.chargeTaxTypeCode.add(typeCodes);
+        this.chargeTaxCategoryCode.add(categoryCodes);
+        this.chargeTaxApplicablePercent.add(applicablePercent);
     }
 }
