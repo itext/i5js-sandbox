@@ -91,6 +91,8 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> paymentMeansPayerFinancialInstitutionBIC;
     protected List<String> paymentMeansPayerFinancialInstitutionGermanBankleitzahlID;
     protected List<String> paymentMeansPayerFinancialInstitutionName;
+    protected List<String> taxExemptionReason;
+    protected List<String> taxCategoryCode;
 
     public String[] getNotesCodes() {
         return (String[]) notesCodes.toArray(new String[notesCodes.size()]);
@@ -247,6 +249,14 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     public String[] getPaymentMeansPayerFinancialInstitutionName() {
         return (String[]) paymentMeansPayerFinancialInstitutionName.toArray(new String[paymentMeansPayerFinancialInstitutionName.size()]);
     }
+
+    public String[] getTaxExemptionReason() {
+        return (String[])taxExemptionReason.toArray(new String[taxExemptionReason.size()]);
+    }
+
+    public String[] getTaxCategoryCode() {
+        return (String[])taxCategoryCode.toArray(new String[taxCategoryCode.size()]);
+    }
     
     @Override
     public void addNote(String note) {
@@ -379,5 +389,23 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         paymentMeansPayeeFinancialInstitutionBIC.add(bicCreditor);
         paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID.add(germanBankleitzahlIDCreditor);
         paymentMeansPayeeFinancialInstitutionName.add(institutionnameCreditor);
+    }
+
+    @Override
+    public void addApplicableTradeTax(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
+            String basisAmount, String basisAmountCurrencyID, String applicablePercent) {
+        throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
+    }
+
+    public void addApplicableTradeTax(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
+            String exemptionReason, String basisAmount, String basisAmountCurrencyID, String categoryCode, String applicablePercent) {
+        taxCalculatedAmount.add(calculatedAmount);
+        taxCalculatedAmountCurrencyID.add(calculatedAmountCurrencyID);
+        taxTypeCode.add(typeCode);
+        taxExemptionReason.add(exemptionReason);
+        taxBasisAmount.add(basisAmount);
+        taxBasisAmountCurrencyID.add(basisAmountCurrencyID);
+        taxCategoryCode.add(categoryCode);
+        taxApplicablePercent.add(applicablePercent);
     }
 }

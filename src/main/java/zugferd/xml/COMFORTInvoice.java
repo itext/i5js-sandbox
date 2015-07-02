@@ -83,5 +83,7 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String[] getPaymentMeansPayerFinancialInstitutionBIC();
     public String[] getPaymentMeansPayerFinancialInstitutionGermanBankleitzahlID();
     public String[] getPaymentMeansPayerFinancialInstitutionName();
+    public String[] getTaxExemptionReason();
+    public String[] getTaxCategoryCode();
 }
 
