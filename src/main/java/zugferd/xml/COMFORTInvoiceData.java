@@ -97,13 +97,26 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected String billingStartDateTimeFormat;
     protected String billingEndDateTime;
     protected String billingEndDateTimeFormat;
-    protected List<String> chargeIndicator;
-    protected List<String> chargeActualAmount;
-    protected List<String> chargeActualAmountCurrency;
-    protected List<String> chargeReason;
-    protected List<String[]> chargeTaxTypeCode;
-    protected List<String[]> chargeTaxCategoryCode;
-    protected List<String[]> chargeTaxApplicablePercent;
+    protected List<String> tradeAllowanceChargeIndicator;
+    protected List<String> tradeAllowanceChargeActualAmount;
+    protected List<String> tradeAllowanceChargeActualAmountCurrency;
+    protected List<String> tradeAllowanceChargeReason;
+    protected List<String[]> tradeAllowanceChargeTaxTypeCode;
+    protected List<String[]> tradeAllowanceChargeTaxCategoryCode;
+    protected List<String[]> tradeAllowanceChargeTaxApplicablePercent;
+    protected List<String[]> logisticsServiceChargeDescription;
+    protected List<String> logisticsServiceChargeAmount;
+    protected List<String> logisticsServiceChargeAmountCurrency;
+    protected List<String[]> logisticsServiceChargeTaxTypeCode;
+    protected List<String[]> logisticsServiceChargeTaxCategoryCode;
+    protected List<String[]> logisticsServiceChargeTaxApplicablePercent;
+    protected List<String[]> tradePaymentTermsInformation;
+    protected List<String> tradePaymentTermsDueDateTime;
+    protected List<String> tradePaymentTermsDueDateTimeFormat;
+    protected String totalPrepaidAmount;
+    protected String totalPrepaidAmountCurrencyID;
+    protected String duePayableAmount;
+    protected String duePayableAmountCurrencyID;
             
     public String[] getNotesCodes() {
         return (String[]) notesCodes.toArray(new String[notesCodes.size()]);
@@ -285,47 +298,113 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return billingEndDateTimeFormat;
     }
     
-    public String[] getChargeIndicator() {
-        return (String[])chargeIndicator.toArray(new String[chargeIndicator.size()]);
+    public String[] getTradeAllowanceChargeIndicator() {
+        return (String[])tradeAllowanceChargeIndicator.toArray(new String[tradeAllowanceChargeIndicator.size()]);
     }
     
-    public String[] getChargeActualAmount() {
-        return (String[])chargeActualAmount.toArray(new String[chargeActualAmount.size()]);
+    public String[] getTradeAllowanceChargeActualAmount() {
+        return (String[])tradeAllowanceChargeActualAmount.toArray(new String[tradeAllowanceChargeActualAmount.size()]);
     }
     
-    public String[] getChargeActualAmountCurrency() {
-        return (String[])chargeActualAmountCurrency.toArray(new String[chargeActualAmountCurrency.size()]);
+    public String[] getTradeAllowanceChargeActualAmountCurrency() {
+        return (String[])tradeAllowanceChargeActualAmountCurrency.toArray(new String[tradeAllowanceChargeActualAmountCurrency.size()]);
     }
     
-    public String[] getChargeReason() {
-        return (String[])chargeReason.toArray(new String[chargeReason.size()]);
+    public String[] getTradeAllowanceChargeReason() {
+        return (String[])tradeAllowanceChargeReason.toArray(new String[tradeAllowanceChargeReason.size()]);
     }
 
-    public String[][] getChargeTaxTypeCode() {
-        int n = chargeTaxTypeCode.size();
+    public String[][] getTradeAllowanceChargeTaxTypeCode() {
+        int n = tradeAllowanceChargeTaxTypeCode.size();
         String[][] array = new String[n][];
         for (int i = 0; i < n; i++) {
-            array[i] = chargeTaxTypeCode.get(i);
+            array[i] = tradeAllowanceChargeTaxTypeCode.get(i);
         }
         return array;
     }
     
-    public String[][] getChargeTaxCategoryCode() {
-        int n = chargeTaxCategoryCode.size();
+    public String[][] getTradeAllowanceChargeTaxCategoryCode() {
+        int n = tradeAllowanceChargeTaxCategoryCode.size();
         String[][] array = new String[n][];
         for (int i = 0; i < n; i++) {
-            array[i] = chargeTaxCategoryCode.get(i);
+            array[i] = tradeAllowanceChargeTaxCategoryCode.get(i);
         }
         return array;
     }
     
-    public String[][] getChargeTaxApplicablePercent() {
-        int n = chargeTaxApplicablePercent.size();
+    public String[][] getTradeAllowanceChargeTaxApplicablePercent() {
+        int n = tradeAllowanceChargeTaxApplicablePercent.size();
         String[][] array = new String[n][];
         for (int i = 0; i < n; i++) {
-            array[i] = chargeTaxApplicablePercent.get(i);
+            array[i] = tradeAllowanceChargeTaxApplicablePercent.get(i);
         }
         return array;
+    }
+    
+    public String[][] getLogisticsServiceChargeDescription() {
+        int n = logisticsServiceChargeDescription.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = logisticsServiceChargeDescription.get(i);
+        }
+        return array;
+    }
+    public String[] getLogisticsServiceChargeAmount() {
+        return (String[])logisticsServiceChargeAmount.toArray(new String[logisticsServiceChargeAmount.size()]);
+    }
+    public String[] getLogisticsServiceChargeAmountCurrency() {
+        return (String[])logisticsServiceChargeAmountCurrency.toArray(new String[logisticsServiceChargeAmountCurrency.size()]);
+    }
+    public String[][] getLogisticsServiceChargeTaxTypeCode() {
+        int n = logisticsServiceChargeTaxTypeCode.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = logisticsServiceChargeTaxTypeCode.get(i);
+        }
+        return array;
+    }
+    public String[][] getLogisticsServiceChargeTaxCategoryCode() {
+        int n = logisticsServiceChargeTaxCategoryCode.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = logisticsServiceChargeTaxCategoryCode.get(i);
+        }
+        return array;
+    }
+    public String[][] getLogisticsServiceChargeTaxApplicablePercent() {
+        int n = logisticsServiceChargeTaxApplicablePercent.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = logisticsServiceChargeTaxApplicablePercent.get(i);
+        }
+        return array;
+    }
+    
+    public String[][] getTradePaymentTermsInformation() {
+        int n = tradePaymentTermsInformation.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = tradePaymentTermsInformation.get(i);
+        }
+        return array;
+    }
+    public String[] getTradePaymentTermsDueDateTime() {
+        return (String[])tradePaymentTermsDueDateTime.toArray(new String[tradePaymentTermsDueDateTime.size()]);
+    }
+    public String[] getTradePaymentTermsDueDateTimeFormat() {
+        return (String[])tradePaymentTermsDueDateTimeFormat.toArray(new String[tradePaymentTermsDueDateTimeFormat.size()]);
+    }
+    public String getTotalPrepaidAmount() {
+        return totalPrepaidAmount;
+    }
+    public String getTotalPrepaidAmountCurrencyID() {
+        return totalPrepaidAmountCurrencyID;
+    }
+    public String getDuePayableAmount() {
+        return duePayableAmount;
+    }
+    public String getDuePayableAmountCurrencyID() {
+        return duePayableAmountCurrencyID;
     }
     
     @Override
@@ -487,14 +566,36 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.billingEndDateTimeFormat = billingEndDateTimeFormat;
     }
     
-    public void addCharge(String indicator, String actualAmount, String actualAmountCurrency,
+    public void addTradeAllowanceCharge(String indicator, String actualAmount, String actualAmountCurrency,
             String reason, String[] typeCodes, String[] categoryCodes, String[] applicablePercent) {
-        this.chargeIndicator.add(indicator);
-        this.chargeActualAmount.add(actualAmount);
-        this.chargeActualAmountCurrency.add(actualAmountCurrency);
-        this.chargeReason.add(reason);
-        this.chargeTaxTypeCode.add(typeCodes);
-        this.chargeTaxCategoryCode.add(categoryCodes);
-        this.chargeTaxApplicablePercent.add(applicablePercent);
+        this.tradeAllowanceChargeIndicator.add(indicator);
+        this.tradeAllowanceChargeActualAmount.add(actualAmount);
+        this.tradeAllowanceChargeActualAmountCurrency.add(actualAmountCurrency);
+        this.tradeAllowanceChargeReason.add(reason);
+        this.tradeAllowanceChargeTaxTypeCode.add(typeCodes);
+        this.tradeAllowanceChargeTaxCategoryCode.add(categoryCodes);
+        this.tradeAllowanceChargeTaxApplicablePercent.add(applicablePercent);
+    }
+    
+    public void addLogisticsServiceCharge(String[] description, String actualAmount, String actualAmountCurrency,
+            String[] typeCodes, String[] categoryCodes, String[] applicablePercent) {
+        this.logisticsServiceChargeDescription.add(description);
+        this.logisticsServiceChargeAmount.add(actualAmount);
+        this.logisticsServiceChargeAmountCurrency.add(actualAmountCurrency);
+        this.logisticsServiceChargeTaxTypeCode.add(typeCodes);
+        this.logisticsServiceChargeTaxCategoryCode.add(categoryCodes);
+        this.logisticsServiceChargeTaxApplicablePercent.add(applicablePercent);
+    }
+    public void setTotalPrepaidAmount(String totalPrepaidAmount) {
+        this.totalPrepaidAmount = totalPrepaidAmount;
+    }
+    public void setTotalPrepaidCurrencyID(String totalPrepaidCurrencyID) {
+        this.totalPrepaidAmountCurrencyID = totalPrepaidCurrencyID;
+    }
+    public void setDuePayableAmount(String duePayableAmount) {
+        this.duePayableAmount = duePayableAmount;
+    }
+    public void setDuePayableAmountCurrencyID(String duePayableAmountCurrencyID) {
+        this.duePayableAmountCurrencyID = duePayableAmountCurrencyID;
     }
 }

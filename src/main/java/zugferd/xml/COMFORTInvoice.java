@@ -89,12 +89,25 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String getBillingStartDateTimeFormat();
     public String getBillingEndDateTime();
     public String getBillingEndDateTimeFormat();
-    public String[] getChargeIndicator();
-    public String[] getChargeActualAmount();
-    public String[] getChargeActualAmountCurrency();
-    public String[] getChargeReason();
-    public String[][] getChargeTaxTypeCode();
-    public String[][] getChargeTaxCategoryCode();
-    public String[][] getChargeTaxApplicablePercent();
+    public String[] getTradeAllowanceChargeIndicator();
+    public String[] getTradeAllowanceChargeActualAmount();
+    public String[] getTradeAllowanceChargeActualAmountCurrency();
+    public String[] getTradeAllowanceChargeReason();
+    public String[][] getTradeAllowanceChargeTaxTypeCode();
+    public String[][] getTradeAllowanceChargeTaxCategoryCode();
+    public String[][] getTradeAllowanceChargeTaxApplicablePercent();
+    public String[][] getLogisticsServiceChargeDescription();
+    public String[] getLogisticsServiceChargeAmount();
+    public String[] getLogisticsServiceChargeAmountCurrency();
+    public String[][] getLogisticsServiceChargeTaxTypeCode();
+    public String[][] getLogisticsServiceChargeTaxCategoryCode();
+    public String[][] getLogisticsServiceChargeTaxApplicablePercent();
+    public String[][] getTradePaymentTermsInformation();
+    public String[] getTradePaymentTermsDueDateTime();
+    public String[] getTradePaymentTermsDueDateTimeFormat();
+    public String getTotalPrepaidAmount();
+    public String getTotalPrepaidAmountCurrencyID();
+    public String getDuePayableAmount();
+    public String getDuePayableAmountCurrencyID();
 }
 
