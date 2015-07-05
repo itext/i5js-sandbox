@@ -131,6 +131,16 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> lineItemNetPriceChargeAmountCurrencyID = new ArrayList<String>();
     protected List<String> lineItemNetPriceBasisQuantity = new ArrayList<String>();
     protected List<String> lineItemNetPriceBasisQuantityCode = new ArrayList<String>();
+    protected List<String[]> lineItemSettlementTaxTypeCode = new ArrayList<String[]>();
+    protected List<String[]> lineItemSettlementTaxExemptionReason = new ArrayList<String[]>();
+    protected List<String[]> lineItemSettlementTaxCategoryCode = new ArrayList<String[]>();
+    protected List<String[]> lineItemSettlementTaxApplicablePercent = new ArrayList<String[]>();
+    protected List<String> lineItemLineTotalAmount = new ArrayList<String>();
+    protected List<String> lineItemSpecifiedTradeProductGlobalID = new ArrayList<String>();
+    protected List<String> lineItemSpecifiedTradeProductSchemeID = new ArrayList<String>();
+    protected List<String> lineItemSpecifiedTradeProductSellerAssignedID = new ArrayList<String>();
+    protected List<String> lineItemSpecifiedTradeProductBuyerAssignedID = new ArrayList<String>();
+    protected List<String> lineItemSpecifiedTradeProductDescription = new ArrayList<String>();
             
     public String[] getNotesCodes() {
         return (String[]) notesCodes.toArray(new String[notesCodes.size()]);
@@ -489,6 +499,56 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return (String[])lineItemNetPriceBasisQuantityCode.toArray(new String[lineItemNetPriceBasisQuantityCode.size()]);
     }
     
+    public String[][] getLineItemSettlementTaxTypeCode() {
+        int n = lineItemSettlementTaxTypeCode.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = lineItemSettlementTaxTypeCode.get(i);
+        }
+        return array;
+    }
+    public String[][] getLineItemSettlementTaxExemptionReason() {
+        int n = lineItemSettlementTaxExemptionReason.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = lineItemSettlementTaxExemptionReason.get(i);
+        }
+        return array;
+    }
+    public String[][] getLineItemSettlementTaxCategoryCode() {
+        int n = lineItemSettlementTaxCategoryCode.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = lineItemSettlementTaxCategoryCode.get(i);
+        }
+        return array;
+    }
+    public String[][] getLineItemSettlementTaxApplicablePercent() {
+        int n = lineItemSettlementTaxApplicablePercent.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = lineItemSettlementTaxApplicablePercent.get(i);
+        }
+        return array;
+    }
+    public String[] getLineItemLineTotalAmount() {
+        return (String[])lineItemLineTotalAmount.toArray(new String[lineItemLineTotalAmount.size()]);
+    }
+    public String[] getLineItemSpecifiedTradeProductGlobalID() {
+        return (String[])lineItemSpecifiedTradeProductGlobalID.toArray(new String[lineItemSpecifiedTradeProductGlobalID.size()]);
+    }
+    public String[] getLineItemSpecifiedTradeProductSchemeID() {
+        return (String[])lineItemSpecifiedTradeProductSchemeID.toArray(new String[lineItemSpecifiedTradeProductSchemeID.size()]);
+    }
+    public String[] getLineItemSpecifiedTradeProductSellerAssignedID() {
+        return (String[])lineItemSpecifiedTradeProductSellerAssignedID.toArray(new String[lineItemSpecifiedTradeProductSellerAssignedID.size()]);
+    }
+    public String[] getLineItemSpecifiedTradeProductBuyerAssignedID() {
+        return (String[])lineItemSpecifiedTradeProductBuyerAssignedID.toArray(new String[lineItemSpecifiedTradeProductBuyerAssignedID.size()]);
+    }
+    public String[] getLineItemSpecifiedTradeProductDescription() {
+        return (String[])lineItemSpecifiedTradeProductDescription.toArray(new String[lineItemSpecifiedTradeProductDescription.size()]);
+    }
     
     @Override
     public void addNote(String note) {
@@ -696,7 +756,18 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
             String[] grossPriceTradeAllowanceChargeReason,
             String netPriceChargeAmount, String netPriceChargeAmountCurrencyID,
             String netPriceBasisQuantity, String netPriceBasisQuantityCode,
-            String billedQuantity, String billedQuantityUnitCode, String specifiedTradeProductName) {
+            String billedQuantity, String billedQuantityUnitCode,
+            String[] lineItemSettlementTaxTypeCode,
+            String[] lineItemSettlementTaxExemptionReason,
+            String[] lineItemSettlementTaxCategoryCode,
+            String[] lineItemSettlementTaxApplicablePercent,
+            String lineItemLineTotalAmount,
+            String lineItemSpecifiedTradeProductGlobalID,
+            String lineItemSpecifiedTradeProductSchemeID,
+            String lineItemSpecifiedTradeProductSellerAssignedID,
+            String lineItemSpecifiedTradeProductBuyerAssignedID,
+            String lineItemSpecifiedTradeProductName,
+            String lineItemSpecifiedTradeProductDescription) {
         this.lineItemLineID.add(id);
         this.lineItemIncludedNote.add(notes);
         this.lineItemGrossPriceChargeAmount.add(grossPriceChargeAmount);
@@ -713,7 +784,17 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.lineItemNetPriceBasisQuantityCode.add(netPriceBasisQuantityCode);
         this.lineItemBilledQuantity.add(billedQuantity);
         this.lineItemBilledQuantityUnitCode.add(billedQuantityUnitCode);
-        this.lineItemSpecifiedTradeProductName.add(specifiedTradeProductName);
+        this.lineItemSettlementTaxTypeCode.add(lineItemSettlementTaxTypeCode);
+        this.lineItemSettlementTaxExemptionReason.add(lineItemSettlementTaxExemptionReason);
+        this.lineItemSettlementTaxCategoryCode.add(lineItemSettlementTaxCategoryCode);
+        this.lineItemSettlementTaxApplicablePercent.add(lineItemSettlementTaxApplicablePercent);
+        this.lineItemLineTotalAmount.add(lineItemLineTotalAmount);
+        this.lineItemSpecifiedTradeProductGlobalID.add(lineItemSpecifiedTradeProductGlobalID);
+        this.lineItemSpecifiedTradeProductSchemeID.add(lineItemSpecifiedTradeProductSchemeID);
+        this.lineItemSpecifiedTradeProductSellerAssignedID.add(lineItemSpecifiedTradeProductSellerAssignedID);
+        this.lineItemSpecifiedTradeProductBuyerAssignedID.add(lineItemSpecifiedTradeProductBuyerAssignedID);
+        this.lineItemSpecifiedTradeProductName.add(lineItemSpecifiedTradeProductName);
+        this.lineItemSpecifiedTradeProductDescription.add(lineItemSpecifiedTradeProductDescription);
     }
 }
 

@@ -123,5 +123,15 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String[] getLineItemNetPriceChargeAmountCurrencyID();
     public String[] getLineItemNetPriceBasisQuantity();
     public String[] getLineItemNetPriceBasisQuantityCode();
+    public String[][] getLineItemSettlementTaxTypeCode();
+    public String[][] getLineItemSettlementTaxExemptionReason();
+    public String[][] getLineItemSettlementTaxCategoryCode();
+    public String[][] getLineItemSettlementTaxApplicablePercent();
+    public String[] getLineItemLineTotalAmount();
+    public String[] getLineItemSpecifiedTradeProductGlobalID();
+    public String[] getLineItemSpecifiedTradeProductSchemeID();
+    public String[] getLineItemSpecifiedTradeProductSellerAssignedID();
+    public String[] getLineItemSpecifiedTradeProductBuyerAssignedID();
+    public String[] getLineItemSpecifiedTradeProductDescription();
 }
 
