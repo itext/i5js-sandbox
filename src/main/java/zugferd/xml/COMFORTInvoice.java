@@ -109,5 +109,19 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String getTotalPrepaidAmountCurrencyID();
     public String getDuePayableAmount();
     public String getDuePayableAmountCurrencyID();
+    public String[] getLineItemLineID();
+    public String[][][] getLineItemIncludedNote();
+    public String[] getLineItemGrossPriceChargeAmount();
+    public String[] getLineItemGrossPriceChargeAmountCurrencyID();
+    public String[] getLineItemGrossPriceBasisQuantity();
+    public String[] getLineItemGrossPriceBasisQuantityCode();
+    public String[][] getLineItemGrossPriceTradeAllowanceChargeIndicator();
+    public String[][] getLineItemGrossPriceTradeAllowanceChargeActualAmount();
+    public String[][] getLineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID();
+    public String[][] getLineItemGrossPriceTradeAllowanceChargeReason();
+    public String[] getLineItemNetPriceChargeAmount();
+    public String[] getLineItemNetPriceChargeAmountCurrencyID();
+    public String[] getLineItemNetPriceBasisQuantity();
+    public String[] getLineItemNetPriceBasisQuantityCode();
 }
 

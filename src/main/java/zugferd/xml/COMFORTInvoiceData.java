@@ -88,35 +88,49 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String[]> paymentMeansInformation = new ArrayList<String[]>();
     protected List<String> paymentMeansPayerAccountIBAN = new ArrayList<String>();
     protected List<String> paymentMeansPayerAccountProprietaryID = new ArrayList<String>();
-    protected List<String> paymentMeansPayerFinancialInstitutionBIC;
-    protected List<String> paymentMeansPayerFinancialInstitutionGermanBankleitzahlID;
-    protected List<String> paymentMeansPayerFinancialInstitutionName;
-    protected List<String> taxExemptionReason;
-    protected List<String> taxCategoryCode;
+    protected List<String> paymentMeansPayerFinancialInstitutionBIC = new ArrayList<String>();
+    protected List<String> paymentMeansPayerFinancialInstitutionGermanBankleitzahlID = new ArrayList<String>();
+    protected List<String> paymentMeansPayerFinancialInstitutionName = new ArrayList<String>();
+    protected List<String> taxExemptionReason = new ArrayList<String>();
+    protected List<String> taxCategoryCode = new ArrayList<String>();
     protected String billingStartDateTime;
     protected String billingStartDateTimeFormat;
     protected String billingEndDateTime;
     protected String billingEndDateTimeFormat;
-    protected List<String> tradeAllowanceChargeIndicator;
-    protected List<String> tradeAllowanceChargeActualAmount;
-    protected List<String> tradeAllowanceChargeActualAmountCurrency;
-    protected List<String> tradeAllowanceChargeReason;
-    protected List<String[]> tradeAllowanceChargeTaxTypeCode;
-    protected List<String[]> tradeAllowanceChargeTaxCategoryCode;
-    protected List<String[]> tradeAllowanceChargeTaxApplicablePercent;
-    protected List<String[]> logisticsServiceChargeDescription;
-    protected List<String> logisticsServiceChargeAmount;
-    protected List<String> logisticsServiceChargeAmountCurrency;
-    protected List<String[]> logisticsServiceChargeTaxTypeCode;
-    protected List<String[]> logisticsServiceChargeTaxCategoryCode;
-    protected List<String[]> logisticsServiceChargeTaxApplicablePercent;
-    protected List<String[]> tradePaymentTermsInformation;
-    protected List<String> tradePaymentTermsDueDateTime;
-    protected List<String> tradePaymentTermsDueDateTimeFormat;
+    protected List<String> tradeAllowanceChargeIndicator = new ArrayList<String>();
+    protected List<String> tradeAllowanceChargeActualAmount = new ArrayList<String>();
+    protected List<String> tradeAllowanceChargeActualAmountCurrency = new ArrayList<String>();
+    protected List<String> tradeAllowanceChargeReason = new ArrayList<String>();
+    protected List<String[]> tradeAllowanceChargeTaxTypeCode = new ArrayList<String[]>();
+    protected List<String[]> tradeAllowanceChargeTaxCategoryCode = new ArrayList<String[]>();
+    protected List<String[]> tradeAllowanceChargeTaxApplicablePercent = new ArrayList<String[]>();
+    protected List<String[]> logisticsServiceChargeDescription = new ArrayList<String[]>();
+    protected List<String> logisticsServiceChargeAmount = new ArrayList<String>();
+    protected List<String> logisticsServiceChargeAmountCurrency = new ArrayList<String>();
+    protected List<String[]> logisticsServiceChargeTaxTypeCode = new ArrayList<String[]>();
+    protected List<String[]> logisticsServiceChargeTaxCategoryCode = new ArrayList<String[]>();
+    protected List<String[]> logisticsServiceChargeTaxApplicablePercent = new ArrayList<String[]>();
+    protected List<String[]> tradePaymentTermsInformation = new ArrayList<String[]>();
+    protected List<String> tradePaymentTermsDueDateTime = new ArrayList<String>();
+    protected List<String> tradePaymentTermsDueDateTimeFormat = new ArrayList<String>();
     protected String totalPrepaidAmount;
     protected String totalPrepaidAmountCurrencyID;
     protected String duePayableAmount;
     protected String duePayableAmountCurrencyID;
+    protected List<String> lineItemLineID = new ArrayList<String>();
+    protected List<String[][]> lineItemIncludedNote = new ArrayList<String[][]>();
+    protected List<String> lineItemGrossPriceChargeAmount = new ArrayList<String>();
+    protected List<String> lineItemGrossPriceChargeAmountCurrencyID = new ArrayList<String>();
+    protected List<String> lineItemGrossPriceBasisQuantity = new ArrayList<String>();
+    protected List<String> lineItemGrossPriceBasisQuantityCode = new ArrayList<String>();
+    protected List<String[]> lineItemGrossPriceTradeAllowanceChargeIndicator = new ArrayList<String[]>();
+    protected List<String[]> lineItemGrossPriceTradeAllowanceChargeActualAmount = new ArrayList<String[]>();
+    protected List<String[]> lineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID = new ArrayList<String[]>();
+    protected List<String[]> lineItemGrossPriceTradeAllowanceChargeReason = new ArrayList<String[]>();
+    protected List<String> lineItemNetPriceChargeAmount = new ArrayList<String>();
+    protected List<String> lineItemNetPriceChargeAmountCurrencyID = new ArrayList<String>();
+    protected List<String> lineItemNetPriceBasisQuantity = new ArrayList<String>();
+    protected List<String> lineItemNetPriceBasisQuantityCode = new ArrayList<String>();
             
     public String[] getNotesCodes() {
         return (String[]) notesCodes.toArray(new String[notesCodes.size()]);
@@ -406,6 +420,75 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     public String getDuePayableAmountCurrencyID() {
         return duePayableAmountCurrencyID;
     }
+    public String[] getLineItemLineID() {
+        return (String[])lineItemLineID.toArray(new String[lineItemLineID.size()]);
+    }
+    public String[][][] getLineItemIncludedNote() {
+        int n = lineItemIncludedNote.size();
+        String[][][] array = new String[n][][];
+        for (int i = 0; i < n; i++) {
+            array[i] = lineItemIncludedNote.get(i);
+        }
+        return array;
+    }
+    
+    public String[] getLineItemGrossPriceChargeAmount() {
+        return (String[])lineItemGrossPriceChargeAmount.toArray(new String[lineItemGrossPriceChargeAmount.size()]);
+    }
+    public String[] getLineItemGrossPriceChargeAmountCurrencyID() {
+        return (String[])lineItemGrossPriceChargeAmountCurrencyID.toArray(new String[lineItemGrossPriceChargeAmountCurrencyID.size()]);
+    }
+    public String[] getLineItemGrossPriceBasisQuantity() {
+        return (String[])lineItemGrossPriceBasisQuantity.toArray(new String[lineItemGrossPriceBasisQuantity.size()]);
+    }
+    public String[] getLineItemGrossPriceBasisQuantityCode() {
+        return (String[])lineItemGrossPriceBasisQuantityCode.toArray(new String[lineItemGrossPriceBasisQuantityCode.size()]);
+    }
+    public String[][] getLineItemGrossPriceTradeAllowanceChargeIndicator() {
+        int n = lineItemGrossPriceTradeAllowanceChargeIndicator.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = lineItemGrossPriceTradeAllowanceChargeIndicator.get(i);
+        }
+        return array;
+    }
+    public String[][] getLineItemGrossPriceTradeAllowanceChargeActualAmount() {
+        int n = lineItemGrossPriceTradeAllowanceChargeActualAmount.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = lineItemGrossPriceTradeAllowanceChargeActualAmount.get(i);
+        }
+        return array;
+    }
+    public String[][] getLineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID() {
+        int n = lineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = lineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID.get(i);
+        }
+        return array;
+    }
+    public String[][] getLineItemGrossPriceTradeAllowanceChargeReason() {
+        int n = lineItemGrossPriceTradeAllowanceChargeReason.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = lineItemGrossPriceTradeAllowanceChargeReason.get(i);
+        }
+        return array;
+    }
+    public String[] getLineItemNetPriceChargeAmount() {
+        return (String[])lineItemNetPriceChargeAmount.toArray(new String[lineItemNetPriceChargeAmount.size()]);
+    }
+    public String[] getLineItemNetPriceChargeAmountCurrencyID() {
+        return (String[])lineItemNetPriceChargeAmountCurrencyID.toArray(new String[lineItemNetPriceChargeAmountCurrencyID.size()]);
+    }
+    public String[] getLineItemNetPriceBasisQuantity() {
+        return (String[])lineItemNetPriceBasisQuantity.toArray(new String[lineItemNetPriceBasisQuantity.size()]);
+    }
+    public String[] getLineItemNetPriceBasisQuantityCode() {
+        return (String[])lineItemNetPriceBasisQuantityCode.toArray(new String[lineItemNetPriceBasisQuantityCode.size()]);
+    }
+    
     
     @Override
     public void addNote(String note) {
@@ -598,4 +681,39 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     public void setDuePayableAmountCurrencyID(String duePayableAmountCurrencyID) {
         this.duePayableAmountCurrencyID = duePayableAmountCurrencyID;
     }
+    
+    @Override
+    public void addIncludedSupplyChainTradeLineItem(String billedQuantity, String billedQuantityUnitCode, String specifiedTradeProductName) {
+        throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
+    }
+    
+    public void addIncludedSupplyChainTradeLineItem(String id, String[][] notes,
+            String grossPriceChargeAmount, String grossPriceChargeAmountCurrencyID,
+            String grossPriceBasisQuantity, String grossPriceBasisQuantityCode,
+            String[] grossPriceTradeAllowanceChargeIndicator,
+            String[] grossPriceTradeAllowanceChargeActualAmount,
+            String[] grossPriceTradeAllowanceChargeActualAmountCurrencyID,
+            String[] grossPriceTradeAllowanceChargeReason,
+            String netPriceChargeAmount, String netPriceChargeAmountCurrencyID,
+            String netPriceBasisQuantity, String netPriceBasisQuantityCode,
+            String billedQuantity, String billedQuantityUnitCode, String specifiedTradeProductName) {
+        this.lineItemLineID.add(id);
+        this.lineItemIncludedNote.add(notes);
+        this.lineItemGrossPriceChargeAmount.add(grossPriceChargeAmount);
+        this.lineItemGrossPriceChargeAmountCurrencyID.add(grossPriceChargeAmountCurrencyID);
+        this.lineItemGrossPriceBasisQuantity.add(grossPriceBasisQuantity);
+        this.lineItemGrossPriceBasisQuantityCode.add(grossPriceBasisQuantityCode);
+        this.lineItemGrossPriceTradeAllowanceChargeIndicator.add(grossPriceTradeAllowanceChargeIndicator);
+        this.lineItemGrossPriceTradeAllowanceChargeActualAmount.add(grossPriceTradeAllowanceChargeActualAmount);
+        this.lineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID.add(grossPriceTradeAllowanceChargeActualAmountCurrencyID);
+        this.lineItemGrossPriceTradeAllowanceChargeReason.add(grossPriceTradeAllowanceChargeReason);
+        this.lineItemNetPriceChargeAmount.add(netPriceChargeAmount);
+        this.lineItemNetPriceChargeAmountCurrencyID.add(netPriceChargeAmountCurrencyID);
+        this.lineItemNetPriceBasisQuantity.add(netPriceBasisQuantity);
+        this.lineItemNetPriceBasisQuantityCode.add(netPriceBasisQuantityCode);
+        this.lineItemBilledQuantity.add(billedQuantity);
+        this.lineItemBilledQuantityUnitCode.add(billedQuantityUnitCode);
+        this.lineItemSpecifiedTradeProductName.add(specifiedTradeProductName);
+    }
 }
+

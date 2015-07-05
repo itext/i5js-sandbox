@@ -106,9 +106,9 @@ public class BASICInvoiceData implements BASICInvoice {
     protected String taxTotalAmountCurrencyID;
     protected String grandTotalAmount;
     protected String grandTotalAmountCurrencyID;
-    protected List<String> billedQuantity = new ArrayList<String>();
-    protected List<String> billedQuantityUnitCode = new ArrayList<String>();
-    protected List<String> specifiedTradeProductName = new ArrayList<String>();
+    protected List<String> lineItemBilledQuantity = new ArrayList<String>();
+    protected List<String> lineItemBilledQuantityUnitCode = new ArrayList<String>();
+    protected List<String> lineItemSpecifiedTradeProductName = new ArrayList<String>();
     
     
     public boolean getTestIndicator() {
@@ -323,16 +323,16 @@ public class BASICInvoiceData implements BASICInvoice {
         return grandTotalAmountCurrencyID;
     }
 
-    public String[] getBilledQuantity() {
-        return (String[])billedQuantity.toArray(new String[billedQuantity.size()]);
+    public String[] getLineItemBilledQuantity() {
+        return (String[])lineItemBilledQuantity.toArray(new String[lineItemBilledQuantity.size()]);
     }
 
-    public String[] getBilledQuantityUnitCode() {
-        return (String[])billedQuantityUnitCode.toArray(new String[billedQuantityUnitCode.size()]);
+    public String[] getLineItemBilledQuantityUnitCode() {
+        return (String[])lineItemBilledQuantityUnitCode.toArray(new String[lineItemBilledQuantityUnitCode.size()]);
     }
 
-    public String[] getSpecifiedTradeProductName() {
-        return (String[])specifiedTradeProductName.toArray(new String[specifiedTradeProductName.size()]);
+    public String[] getLineItemSpecifiedTradeProductName() {
+        return (String[])lineItemSpecifiedTradeProductName.toArray(new String[lineItemSpecifiedTradeProductName.size()]);
     }
 
     public void setTest(boolean test) {
@@ -507,9 +507,9 @@ public class BASICInvoiceData implements BASICInvoice {
     }
 
     public void addIncludedSupplyChainTradeLineItem(String billedQuantity, String billedQuantityUnitCode, String specifiedTradeProductName) {
-        this.billedQuantity.add(billedQuantity);
-        this.billedQuantityUnitCode.add(billedQuantityUnitCode);
-        this.specifiedTradeProductName.add(specifiedTradeProductName);
+        this.lineItemBilledQuantity.add(billedQuantity);
+        this.lineItemBilledQuantityUnitCode.add(billedQuantityUnitCode);
+        this.lineItemSpecifiedTradeProductName.add(specifiedTradeProductName);
     }
     
 }

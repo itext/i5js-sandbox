@@ -306,9 +306,9 @@ public class BASICInvoiceDOM {
     }
     
     protected void processLines(Document doc, BASICInvoice data) {
-        String[] quantity = data.getBilledQuantity();
-        String[] quantityCode = data.getBilledQuantityUnitCode();
-        String[] name = data.getSpecifiedTradeProductName();
+        String[] quantity = data.getLineItemBilledQuantity();
+        String[] quantityCode = data.getLineItemBilledQuantityUnitCode();
+        String[] name = data.getLineItemSpecifiedTradeProductName();
         for (int i = quantity.length - 1; i >= 0; i--) {
             processLine(doc, quantity[i], quantityCode[i], name[i]);
         }

@@ -98,8 +98,8 @@ public interface BASICInvoice {
     public String getTaxTotalAmountCurrencyID();
     public String getGrandTotalAmount();
     public String getGrandTotalAmountCurrencyID();
-    public String[] getBilledQuantity();
-    public String[] getBilledQuantityUnitCode();
-    public String[] getSpecifiedTradeProductName();
+    public String[] getLineItemBilledQuantity();
+    public String[] getLineItemBilledQuantityUnitCode();
+    public String[] getLineItemSpecifiedTradeProductName();
 }
 
