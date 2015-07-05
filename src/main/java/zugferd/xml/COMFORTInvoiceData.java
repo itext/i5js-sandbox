@@ -143,7 +143,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> lineItemSpecifiedTradeProductDescription = new ArrayList<String>();
             
     public String[] getNotesCodes() {
-        return (String[]) notesCodes.toArray(new String[notesCodes.size()]);
+        return to1DArray(notesCodes);
     }
 
     public String getBuyerReference() {
@@ -155,11 +155,11 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     }
 
     public String[] getSellerGlobalID() {
-        return (String[]) sellerGlobalID.toArray(new String[sellerGlobalID.size()]);
+        return to1DArray(sellerGlobalID);
     }
 
     public String[] getSellerGlobalSchemeID() {
-        return (String[]) sellerGlobalSchemeID.toArray(new String[sellerGlobalSchemeID.size()]);
+        return to1DArray(sellerGlobalSchemeID);
     }
 
     public String getBuyerID() {
@@ -167,11 +167,11 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     }
 
     public String[] getBuyerGlobalID() {
-        return (String[]) buyerGlobalID.toArray(new String[buyerGlobalID.size()]);
+        return to1DArray(buyerGlobalID);
     }
 
     public String[] getBuyerGlobalSchemeID() {
-        return (String[]) buyerGlobalSchemeID.toArray(new String[buyerGlobalSchemeID.size()]);
+        return to1DArray(buyerGlobalSchemeID);
     }
 
     public String getBuyerOrderReferencedDocumentIssueDateTime() {
@@ -226,11 +226,11 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     }
     
     public String[] getInvoiceeGlobalID() {
-        return (String[]) invoiceeGlobalID.toArray(new String[invoiceeGlobalID.size()]);
+        return to1DArray(invoiceeGlobalID);
     }
 
     public String[] getInvoiceeGlobalSchemeID() {
-        return (String[]) invoiceeGlobalSchemeID.toArray(new String[invoiceeGlobalSchemeID.size()]);
+        return to1DArray(invoiceeGlobalSchemeID);
     }
     
     public String getInvoiceeName() {
@@ -258,52 +258,47 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     }
     
     public String[] getInvoiceeTaxRegistrationID() {
-        return (String[]) invoiceeTaxRegistrationID.toArray(new String[invoiceeTaxRegistrationID.size()]);
+        return to1DArray(invoiceeTaxRegistrationID);
     }
     
     public String[] getInvoiceeTaxRegistrationSchemeID() {
-        return (String[]) invoiceeTaxRegistrationSchemeID.toArray(new String[invoiceeTaxRegistrationSchemeID.size()]);
+        return to1DArray(invoiceeTaxRegistrationSchemeID);
     }
 
     public String[] getPaymentMeansTypeCode() {
-        return (String[]) paymentMeansTypeCode.toArray(new String[paymentMeansTypeCode.size()]);
+        return to1DArray(paymentMeansTypeCode);
     }
     
     public String[][] getPaymentMeansInformation() {
-        int n = paymentMeansInformation.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = paymentMeansInformation.get(i);
-        }
-        return array;
+        return to2DArray(paymentMeansInformation);
     }
     
     public String[] getPaymentMeansPayerAccountIBAN() {
-        return (String[]) paymentMeansPayerAccountIBAN.toArray(new String[paymentMeansPayerAccountIBAN.size()]);
+        return to1DArray(paymentMeansPayerAccountIBAN);
     }
     
     public String[] getPaymentMeansPayerAccountProprietaryID() {
-        return (String[]) paymentMeansPayerAccountProprietaryID.toArray(new String[paymentMeansPayerAccountProprietaryID.size()]);
+        return to1DArray(paymentMeansPayerAccountProprietaryID);
     }
     
     public String[] getPaymentMeansPayerFinancialInstitutionBIC() {
-        return (String[]) paymentMeansPayerFinancialInstitutionBIC.toArray(new String[paymentMeansPayerFinancialInstitutionBIC.size()]);
+        return to1DArray(paymentMeansPayerFinancialInstitutionBIC);
     }
     
     public String[] getPaymentMeansPayerFinancialInstitutionGermanBankleitzahlID() {
-        return (String[]) paymentMeansPayerFinancialInstitutionGermanBankleitzahlID.toArray(new String[paymentMeansPayerFinancialInstitutionGermanBankleitzahlID.size()]);
+        return to1DArray(paymentMeansPayerFinancialInstitutionGermanBankleitzahlID);
     }
     
     public String[] getPaymentMeansPayerFinancialInstitutionName() {
-        return (String[]) paymentMeansPayerFinancialInstitutionName.toArray(new String[paymentMeansPayerFinancialInstitutionName.size()]);
+        return to1DArray(paymentMeansPayerFinancialInstitutionName);
     }
 
     public String[] getTaxExemptionReason() {
-        return (String[])taxExemptionReason.toArray(new String[taxExemptionReason.size()]);
+        return to1DArray(taxExemptionReason);
     }
 
     public String[] getTaxCategoryCode() {
-        return (String[])taxCategoryCode.toArray(new String[taxCategoryCode.size()]);
+        return to1DArray(taxCategoryCode);
     }
     
     public String getBillingStartDateTime() {
@@ -323,100 +318,60 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     }
     
     public String[] getTradeAllowanceChargeIndicator() {
-        return (String[])tradeAllowanceChargeIndicator.toArray(new String[tradeAllowanceChargeIndicator.size()]);
+        return to1DArray(tradeAllowanceChargeIndicator);
     }
     
     public String[] getTradeAllowanceChargeActualAmount() {
-        return (String[])tradeAllowanceChargeActualAmount.toArray(new String[tradeAllowanceChargeActualAmount.size()]);
+        return to1DArray(tradeAllowanceChargeActualAmount);
     }
     
     public String[] getTradeAllowanceChargeActualAmountCurrency() {
-        return (String[])tradeAllowanceChargeActualAmountCurrency.toArray(new String[tradeAllowanceChargeActualAmountCurrency.size()]);
+        return to1DArray(tradeAllowanceChargeActualAmountCurrency);
     }
     
     public String[] getTradeAllowanceChargeReason() {
-        return (String[])tradeAllowanceChargeReason.toArray(new String[tradeAllowanceChargeReason.size()]);
+        return to1DArray(tradeAllowanceChargeReason);
     }
 
     public String[][] getTradeAllowanceChargeTaxTypeCode() {
-        int n = tradeAllowanceChargeTaxTypeCode.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = tradeAllowanceChargeTaxTypeCode.get(i);
-        }
-        return array;
+        return to2DArray(tradeAllowanceChargeTaxTypeCode);
     }
     
     public String[][] getTradeAllowanceChargeTaxCategoryCode() {
-        int n = tradeAllowanceChargeTaxCategoryCode.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = tradeAllowanceChargeTaxCategoryCode.get(i);
-        }
-        return array;
+        return to2DArray(tradeAllowanceChargeTaxCategoryCode);
     }
     
     public String[][] getTradeAllowanceChargeTaxApplicablePercent() {
-        int n = tradeAllowanceChargeTaxApplicablePercent.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = tradeAllowanceChargeTaxApplicablePercent.get(i);
-        }
-        return array;
+        return to2DArray(tradeAllowanceChargeTaxApplicablePercent);
     }
     
     public String[][] getLogisticsServiceChargeDescription() {
-        int n = logisticsServiceChargeDescription.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = logisticsServiceChargeDescription.get(i);
-        }
-        return array;
+        return to2DArray(logisticsServiceChargeDescription);
     }
     public String[] getLogisticsServiceChargeAmount() {
-        return (String[])logisticsServiceChargeAmount.toArray(new String[logisticsServiceChargeAmount.size()]);
+        return to1DArray(logisticsServiceChargeAmount);
     }
     public String[] getLogisticsServiceChargeAmountCurrency() {
-        return (String[])logisticsServiceChargeAmountCurrency.toArray(new String[logisticsServiceChargeAmountCurrency.size()]);
+        return to1DArray(logisticsServiceChargeAmountCurrency);
     }
     public String[][] getLogisticsServiceChargeTaxTypeCode() {
-        int n = logisticsServiceChargeTaxTypeCode.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = logisticsServiceChargeTaxTypeCode.get(i);
-        }
-        return array;
+        return to2DArray(logisticsServiceChargeTaxTypeCode);
     }
     public String[][] getLogisticsServiceChargeTaxCategoryCode() {
-        int n = logisticsServiceChargeTaxCategoryCode.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = logisticsServiceChargeTaxCategoryCode.get(i);
-        }
-        return array;
+        return to2DArray(logisticsServiceChargeTaxCategoryCode);
     }
     public String[][] getLogisticsServiceChargeTaxApplicablePercent() {
-        int n = logisticsServiceChargeTaxApplicablePercent.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = logisticsServiceChargeTaxApplicablePercent.get(i);
-        }
-        return array;
+        return to2DArray(logisticsServiceChargeTaxApplicablePercent);
     }
     
     public String[][] getTradePaymentTermsInformation() {
-        int n = tradePaymentTermsInformation.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = tradePaymentTermsInformation.get(i);
-        }
-        return array;
+        return to2DArray(tradePaymentTermsInformation);
     }
     public String[] getTradePaymentTermsDueDateTime() {
-        return (String[])tradePaymentTermsDueDateTime.toArray(new String[tradePaymentTermsDueDateTime.size()]);
+        return to1DArray(tradePaymentTermsDueDateTime);
     }
     public String[] getTradePaymentTermsDueDateTimeFormat() {
-        return (String[])tradePaymentTermsDueDateTimeFormat.toArray(new String[tradePaymentTermsDueDateTimeFormat.size()]);
+        return to1DArray(tradePaymentTermsDueDateTimeFormat);
     }
     public String getTotalPrepaidAmount() {
         return totalPrepaidAmount;
@@ -431,123 +386,78 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return duePayableAmountCurrencyID;
     }
     public String[] getLineItemLineID() {
-        return (String[])lineItemLineID.toArray(new String[lineItemLineID.size()]);
+        return to1DArray(lineItemLineID);
     }
     public String[][][] getLineItemIncludedNote() {
-        int n = lineItemIncludedNote.size();
-        String[][][] array = new String[n][][];
-        for (int i = 0; i < n; i++) {
-            array[i] = lineItemIncludedNote.get(i);
-        }
-        return array;
+        return to3DArray(lineItemIncludedNote);
     }
     
     public String[] getLineItemGrossPriceChargeAmount() {
-        return (String[])lineItemGrossPriceChargeAmount.toArray(new String[lineItemGrossPriceChargeAmount.size()]);
+        return to1DArray(lineItemGrossPriceChargeAmount);
     }
     public String[] getLineItemGrossPriceChargeAmountCurrencyID() {
-        return (String[])lineItemGrossPriceChargeAmountCurrencyID.toArray(new String[lineItemGrossPriceChargeAmountCurrencyID.size()]);
+        return to1DArray(lineItemGrossPriceChargeAmountCurrencyID);
     }
     public String[] getLineItemGrossPriceBasisQuantity() {
-        return (String[])lineItemGrossPriceBasisQuantity.toArray(new String[lineItemGrossPriceBasisQuantity.size()]);
+        return to1DArray(lineItemGrossPriceBasisQuantity);
     }
     public String[] getLineItemGrossPriceBasisQuantityCode() {
-        return (String[])lineItemGrossPriceBasisQuantityCode.toArray(new String[lineItemGrossPriceBasisQuantityCode.size()]);
+        return to1DArray(lineItemGrossPriceBasisQuantityCode);
     }
     public String[][] getLineItemGrossPriceTradeAllowanceChargeIndicator() {
-        int n = lineItemGrossPriceTradeAllowanceChargeIndicator.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = lineItemGrossPriceTradeAllowanceChargeIndicator.get(i);
-        }
-        return array;
+        return to2DArray(lineItemGrossPriceTradeAllowanceChargeIndicator);
     }
     public String[][] getLineItemGrossPriceTradeAllowanceChargeActualAmount() {
-        int n = lineItemGrossPriceTradeAllowanceChargeActualAmount.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = lineItemGrossPriceTradeAllowanceChargeActualAmount.get(i);
-        }
-        return array;
+        return to2DArray(lineItemGrossPriceTradeAllowanceChargeActualAmount);
     }
     public String[][] getLineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID() {
-        int n = lineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = lineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID.get(i);
-        }
-        return array;
+        return to2DArray(lineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID);
     }
     public String[][] getLineItemGrossPriceTradeAllowanceChargeReason() {
-        int n = lineItemGrossPriceTradeAllowanceChargeReason.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = lineItemGrossPriceTradeAllowanceChargeReason.get(i);
-        }
-        return array;
+        return to2DArray(lineItemGrossPriceTradeAllowanceChargeReason);
     }
     public String[] getLineItemNetPriceChargeAmount() {
-        return (String[])lineItemNetPriceChargeAmount.toArray(new String[lineItemNetPriceChargeAmount.size()]);
+        return to1DArray(lineItemNetPriceChargeAmount);
     }
     public String[] getLineItemNetPriceChargeAmountCurrencyID() {
-        return (String[])lineItemNetPriceChargeAmountCurrencyID.toArray(new String[lineItemNetPriceChargeAmountCurrencyID.size()]);
+        return to1DArray(lineItemNetPriceChargeAmountCurrencyID);
     }
     public String[] getLineItemNetPriceBasisQuantity() {
-        return (String[])lineItemNetPriceBasisQuantity.toArray(new String[lineItemNetPriceBasisQuantity.size()]);
+        return to1DArray(lineItemNetPriceBasisQuantity);
     }
     public String[] getLineItemNetPriceBasisQuantityCode() {
-        return (String[])lineItemNetPriceBasisQuantityCode.toArray(new String[lineItemNetPriceBasisQuantityCode.size()]);
+        return to1DArray(lineItemNetPriceBasisQuantityCode);
     }
     
     public String[][] getLineItemSettlementTaxTypeCode() {
-        int n = lineItemSettlementTaxTypeCode.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = lineItemSettlementTaxTypeCode.get(i);
-        }
-        return array;
+        return to2DArray(lineItemSettlementTaxTypeCode);
     }
     public String[][] getLineItemSettlementTaxExemptionReason() {
-        int n = lineItemSettlementTaxExemptionReason.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = lineItemSettlementTaxExemptionReason.get(i);
-        }
-        return array;
+        return to2DArray(lineItemSettlementTaxExemptionReason);
     }
     public String[][] getLineItemSettlementTaxCategoryCode() {
-        int n = lineItemSettlementTaxCategoryCode.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = lineItemSettlementTaxCategoryCode.get(i);
-        }
-        return array;
+        return to2DArray(lineItemSettlementTaxCategoryCode);
     }
     public String[][] getLineItemSettlementTaxApplicablePercent() {
-        int n = lineItemSettlementTaxApplicablePercent.size();
-        String[][] array = new String[n][];
-        for (int i = 0; i < n; i++) {
-            array[i] = lineItemSettlementTaxApplicablePercent.get(i);
-        }
-        return array;
+        return to2DArray(lineItemSettlementTaxApplicablePercent);
     }
     public String[] getLineItemLineTotalAmount() {
-        return (String[])lineItemLineTotalAmount.toArray(new String[lineItemLineTotalAmount.size()]);
+        return to1DArray(lineItemLineTotalAmount);
     }
     public String[] getLineItemSpecifiedTradeProductGlobalID() {
-        return (String[])lineItemSpecifiedTradeProductGlobalID.toArray(new String[lineItemSpecifiedTradeProductGlobalID.size()]);
+        return to1DArray(lineItemSpecifiedTradeProductGlobalID);
     }
     public String[] getLineItemSpecifiedTradeProductSchemeID() {
-        return (String[])lineItemSpecifiedTradeProductSchemeID.toArray(new String[lineItemSpecifiedTradeProductSchemeID.size()]);
+        return to1DArray(lineItemSpecifiedTradeProductSchemeID);
     }
     public String[] getLineItemSpecifiedTradeProductSellerAssignedID() {
-        return (String[])lineItemSpecifiedTradeProductSellerAssignedID.toArray(new String[lineItemSpecifiedTradeProductSellerAssignedID.size()]);
+        return to1DArray(lineItemSpecifiedTradeProductSellerAssignedID);
     }
     public String[] getLineItemSpecifiedTradeProductBuyerAssignedID() {
-        return (String[])lineItemSpecifiedTradeProductBuyerAssignedID.toArray(new String[lineItemSpecifiedTradeProductBuyerAssignedID.size()]);
+        return to1DArray(lineItemSpecifiedTradeProductBuyerAssignedID);
     }
     public String[] getLineItemSpecifiedTradeProductDescription() {
-        return (String[])lineItemSpecifiedTradeProductDescription.toArray(new String[lineItemSpecifiedTradeProductDescription.size()]);
+        return to1DArray(lineItemSpecifiedTradeProductDescription);
     }
     
     @Override

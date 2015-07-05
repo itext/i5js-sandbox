@@ -110,6 +110,27 @@ public class BASICInvoiceData implements BASICInvoice {
     protected List<String> lineItemBilledQuantityUnitCode = new ArrayList<String>();
     protected List<String> lineItemSpecifiedTradeProductName = new ArrayList<String>();
     
+    protected String[] to1DArray(List<String> list) {
+        return (String[]) list.toArray(new String[list.size()]);
+    }
+    
+    protected String[][] to2DArray(List<String[]> list) {
+        int n = list.size();
+        String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = list.get(i);
+        }
+        return array;
+    }
+    
+    protected String[][][] to3DArray(List<String[][]> list) {
+        int n = list.size();
+        String[][][] array = new String[n][][];
+        for (int i = 0; i < n; i++) {
+            array[i] = list.get(i);
+        }
+        return array;
+    }
     
     public boolean getTestIndicator() {
         return test;
@@ -136,7 +157,7 @@ public class BASICInvoiceData implements BASICInvoice {
     }
 
     public String[] getNotes() {
-        return (String[]) notes.toArray(new String[notes.size()]);
+        return to1DArray(notes);
     }
 
     public String getSellerName() {
@@ -164,11 +185,11 @@ public class BASICInvoiceData implements BASICInvoice {
     }
 
     public String[] getSellerTaxRegistrationID() {
-        return (String[]) sellerTaxRegistrationID.toArray(new String[sellerTaxRegistrationID.size()]);
+        return to1DArray(sellerTaxRegistrationID);
     }
 
     public String[] getSellerTaxRegistrationSchemeID() {
-        return (String[]) sellerTaxRegistrationSchemeID.toArray(new String[sellerTaxRegistrationSchemeID.size()]);
+        return to1DArray(sellerTaxRegistrationSchemeID);
     }
 
     public String getBuyerName() {
@@ -196,11 +217,11 @@ public class BASICInvoiceData implements BASICInvoice {
     }
 
     public String[] getBuyerTaxRegistrationID() {
-        return (String[]) buyerTaxRegistrationID.toArray(new String[buyerTaxRegistrationID.size()]);
+        return to1DArray(buyerTaxRegistrationID);
     }
 
     public String[] getBuyerTaxRegistrationSchemeID() {
-        return (String[]) buyerTaxRegistrationSchemeID.toArray(new String[buyerTaxRegistrationSchemeID.size()]);
+        return to1DArray(buyerTaxRegistrationSchemeID);
     }
 
     public String getDeliveryDateTime() {
@@ -220,59 +241,59 @@ public class BASICInvoiceData implements BASICInvoice {
     }
 
     public String[] getPaymentMeansID() {
-        return (String[])paymentMeansID.toArray(new String[paymentMeansID.size()]);
+        return to1DArray(paymentMeansID);
     }
 
     public String[] getPaymentMeansSchemeAgencyID() {
-        return (String[])paymentMeansSchemeAgencyID.toArray(new String[paymentMeansSchemeAgencyID.size()]);
+        return to1DArray(paymentMeansSchemeAgencyID);
     }
 
     public String[] getPaymentMeansPayeeAccountIBAN() {
-        return (String[])paymentMeansPayeeAccountIBAN.toArray(new String[paymentMeansPayeeAccountIBAN.size()]);
+        return to1DArray(paymentMeansPayeeAccountIBAN);
     }
 
     public String[] getPaymentMeansPayeeAccountAccountName() {
-        return (String[])paymentMeansPayeeAccountName.toArray(new String[paymentMeansPayeeAccountName.size()]);
+        return to1DArray(paymentMeansPayeeAccountName);
     }
 
     public String[] getPaymentMeansPayeeAccountProprietaryID() {
-        return (String[])paymentMeansPayeeAccountProprietaryID.toArray(new String[paymentMeansPayeeAccountProprietaryID.size()]);
+        return to1DArray(paymentMeansPayeeAccountProprietaryID);
     }
 
     public String[] getPaymentMeansPayeeFinancialInstitutionBIC() {
-        return (String[])paymentMeansPayeeFinancialInstitutionBIC.toArray(new String[paymentMeansPayeeFinancialInstitutionBIC.size()]);
+        return to1DArray(paymentMeansPayeeFinancialInstitutionBIC);
     }
 
     public String[] getPaymentMeansPayeeFinancialInstitutionGermanBankleitzahlID() {
-        return (String[])paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID.toArray(new String[paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID.size()]);
+        return to1DArray(paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID);
     }
 
     public String[] getPaymentMeansPayeeFinancialInstitutionName() {
-        return (String[])paymentMeansPayeeFinancialInstitutionName.toArray(new String[paymentMeansPayeeFinancialInstitutionName.size()]);
+        return to1DArray(paymentMeansPayeeFinancialInstitutionName);
     }
 
     public String[] getTaxCalculatedAmount() {
-        return (String[])taxCalculatedAmount.toArray(new String[taxCalculatedAmount.size()]);
+        return to1DArray(taxCalculatedAmount);
     }
 
     public String[] getTaxCalculatedAmountCurrencyID() {
-        return (String[])taxCalculatedAmountCurrencyID.toArray(new String[taxCalculatedAmountCurrencyID.size()]);
+        return to1DArray(taxCalculatedAmountCurrencyID);
     }
 
     public String[] getTaxTypeCode() {
-        return (String[])taxTypeCode.toArray(new String[taxTypeCode.size()]);
+        return to1DArray(taxTypeCode);
     }
 
     public String[] getTaxBasisAmount() {
-        return (String[])taxBasisAmount.toArray(new String[taxBasisAmount.size()]);
+        return to1DArray(taxBasisAmount);
     }
 
     public String[] getTaxBasisAmountCurrencyID() {
-        return (String[])taxBasisAmountCurrencyID.toArray(new String[taxBasisAmountCurrencyID.size()]);
+        return to1DArray(taxBasisAmountCurrencyID);
     }
 
     public String[] getTaxApplicablePercent() {
-        return (String[])taxApplicablePercent.toArray(new String[taxApplicablePercent.size()]);
+        return to1DArray(taxApplicablePercent);
     }
 
     public String getLineTotalAmount() {
@@ -324,15 +345,15 @@ public class BASICInvoiceData implements BASICInvoice {
     }
 
     public String[] getLineItemBilledQuantity() {
-        return (String[])lineItemBilledQuantity.toArray(new String[lineItemBilledQuantity.size()]);
+        return to1DArray(lineItemBilledQuantity);
     }
 
     public String[] getLineItemBilledQuantityUnitCode() {
-        return (String[])lineItemBilledQuantityUnitCode.toArray(new String[lineItemBilledQuantityUnitCode.size()]);
+        return to1DArray(lineItemBilledQuantityUnitCode);
     }
 
     public String[] getLineItemSpecifiedTradeProductName() {
-        return (String[])lineItemSpecifiedTradeProductName.toArray(new String[lineItemSpecifiedTradeProductName.size()]);
+        return to1DArray(lineItemSpecifiedTradeProductName);
     }
 
     public void setTest(boolean test) {
