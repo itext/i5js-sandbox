@@ -72,8 +72,8 @@ public interface BASICInvoice {
     public String getDeliveryDateTimeFormat();
     public String getPaymentReference();
     public String getInvoiceCurrencyCode();
-    public String[] getPaymentMeansID();
-    public String[] getPaymentMeansSchemeAgencyID();
+    public String[][] getPaymentMeansID();
+    public String[][] getPaymentMeansSchemeAgencyID();
     public String[] getPaymentMeansPayeeAccountIBAN();
     public String[] getPaymentMeansPayeeAccountAccountName();
     public String[] getPaymentMeansPayeeAccountProprietaryID();

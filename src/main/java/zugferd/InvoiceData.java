@@ -46,8 +46,8 @@ public class InvoiceData {
         invoiceData.setBuyerCountryID(customer.getCountryId());
         invoiceData.setPaymentReference(String.format("%09d", invoice.getId()));
         invoiceData.setInvoiceCurrencyCode("EUR");
-        invoiceData.addPaymentMeans("", "", "BE 41 7360 0661 9710", "", "", "KREDBEBB", "", "KBC");
-        invoiceData.addPaymentMeans("", "", "BE 56 0015 4298 7888", "", "", "GEBABEBB", "", "BNP Paribas");
+        invoiceData.addPaymentMeans(new String[]{""}, new String[]{""}, "BE 41 7360 0661 9710", "", "", "KREDBEBB", "", "KBC");
+        invoiceData.addPaymentMeans(new String[]{""}, new String[]{""}, "BE 56 0015 4298 7888", "", "", "GEBABEBB", "", "BNP Paribas");
         Map<Double,Double> taxes = new TreeMap<Double, Double>();
         double tax;
         for (Item item : invoice.getItems()) {
@@ -73,18 +73,12 @@ public class InvoiceData {
             ltN += tA;
             invoiceData.addApplicableTradeTax(format(total - tA), "EUR", "VAT", format(tA), "EUR", format(tax));
         }
-        invoiceData.setLineTotalAmount(format(ltN));
-        invoiceData.setLineTotalAmountCurrencyID("EUR");
-        invoiceData.setChargeTotalAmount(format(0));
-        invoiceData.setChargeTotalAmountCurrencyID("EUR");
-        invoiceData.setAllowanceTotalAmount(format(0));
-        invoiceData.setAllowanceTotalAmountCurrencyID("EUR");
-        invoiceData.setTaxBasisTotalAmount(format(ltN));
-        invoiceData.setTaxBasisTotalAmountCurrencyID("EUR");
-        invoiceData.setTaxTotalAmount(format(ttA));
-        invoiceData.setTaxTotalAmountCurrencyID("EUR");
-        invoiceData.setGrandTotalAmount(format(gtA));
-        invoiceData.setGrandTotalAmountCurrencyID("EUR");
+        invoiceData.setMonetarySummation(format(ltN), "EUR",
+            format(0), "EUR",
+            format(0), "EUR",
+            format(ltN), "EUR",
+            format(ttA), "EUR",
+            format(gtA), "EUR");
         return invoiceData;
     }
     

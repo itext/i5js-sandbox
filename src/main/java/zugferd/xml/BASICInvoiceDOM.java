@@ -57,6 +57,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -76,33 +77,88 @@ public class BASICInvoiceDOM {
 	doc = docBuilder.parse(XML);
     }
     
-    public void importData(BASICInvoice data) {
+    protected boolean isEmpty(String s) {
+        if (s == null) return true;
+        if (s.trim().length() == 0) return true;
+        return false;
+    }
+    
+    public void importData(BASICInvoice data) throws DataIncompleteException {
+        // SpecifiedExchangedDocumentContext
         setNodeContent(doc, "udt:Indicator", 0, data.getTestIndicator() ? "true" : "false");
+        
+        // HeaderExchangedDocument
+        if (isEmpty(data.getId())) 
+            throw new DataIncompleteException("HeaderExchangedDocument > ID");
         setNodeContent(doc, "ram:ID", 1, data.getId());
+        if (isEmpty(data.getName())) 
+            throw new DataIncompleteException("HeaderExchangedDocument > Name");
         setNodeContent(doc, "ram:Name", 0, data.getName());
+        if (isEmpty(data.getId())) 
+            throw new DataIncompleteException("HeaderExchangedDocument > TypeCode");
         setNodeContent(doc, "ram:TypeCode", 0, data.getTypeCode());
+        if (isEmpty(data.getId())) 
+            throw new DataIncompleteException("HeaderExchangedDocument > issueDateTime > DateTimeString");
+        if (isEmpty(data.getId())) 
+            throw new DataIncompleteException("HeaderExchangedDocument > issueDateTime > DateTimeString . format");
         setDateTime(doc, "ram:IssueDateTime", 0, data.getDateTime(), data.getDateTimeFormat());
         setNodeSubContent(doc, "ram:IncludedNote", 0, data.getNotes(), null);
+        
+        // SpecifiedSupplyChainTradeTransaction
+        if (isEmpty(data.getSellerName())) 
+            throw new DataIncompleteException("SpecifiedSupplyChainTradeTransaction > ApplicableSupplyChainTradeAgreement > SellerTradeParty > Name");
         processTradeParty(doc, "ram:SellerTradeParty", 0,
                 data.getSellerName(), data.getSellerPostcode(),
                 data.getSellerLineOne(), data.getSellerLineTwo(),
                 data.getSellerCityName(), data.getSellerCountryID(),
                 data.getSellerTaxRegistrationID(), data.getSellerTaxRegistrationSchemeID());
+        if (isEmpty(data.getBuyerName())) 
+            throw new DataIncompleteException("SpecifiedSupplyChainTradeTransaction > ApplicableSupplyChainTradeAgreement > BuyerTradeParty > Name");
         processTradeParty(doc, "ram:BuyerTradeParty", 0,
                 data.getBuyerName(), data.getBuyerPostcode(),
                 data.getBuyerLineOne(), data.getBuyerLineTwo(),
                 data.getBuyerCityName(), data.getBuyerCountryID(),
                 data.getBuyerTaxRegistrationID(), data.getBuyerTaxRegistrationSchemeID());
-        setDateTime(doc, "ram:OccurrenceDateTime", 0, data.getDateTime(), data.getDateTimeFormat());
+        
+        // ApplicableSupplyChainTradeDelivery
+        setDateTime(doc, "ram:OccurrenceDateTime", 0, data.getDeliveryDateTime(), data.getDeliveryDateTimeFormat());
+        
+        // ApplicableSupplyChainTradeSettlement
         setNodeContent(doc, "ram:PaymentReference", 0, data.getPaymentReference());
+        if (isEmpty(data.getInvoiceCurrencyCode())) 
+            throw new DataIncompleteException("ApplicableSupplyChainTradeSettlement > InvoiceCurrencyCode");
         setNodeContent(doc, "ram:InvoiceCurrencyCode", 0, data.getInvoiceCurrencyCode());
         processPaymentMeans(doc, data);
         processTax(doc, data);
+        if (isEmpty(data.getLineTotalAmount()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > LineTotalAmount");
+        if (isEmpty(data.getLineTotalAmountCurrencyID()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > LineTotalAmount . currencyID");
         setNodeContent(doc, "ram:LineTotalAmount", 0, data.getLineTotalAmount(), "currencyID", data.getLineTotalAmountCurrencyID());
+        if (isEmpty(data.getChargeTotalAmount()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > ChargeTotalAmount");
+        if (isEmpty(data.getChargeTotalAmountCurrencyID()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > ChargeTotalAmount . currencyID");
         setNodeContent(doc, "ram:ChargeTotalAmount", 0, data.getChargeTotalAmount(), "currencyID", data.getChargeTotalAmountCurrencyID());
+        if (isEmpty(data.getAllowanceTotalAmount()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > AllowanceTotalAmount");
+        if (isEmpty(data.getAllowanceTotalAmountCurrencyID()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > AllowanceTotalAmount . currencyID");
         setNodeContent(doc, "ram:AllowanceTotalAmount", 0, data.getAllowanceTotalAmount(), "currencyID", data.getAllowanceTotalAmountCurrencyID());
+        if (isEmpty(data.getTaxBasisTotalAmount()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > TaxBasisTotalAmount");
+        if (isEmpty(data.getTaxBasisTotalAmountCurrencyID()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > TaxBasisTotalAmount . currencyID");
         setNodeContent(doc, "ram:TaxBasisTotalAmount", 0, data.getTaxBasisTotalAmount(), "currencyID", data.getTaxBasisTotalAmountCurrencyID());
+        if (isEmpty(data.getTaxTotalAmount()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > TaxTotalAmount");
+        if (isEmpty(data.getTaxTotalAmountCurrencyID()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > TaxTotalAmount . currencyID");
         setNodeContent(doc, "ram:TaxTotalAmount", 0, data.getTaxTotalAmount(), "currencyID", data.getTaxTotalAmountCurrencyID());
+        if (isEmpty(data.getGrandTotalAmount()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > GrandTotalAmount");
+        if (isEmpty(data.getGrandTotalAmountCurrencyID()))
+            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > GrandTotalAmount . currencyID");
         setNodeContent(doc, "ram:GrandTotalAmount", 0, data.getGrandTotalAmount(), "currencyID", data.getGrandTotalAmountCurrencyID());
         processLines(doc, data);
     }
@@ -217,8 +273,8 @@ public class BASICInvoiceDOM {
     }
     
     protected void processPaymentMeans(Document doc, BASICInvoice data) {
-        String[] pmID = data.getPaymentMeansID();
-        String[] pmSchemeAgencyID = data.getPaymentMeansSchemeAgencyID();
+        String[][] pmID = data.getPaymentMeansID();
+        String[][] pmSchemeAgencyID = data.getPaymentMeansSchemeAgencyID();
         String[] pmIBAN = data.getPaymentMeansPayeeAccountIBAN();
         String[] pmAccountName = data.getPaymentMeansPayeeAccountAccountName();
         String[] pmAccountID = data.getPaymentMeansPayeeAccountProprietaryID();
@@ -226,7 +282,7 @@ public class BASICInvoiceDOM {
         String[] pmGermanBankleitzahlID = data.getPaymentMeansPayeeFinancialInstitutionGermanBankleitzahlID();
         String[] pmFinancialInst = data.getPaymentMeansPayeeFinancialInstitutionName();
         for (int i = 0; i < pmID.length; i++) {
-            processPaymentMeans(doc, data, i,
+            processPaymentMeans(doc, data,
                     pmID[i],
                     pmSchemeAgencyID[i],
                     pmIBAN[i],
@@ -239,38 +295,33 @@ public class BASICInvoiceDOM {
         }
     }
     
-    protected void processPaymentMeans(Document doc, BASICInvoice data, int n,
-        String... paymentMeans) {
-        Node node = doc.getElementsByTagName("ram:SpecifiedTradeSettlementPaymentMeans").item(0);
-        Node newNode = node.cloneNode(true);
-        NodeList list = newNode.getChildNodes();
-        Node childNode;
-        NodeList l;
-        Node grandchildNode;
-        int counter = 0;
-        for (int i = 0; i < list.getLength(); i++) {
-            childNode = list.item(i);
-            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-                if (counter == 0) {
-                    childNode.setTextContent(paymentMeans[counter++]);
-                    childNode.getAttributes().item(0).setTextContent(paymentMeans[counter++]);
-                }
-                else {
-                    l = childNode.getChildNodes();
-                    for (int j = 0; j < l.getLength(); j++) {
-                        grandchildNode = l.item(j);
-                        if (grandchildNode.getNodeType() == Node.ELEMENT_NODE) {
-                            grandchildNode.setTextContent(paymentMeans[counter++]);
-                        }
-                        else {
-                            grandchildNode.setTextContent("");
-                        }
-                    }
-                }
-            }
+    protected void processPaymentMeans(Document doc, BASICInvoice data,
+        String[] id, String[] scheme, String iban, String accName, String accID, String bic, String bank, String inst) {  
+        NodeList l = doc.getElementsByTagName("ram:SpecifiedTradeSettlementPaymentMeans");
+        Element element = (Element) l.item(l.getLength() - 1);
+        Node parent = element.getParentNode();
+        Element newNode = (Element)parent.insertBefore(element.cloneNode(true), element);
+        Node idNode = newNode.getElementsByTagName("ram:ID").item(0);
+        int n = id.length;
+        for (int j = n - 1; j >= 0; j--) {
+            Node c = newNode.insertBefore(idNode.cloneNode(true), idNode.getNextSibling());
+            c.setTextContent(id[j]);
+            c.getAttributes().item(0).setTextContent(scheme[j]);
         }
-        Node parent = node.getParentNode();
-        parent.insertBefore(newNode, node);
+        Element accNode = (Element)newNode.getElementsByTagName("ram:PayeePartyCreditorFinancialAccount").item(0);
+        Node ibanNode = accNode.getElementsByTagName("ram:IBANID").item(0);
+        ibanNode.setTextContent(iban);
+        Node accNameNode = accNode.getElementsByTagName("ram:AccountName").item(0);
+        accNameNode.setTextContent(accName);
+        Node accIDNode = accNode.getElementsByTagName("ram:ProprietaryID").item(0);
+        accIDNode.setTextContent(accID);
+        Element instNode = (Element)newNode.getElementsByTagName("ram:PayeeSpecifiedCreditorFinancialInstitution").item(0);
+        Node bicNode = instNode.getElementsByTagName("ram:BICID").item(0);
+        bicNode.setTextContent(bic);
+        Node bankNode = instNode.getElementsByTagName("ram:GermanBankleitzahlID").item(0);
+        bankNode.setTextContent(bank);
+        Node nameNode = instNode.getElementsByTagName("ram:Name").item(0);
+        nameNode.setTextContent(inst);
     }
     
     protected void processTax(Document doc, BASICInvoice data) {
@@ -280,7 +331,7 @@ public class BASICInvoiceDOM {
         String[] basisAmount = data.getTaxBasisAmount();
         String[] basisAmountCurr = data.getTaxBasisAmountCurrencyID();
         String[] percent = data.getTaxApplicablePercent();
-        for (int i = 0; i < calculated.length; i++) {
+        for (int i = calculated.length - 1; i >= 0; i--) {
             processTax(doc, calculated[i], calculatedCurr[i],
                     typeCode[i], basisAmount[i], basisAmountCurr[i], percent[i]);
         }
@@ -305,8 +356,10 @@ public class BASICInvoiceDOM {
         parent.insertBefore(newNode, node);
     }
     
-    protected void processLines(Document doc, BASICInvoice data) {
+    protected void processLines(Document doc, BASICInvoice data) throws DataIncompleteException {
         String[] quantity = data.getLineItemBilledQuantity();
+        if (quantity.length == 0)
+            throw new DataIncompleteException("You can create an invoice without any line items");
         String[] quantityCode = data.getLineItemBilledQuantityUnitCode();
         String[] name = data.getLineItemSpecifiedTradeProductName();
         for (int i = quantity.length - 1; i >= 0; i--) {

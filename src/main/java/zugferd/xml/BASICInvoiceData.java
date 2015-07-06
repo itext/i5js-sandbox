@@ -80,8 +80,8 @@ public class BASICInvoiceData implements BASICInvoice {
     protected String deliveryDateFormat = "102";
     protected String paymentReference;
     protected String invoiceCurrencyCode;
-    protected List<String> paymentMeansID = new ArrayList<String>();
-    protected List<String> paymentMeansSchemeAgencyID = new ArrayList<String>();
+    protected List<String[]> paymentMeansID = new ArrayList<String[]>();
+    protected List<String[]> paymentMeansSchemeAgencyID = new ArrayList<String[]>();
     protected List<String> paymentMeansPayeeAccountIBAN = new ArrayList<String>();
     protected List<String> paymentMeansPayeeAccountName = new ArrayList<String>();
     protected List<String> paymentMeansPayeeAccountProprietaryID = new ArrayList<String>();
@@ -240,12 +240,12 @@ public class BASICInvoiceData implements BASICInvoice {
         return invoiceCurrencyCode;
     }
 
-    public String[] getPaymentMeansID() {
-        return to1DArray(paymentMeansID);
+    public String[][] getPaymentMeansID() {
+        return to2DArray(paymentMeansID);
     }
 
-    public String[] getPaymentMeansSchemeAgencyID() {
-        return to1DArray(paymentMeansSchemeAgencyID);
+    public String[][] getPaymentMeansSchemeAgencyID() {
+        return to2DArray(paymentMeansSchemeAgencyID);
     }
 
     public String[] getPaymentMeansPayeeAccountIBAN() {
@@ -437,16 +437,13 @@ public class BASICInvoiceData implements BASICInvoice {
         this.buyerCountryID = buyerCountryID;
     }
 
-    public void setBuyerTaxRegistration(String schemeID, String taxId) {
+    public void addBuyerTaxRegistration(String schemeID, String taxId) {
         buyerTaxRegistrationSchemeID.add(schemeID);
         buyerTaxRegistrationID.add(taxId);
     }
 
-    public void setDeliveryDate(String deliveryDate) {
+    public void setDeliveryDate(String deliveryDate, String deliveryDateFormat) {
         this.deliveryDate = deliveryDate;
-    }
-
-    public void setDeliveryDateFormat(String deliveryDateFormat) {
         this.deliveryDateFormat = deliveryDateFormat;
     }
 
@@ -458,7 +455,7 @@ public class BASICInvoiceData implements BASICInvoice {
         this.invoiceCurrencyCode = invoiceCurrencyCode;
     }
 
-    public void addPaymentMeans(String schemeAgencyID, String id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
+    public void addPaymentMeans(String schemeAgencyID[], String[] id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
         paymentMeansID.add(id);
         paymentMeansSchemeAgencyID.add(schemeAgencyID);
         paymentMeansPayeeAccountIBAN.add(iban);
@@ -479,51 +476,23 @@ public class BASICInvoiceData implements BASICInvoice {
         taxApplicablePercent.add(applicablePercent);
     }
 
-    public void setLineTotalAmount(String lineTotalAmount) {
+    public void setMonetarySummation(String lineTotalAmount, String lineTotalAmountCurrencyID,
+            String chargeTotalAmount, String chargeTotalAmountCurrencyID,
+            String allowanceTotalAmount, String allowanceTotalAmountCurrencyID,
+            String taxBasisTotalAmount, String taxBasisTotalAmountCurrencyID,
+            String taxTotalAmount, String taxTotalAmountCurrencyID,
+            String grandTotalAmount, String grandTotalAmountCurrencyID) {
         this.lineTotalAmount = lineTotalAmount;
-    }
-
-    public void setLineTotalAmountCurrencyID(String lineTotalAmountCurrencyID) {
         this.lineTotalAmountCurrencyID = lineTotalAmountCurrencyID;
-    }
-
-    public void setChargeTotalAmount(String chargeTotalAmount) {
         this.chargeTotalAmount = chargeTotalAmount;
-    }
-
-    public void setChargeTotalAmountCurrencyID(String chargeTotalAmountCurrencyID) {
         this.chargeTotalAmountCurrencyID = chargeTotalAmountCurrencyID;
-    }
-
-    public void setAllowanceTotalAmount(String allowanceTotalAmount) {
         this.allowanceTotalAmount = allowanceTotalAmount;
-    }
-
-    public void setAllowanceTotalAmountCurrencyID(String allowanceTotalAmountCurrencyID) {
         this.allowanceTotalAmountCurrencyID = allowanceTotalAmountCurrencyID;
-    }
-
-    public void setTaxBasisTotalAmount(String taxBasisTotalAmount) {
         this.taxBasisTotalAmount = taxBasisTotalAmount;
-    }
-
-    public void setTaxBasisTotalAmountCurrencyID(String taxBasisTotalAmountCurrencyID) {
         this.taxBasisTotalAmountCurrencyID = taxBasisTotalAmountCurrencyID;
-    }
-
-    public void setTaxTotalAmount(String taxTotalAmount) {
         this.taxTotalAmount = taxTotalAmount;
-    }
-
-    public void setTaxTotalAmountCurrencyID(String taxTotalAmountCurrencyID) {
         this.taxTotalAmountCurrencyID = taxTotalAmountCurrencyID;
-    }
-
-    public void setGrandTotalAmount(String grandTotalAmount) {
         this.grandTotalAmount = grandTotalAmount;
-    }
-
-    public void setGrandTotalAmountCurrencyID(String grandTotalAmountCurrencyID) {
         this.grandTotalAmountCurrencyID = grandTotalAmountCurrencyID;
     }
 

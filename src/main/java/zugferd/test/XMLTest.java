@@ -16,13 +16,14 @@ import zugferd.xml.BASICInvoiceDOM;
 import zugferd.xml.BASICInvoice;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.PojoFactory;
+import zugferd.xml.DataIncompleteException;
 
 /**
  *
  * @author iText
  */
 public class XMLTest {
-    public static void main(String[] args) throws SQLException, ParserConfigurationException, SAXException, IOException, TransformerException {
+    public static void main(String[] args) throws SQLException, ParserConfigurationException, SAXException, IOException, TransformerException, DataIncompleteException {
         PojoFactory factory = PojoFactory.getInstance();
         List<Invoice> invoices = factory.getInvoices();
         InvoiceData invoiceData = new InvoiceData();

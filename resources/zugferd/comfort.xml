@@ -3,7 +3,7 @@
 	<rsm:SpecifiedExchangedDocumentContext>
 		<ram:TestIndicator><udt:Indicator /></ram:TestIndicator>
 		<ram:GuidelineSpecifiedDocumentContextParameter>
-			<ram:ID>urn:ferd:CrossIndustryDocument:invoice:1p0:basic</ram:ID>
+			<ram:ID>urn:ferd:CrossIndustryDocument:invoice:1p0:comfort</ram:ID>
 		</ram:GuidelineSpecifiedDocumentContextParameter>
 	</rsm:SpecifiedExchangedDocumentContext>
 	<rsm:HeaderExchangedDocument>

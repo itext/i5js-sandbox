@@ -564,13 +564,13 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     }
 
     @Override
-    public void addPaymentMeans(String schemeAgencyID, String id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
+    public void addPaymentMeans(String[] schemeAgencyID, String[] id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
         throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
     }
 
     public void addPaymentMeans(
             String typeCode, String[] information,
-            String schemeAgencyID, String id,
+            String[] schemeAgencyID, String[] id,
             String ibanDebtor, String proprietaryIDDebtor,
             String ibanCreditor, String accountnameCreditor, String proprietaryIDCreditor,
             String bicDebtor, String germanBankleitzahlIDDebtor, String institutionnameDebtor,
