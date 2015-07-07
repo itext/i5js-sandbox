@@ -29,7 +29,7 @@ public class LiberationSans {
     
     public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(DEST));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         FontFactory.register(FONT,"Greek-Regular");
         Font f = FontFactory.getFont("Greek-Regular", "Cp1253", true);
