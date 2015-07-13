@@ -184,7 +184,7 @@
 						</ram:ChargeIndicator>
 						<ram:ActualAmount currencyID="" />
 						<ram:Reason />
-					<ram:AppliedTradeAllowanceCharge>
+					</ram:AppliedTradeAllowanceCharge>
 				</ram:GrossPriceProductTradePrice>
 				<ram:NetPriceProductTradePrice>
 					<ram:ChargeAmount currencyID="" />

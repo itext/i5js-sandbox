@@ -67,20 +67,23 @@ import org.xml.sax.SAXException;
  * @author iText
  */
 public class BASICInvoiceDOM {
-    public static final String XML = "resources/zugferd/basic.xml";
+    public static final String BASIC = "resources/zugferd/basic.xml";
     
     protected Document doc;
     
     public BASICInvoiceDOM() throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-	doc = docBuilder.parse(XML);
+	doc = docBuilder.parse(getXMLTemplate());
+    }
+    
+    public String getXMLTemplate() {
+        return BASIC;
     }
     
     protected boolean isEmpty(String s) {
         if (s == null) return true;
-        if (s.trim().length() == 0) return true;
-        return false;
+        return s.trim().length() == 0;
     }
     
     public void importData(BASICInvoice data) throws DataIncompleteException {

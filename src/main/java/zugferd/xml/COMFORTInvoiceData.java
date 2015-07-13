@@ -87,6 +87,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> paymentMeansTypeCode = new ArrayList<String>();
     protected List<String[]> paymentMeansInformation = new ArrayList<String[]>();
     protected List<String> paymentMeansPayerAccountIBAN = new ArrayList<String>();
+    protected List<String> paymentMeansPayerAccountName = new ArrayList<String>();
     protected List<String> paymentMeansPayerAccountProprietaryID = new ArrayList<String>();
     protected List<String> paymentMeansPayerFinancialInstitutionBIC = new ArrayList<String>();
     protected List<String> paymentMeansPayerFinancialInstitutionGermanBankleitzahlID = new ArrayList<String>();
@@ -460,11 +461,6 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return to1DArray(lineItemSpecifiedTradeProductDescription);
     }
     
-    @Override
-    public void addNote(String note) {
-        throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
-    }
-    
     public void addNote(String code, String note) {
     }
 
@@ -571,7 +567,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     public void addPaymentMeans(
             String typeCode, String[] information,
             String[] schemeAgencyID, String[] id,
-            String ibanDebtor, String proprietaryIDDebtor,
+            String ibanDebtor, String accountnameDebtor, String proprietaryIDDebtor,
             String ibanCreditor, String accountnameCreditor, String proprietaryIDCreditor,
             String bicDebtor, String germanBankleitzahlIDDebtor, String institutionnameDebtor,
             String bicCreditor, String germanBankleitzahlIDCreditor, String institutionnameCreditor
@@ -580,6 +576,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         paymentMeansInformation.add(information);
         paymentMeansID.add(id);
         paymentMeansSchemeAgencyID.add(schemeAgencyID);
+        paymentMeansPayerAccountName.add(accountnameDebtor);
         paymentMeansPayerAccountIBAN.add(ibanDebtor);
         paymentMeansPayerAccountProprietaryID.add(proprietaryIDDebtor);
         paymentMeansPayeeAccountIBAN.add(ibanCreditor);
@@ -591,12 +588,6 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         paymentMeansPayeeFinancialInstitutionBIC.add(bicCreditor);
         paymentMeansPayeeFinancialInstitutionGermanBankleitzahlID.add(germanBankleitzahlIDCreditor);
         paymentMeansPayeeFinancialInstitutionName.add(institutionnameCreditor);
-    }
-
-    @Override
-    public void addApplicableTradeTax(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
-            String basisAmount, String basisAmountCurrencyID, String applicablePercent) {
-        throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
     }
 
     public void addApplicableTradeTax(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
