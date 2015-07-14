@@ -56,10 +56,10 @@ public class BASICInvoiceData implements BASICInvoice {
     
     protected boolean test = true;
     protected String id;
-    protected String name = "INVOICE";
-    protected String typeCode = "380";
+    protected String name;
+    protected String typeCode;
     protected Date date;
-    protected String dateFormat = "102";
+    protected String dateFormat;
     protected List<String> notes = new ArrayList<String>();
     protected String sellerName;
     protected String sellerPostcode;
@@ -78,7 +78,7 @@ public class BASICInvoiceData implements BASICInvoice {
     protected List<String> buyerTaxRegistrationID = new ArrayList<String>();
     protected List<String> buyerTaxRegistrationSchemeID = new ArrayList<String>();
     protected Date deliveryDate;
-    protected String deliveryDateFormat = "102";
+    protected String deliveryDateFormat;
     protected String paymentReference;
     protected String invoiceCurrencyCode;
     protected List<String[]> paymentMeansID = new ArrayList<String[]>();

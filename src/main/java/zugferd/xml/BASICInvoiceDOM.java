@@ -134,7 +134,7 @@ public class BASICInvoiceDOM {
                 data.getBuyerTaxRegistrationID(), data.getBuyerTaxRegistrationSchemeID());
         
         // ApplicableSupplyChainTradeDelivery
-        if (!isEmpty(data.getDateTimeFormat())) {
+        if (!isEmpty(data.getDeliveryDateTimeFormat())) {
             sdf = DateFormatCode.getDateFormat(data.getDeliveryDateTimeFormat());
             setDateTime(doc, "ram:OccurrenceDateTime", 0, sdf.format(data.getDeliveryDateTime()), data.getDeliveryDateTimeFormat());
         }

@@ -108,7 +108,7 @@ public class PdfTest {
         p = new Paragraph(basic.getName(), font14);
         p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
-        p = new Paragraph(convertDate(basic.getDateTime(), "yyyyMMdd", "MMM dd, yyyy"), font12);
+        p = new Paragraph(convertDate(basic.getDateTime(), "MMM dd, yyyy"), font12);
         p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
         
@@ -267,10 +267,8 @@ public class PdfTest {
         return p;
     }
     
-    public String convertDate(String date, String origFormat, String newFormat) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat(origFormat);
-        Date d = sdf.parse(date);
-        sdf.applyPattern(newFormat);
+    public String convertDate(Date d, String newFormat) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(newFormat);
         return sdf.format(d);
     }
 }
