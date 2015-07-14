@@ -42,39 +42,28 @@
  * For more information, please contact iText Software Corp. at this
  * address: sales@itextpdf.com
  */
-package zugferd.xml;
-
-import zugferd.exceptions.DataIncompleteException;
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-import zugferd.codes.DocumentTypeCode;
-import zugferd.exceptions.InvalidCodeException;
+package zugferd.codes;
 
 /**
- *
  * @author Bruno Lowagie (iText Software)
  */
-public class COMFORTInvoiceDOM extends BASICInvoiceDOM {
-    public static final String COMFORT = "resources/zugferd/comfort.xml";
+public class DocumentTypeCode {
+    public static final String COMMERCIAL_INVOICE = "380";
+    public static final String DEBIT_NOTE_FINANCIAL_ADJUSTMENT = "38";
+    public static final String SELF_BILLED_INVOICE = "389";
     
-    public COMFORTInvoiceDOM() throws ParserConfigurationException, SAXException, IOException {
-        init();
+    public static boolean isValidBasic(String code) {
+        return COMMERCIAL_INVOICE.equals(code);
     }
     
-    @Override
-    public String getXMLTemplate() {
-        return COMFORT;
+    public static boolean isValidComfort(String code) {
+        return COMMERCIAL_INVOICE.equals(code)
+            || DEBIT_NOTE_FINANCIAL_ADJUSTMENT.equals(code);
     }
     
-    @Override
-    protected boolean isValidDocumentTypeCode(String code) {
-        return DocumentTypeCode.isValidComfort(code);
+    public static boolean isValidExtended(String code) {
+        return COMMERCIAL_INVOICE.equals(code)
+            || DEBIT_NOTE_FINANCIAL_ADJUSTMENT.equals(code)
+            || SELF_BILLED_INVOICE.equals(code);
     }
-    
-    public void importData(COMFORTInvoice data) throws DataIncompleteException, InvalidCodeException {
-        super.importData(data);
-    }
-    protected void processTax(Document doc, String... content) { }
 }

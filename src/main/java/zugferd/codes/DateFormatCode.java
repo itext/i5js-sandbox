@@ -42,14 +42,54 @@
  * For more information, please contact iText Software Corp. at this
  * address: sales@itextpdf.com
  */
-package zugferd.xml;
+package zugferd.codes;
 
-/*
- * This exception is thrown when you try to create a ZUGFeRD XML file
- * that doesn't contain all the required data.
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import zugferd.exceptions.InvalidCodeException;
+
+/**
+ * @author Bruno Lowagie (iText Software)
  */
-public class DataIncompleteException extends Exception {
-    public DataIncompleteException(String tag) {
-        super(String.format("The following tag is missing: %s", tag));
+public class DateFormatCode {
+    public static final String YYYYMMDD = "102";
+    public static final String YYYYMM = "610";
+    public static final String YYYYWW = "616";
+    
+    public static boolean isValidFormat(String format) {
+        return format.equals(YYYYMMDD)
+            || format.equals(YYYYMM)
+            || format.equals(YYYYWW);
+    }
+    
+    public static String convertToString(Date d, String format) throws InvalidCodeException {
+        return getDateFormat(format).format(d);
+    }
+    
+    public static Date convertToDate(String d, String format) throws InvalidCodeException, ParseException {
+        return getDateFormat(format).parse(d);
+    }
+    
+    public static SimpleDateFormat getDateFormat(String format) throws InvalidCodeException {
+        if (YYYYMMDD.equals(format)) {
+            return new SimpleDateFormat("yyyyMMdd");
+        }
+        else if (YYYYMM.equals(format)) {
+            return new SimpleDateFormat("yyyyMM");
+        }
+        else if (YYYYWW.equals(format)) {
+            return new SimpleDateFormat("yyyyww");
+        }
+        throw new InvalidCodeException(format, "date format");
+    }
+    
+    public static void main(String[] args) throws InvalidCodeException, ParseException {
+        System.out.println(convertToDate("20150401", "102"));
+        System.out.println(convertToDate("201504", "610"));
+        System.out.println(convertToDate("201529", "616"));
+        System.out.println(convertToString(new Date(), "102"));
+        System.out.println(convertToString(new Date(), "610"));
+        System.out.println(convertToString(new Date(), "616"));
     }
 }

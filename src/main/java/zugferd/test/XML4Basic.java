@@ -6,18 +6,24 @@
 package zugferd.test;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
+import zugferd.codes.DateFormatCode;
+import zugferd.codes.DocumentTypeCode;
 import zugferd.xml.BASICInvoiceDOM;
 import zugferd.xml.BASICInvoiceData;
-import zugferd.xml.DataIncompleteException;
+import zugferd.exceptions.DataIncompleteException;
+import zugferd.exceptions.InvalidCodeException;
 
 /**
  * @author iText
  */
 public class XML4Basic {
-    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, DataIncompleteException, TransformerException {
+    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, DataIncompleteException, TransformerException, InvalidCodeException, ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         BASICInvoiceData data = new BASICInvoiceData();
         // SpecifiedExchangedDocumentContext
         data.setTest(true);
@@ -25,9 +31,8 @@ public class XML4Basic {
         // HeaderExchangedDocument
         data.setId("HeaderExchangedDocument.ID");
         data.setName("HeaderExchangedDocument.Name");
-        data.setTypeCode("HeaderExchangedDocument.TypeCode");
-        data.setDate("HeaderExchangedDocument.IssueDateTime");
-        data.setDateFormat("HeaderExchangedDocument.IssueDateTimeFormat");
+        data.setTypeCode(DocumentTypeCode.COMMERCIAL_INVOICE);
+        data.setDate(sdf.parse("2015/04/01"), DateFormatCode.YYYYMMDD);
         data.addNote("HeaderExchangedDocument.Note[0]");
         data.addNote("HeaderExchangedDocument.Note[1]");
         data.addNote("HeaderExchangedDocument.Note[2]");
@@ -55,7 +60,7 @@ public class XML4Basic {
         data.addBuyerTaxRegistration("BuyerTradeParty.SpecifiedTaxRegistration[2]", "BuyerTradeParty.SpecifiedTaxRegistration.SchemeID[2]");
         
         // ApplicableSupplyChainTradeDelivery
-        data.setDeliveryDate("ActualDeliverySupplyChainEvent.OccurrenceDateTime", "ActualDeliverySupplyChainEvent.OccurrenceDateTime.format");
+        data.setDeliveryDate(sdf.parse("2015/04/01"), DateFormatCode.YYYYMMDD);
         
         // ApplicableSupplyChainTradeSettlement
         data.setPaymentReference("ApplicableSupplyChainTradeSettlement.PaymentReference");

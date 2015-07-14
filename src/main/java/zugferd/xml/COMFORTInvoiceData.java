@@ -45,6 +45,7 @@
 package zugferd.xml;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,16 +62,16 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected String buyerID;
     protected List<String> buyerGlobalID = new ArrayList<String>();
     protected List<String> buyerGlobalSchemeID = new ArrayList<String>();
-    protected String buyerOrderReferencedDocumentIssueDateTime;
+    protected Date buyerOrderReferencedDocumentIssueDateTime;
     protected String buyerOrderReferencedDocumentIssueDateTimeFormat;
     protected String buyerOrderReferencedDocumentID;
-    protected String contractReferencedDocumentIssueDateTime;
+    protected Date contractReferencedDocumentIssueDateTime;
     protected String contractReferencedDocumentIssueDateTimeFormat;
     protected String contractReferencedDocumentID;
-    protected String customerOrderReferencedDocumentIssueDateTime;
+    protected Date customerOrderReferencedDocumentIssueDateTime;
     protected String customerOrderReferencedDocumentIssueDateTimeFormat;
     protected String customerOrderReferencedDocumentID;
-    protected String deliveryNoteReferencedDocumentIssueDateTime;
+    protected Date deliveryNoteReferencedDocumentIssueDateTime;
     protected String deliveryNoteReferencedDocumentIssueDateTimeFormat;
     protected String deliveryNoteReferencedDocumentID;
     protected String invoiceeID;
@@ -94,9 +95,9 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> paymentMeansPayerFinancialInstitutionName = new ArrayList<String>();
     protected List<String> taxExemptionReason = new ArrayList<String>();
     protected List<String> taxCategoryCode = new ArrayList<String>();
-    protected String billingStartDateTime;
+    protected Date billingStartDateTime;
     protected String billingStartDateTimeFormat;
-    protected String billingEndDateTime;
+    protected Date billingEndDateTime;
     protected String billingEndDateTimeFormat;
     protected List<String> tradeAllowanceChargeIndicator = new ArrayList<String>();
     protected List<String> tradeAllowanceChargeActualAmount = new ArrayList<String>();
@@ -112,7 +113,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String[]> logisticsServiceChargeTaxCategoryCode = new ArrayList<String[]>();
     protected List<String[]> logisticsServiceChargeTaxApplicablePercent = new ArrayList<String[]>();
     protected List<String[]> tradePaymentTermsInformation = new ArrayList<String[]>();
-    protected List<String> tradePaymentTermsDueDateTime = new ArrayList<String>();
+    protected List<Date> tradePaymentTermsDueDateTime = new ArrayList<Date>();
     protected List<String> tradePaymentTermsDueDateTimeFormat = new ArrayList<String>();
     protected String totalPrepaidAmount;
     protected String totalPrepaidAmountCurrencyID;
@@ -175,7 +176,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return to1DArray(buyerGlobalSchemeID);
     }
 
-    public String getBuyerOrderReferencedDocumentIssueDateTime() {
+    public Date getBuyerOrderReferencedDocumentIssueDateTime() {
         return buyerOrderReferencedDocumentIssueDateTime;
     }
 
@@ -187,7 +188,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return buyerOrderReferencedDocumentID;
     }
 
-    public String getContractReferencedDocumentIssueDateTime() {
+    public Date getContractReferencedDocumentIssueDateTime() {
         return contractReferencedDocumentIssueDateTime;
     }
 
@@ -199,7 +200,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return contractReferencedDocumentID;
     }
 
-    public String getCustomerOrderReferencedDocumentIssueDateTime() {
+    public Date getCustomerOrderReferencedDocumentIssueDateTime() {
         return customerOrderReferencedDocumentIssueDateTime;
     }
 
@@ -211,7 +212,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return customerOrderReferencedDocumentID;
     }
 
-    public String getDeliveryNoteReferencedDocumentIssueDateTime() {
+    public Date getDeliveryNoteReferencedDocumentIssueDateTime() {
         return deliveryNoteReferencedDocumentIssueDateTime;
     }
 
@@ -302,7 +303,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return to1DArray(taxCategoryCode);
     }
     
-    public String getBillingStartDateTime() {
+    public Date getBillingStartDateTime() {
         return billingStartDateTime;
     }
     
@@ -310,7 +311,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return billingStartDateTimeFormat;
     }
     
-    public String getBillingEndDateTime() {
+    public Date getBillingEndDateTime() {
         return billingEndDateTime;
     }
     
@@ -368,8 +369,8 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     public String[][] getTradePaymentTermsInformation() {
         return to2DArray(tradePaymentTermsInformation);
     }
-    public String[] getTradePaymentTermsDueDateTime() {
-        return to1DArray(tradePaymentTermsDueDateTime);
+    public Date[] getTradePaymentTermsDueDateTime() {
+        return (Date[]) tradePaymentTermsDueDateTime.toArray(new Date[tradePaymentTermsDueDateTime.size()]);
     }
     public String[] getTradePaymentTermsDueDateTimeFormat() {
         return to1DArray(tradePaymentTermsDueDateTimeFormat);
@@ -486,7 +487,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.buyerGlobalSchemeID.add(buyerGlobalSchemeID);
     }
     
-    public void setBuyerOrderReferencedDocumentIssueDateTime(String buyerOrderReferencedDocumentIssueDateTime, String buyerOrderReferencedDocumentIssueDateTimeFormat) {
+    public void setBuyerOrderReferencedDocumentIssueDateTime(Date buyerOrderReferencedDocumentIssueDateTime, String buyerOrderReferencedDocumentIssueDateTimeFormat) {
         this.buyerOrderReferencedDocumentIssueDateTime = buyerOrderReferencedDocumentIssueDateTime;
         this.buyerOrderReferencedDocumentIssueDateTimeFormat = buyerOrderReferencedDocumentIssueDateTimeFormat;
     }
@@ -495,7 +496,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.buyerOrderReferencedDocumentID = buyerOrderReferencedDocumentID;
     }
 
-    public void setContractReferencedDocumentIssueDateTime(String contractReferencedDocumentIssueDateTime, String contractReferencedDocumentIssueDateTimeFormat) {
+    public void setContractReferencedDocumentIssueDateTime(Date contractReferencedDocumentIssueDateTime, String contractReferencedDocumentIssueDateTimeFormat) {
         this.contractReferencedDocumentIssueDateTime = contractReferencedDocumentIssueDateTime;
         this.contractReferencedDocumentIssueDateTimeFormat = contractReferencedDocumentIssueDateTimeFormat;
     }
@@ -504,7 +505,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.contractReferencedDocumentID = contractReferencedDocumentID;
     }
 
-    public void setCustomerOrderReferencedDocumentIssueDateTime(String customerOrderReferencedDocumentIssueDateTime, String customerOrderReferencedDocumentIssueDateTimeFormat) {
+    public void setCustomerOrderReferencedDocumentIssueDateTime(Date customerOrderReferencedDocumentIssueDateTime, String customerOrderReferencedDocumentIssueDateTimeFormat) {
         this.customerOrderReferencedDocumentIssueDateTime = customerOrderReferencedDocumentIssueDateTime;
         this.customerOrderReferencedDocumentIssueDateTimeFormat = customerOrderReferencedDocumentIssueDateTimeFormat;
     }
@@ -513,7 +514,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.customerOrderReferencedDocumentID = customerOrderReferencedDocumentID;
     }
 
-    public void setDeliveryNoteReferencedDocumentIssueDateTime(String deliveryNoteReferencedDocumentIssueDateTime, String deliveryNoteReferencedDocumentIssueDateTimeFormat) {
+    public void setDeliveryNoteReferencedDocumentIssueDateTime(Date deliveryNoteReferencedDocumentIssueDateTime, String deliveryNoteReferencedDocumentIssueDateTimeFormat) {
         this.deliveryNoteReferencedDocumentIssueDateTime = deliveryNoteReferencedDocumentIssueDateTime;
         this.deliveryNoteReferencedDocumentIssueDateTimeFormat = deliveryNoteReferencedDocumentIssueDateTimeFormat;
     }
@@ -602,8 +603,8 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         taxApplicablePercent.add(applicablePercent);
     }
     
-    public void setBillingStartEnd(String billingStartDateTime, String billingStartDateTimeFormat,
-            String billingEndDateTime, String billingEndDateTimeFormat) {
+    public void setBillingStartEnd(Date billingStartDateTime, String billingStartDateTimeFormat,
+            Date billingEndDateTime, String billingEndDateTimeFormat) {
         this.billingStartDateTime = billingStartDateTime;
         this.billingStartDateTimeFormat = billingStartDateTimeFormat;
         this.billingEndDateTime = billingEndDateTime;

@@ -42,39 +42,14 @@
  * For more information, please contact iText Software Corp. at this
  * address: sales@itextpdf.com
  */
-package zugferd.xml;
+package zugferd.exceptions;
 
-import zugferd.exceptions.DataIncompleteException;
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-import zugferd.codes.DocumentTypeCode;
-import zugferd.exceptions.InvalidCodeException;
-
-/**
- *
- * @author Bruno Lowagie (iText Software)
+/*
+ * This exception is thrown when you try to create a ZUGFeRD XML file
+ * that doesn't contain all the required data.
  */
-public class COMFORTInvoiceDOM extends BASICInvoiceDOM {
-    public static final String COMFORT = "resources/zugferd/comfort.xml";
-    
-    public COMFORTInvoiceDOM() throws ParserConfigurationException, SAXException, IOException {
-        init();
+public class DataIncompleteException extends Exception {
+    public DataIncompleteException(String tag) {
+        super(String.format("The following tag is missing: %s", tag));
     }
-    
-    @Override
-    public String getXMLTemplate() {
-        return COMFORT;
-    }
-    
-    @Override
-    protected boolean isValidDocumentTypeCode(String code) {
-        return DocumentTypeCode.isValidComfort(code);
-    }
-    
-    public void importData(COMFORTInvoice data) throws DataIncompleteException, InvalidCodeException {
-        super.importData(data);
-    }
-    protected void processTax(Document doc, String... content) { }
 }

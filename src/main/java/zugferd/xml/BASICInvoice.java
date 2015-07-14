@@ -44,12 +44,14 @@
  */
 package zugferd.xml;
 
+import java.util.Date;
+
 public interface BASICInvoice {
     public boolean getTestIndicator();
     public String getId();
     public String getName();
     public String getTypeCode();
-    public String getDateTime();
+    public Date getDateTime();
     public String getDateTimeFormat();
     public String[] getNotes();
     public String getSellerName();
@@ -68,7 +70,7 @@ public interface BASICInvoice {
     public String getBuyerCountryID();
     public String[] getBuyerTaxRegistrationID();
     public String[] getBuyerTaxRegistrationSchemeID();
-    public String getDeliveryDateTime();
+    public Date getDeliveryDateTime();
     public String getDeliveryDateTimeFormat();
     public String getPaymentReference();
     public String getInvoiceCurrencyCode();

@@ -45,6 +45,7 @@
 package zugferd.xml;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,7 +58,7 @@ public class BASICInvoiceData implements BASICInvoice {
     protected String id;
     protected String name = "INVOICE";
     protected String typeCode = "380";
-    protected String date;
+    protected Date date;
     protected String dateFormat = "102";
     protected List<String> notes = new ArrayList<String>();
     protected String sellerName;
@@ -76,7 +77,7 @@ public class BASICInvoiceData implements BASICInvoice {
     protected String buyerCountryID;
     protected List<String> buyerTaxRegistrationID = new ArrayList<String>();
     protected List<String> buyerTaxRegistrationSchemeID = new ArrayList<String>();
-    protected String deliveryDate;
+    protected Date deliveryDate;
     protected String deliveryDateFormat = "102";
     protected String paymentReference;
     protected String invoiceCurrencyCode;
@@ -148,7 +149,7 @@ public class BASICInvoiceData implements BASICInvoice {
         return typeCode;
     }
 
-    public String getDateTime() {
+    public Date getDateTime() {
         return date;
     }
 
@@ -224,7 +225,7 @@ public class BASICInvoiceData implements BASICInvoice {
         return to1DArray(buyerTaxRegistrationSchemeID);
     }
 
-    public String getDeliveryDateTime() {
+    public Date getDeliveryDateTime() {
         return deliveryDate;
     }
 
@@ -372,11 +373,8 @@ public class BASICInvoiceData implements BASICInvoice {
         this.typeCode = typeCode;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date, String dateFormat) {
         this.date = date;
-    }
-
-    public void setDateFormat(String dateFormat) {
         this.dateFormat = dateFormat;
     }
 
@@ -442,7 +440,7 @@ public class BASICInvoiceData implements BASICInvoice {
         buyerTaxRegistrationID.add(taxId);
     }
 
-    public void setDeliveryDate(String deliveryDate, String deliveryDateFormat) {
+    public void setDeliveryDate(Date deliveryDate, String deliveryDateFormat) {
         this.deliveryDate = deliveryDate;
         this.deliveryDateFormat = deliveryDateFormat;
     }

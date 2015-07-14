@@ -44,8 +44,10 @@
  */
 package zugferd.xml;
 
+import zugferd.exceptions.DataIncompleteException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -62,6 +64,9 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import zugferd.codes.DateFormatCode;
+import zugferd.codes.DocumentTypeCode;
+import zugferd.exceptions.InvalidCodeException;
 
 /**
  * @author iText
@@ -72,6 +77,10 @@ public class BASICInvoiceDOM {
     protected Document doc;
     
     public BASICInvoiceDOM() throws ParserConfigurationException, SAXException, IOException {
+        init();
+    }
+    
+    public final void init() throws SAXException, ParserConfigurationException, IOException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 	doc = docBuilder.parse(getXMLTemplate());
@@ -86,7 +95,11 @@ public class BASICInvoiceDOM {
         return s.trim().length() == 0;
     }
     
-    public void importData(BASICInvoice data) throws DataIncompleteException {
+    protected boolean isValidDocumentTypeCode(String code) {
+        return DocumentTypeCode.isValidBasic(code);
+    }
+    
+    public void importData(BASICInvoice data) throws DataIncompleteException, InvalidCodeException {
         // SpecifiedExchangedDocumentContext
         setNodeContent(doc, "udt:Indicator", 0, data.getTestIndicator() ? "true" : "false");
         
@@ -97,14 +110,11 @@ public class BASICInvoiceDOM {
         if (isEmpty(data.getName())) 
             throw new DataIncompleteException("HeaderExchangedDocument > Name");
         setNodeContent(doc, "ram:Name", 0, data.getName());
-        if (isEmpty(data.getId())) 
-            throw new DataIncompleteException("HeaderExchangedDocument > TypeCode");
+        if (!isValidDocumentTypeCode(data.getTypeCode())) 
+            throw new InvalidCodeException(data.getTypeCode(), "document type code");
         setNodeContent(doc, "ram:TypeCode", 0, data.getTypeCode());
-        if (isEmpty(data.getId())) 
-            throw new DataIncompleteException("HeaderExchangedDocument > issueDateTime > DateTimeString");
-        if (isEmpty(data.getId())) 
-            throw new DataIncompleteException("HeaderExchangedDocument > issueDateTime > DateTimeString . format");
-        setDateTime(doc, "ram:IssueDateTime", 0, data.getDateTime(), data.getDateTimeFormat());
+        SimpleDateFormat sdf = DateFormatCode.getDateFormat(data.getDateTimeFormat());
+        setDateTime(doc, "ram:IssueDateTime", 0, sdf.format(data.getDateTime()), data.getDateTimeFormat());
         setNodeSubContent(doc, "ram:IncludedNote", 0, data.getNotes(), null);
         
         // SpecifiedSupplyChainTradeTransaction
@@ -124,8 +134,10 @@ public class BASICInvoiceDOM {
                 data.getBuyerTaxRegistrationID(), data.getBuyerTaxRegistrationSchemeID());
         
         // ApplicableSupplyChainTradeDelivery
-        setDateTime(doc, "ram:OccurrenceDateTime", 0, data.getDeliveryDateTime(), data.getDeliveryDateTimeFormat());
-        
+        if (!isEmpty(data.getDateTimeFormat())) {
+            sdf = DateFormatCode.getDateFormat(data.getDeliveryDateTimeFormat());
+            setDateTime(doc, "ram:OccurrenceDateTime", 0, sdf.format(data.getDeliveryDateTime()), data.getDeliveryDateTimeFormat());
+        }
         // ApplicableSupplyChainTradeSettlement
         setNodeContent(doc, "ram:PaymentReference", 0, data.getPaymentReference());
         if (isEmpty(data.getInvoiceCurrencyCode())) 

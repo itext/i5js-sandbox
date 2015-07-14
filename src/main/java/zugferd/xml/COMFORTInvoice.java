@@ -44,6 +44,8 @@
  */
 package zugferd.xml;
 
+import java.util.Date;
+
 public interface COMFORTInvoice extends BASICInvoice {
     public String[] getNotesCodes();
     public String getBuyerReference();
@@ -53,16 +55,16 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String getBuyerID();
     public String[] getBuyerGlobalID();
     public String[] getBuyerGlobalSchemeID();
-    public String getBuyerOrderReferencedDocumentIssueDateTime();
+    public Date getBuyerOrderReferencedDocumentIssueDateTime();
     public String getBuyerOrderReferencedDocumentIssueDateTimeFormat();
     public String getBuyerOrderReferencedDocumentID();
-    public String getContractReferencedDocumentIssueDateTime();
+    public Date getContractReferencedDocumentIssueDateTime();
     public String getContractReferencedDocumentIssueDateTimeFormat();
     public String getContractReferencedDocumentID();
-    public String getCustomerOrderReferencedDocumentIssueDateTime();
+    public Date getCustomerOrderReferencedDocumentIssueDateTime();
     public String getCustomerOrderReferencedDocumentIssueDateTimeFormat();
     public String getCustomerOrderReferencedDocumentID();
-    public String getDeliveryNoteReferencedDocumentIssueDateTime();
+    public Date getDeliveryNoteReferencedDocumentIssueDateTime();
     public String getDeliveryNoteReferencedDocumentIssueDateTimeFormat();
     public String getDeliveryNoteReferencedDocumentID();
     public String getInvoiceeID();
@@ -85,9 +87,9 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String[] getPaymentMeansPayerFinancialInstitutionName();
     public String[] getTaxExemptionReason();
     public String[] getTaxCategoryCode();
-    public String getBillingStartDateTime();
+    public Date getBillingStartDateTime();
     public String getBillingStartDateTimeFormat();
-    public String getBillingEndDateTime();
+    public Date getBillingEndDateTime();
     public String getBillingEndDateTimeFormat();
     public String[] getTradeAllowanceChargeIndicator();
     public String[] getTradeAllowanceChargeActualAmount();
@@ -103,7 +105,7 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String[][] getLogisticsServiceChargeTaxCategoryCode();
     public String[][] getLogisticsServiceChargeTaxApplicablePercent();
     public String[][] getTradePaymentTermsInformation();
-    public String[] getTradePaymentTermsDueDateTime();
+    public Date[] getTradePaymentTermsDueDateTime();
     public String[] getTradePaymentTermsDueDateTimeFormat();
     public String getTotalPrepaidAmount();
     public String getTotalPrepaidAmountCurrencyID();

@@ -42,39 +42,13 @@
  * For more information, please contact iText Software Corp. at this
  * address: sales@itextpdf.com
  */
-package zugferd.xml;
-
-import zugferd.exceptions.DataIncompleteException;
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-import zugferd.codes.DocumentTypeCode;
-import zugferd.exceptions.InvalidCodeException;
+package zugferd.exceptions;
 
 /**
- *
  * @author Bruno Lowagie (iText Software)
  */
-public class COMFORTInvoiceDOM extends BASICInvoiceDOM {
-    public static final String COMFORT = "resources/zugferd/comfort.xml";
-    
-    public COMFORTInvoiceDOM() throws ParserConfigurationException, SAXException, IOException {
-        init();
+public class InvalidCodeException extends Exception {
+    public InvalidCodeException(String code, String context) {
+        super(String.format("%s is an invalid code for %s", code, context));
     }
-    
-    @Override
-    public String getXMLTemplate() {
-        return COMFORT;
-    }
-    
-    @Override
-    protected boolean isValidDocumentTypeCode(String code) {
-        return DocumentTypeCode.isValidComfort(code);
-    }
-    
-    public void importData(COMFORTInvoice data) throws DataIncompleteException, InvalidCodeException {
-        super.importData(data);
-    }
-    protected void processTax(Document doc, String... content) { }
 }

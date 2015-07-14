@@ -44,7 +44,8 @@ import zugferd.pojo.PojoFactory;
 import zugferd.pojo.Product;
 import zugferd.xml.BASICInvoice;
 import zugferd.xml.BASICInvoiceDOM;
-import zugferd.xml.DataIncompleteException;
+import zugferd.exceptions.DataIncompleteException;
+import zugferd.exceptions.InvalidCodeException;
 
 /**
  *
@@ -62,7 +63,7 @@ public class PdfTest {
     protected Font font12b;
     protected Font font14;
     
-    public static void main(String[] args) throws IOException, DocumentException, ParserConfigurationException, SQLException, SAXException, TransformerException, XMPException, ParseException, DataIncompleteException {
+    public static void main(String[] args) throws IOException, DocumentException, ParserConfigurationException, SQLException, SAXException, TransformerException, XMPException, ParseException, DataIncompleteException, InvalidCodeException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
         PdfTest app = new PdfTest();
@@ -84,7 +85,7 @@ public class PdfTest {
         font14 = new Font(bf, 14);
     }
     
-    public void createPdf(Invoice invoice) throws ParserConfigurationException, SAXException, TransformerException, IOException, DocumentException, XMPException, ParseException, DataIncompleteException {
+    public void createPdf(Invoice invoice) throws ParserConfigurationException, SAXException, TransformerException, IOException, DocumentException, XMPException, ParseException, DataIncompleteException, InvalidCodeException {
         String dest = String.format(DEST, invoice.getId());
         InvoiceData invoiceData = new InvoiceData();
         BASICInvoice basic = invoiceData.importInvoice(invoice);
