@@ -42,41 +42,25 @@
  * For more information, please contact iText Software Corp. at this
  * address: sales@itextpdf.com
  */
-package zugferd.xml;
-
-import zugferd.exceptions.DataIncompleteException;
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-import zugferd.codes.DocumentTypeCode;
-import zugferd.exceptions.InvalidCodeException;
+package zugferd.codes;
 
 /**
- *
  * @author Bruno Lowagie (iText Software)
  */
-public class COMFORTInvoiceDOM extends BASICInvoiceDOM {
-    public static final String COMFORT = "resources/zugferd/comfort.xml";
-    
-    public COMFORTInvoiceDOM() throws ParserConfigurationException, SAXException, IOException {
-        init();
+public class CountryCode {
+    /**
+     * The code list provided with the ZUGFeRD standard only lists four codes:
+     * DE, FR, IT, and CN. Obviously, there are more codes available (in ISO 3166-1 alpha-2).
+     * We won't check the presence of a code in ISO ISO 3166-1 alpha-2, but we'll check if the
+     * code consists of two letters and if it's uppercase.
+     * @param code the code to be tested
+     * @return true if the code has the correct format
+     */
+    public static boolean isValid(String code) {
+        if (code.length() != 2) return false;
+        if (code.charAt(0) < 65) return false;
+        if (code.charAt(0) > 90) return false;
+        if (code.charAt(1) < 65) return false;
+        return code.charAt(1) < 91;
     }
-    
-    @Override
-    public String getXMLTemplate() {
-        return COMFORT;
-    }
-    
-    @Override
-    protected boolean isValidDocumentTypeCode(String code) {
-        return DocumentTypeCode.isValidComfort(code);
-    }
-    
-    public void importData(COMFORTInvoice data) throws DataIncompleteException, InvalidCodeException {
-        super.importData(data);
-    }
-    
-    @Override
-    protected void processTax(Document doc, String... content) { }
 }
