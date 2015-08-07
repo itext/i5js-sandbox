@@ -13,7 +13,7 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
-import zugferd.xml.BASICInvoiceDOM;
+import zugferd.xml.InvoiceDOM;
 import zugferd.xml.BASICInvoiceData;
 import zugferd.exceptions.DataIncompleteException;
 import zugferd.exceptions.InvalidCodeException;
@@ -106,8 +106,7 @@ public class XML4Basic {
                 "IncludedSupplyChainTradeLineItem.SpecifiedTradeProduct.Name[2]");
         
         // Create the XML
-        BASICInvoiceDOM dom = new BASICInvoiceDOM();
-        dom.importData(data);
+        InvoiceDOM dom = new InvoiceDOM(data);
         byte[] xml = dom.exportDoc();
         System.out.println(new String(xml));
     }

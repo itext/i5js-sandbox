@@ -43,7 +43,7 @@ import zugferd.pojo.Item;
 import zugferd.pojo.PojoFactory;
 import zugferd.pojo.Product;
 import zugferd.xml.BASICInvoice;
-import zugferd.xml.BASICInvoiceDOM;
+import zugferd.xml.InvoiceDOM;
 import zugferd.exceptions.DataIncompleteException;
 import zugferd.exceptions.InvalidCodeException;
 
@@ -171,7 +171,7 @@ public class PdfTest {
         document.add(getPaymentInfo(basic.getPaymentReference(), basic.getPaymentMeansPayeeFinancialInstitutionBIC(), basic.getPaymentMeansPayeeAccountIBAN()));
 
         // XML version
-        BASICInvoiceDOM dom = new BASICInvoiceDOM();
+        InvoiceDOM dom = new InvoiceDOM();
         dom.importData(basic);
         PdfDictionary parameters = new PdfDictionary();
         parameters.put(PdfName.MODDATE, new PdfDate());

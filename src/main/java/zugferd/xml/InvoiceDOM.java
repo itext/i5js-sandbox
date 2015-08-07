@@ -47,7 +47,7 @@ package zugferd.xml;
 import zugferd.exceptions.DataIncompleteException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -66,77 +66,94 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
+import zugferd.codes.FreeTextSubjectCode;
 import zugferd.exceptions.InvalidCodeException;
 
 /**
  * @author iText
  */
-public class BASICInvoiceDOM {
+public final class InvoiceDOM {
+    
+    // Profiles that are supported:
     public static final String BASIC = "resources/zugferd/basic.xml";
+    public static final String COMFORT = "resources/zugferd/comfort.xml";
     
-    protected Document doc;
+    // The DOM document
+    private Document doc;
     
-    public BASICInvoiceDOM() throws ParserConfigurationException, SAXException, IOException {
-        init();
-    }
-    
-    public final void init() throws SAXException, ParserConfigurationException, IOException {
+    /**
+     * Creates an object that will import data into an XML template.
+     * @param data If this is an instance of BASICInvoice, the BASIC profile will be used;
+     *             If this is an instance of COMFORTInvoice, the COMFORT profile will be used.
+     */
+    public InvoiceDOM(BASICInvoice data)
+            throws ParserConfigurationException, SAXException, IOException,
+            DataIncompleteException, InvalidCodeException {
+        // Checking the profile and the document type code
+        DocumentTypeCode dtCode;
+        String template;
+        if (data instanceof COMFORTInvoice) {
+            template = COMFORT;
+            dtCode = new DocumentTypeCode(DocumentTypeCode.COMFORT);
+        }
+        else {
+            template = BASIC;
+            dtCode = new DocumentTypeCode(DocumentTypeCode.COMFORT);
+        }
+        if (!dtCode.isValid(data.getTypeCode()))
+            throw new InvalidCodeException(data.getTypeCode(), "document type code");
+        // Loading the XML template
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-	doc = docBuilder.parse(getXMLTemplate());
+	doc = docBuilder.parse(template);
+        // importing the data
+        importData(data);
     }
     
-    public String getXMLTemplate() {
-        return BASIC;
-    }
-    
-    protected boolean isEmpty(String s) {
-        if (s == null) return true;
-        return s.trim().length() == 0;
-    }
-    
-    protected boolean isValidDocumentTypeCode(String code) {
-        return DocumentTypeCode.isValidBasic(code);
-    }
-    
-    public void importData(BASICInvoice data) throws DataIncompleteException, InvalidCodeException {
-        // SpecifiedExchangedDocumentContext
-        setNodeContent(doc, "udt:Indicator", 0, data.getTestIndicator() ? "true" : "false");
+    private void importData(BASICInvoice data) throws DataIncompleteException, InvalidCodeException {
         
-        // HeaderExchangedDocument
+        /* SpecifiedExchangedDocumentContext (required) */
+        
+        Element element = (Element) doc.getElementsByTagName("rsm:SpecifiedExchangedDocumentContext").item(0);
+        // TestIndicator (optional)
+        setContent(element, "udt:Indicator", data.getTestIndicator() ? "true" : "false", null);
+        
+        /* HeaderExchangedDocument */
+        
+        element = (Element) doc.getElementsByTagName("rsm:HeaderExchangedDocument").item(0);
+        // ID (required)
         if (isEmpty(data.getId())) 
             throw new DataIncompleteException("HeaderExchangedDocument > ID");
-        setNodeContent(doc, "ram:ID", 1, data.getId());
+        setContent(element, "ram:ID", data.getId(), null);
+        // Name (required)
         if (isEmpty(data.getName())) 
             throw new DataIncompleteException("HeaderExchangedDocument > Name");
-        setNodeContent(doc, "ram:Name", 0, data.getName());
-        if (!isValidDocumentTypeCode(data.getTypeCode())) 
-            throw new InvalidCodeException(data.getTypeCode(), "document type code");
-        setNodeContent(doc, "ram:TypeCode", 0, data.getTypeCode());
-        SimpleDateFormat sdf = DateFormatCode.getDateFormat(data.getDateTimeFormat());
-        setDateTime(doc, "ram:IssueDateTime", 0, sdf.format(data.getDateTime()), data.getDateTimeFormat());
-        setNodeSubContent(doc, "ram:IncludedNote", 0, data.getNotes(), null);
+        setContent(element, "ram:Name", data.getName(), null);
+        // TypeCode (required; already checked upon creation of the InvoiceDOM)
+        setContent(element, "ram:TypeCode", data.getTypeCode(), null);
+        // IssueDateTime (required)
+        setDateTime(element, "udt:DateTimeString", data.getDateTimeFormat(), data.getDateTime());
+        // IncludedNote (optional): header level
+        setIncludedNotes(element, FreeTextSubjectCode.HEADER, data);
         
-        // SpecifiedSupplyChainTradeTransaction
+        /* SpecifiedSupplyChainTradeTransaction */
+        
+        element = (Element) doc.getElementsByTagName("rsm:SpecifiedSupplyChainTradeTransaction").item(0);
+        // buyer reference (optional; comfort only)
+        setBuyerReference(element, data);
+        // SellerTradeParty (required)
         if (isEmpty(data.getSellerName())) 
             throw new DataIncompleteException("SpecifiedSupplyChainTradeTransaction > ApplicableSupplyChainTradeAgreement > SellerTradeParty > Name");
-        processTradeParty(doc, "ram:SellerTradeParty", 0,
-                data.getSellerName(), data.getSellerPostcode(),
-                data.getSellerLineOne(), data.getSellerLineTwo(),
-                data.getSellerCityName(), data.getSellerCountryID(),
-                data.getSellerTaxRegistrationID(), data.getSellerTaxRegistrationSchemeID());
+        setSellerTradeParty(element, data);
+        // BuyerTradeParty (required)
         if (isEmpty(data.getBuyerName())) 
             throw new DataIncompleteException("SpecifiedSupplyChainTradeTransaction > ApplicableSupplyChainTradeAgreement > BuyerTradeParty > Name");
-        processTradeParty(doc, "ram:BuyerTradeParty", 0,
-                data.getBuyerName(), data.getBuyerPostcode(),
-                data.getBuyerLineOne(), data.getBuyerLineTwo(),
-                data.getBuyerCityName(), data.getBuyerCountryID(),
-                data.getBuyerTaxRegistrationID(), data.getBuyerTaxRegistrationSchemeID());
+        setBuyerTradeParty(element, data);
         
         // ApplicableSupplyChainTradeDelivery
         if (!isEmpty(data.getDeliveryDateTimeFormat())) {
-            sdf = DateFormatCode.getDateFormat(data.getDeliveryDateTimeFormat());
-            setDateTime(doc, "ram:OccurrenceDateTime", 0, sdf.format(data.getDeliveryDateTime()), data.getDeliveryDateTimeFormat());
+            Element parent = (Element)element.getElementsByTagName("ram:ActualDeliverySupplyChainEvent").item(0);
+            setDateTime(parent, "udt:DateTimeString", data.getDeliveryDateTimeFormat(), data.getDeliveryDateTime());
         }
         // ApplicableSupplyChainTradeSettlement
         setNodeContent(doc, "ram:PaymentReference", 0, data.getPaymentReference());
@@ -178,6 +195,183 @@ public class BASICInvoiceDOM {
         processLines(doc, data);
     }
     
+    /**
+     * Helper method to set the content of a tag.
+     * @param parent    the parent element of the tag
+     * @param tag       the tag for which we want to set the content
+     * @param content   the new content for the tag
+     * @param attributes    a sequence of attributes of which
+     *                      the odd elements are keys, the even elements the
+     *                      corresponding value.
+     */
+    private void setContent(Element parent, String tag, String content, String[] attributes) {
+        Node node = parent.getElementsByTagName(tag).item(0);
+        // content
+        node.setTextContent(content);
+        // attributes
+        if (attributes == null || attributes.length == 0)
+            return;
+        int n = attributes.length;
+        String attrName, attrValue;
+        NamedNodeMap attrs = node.getAttributes();
+        Node attr;
+        for (int i = 0; i < n; i++) {
+            attrName = attributes[i];
+            if (++i == n) continue;
+            attrValue = attributes[i];
+            attr = attrs.getNamedItem(attrName);
+            if (attr != null)
+                attr.setTextContent(attrValue);
+        }
+    }
+    
+    /**
+     * Set the content of a date tag along with the attribute that defines the format.
+     * @param parent    the parent element that holds the date tag
+     * @param tag       the date tag we want to change
+     * @param dateTimeFormat    the format that will be used as an attribute
+     * @param dateTime  the actual date
+     */
+    protected void setDateTime(Element parent, String tag, String dateTimeFormat, Date dateTime) throws InvalidCodeException {
+        DateFormatCode dfCode = new DateFormatCode();
+        if (!dfCode.isValid(dateTimeFormat))
+            throw new InvalidCodeException(dateTimeFormat, "date / time format code");
+        setContent(parent, tag, dfCode.convertToString(dateTime, dateTimeFormat), new String[]{"format", dateTimeFormat});
+    }
+    
+    /**
+     * Includes notes and (in case of the COMFORT profile) the subject codes
+     * for those notes.
+     * @param parent    the parent element of the tag we want to change
+     * @param tag   the name of the tag
+     * @param level the level where the notices are added (header or line)
+     * @param data  the invoice data (BASICInvoice and COMFORTInvoice are supported)
+     */
+    protected void setIncludedNotes(Element parent, int level, BASICInvoice data)
+        throws DataIncompleteException, InvalidCodeException {
+        Node includedNoteNode = parent.getElementsByTagName("ram:IncludedNote").item(0);
+        String[] notes = data.getNotes();
+        int n = notes.length;
+        FreeTextSubjectCode ftsCode = new FreeTextSubjectCode(level);
+        String[] notesCodes = null;
+        if (data instanceof COMFORTInvoice) {
+            notesCodes = ((COMFORTInvoice)data).getNotesCodes();
+            if (n != notesCodes.length)
+                throw new DataIncompleteException("Number of included notes is not equal to number of codes for included notes.");
+        }
+        for (int i = 0; i < n; i++) {
+            Element noteNode = (Element)includedNoteNode.cloneNode(true);
+            Node content = noteNode.getElementsByTagName("ram:Content").item(0);
+            content.setTextContent(notes[i]);
+            if (notesCodes != null) {
+                if (!ftsCode.isValid(notesCodes[i]))
+                    throw new InvalidCodeException(notesCodes[i], "included note subject code");
+                Node code = noteNode.getElementsByTagName("ram:SubjectCode").item(0);
+                code.setTextContent(notesCodes[i]);
+            }
+            parent.insertBefore(noteNode, includedNoteNode);
+        }
+    }
+    
+    protected void setBuyerReference(Element parent, BASICInvoice data) {
+        if (data instanceof COMFORTInvoice) {
+            String buyerReference = ((COMFORTInvoice) data).getBuyerReference();
+            if (!isEmpty(buyerReference)) {
+                setContent(parent, "ram:BuyerReference", buyerReference, null);
+            }
+        }
+    }
+    
+    protected void setSellerTradeParty(Element parent, BASICInvoice data) throws DataIncompleteException {
+        String id = null;
+        String[] globalID = null;
+        String[] globalIDScheme = null;
+        if (data instanceof COMFORTInvoice) {
+            id = ((COMFORTInvoice)data).getSellerID();
+            globalID = ((COMFORTInvoice)data).getSellerGlobalID();
+            globalIDScheme = ((COMFORTInvoice)data).getSellerGlobalSchemeID();
+        }
+        String name = data.getSellerName();
+        String postcode = data.getSellerPostcode();
+        String lineOne = data.getSellerLineOne();
+        String lineTwo = data.getSellerLineTwo();
+        String cityName = data.getSellerCityName();
+        String countryID = data.getSellerCountryID();
+        String[] taxRegistrationID = data.getSellerTaxRegistrationID();
+        String[] taxRegistrationSchemeID = data.getSellerTaxRegistrationSchemeID();
+        processTradeParty(parent, "ram:SellerTradeParty", id, globalID, globalIDScheme,
+                name, postcode, lineOne, lineTwo, cityName, countryID,
+                taxRegistrationID, taxRegistrationSchemeID);
+    }
+    
+    protected void setBuyerTradeParty(Element parent, BASICInvoice data) throws DataIncompleteException {
+        String id = null;
+        String[] globalID = null;
+        String[] globalIDScheme = null;
+        if (data instanceof COMFORTInvoice) {
+            id = ((COMFORTInvoice)data).getBuyerID();
+            globalID = ((COMFORTInvoice)data).getBuyerGlobalID();
+            globalIDScheme = ((COMFORTInvoice)data).getBuyerGlobalSchemeID();
+        }
+        String name = data.getBuyerName();
+        String postcode = data.getBuyerPostcode();
+        String lineOne = data.getBuyerLineOne();
+        String lineTwo = data.getBuyerLineTwo();
+        String cityName = data.getBuyerCityName();
+        String countryID = data.getBuyerCountryID();
+        String[] taxRegistrationID = data.getBuyerTaxRegistrationID();
+        String[] taxRegistrationSchemeID = data.getBuyerTaxRegistrationSchemeID();
+        processTradeParty(parent, "ram:BuyerTradeParty", id, globalID, globalIDScheme,
+                name, postcode, lineOne, lineTwo, cityName, countryID,
+                taxRegistrationID, taxRegistrationSchemeID);
+    }
+    
+    protected void processTradeParty(Element element, String tagname,
+        String id, String[] globalID, String[] globalIDScheme,
+        String name, String postcode, String lineOne, String lineTwo,
+        String cityName, String countryID,
+        String[] taxRegistrationID, String[] taxRegistrationSchemeID) throws DataIncompleteException {
+        Element party = (Element) element.getElementsByTagName(tagname).item(0);
+        Node node;
+        if (id != null) {
+            node = party.getElementsByTagName("ram:ID").item(0);
+            node.setTextContent(id);
+        }
+        if (globalID != null) {
+            int n = globalID.length;
+            if (globalIDScheme == null || globalIDScheme.length != n)
+                throw new DataIncompleteException("Number of global ID schemes is not equal to number of global IDs.");
+            node = party.getElementsByTagName("ram:GlobalID").item(0);
+            for (int i = 0; i < n; i++) {
+                Element idNode = (Element)node.cloneNode(true);
+                NamedNodeMap attrs = idNode.getAttributes();
+                idNode.setTextContent(globalID[i]);
+                Node schemeID = attrs.getNamedItem("schemeID");
+                schemeID.setTextContent(globalIDScheme[i]);
+                party.insertBefore(idNode, node);
+            }
+        }
+        setContent(party, "ram:Name", name, null);
+        setContent(party, "ram:PostcodeCode", postcode, null);
+        setContent(party, "ram:LineOne", lineOne, null);
+        setContent(party, "ram:LineTwo", lineTwo, null);
+        setContent(party, "ram:CityName", cityName, null);
+        setContent(party, "ram:CountryID", countryID, null);
+        int n = taxRegistrationID.length;
+        if (taxRegistrationSchemeID != null && taxRegistrationSchemeID.length != n)
+            throw new DataIncompleteException("Number of tax ID schemes is not equal to number of tax IDs.");
+        Element tax = (Element) party.getElementsByTagName("ram:SpecifiedTaxRegistration").item(0);
+        node = tax.getElementsByTagName("ram:ID").item(0);
+        for (int i = 0; i < n; i++) {
+            Element idNode = (Element)node.cloneNode(true);
+            idNode.setTextContent(taxRegistrationID[i]);
+            NamedNodeMap attrs = idNode.getAttributes();
+            Node schemeID = attrs.getNamedItem("schemeID");
+            schemeID.setTextContent(taxRegistrationSchemeID[i]);
+            tax.insertBefore(idNode, node);
+        }           
+    }
+    
     protected void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
         Node node = doc.getElementsByTagName(tagname).item(idx);
         if (node == null)
@@ -195,21 +389,6 @@ public class BASICInvoiceDOM {
             attr = attrs.getNamedItem(attrName);
             if (attr != null)
                 attr.setTextContent(attrValue);
-        }
-    }
-    
-    protected void setDateTime(Document doc, String tagname, int idx, String datetime, String format) {
-        Node node = doc.getElementsByTagName(tagname).item(idx);
-        if (node == null)
-            return;
-        NodeList list = node.getChildNodes();
-        for (int i = 0; i < list.getLength(); i++) {
-            Node childNode = list.item(i);
-            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-                childNode.setTextContent(datetime);
-                Node attr = childNode.getAttributes().item(0);
-                attr.setTextContent(format);
-            }
         }
     }
     
@@ -251,39 +430,6 @@ public class BASICInvoiceDOM {
                 }
             }
             parent.insertBefore(newNode, node);
-        }
-    }
-    
-    protected void processTradeParty(Document doc, String tagname, int idx,
-        String name, String postcode, String lineOne, String lineTwo,
-        String cityName, String countryID,
-        String[] taxRegistrationID, String[] taxRegistrationSchemeID) {
-        Node node = doc.getElementsByTagName(tagname).item(idx);
-        NodeList list = node.getChildNodes();
-        for (int i = 0; i < list.getLength(); i++) {
-            Node childNode = list.item(i);
-            if (childNode.getNodeType() != Node.ELEMENT_NODE)
-                continue;
-            if ("ram:Name".equals(childNode.getNodeName())) {
-                childNode.setTextContent(name);
-            }
-            else if ("ram:PostalTradeAddress".equals(childNode.getNodeName()))
-                processPostalAddres(childNode, postcode, lineOne, lineTwo, cityName, countryID);
-            else if ("ram:SpecifiedTaxRegistration".equals(childNode.getNodeName())) {
-                setNodeSubContent(node, childNode, taxRegistrationID, taxRegistrationSchemeID);
-                break;
-            }
-        }
-    }
-
-    protected void processPostalAddres(Node node, String... content) {
-        NodeList list = node.getChildNodes();
-        int counter = 0;
-        for (int i = 0; i < list.getLength(); i++) {
-            Node childNode = list.item(i);
-            if (childNode.getNodeType() != Node.ELEMENT_NODE)
-                continue;
-            childNode.setTextContent(content[counter++]);
         }
     }
     
@@ -352,7 +498,7 @@ public class BASICInvoiceDOM {
         }
     }
     
-    protected void processTax(Document doc, String... content) {
+    protected void processTax(Document doc, String... content) {/*
         Node node = doc.getElementsByTagName("ram:ApplicableTradeTax").item(0);
         int counter = 0;
         Node newNode = node.cloneNode(true);
@@ -368,7 +514,7 @@ public class BASICInvoiceDOM {
             }
         }
         Node parent = node.getParentNode();
-        parent.insertBefore(newNode, node);
+        parent.insertBefore(newNode, node);*/
     }
     
     protected void processLines(Document doc, BASICInvoice data) throws DataIncompleteException {
@@ -438,5 +584,10 @@ public class BASICInvoiceDOM {
         if (emptyElement || emptyText) {
             node.getParentNode().removeChild(node);
         }
+    }
+    
+    protected boolean isEmpty(String s) {
+        if (s == null) return true;
+        return s.trim().length() == 0;
     }
 }

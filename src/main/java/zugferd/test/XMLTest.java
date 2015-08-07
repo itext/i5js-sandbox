@@ -12,7 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 import zugferd.InvoiceData;
-import zugferd.xml.BASICInvoiceDOM;
+import zugferd.xml.InvoiceDOM;
 import zugferd.xml.BASICInvoice;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.PojoFactory;
@@ -29,11 +29,10 @@ public class XMLTest {
         List<Invoice> invoices = factory.getInvoices();
         InvoiceData invoiceData = new InvoiceData();
         BASICInvoice basic;
-        BASICInvoiceDOM dom;
+        InvoiceDOM dom;
         for (Invoice invoice : invoices) {
             basic = invoiceData.importInvoice(invoice);
-            dom = new BASICInvoiceDOM();
-            dom.importData(basic);
+            dom = new InvoiceDOM(basic);
             byte[] xml = dom.exportDoc();
             System.out.println(new String(xml));
         }

@@ -462,7 +462,13 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return to1DArray(lineItemSpecifiedTradeProductDescription);
     }
     
-    public void addNote(String code, String note) {
+    public void addNote(String note) {
+        throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
+    }
+    
+    public void addNote(String note, String code) {
+        notes.add(note);
+        notesCodes.add(code);
     }
 
     public void setBuyerReference(String buyerReference) {
@@ -473,7 +479,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.sellerID = sellerID;
     }
 
-    public void addSellerGlobaleID(String sellerGlobalSchemeID, String sellerGlobalID) {
+    public void addSellerGlobalID(String sellerGlobalSchemeID, String sellerGlobalID) {
         this.sellerGlobalID.add(sellerGlobalID);
         this.sellerGlobalSchemeID.add(sellerGlobalSchemeID);
     }
@@ -482,7 +488,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.buyerID = buyerID;
     }
 
-    public void setBuyerGlobaleID(String buyerGlobalSchemeID, String buyerGlobalID) {
+    public void addBuyerGlobalID(String buyerGlobalSchemeID, String buyerGlobalID) {
         this.buyerGlobalID.add(buyerGlobalID);
         this.buyerGlobalSchemeID.add(buyerGlobalSchemeID);
     }

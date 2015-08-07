@@ -42,41 +42,51 @@
  * For more information, please contact iText Software Corp. at this
  * address: sales@itextpdf.com
  */
-package zugferd.xml;
-
-import zugferd.exceptions.DataIncompleteException;
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-import zugferd.codes.DocumentTypeCode;
-import zugferd.exceptions.InvalidCodeException;
+package zugferd.codes;
 
 /**
- *
  * @author Bruno Lowagie (iText Software)
  */
-public class COMFORTInvoiceDOM extends BASICInvoiceDOM {
-    public static final String COMFORT = "resources/zugferd/comfort.xml";
+public class FreeTextSubjectCode extends CodeValidation {
+    // header 
+    public static final String REGULATORY_INFORMATION = "REG";
+    public static final String PRICE_CONDITIONS = "AAK";
+    public static final String ADDITIONAL_SALES_CONDITIONS = "AAJ";
+    public static final String PAYMENT_INFORMATION = "PMT";
+    // line
+    public static final String PRICE_CALCULATION_FORMULA = "PRF";
+    public static final String PRODUCT_INFORMATION = "PRD";
+    public static final String CERTIFICATION_STATEMENTS = "AAY";
     
-    public COMFORTInvoiceDOM() throws ParserConfigurationException, SAXException, IOException {
-        init();
+    public static final int HEADER = 1;
+    public static final int LINE = 2;
+    
+    protected int level;
+    
+    public FreeTextSubjectCode(int level) {
+        this.level = level;
     }
     
-    @Override
-    public String getXMLTemplate() {
-        return COMFORT;
+    public boolean isValid(String code) {
+        switch(level) {
+            case HEADER:
+                return isHeaderLevel(code);
+            case LINE:
+                return isLineLevel(code);
+        }
+        return true;
     }
     
-    @Override
-    protected boolean isValidDocumentTypeCode(String code) {
-        return DocumentTypeCode.isValidComfort(code);
+    public static boolean isHeaderLevel(String code) {
+        return code.equals(REGULATORY_INFORMATION)
+            || code.equals(PRICE_CONDITIONS)
+            || code.equals(ADDITIONAL_SALES_CONDITIONS)
+            || code.equals(PAYMENT_INFORMATION);
     }
     
-    public void importData(COMFORTInvoice data) throws DataIncompleteException, InvalidCodeException {
-        super.importData(data);
+    public static boolean isLineLevel(String code) {
+        return code.equals(PRICE_CALCULATION_FORMULA)
+            || code.equals(PRODUCT_INFORMATION)
+            || code.equals(CERTIFICATION_STATEMENTS);
     }
-    
-    @Override
-    protected void processTax(Document doc, String... content) { }
 }

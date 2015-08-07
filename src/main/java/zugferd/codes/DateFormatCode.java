@@ -63,11 +63,11 @@ public class DateFormatCode extends CodeValidation {
             || format.equals(YYYYWW);
     }
     
-    public static String convertToString(Date d, String format) throws InvalidCodeException {
+    public String convertToString(Date d, String format) throws InvalidCodeException {
         return getDateFormat(format).format(d);
     }
     
-    public static Date convertToDate(String d, String format) throws InvalidCodeException, ParseException {
+    public Date convertToDate(String d, String format) throws InvalidCodeException, ParseException {
         return getDateFormat(format).parse(d);
     }
     

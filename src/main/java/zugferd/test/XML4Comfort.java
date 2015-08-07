@@ -13,10 +13,12 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
-import zugferd.xml.COMFORTInvoiceDOM;
+import zugferd.codes.FreeTextSubjectCode;
+import zugferd.codes.GlobalIdentifierCode;
 import zugferd.xml.COMFORTInvoiceData;
 import zugferd.exceptions.DataIncompleteException;
 import zugferd.exceptions.InvalidCodeException;
+import zugferd.xml.InvoiceDOM;
 
 /**
  *
@@ -35,12 +37,17 @@ public class XML4Comfort {
         data.setName("HeaderExchangedDocument.Name");
         data.setTypeCode(DocumentTypeCode.DEBIT_NOTE_FINANCIAL_ADJUSTMENT);
         data.setDate(sdf.parse("2016/04/01"), DateFormatCode.YYYYMMDD);
-        data.addNote("HeaderExchangedDocument.Note[0]", "SubjectCode[0]");
-        data.addNote("HeaderExchangedDocument.Note[1]", "SubjectCode[1]");
-        data.addNote("HeaderExchangedDocument.Note[2]");
+        data.addNote("HeaderExchangedDocument.Note[0]", FreeTextSubjectCode.REGULATORY_INFORMATION);
+        data.addNote("HeaderExchangedDocument.Note[1]", FreeTextSubjectCode.PRICE_CONDITIONS);
+        data.addNote("HeaderExchangedDocument.Note[2]", FreeTextSubjectCode.PAYMENT_INFORMATION);
         
-        // SpecifiedSupplyChainTradeTransaction>
+        // SpecifiedSupplyChainTradeTransaction
+        data.setBuyerReference("BuyerReference");
         // Seller
+        data.setSellerID("SellerTradeParty.ID");
+        data.addSellerGlobalID(GlobalIdentifierCode.DUNS, "SellerTradeParty.GlobalID[0]");
+        data.addSellerGlobalID(GlobalIdentifierCode.GTIN, "SellerTradeParty.GlobalID[1]");
+        data.addSellerGlobalID(GlobalIdentifierCode.ODETTE, "SellerTradeParty.GlobalID[2]");
         data.setSellerName("SellerTradeParty.Name");
         data.setSellerPostcode("SellerTradeParty.PostalTradeAddress.Postcode");
         data.setSellerLineOne("SellerTradeParty.PostalTradeAddress.LineOne");
@@ -51,6 +58,10 @@ public class XML4Comfort {
         data.addSellerTaxRegistration("SellerTradeParty.SpecifiedTaxRegistration[1]", "SellerTradeParty.SpecifiedTaxRegistration.SchemeID[1]");
         data.addSellerTaxRegistration("SellerTradeParty.SpecifiedTaxRegistration[2]", "SellerTradeParty.SpecifiedTaxRegistration.SchemeID[2]");
         // Buyer
+        data.setBuyerID("BuyerTradeParty.ID");
+        data.addBuyerGlobalID(GlobalIdentifierCode.DUNS, "BuyerTradeParty.GlobalID[0]");
+        data.addBuyerGlobalID(GlobalIdentifierCode.GTIN, "BuyerTradeParty.GlobalID[1]");
+        data.addBuyerGlobalID(GlobalIdentifierCode.ODETTE, "BuyerTradeParty.GlobalID[2]");
         data.setBuyerName("BuyerTradeParty.Name");
         data.setBuyerPostcode("BuyerTradeParty.PostalTradeAddress.Postcode");
         data.setBuyerLineOne("BuyerTradeParty.PostalTradeAddress.LineOne");
@@ -226,8 +237,7 @@ public class XML4Comfort {
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.BuyerAssignedID",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.Name",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.Description");
-        COMFORTInvoiceDOM dom = new COMFORTInvoiceDOM();
-        dom.importData(data);
+        InvoiceDOM dom = new InvoiceDOM(data);
         byte[] xml = dom.exportDoc();
         System.out.println(new String(xml));
     }
