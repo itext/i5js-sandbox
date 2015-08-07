@@ -52,6 +52,27 @@ public class DocumentTypeCode extends CodeValidation {
     public static final String DEBIT_NOTE_FINANCIAL_ADJUSTMENT = "38";
     public static final String SELF_BILLED_INVOICE = "389";
     
+    public static final int BASIC = 0;
+    public static final int COMFORT = 1;
+    public static final int EXTENDED = 2;
+    
+    protected int profile;
+    
+    public DocumentTypeCode(int profile) {
+        this.profile = profile;
+    }
+    
+    public boolean isValid(String code) {
+        switch(profile) {
+            case BASIC:
+                return isValidBasic(code);
+            case COMFORT:
+                return isValidComfort(code);
+            default:
+                return isValidExtended(code);
+        }
+    }
+    
     public static boolean isValidBasic(String code) {
         return COMMERCIAL_INVOICE.equals(code);
     }
@@ -61,7 +82,7 @@ public class DocumentTypeCode extends CodeValidation {
             || DEBIT_NOTE_FINANCIAL_ADJUSTMENT.equals(code);
     }
     
-    public boolean isValid(String code) {
+    public static boolean isValidExtended(String code) {
         return COMMERCIAL_INVOICE.equals(code)
             || DEBIT_NOTE_FINANCIAL_ADJUSTMENT.equals(code)
             || SELF_BILLED_INVOICE.equals(code);

@@ -58,8 +58,23 @@ public class FreeTextSubjectCodes extends CodeValidation {
     public static final String PRODUCT_INFORMATION = "PRD";
     public static final String CERTIFICATION_STATEMENTS = "AAY";
     
+    public static final int HEADER = 1;
+    public static final int LINE = 2;
+    
+    protected int level;
+    
+    public FreeTextSubjectCodes(int level) {
+        this.level = level;
+    }
+    
     public boolean isValid(String code) {
-        return isHeaderLevel(code) || isLineLevel(code);
+        switch(level) {
+            case HEADER:
+                return isHeaderLevel(code);
+            case LINE:
+                return isLineLevel(code);
+        }
+        return true;
     }
     
     public static boolean isHeaderLevel(String code) {
