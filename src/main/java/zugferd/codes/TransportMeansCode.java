@@ -45,18 +45,30 @@
 package zugferd.codes;
 
 /**
- * @author Bruno Lowagie (iText Software)
+ *
+ * @author iText
  */
-public class CurrencyCode extends CodeValidation {
-    /**
-     * The code list provided with the ZUGFeRD standard only lists four codes:
-     * EUR, USD, GBP and COP. Obviously, there are more codes available (in ISO 4217-3A).
-     * We won't check the presence of a code in ISO 4217-3A, but we'll check if the
-     * code consists of three letters and if it's uppercase.
-     * @param code the code to be tested
-     * @return true if the code has the correct format
-     */
+public class TransportMeansCode extends CodeValidation {
+    
+    public static final String MARITIME = "1";
+    public static final String RAIL = "2";
+    public static final String ROAD = "3";
+    public static final String AIR = "4";
+    public static final String MAIL = "5";
+    public static final String MULTIMODAL = "6";
+    public static final String FIXED_INSTALLATION = "7";
+    public static final String INLAND_WATER = "8";
+    public static final String NOT_APPLICABLE = "9";
+    
     public boolean isValid(String code) {
-        return isUppercase(code, 3);
+        return code.equals(MARITIME)
+                || code.equals(RAIL)
+                || code.equals(ROAD)
+                || code.equals(AIR)
+                || code.equals(MAIL)
+                || code.equals(MULTIMODAL)
+                || code.equals(FIXED_INSTALLATION)
+                || code.equals(INLAND_WATER)
+                || code.equals(NOT_APPLICABLE);
     }
 }

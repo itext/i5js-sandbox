@@ -45,18 +45,26 @@
 package zugferd.codes;
 
 /**
- * @author Bruno Lowagie (iText Software)
+ * @author iText
  */
-public class CurrencyCode extends CodeValidation {
+public class GlobalIdentifierCode extends CodeValidation {
+
+    public static final String SWIFT = "0021";
+    public static final String DUNS = "0060";
+    public static final String GLN = "0088";
+    public static final String GTIN = "0160";
+    public static final String ODETTE = "0177";
+    
     /**
-     * The code list provided with the ZUGFeRD standard only lists four codes:
-     * EUR, USD, GBP and COP. Obviously, there are more codes available (in ISO 4217-3A).
-     * We won't check the presence of a code in ISO 4217-3A, but we'll check if the
-     * code consists of three letters and if it's uppercase.
+     * The code list provided with the ZUGFeRD standard only lists five codes.
+     * There are more codes available (in ISO 6523).
+     * We won't check the presence of a code in ISO 6523, but we'll check if
+     * the code consists of four numbers.
      * @param code the code to be tested
      * @return true if the code has the correct format
      */
     public boolean isValid(String code) {
-        return isUppercase(code, 3);
+        return isNumeric(code, 4);
     }
+
 }

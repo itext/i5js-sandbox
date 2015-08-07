@@ -47,7 +47,7 @@ package zugferd.codes;
 /**
  * @author Bruno Lowagie (iText Software)
  */
-public class LanguageCode {
+public class LanguageCode extends CodeValidation {
     /**
      * The code list provided with the ZUGFeRD standard only lists four codes:
      * de, fr, en, and es. Obviously, there are more codes available (in ISO 639-1).
@@ -56,11 +56,7 @@ public class LanguageCode {
      * @param code the code to be tested
      * @return true if the code has the correct format
      */
-    public static boolean isValid(String code) {
-        if (code.length() != 2) return false;
-        if (code.charAt(0) < 97) return false;
-        if (code.charAt(0) > 122) return false;
-        if (code.charAt(1) < 97) return false;
-        return code.charAt(1) < 123;
+    public boolean isValid(String code) {
+        return isLowercase(code, 2);
     }
 }

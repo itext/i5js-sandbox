@@ -45,18 +45,32 @@
 package zugferd.codes;
 
 /**
- * @author Bruno Lowagie (iText Software)
+ *
+ * @author iText
  */
-public class CurrencyCode extends CodeValidation {
-    /**
-     * The code list provided with the ZUGFeRD standard only lists four codes:
-     * EUR, USD, GBP and COP. Obviously, there are more codes available (in ISO 4217-3A).
-     * We won't check the presence of a code in ISO 4217-3A, but we'll check if the
-     * code consists of three letters and if it's uppercase.
-     * @param code the code to be tested
-     * @return true if the code has the correct format
-     */
-    public boolean isValid(String code) {
-        return isUppercase(code, 3);
+public abstract class CodeValidation {
+    
+    public abstract boolean isValid(String code);
+    
+    public boolean isNumeric(String code, int digits) {
+        if (code.length() != digits) return false;
+        for (char c : code.toCharArray())
+            if (c < 48 || c > 57) return false;
+        return true;
     }
+    
+    public boolean isUppercase(String code, int digits) {
+        if (code.length() != digits) return false;
+        for (char c : code.toCharArray())
+            if (c < 65 || c > 90) return false;
+        return true;
+    }
+    
+    public boolean isLowercase(String code, int digits) {
+        if (code.length() != digits) return false;
+        for (char c : code.toCharArray())
+            if (c < 97 || c > 122) return false;
+        return true;
+    }
+    
 }

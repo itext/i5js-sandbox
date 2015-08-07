@@ -45,18 +45,30 @@
 package zugferd.codes;
 
 /**
- * @author Bruno Lowagie (iText Software)
+ *
+ * @author iText
  */
-public class CurrencyCode extends CodeValidation {
-    /**
-     * The code list provided with the ZUGFeRD standard only lists four codes:
-     * EUR, USD, GBP and COP. Obviously, there are more codes available (in ISO 4217-3A).
-     * We won't check the presence of a code in ISO 4217-3A, but we'll check if the
-     * code consists of three letters and if it's uppercase.
-     * @param code the code to be tested
-     * @return true if the code has the correct format
-     */
+public class PaymentMeansCode extends CodeValidation {
+    
+    public static final String NOT_DEFINED = "1";
+    public static final String AUTOMATED_CLEARING_HOUSE = "3";
+    public static final String CASH = "10";
+    public static final String CHEQUE = "20";
+    public static final String DEBIT_TRANSFER = "31";
+    public static final String PAYMENT_TO_BANK_ACCOUNT = "42";
+    public static final String BANK_CARD = "48";
+    public static final String DIRECT_DEBIT = "49";
+    public static final String CLEARING = "97";
+    
     public boolean isValid(String code) {
-        return isUppercase(code, 3);
+        return code.equals(NOT_DEFINED)
+                || code.equals(AUTOMATED_CLEARING_HOUSE)
+                || code.equals(CASH)
+                || code.equals(CHEQUE)
+                || code.equals(DEBIT_TRANSFER)
+                || code.equals(PAYMENT_TO_BANK_ACCOUNT)
+                || code.equals(BANK_CARD)
+                || code.equals(DIRECT_DEBIT)
+                || code.equals(CLEARING);
     }
 }

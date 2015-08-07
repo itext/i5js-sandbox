@@ -45,18 +45,36 @@
 package zugferd.codes;
 
 /**
- * @author Bruno Lowagie (iText Software)
+ *
+ * @author iText
  */
-public class CurrencyCode extends CodeValidation {
-    /**
-     * The code list provided with the ZUGFeRD standard only lists four codes:
-     * EUR, USD, GBP and COP. Obviously, there are more codes available (in ISO 4217-3A).
-     * We won't check the presence of a code in ISO 4217-3A, but we'll check if the
-     * code consists of three letters and if it's uppercase.
-     * @param code the code to be tested
-     * @return true if the code has the correct format
-     */
+public class AllowanceChargeReasonCode extends CodeValidation {
+    
+    public static final String ADVERTISING = "AA";
+    public static final String OTHER_SERVICES = "ADR";
+    public static final String COLLECTION_AND_RECYCLING = "AEO";
+    public static final String DISCOUNT = "DI";
+    public static final String EARLY_PAYMENT_ALLOWANCE = "EAB";
+    public static final String FREIGHT_SERVICE = "FC";
+    public static final String INSURANCE = "IN";
+    public static final String MINIMUM_BILLING_CHARGE = "MAC";
+    public static final String NON_RETURNABLE_CONTAINERS = "NAA";
+    public static final String PACKING = "PC";
+    public static final String REBATE = "RAA";
+    public static final String SPECIAL_HANDLING = "SH";
+    
     public boolean isValid(String code) {
-        return isUppercase(code, 3);
+        return code.equals(ADVERTISING)
+                || code.equals(OTHER_SERVICES)
+                || code.equals(COLLECTION_AND_RECYCLING)
+                || code.equals(DISCOUNT)
+                || code.equals(EARLY_PAYMENT_ALLOWANCE)
+                || code.equals(FREIGHT_SERVICE)
+                || code.equals(INSURANCE)
+                || code.equals(MINIMUM_BILLING_CHARGE)
+                || code.equals(NON_RETURNABLE_CONTAINERS)
+                || code.equals(PACKING)
+                || code.equals(REBATE)
+                || code.equals(SPECIAL_HANDLING);
     }
 }

@@ -45,18 +45,34 @@
 package zugferd.codes;
 
 /**
- * @author Bruno Lowagie (iText Software)
+ *
+ * @author iText
  */
-public class CurrencyCode extends CodeValidation {
-    /**
-     * The code list provided with the ZUGFeRD standard only lists four codes:
-     * EUR, USD, GBP and COP. Obviously, there are more codes available (in ISO 4217-3A).
-     * We won't check the presence of a code in ISO 4217-3A, but we'll check if the
-     * code consists of three letters and if it's uppercase.
-     * @param code the code to be tested
-     * @return true if the code has the correct format
-     */
+public class IncotermsCOde extends CodeValidation {
+    
+    public static final String EX_WORKS = "EXW";
+    public static final String FREE_CARRIER = "FCA";
+    public static final String FREE_ALONGSIDE_SHIP = "FAS";
+    public static final String FREE_ON_BOARD = "FOB";
+    public static final String COST_AND_FREIGHT = "CFR";
+    public static final String COST_INSURANCE_FREIGHT = "CIF";
+    public static final String DELIVERED_AT_TERMINAL = "DAT";
+    public static final String DELIVERED_AT_PLACE = "DAP";
+    public static final String CARRIAGE_PAID_TO = "CPT";
+    public static final String CARRIAGE_INSURANCE_PAID = "CIP";
+    public static final String DELIVERED_DUTY_PAID = "DDP";
+    
     public boolean isValid(String code) {
-        return isUppercase(code, 3);
+        return code.equals(EX_WORKS)
+                || code.equals(FREE_CARRIER)
+                || code.equals(FREE_ALONGSIDE_SHIP)
+                || code.equals(FREE_ON_BOARD)
+                || code.equals(COST_AND_FREIGHT)
+                || code.equals(COST_INSURANCE_FREIGHT)
+                || code.equals(DELIVERED_AT_TERMINAL)
+                || code.equals(DELIVERED_AT_PLACE)
+                || code.equals(CARRIAGE_PAID_TO)
+                || code.equals(CARRIAGE_INSURANCE_PAID)
+                || code.equals(DELIVERED_DUTY_PAID);
     }
 }

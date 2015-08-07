@@ -47,7 +47,7 @@ package zugferd.codes;
 /**
  * @author Bruno Lowagie (iText Software)
  */
-public class DocumentTypeCode {
+public class DocumentTypeCode extends CodeValidation {
     public static final String COMMERCIAL_INVOICE = "380";
     public static final String DEBIT_NOTE_FINANCIAL_ADJUSTMENT = "38";
     public static final String SELF_BILLED_INVOICE = "389";
@@ -61,7 +61,7 @@ public class DocumentTypeCode {
             || DEBIT_NOTE_FINANCIAL_ADJUSTMENT.equals(code);
     }
     
-    public static boolean isValidExtended(String code) {
+    public boolean isValid(String code) {
         return COMMERCIAL_INVOICE.equals(code)
             || DEBIT_NOTE_FINANCIAL_ADJUSTMENT.equals(code)
             || SELF_BILLED_INVOICE.equals(code);

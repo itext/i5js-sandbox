@@ -52,12 +52,12 @@ import zugferd.exceptions.InvalidCodeException;
 /**
  * @author Bruno Lowagie (iText Software)
  */
-public class DateFormatCode {
+public class DateFormatCode extends CodeValidation {
     public static final String YYYYMMDD = "102";
     public static final String YYYYMM = "610";
     public static final String YYYYWW = "616";
     
-    public static boolean isValidFormat(String format) {
+    public boolean isValid(String format) {
         return format.equals(YYYYMMDD)
             || format.equals(YYYYMM)
             || format.equals(YYYYWW);
@@ -83,7 +83,7 @@ public class DateFormatCode {
         }
         throw new InvalidCodeException(format, "date format");
     }
-    
+    /*
     public static void main(String[] args) throws InvalidCodeException, ParseException {
         System.out.println(convertToDate("20150401", "102"));
         System.out.println(convertToDate("201504", "610"));
@@ -92,4 +92,5 @@ public class DateFormatCode {
         System.out.println(convertToString(new Date(), "610"));
         System.out.println(convertToString(new Date(), "616"));
     }
+    */
 }

@@ -45,18 +45,24 @@
 package zugferd.codes;
 
 /**
- * @author Bruno Lowagie (iText Software)
+ *
+ * @author iText
  */
-public class CurrencyCode extends CodeValidation {
-    /**
-     * The code list provided with the ZUGFeRD standard only lists four codes:
-     * EUR, USD, GBP and COP. Obviously, there are more codes available (in ISO 4217-3A).
-     * We won't check the presence of a code in ISO 4217-3A, but we'll check if the
-     * code consists of three letters and if it's uppercase.
-     * @param code the code to be tested
-     * @return true if the code has the correct format
-     */
+public class TaxCategoryCode extends CodeValidation {
+    
+    public static final String VAT_REVERSE_CHARGE = "AE";
+    public static final String EXEMPT_FROM_TAX = "E";
+    public static final String ZERO_RATED_GOODS = "Z";
+    public static final String OUTSIDE_SCOPE = "O";
+    public static final String INTRA_COMMUNITY_SUPPLY = "IC";
+    public static final String STANDARD_RATE = "S";
+    
     public boolean isValid(String code) {
-        return isUppercase(code, 3);
+        return code.equals(STANDARD_RATE)
+                || code.equals(EXEMPT_FROM_TAX)
+                || code.equals(ZERO_RATED_GOODS)
+                || code.equals(OUTSIDE_SCOPE)
+                || code.equals(INTRA_COMMUNITY_SUPPLY)
+                || code.equals(VAT_REVERSE_CHARGE);
     }
 }

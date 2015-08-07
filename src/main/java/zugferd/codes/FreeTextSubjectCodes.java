@@ -47,7 +47,7 @@ package zugferd.codes;
 /**
  * @author Bruno Lowagie (iText Software)
  */
-public class FreeTextSubjectCodes {
+public class FreeTextSubjectCodes extends CodeValidation {
     // header 
     public static final String REGULATORY_INFORMATION = "REG";
     public static final String PRICE_CONDITIONS = "AAK";
@@ -58,6 +58,9 @@ public class FreeTextSubjectCodes {
     public static final String PRODUCT_INFORMATION = "PRD";
     public static final String CERTIFICATION_STATEMENTS = "AAY";
     
+    public boolean isValid(String code) {
+        return isHeaderLevel(code) || isLineLevel(code);
+    }
     
     public static boolean isHeaderLevel(String code) {
         return code.equals(REGULATORY_INFORMATION)

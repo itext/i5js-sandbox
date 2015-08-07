@@ -45,18 +45,33 @@
 package zugferd.codes;
 
 /**
- * @author Bruno Lowagie (iText Software)
+ *
+ * @author iText
  */
-public class CurrencyCode extends CodeValidation {
+public class QuantityCode extends CodeValidation {
+    
+    public static final String BARREL = "BA";
+    public static final String BOTTLECRATE = "BC";
+    public static final String BAG = "BG";
+    public static final String BOTTLE = "BO";
+    public static final String BOX = "BX";
+    public static final String CASE = "CS";
+    public static final String CARTON = "CT";
+    public static final String CAN = "CX";
+    public static final String UNPACKAGED = "NE";
+    public static final String PALLET = "PX";
+    public static final String ROLL = "RO";
+    public static final String SACK = "SA";
+    
     /**
-     * The code list provided with the ZUGFeRD standard only lists four codes:
-     * EUR, USD, GBP and COP. Obviously, there are more codes available (in ISO 4217-3A).
-     * We won't check the presence of a code in ISO 4217-3A, but we'll check if the
-     * code consists of three letters and if it's uppercase.
+     * The code list provided with the ZUGFeRD standard only lists twelve codes.
+     * There are more codes available (in UNCL 7065).
+     * We won't check the presence of a code in UNCL 7065, but we'll check if
+     * the code consists of two letters and if it's uppercase.
      * @param code the code to be tested
      * @return true if the code has the correct format
      */
     public boolean isValid(String code) {
-        return isUppercase(code, 3);
+        return isUppercase(code, 2);
     }
 }

@@ -47,7 +47,7 @@ package zugferd.codes;
 /**
  * @author Bruno Lowagie (iText Software)
  */
-public class CountryCode {
+public class CountryCode extends CodeValidation {
     /**
      * The code list provided with the ZUGFeRD standard only lists four codes:
      * DE, FR, IT, and CN. Obviously, there are more codes available (in ISO 3166-1 alpha-2).
@@ -56,11 +56,7 @@ public class CountryCode {
      * @param code the code to be tested
      * @return true if the code has the correct format
      */
-    public static boolean isValid(String code) {
-        if (code.length() != 2) return false;
-        if (code.charAt(0) < 65) return false;
-        if (code.charAt(0) > 90) return false;
-        if (code.charAt(1) < 65) return false;
-        return code.charAt(1) < 91;
+    public boolean isValid(String code) {
+        return isUppercase(code, 2);
     }
 }
