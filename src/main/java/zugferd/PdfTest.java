@@ -171,8 +171,7 @@ public class PdfTest {
         document.add(getPaymentInfo(basic.getPaymentReference(), basic.getPaymentMeansPayeeFinancialInstitutionBIC(), basic.getPaymentMeansPayeeAccountIBAN()));
 
         // XML version
-        InvoiceDOM dom = new InvoiceDOM();
-        dom.importData(basic);
+        InvoiceDOM dom = new InvoiceDOM(basic);
         PdfDictionary parameters = new PdfDictionary();
         parameters.put(PdfName.MODDATE, new PdfDate());
         PdfFileSpecification fileSpec = writer.addFileAttachment(
