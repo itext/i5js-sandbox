@@ -318,60 +318,60 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return billingEndDateTimeFormat;
     }
     
-    public String[] getTradeAllowanceChargeIndicator() {
+    public String[] getSpecifiedTradeAllowanceChargeIndicator() {
         return to1DArray(tradeAllowanceChargeIndicator);
     }
     
-    public String[] getTradeAllowanceChargeActualAmount() {
+    public String[] getSpecifiedTradeAllowanceChargeActualAmount() {
         return to1DArray(tradeAllowanceChargeActualAmount);
     }
     
-    public String[] getTradeAllowanceChargeActualAmountCurrency() {
+    public String[] getSpecifiedTradeAllowanceChargeActualAmountCurrency() {
         return to1DArray(tradeAllowanceChargeActualAmountCurrency);
     }
     
-    public String[] getTradeAllowanceChargeReason() {
+    public String[] getSpecifiedTradeAllowanceChargeReason() {
         return to1DArray(tradeAllowanceChargeReason);
     }
 
-    public String[][] getTradeAllowanceChargeTaxTypeCode() {
+    public String[][] getSpecifiedTradeAllowanceChargeTaxTypeCode() {
         return to2DArray(tradeAllowanceChargeTaxTypeCode);
     }
     
-    public String[][] getTradeAllowanceChargeTaxCategoryCode() {
+    public String[][] getSpecifiedTradeAllowanceChargeTaxCategoryCode() {
         return to2DArray(tradeAllowanceChargeTaxCategoryCode);
     }
     
-    public String[][] getTradeAllowanceChargeTaxApplicablePercent() {
+    public String[][] getSpecifiedTradeAllowanceChargeTaxApplicablePercent() {
         return to2DArray(tradeAllowanceChargeTaxApplicablePercent);
     }
     
-    public String[][] getLogisticsServiceChargeDescription() {
+    public String[][] getSpecifiedLogisticsServiceChargeDescription() {
         return to2DArray(logisticsServiceChargeDescription);
     }
-    public String[] getLogisticsServiceChargeAmount() {
+    public String[] getSpecifiedLogisticsServiceChargeAmount() {
         return to1DArray(logisticsServiceChargeAmount);
     }
-    public String[] getLogisticsServiceChargeAmountCurrency() {
+    public String[] getSpecifiedLogisticsServiceChargeAmountCurrency() {
         return to1DArray(logisticsServiceChargeAmountCurrency);
     }
-    public String[][] getLogisticsServiceChargeTaxTypeCode() {
+    public String[][] getSpecifiedLogisticsServiceChargeTaxTypeCode() {
         return to2DArray(logisticsServiceChargeTaxTypeCode);
     }
-    public String[][] getLogisticsServiceChargeTaxCategoryCode() {
+    public String[][] getSpecifiedLogisticsServiceChargeTaxCategoryCode() {
         return to2DArray(logisticsServiceChargeTaxCategoryCode);
     }
-    public String[][] getLogisticsServiceChargeTaxApplicablePercent() {
+    public String[][] getSpecifiedLogisticsServiceChargeTaxApplicablePercent() {
         return to2DArray(logisticsServiceChargeTaxApplicablePercent);
     }
     
-    public String[][] getTradePaymentTermsInformation() {
+    public String[][] getSpecifiedTradePaymentTermsDescription() {
         return to2DArray(tradePaymentTermsInformation);
     }
-    public Date[] getTradePaymentTermsDueDateTime() {
+    public Date[] getSpecifiedTradePaymentTermsDueDateTime() {
         return (Date[]) tradePaymentTermsDueDateTime.toArray(new Date[tradePaymentTermsDueDateTime.size()]);
     }
-    public String[] getTradePaymentTermsDueDateTimeFormat() {
+    public String[] getSpecifiedTradePaymentTermsDueDateTimeFormat() {
         return to1DArray(tradePaymentTermsDueDateTimeFormat);
     }
     public String getTotalPrepaidAmount() {
@@ -461,6 +461,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return to1DArray(lineItemSpecifiedTradeProductDescription);
     }
     
+    @Override
     public void addNote(String note) {
         throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
     }
@@ -615,7 +616,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.billingEndDateTimeFormat = billingEndDateTimeFormat;
     }
     
-    public void addTradeAllowanceCharge(String indicator, String actualAmount, String actualAmountCurrency,
+    public void addSpecifiedTradeAllowanceCharge(String indicator, String actualAmount, String actualAmountCurrency,
             String reason, String[] typeCodes, String[] categoryCodes, String[] applicablePercent) {
         this.tradeAllowanceChargeIndicator.add(indicator);
         this.tradeAllowanceChargeActualAmount.add(actualAmount);
@@ -626,7 +627,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.tradeAllowanceChargeTaxApplicablePercent.add(applicablePercent);
     }
     
-    public void addLogisticsServiceCharge(String[] description, String actualAmount, String actualAmountCurrency,
+    public void addSpecifiedLogisticsServiceCharge(String[] description, String actualAmount, String actualAmountCurrency,
             String[] typeCodes, String[] categoryCodes, String[] applicablePercent) {
         this.logisticsServiceChargeDescription.add(description);
         this.logisticsServiceChargeAmount.add(actualAmount);
@@ -635,16 +636,19 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.logisticsServiceChargeTaxCategoryCode.add(categoryCodes);
         this.logisticsServiceChargeTaxApplicablePercent.add(applicablePercent);
     }
-    public void setTotalPrepaidAmount(String totalPrepaidAmount) {
-        this.totalPrepaidAmount = totalPrepaidAmount;
+    
+    public void addSpecifiedTradePaymentTerms(String[] information, Date dateTime, String dateTimeFormat) {
+        this.tradePaymentTermsInformation.add(information);
+        this.tradePaymentTermsDueDateTime.add(dateTime);
+        this.tradePaymentTermsDueDateTimeFormat.add(dateTimeFormat);
     }
-    public void setTotalPrepaidCurrencyID(String totalPrepaidCurrencyID) {
+    
+    public void setTotalPrepaidAmount(String totalPrepaidAmount, String totalPrepaidCurrencyID) {
+        this.totalPrepaidAmount = totalPrepaidAmount;
         this.totalPrepaidAmountCurrencyID = totalPrepaidCurrencyID;
     }
-    public void setDuePayableAmount(String duePayableAmount) {
+    public void setDuePayableAmount(String duePayableAmount, String duePayableAmountCurrencyID) {
         this.duePayableAmount = duePayableAmount;
-    }
-    public void setDuePayableAmountCurrencyID(String duePayableAmountCurrencyID) {
         this.duePayableAmountCurrencyID = duePayableAmountCurrencyID;
     }
     

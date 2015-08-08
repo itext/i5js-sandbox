@@ -76,12 +76,12 @@ public class XML4Basic {
         data.addApplicableTradeTax("21.00", "EUR", "VAT", "100.00", "EUR", "21.00");
         
         // SpecifiedTradeSettlementMonetarySummation
-        data.setMonetarySummation("SpecifiedTradeSettlementMonetarySummation.LineTotalAmount", "SpecifiedTradeSettlementMonetarySummation.LineTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.ChargeTotalAmount", "SpecifiedTradeSettlementMonetarySummation.ChargeTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.AllowanceTotalAmount", "SpecifiedTradeSettlementMonetarySummation.AllowanceTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.TaxBasisTotalAmount", "SpecifiedTradeSettlementMonetarySummation.TaxBasisTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.TaxTotalAmount", "SpecifiedTradeSettlementMonetarySummation.TaxTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.GrandTotalAmount", "SpecifiedTradeSettlementMonetarySummation.GrandTotalAmountCurrencyID");
+        data.setMonetarySummation("1000.00", "EUR",
+                "0.00", "EUR",
+                "0.00", "EUR",
+                "1000.00", "EUR",
+                "210.00", "EUR",
+                "1210.00", "EUR");
         
         data.addIncludedSupplyChainTradeLineItem("IncludedSupplyChainTradeLineItem.SpecifiedSupplyChainTradeDelivery.BilledQuantity[0]",
                 "IncludedSupplyChainTradeLineItem.SpecifiedSupplyChainTradeDelivery.BilledQuantity.unitCode[0]",

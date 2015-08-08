@@ -123,18 +123,34 @@ public class XML4Comfort {
         
         data.setBillingStartEnd(sdf.parse("2016/04/01"), DateFormatCode.YYYYMMDD, sdf.parse("2016/04/30"), DateFormatCode.YYYYMMDD);
         
-        data.addTradeAllowanceCharge("TradeAllowanceCharge.Indicator[0]", "0.1234", "USD", "TradeAllowanceCharge.Reason[0]",
+        data.addSpecifiedTradeAllowanceCharge("TradeAllowanceCharge.Indicator[0]", "0.1234", "USD", "TradeAllowanceCharge.Reason[0]",
             new String[]{"VAT", "VAT"}, new String[]{"S", "S"}, new String[]{"6.00", "21.00"});
-        data.addTradeAllowanceCharge("TradeAllowanceCharge.Indicator[1]", "0.0120", "USD", "TradeAllowanceCharge.Reason[1]",
+        data.addSpecifiedTradeAllowanceCharge("TradeAllowanceCharge.Indicator[1]", "0.0120", "USD", "TradeAllowanceCharge.Reason[1]",
             new String[]{"VAT", "VAT"}, new String[]{"S", "S"}, new String[]{"0.00", "8.00"});
         
-        // SpecifiedTradeSettlementMonetarySummation
-        data.setMonetarySummation("SpecifiedTradeSettlementMonetarySummation.LineTotalAmount", "SpecifiedTradeSettlementMonetarySummation.LineTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.ChargeTotalAmount", "SpecifiedTradeSettlementMonetarySummation.ChargeTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.AllowanceTotalAmount", "SpecifiedTradeSettlementMonetarySummation.AllowanceTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.TaxBasisTotalAmount", "SpecifiedTradeSettlementMonetarySummation.TaxBasisTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.TaxTotalAmount", "SpecifiedTradeSettlementMonetarySummation.TaxTotalAmountCurrencyID",
-                "SpecifiedTradeSettlementMonetarySummation.GrandTotalAmount", "SpecifiedTradeSettlementMonetarySummation.GrandTotalAmountCurrencyID");
+        data.addSpecifiedLogisticsServiceCharge(
+            new String[]{"SpecifiedLogisticsServiceCharge.Description[0][0]", "SpecifiedLogisticsServiceCharge.Description[0][1]"},
+            "0.4321", "EUR", new String[]{"VAT", "VAT"}, new String[]{"S", "S"}, new String[]{"6.00", "21.00"});
+        data.addSpecifiedLogisticsServiceCharge(
+            new String[]{"SpecifiedLogisticsServiceCharge.Description[1][0]", "SpecifiedLogisticsServiceCharge.Description[1][1]"},
+            "0.1234", "EUR", new String[]{"VAT", "VAT"}, new String[]{"S", "S"}, new String[]{"0.00", "8.00"});
+        
+        data.addSpecifiedTradePaymentTerms(
+                new String[]{"SpecifiedTradePaymentTerms.Information[0][0]", "SpecifiedTradePaymentTerms.Information[0][1]"},
+                sdf.parse("2016/05/01"), DateFormatCode.YYYYMMDD);
+        data.addSpecifiedTradePaymentTerms(
+                new String[]{"SpecifiedTradePaymentTerms.Information[1][0]", "SpecifiedTradePaymentTerms.Information[1][1]"},
+                sdf.parse("2016/05/02"), DateFormatCode.YYYYMMDD);
+        
+        // SpecifiedTradeSettlementMonetarySummation       
+        data.setMonetarySummation("1000.00", "USD",
+                "0.00", "USD",
+                "0.00", "USD",
+                "1000.00", "USD",
+                "210.00", "USD",
+                "1210.00", "USD");
+        data.setTotalPrepaidAmount("0.00", "USD");
+        data.setDuePayableAmount("1210.00", "USD");
         
         String[][] notes0 = {
             { "IncludedSupplyChainTradeLineItem[0].AssociatedDocumentLineDocument.IncludedNote.Content[0]",
