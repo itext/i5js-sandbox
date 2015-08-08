@@ -15,6 +15,7 @@ import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
 import zugferd.codes.FreeTextSubjectCode;
 import zugferd.codes.GlobalIdentifierCode;
+import zugferd.codes.PaymentMeansCode;
 import zugferd.codes.TaxIDTypeCode;
 import zugferd.xml.COMFORTInvoiceData;
 import zugferd.exceptions.DataIncompleteException;
@@ -100,40 +101,32 @@ public class XML4Comfort {
         data.setInvoiceeCountryID("BE");
         data.addInvoiceeTaxRegistration(TaxIDTypeCode.VAT, "InvoiceeTradeParty.SpecifiedTaxRegistration.SchemeID[0]");
         data.addInvoiceeTaxRegistration(TaxIDTypeCode.FISCAL_NUMBER, "InvoiceeTradeParty.SpecifiedTaxRegistration.SchemeID[1]");
-        
-        
-        
-        String[] information = { "SpecifiedTradeSettlementPaymentMeans.Information[0]", "SpecifiedTradeSettlementPaymentMeans.Information[1]", "SpecifiedTradeSettlementPaymentMeans.Information[2]" };
-        String[] scheme1 = { "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0][0]", "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0][1]", "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0][2]" };
-        String[] id1 = { "SpecifiedTradeSettlementPaymentMeans.ID[0][0]", "SpecifiedTradeSettlementPaymentMeans.ID[0][1]",  "SpecifiedTradeSettlementPaymentMeans.ID[0][2]" };
-        data.addPaymentMeans("SpecifiedTradeSettlementPaymentMeans.TypeCode[0]", information, scheme1, id1,
+
+        String[] information0 = { "SpecifiedTradeSettlementPaymentMeans.Information[0][0]", "SpecifiedTradeSettlementPaymentMeans.Information[0][1]", "SpecifiedTradeSettlementPaymentMeans.Information[0][2]" };
+        data.addPaymentMeans(PaymentMeansCode.PAYMENT_TO_BANK_ACCOUNT, information0, "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0]", "SpecifiedTradeSettlementPaymentMeans.ID[0]",
+                "SpecifiedTradeSettlementPaymentMeans.Payer.IBANID[0]", "SpecifiedTradeSettlementPaymentMeans.Payer.ProprietaryID[0]",
                 "SpecifiedTradeSettlementPaymentMeans.Payee.IBANID[0]", "SpecifiedTradeSettlementPaymentMeans.Payee.AccountName[0]",
                 "SpecifiedTradeSettlementPaymentMeans.Payee.ProprietaryID[0]",
-                "SpecifiedTradeSettlementPaymentMeans.Payer.IBANID[0]", "SpecifiedTradeSettlementPaymentMeans.Payer.AccountName[0]",
-                "SpecifiedTradeSettlementPaymentMeans.Payer.ProprietaryID[0]",
-                "SpecifiedTradeSettlementPaymentMeans.Payee.BICID[0]", "SpecifiedTradeSettlementPaymentMeans.Payee.GermanBankleitzahlID[0]", "SpecifiedTradeSettlementPaymentMeans.Payee.Name[0]",
-                "SpecifiedTradeSettlementPaymentMeans.Payer.BICID[0]", "SpecifiedTradeSettlementPaymentMeans.Payer.GermanBankleitzahlID[0]", "SpecifiedTradeSettlementPaymentMeans.Payer.Name[0]");
-        String[] scheme2 = { "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[1][0]", "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[1][1]" };
-        String[] id2 = { "SpecifiedTradeSettlementPaymentMeans.ID[1][0]", "SpecifiedTradeSettlementPaymentMeans.ID[1][1]" };
-        data.addPaymentMeans("SpecifiedTradeSettlementPaymentMeans.TypeCode[1]", information, scheme2, id2,
+                "SpecifiedTradeSettlementPaymentMeans.Payer.BICID[0]", "SpecifiedTradeSettlementPaymentMeans.Payer.GermanBankleitzahlID[0]", "SpecifiedTradeSettlementPaymentMeans.Payer.Name[0]",
+                "SpecifiedTradeSettlementPaymentMeans.Payee.BICID[0]", "SpecifiedTradeSettlementPaymentMeans.Payee.GermanBankleitzahlID[0]", "SpecifiedTradeSettlementPaymentMeans.Payee.Name[0]");
+        String[] information1 = { "SpecifiedTradeSettlementPaymentMeans.Information[1][0]", "SpecifiedTradeSettlementPaymentMeans.Information[1][1]" };
+        data.addPaymentMeans(PaymentMeansCode.CASH, information1, "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[1]", "SpecifiedTradeSettlementPaymentMeans.ID[1]",
+                "SpecifiedTradeSettlementPaymentMeans.Payer.IBANID[1]", "SpecifiedTradeSettlementPaymentMeans.Payer.ProprietaryID[1]",
                 "SpecifiedTradeSettlementPaymentMeans.Payee.IBANID[1]", "SpecifiedTradeSettlementPaymentMeans.Payee.AccountName[1]",
                 "SpecifiedTradeSettlementPaymentMeans.Payee.ProprietaryID[1]",
-                "SpecifiedTradeSettlementPaymentMeans.Payer.IBANID[1]", "SpecifiedTradeSettlementPaymentMeans.Payer.AccountName[1]",
-                "SpecifiedTradeSettlementPaymentMeans.Payer.ProprietaryID[1]",
-                "SpecifiedTradeSettlementPaymentMeans.Payee.BICID[1]", "SpecifiedTradeSettlementPaymentMeans.Payee.GermanBankleitzahlID[1]", "SpecifiedTradeSettlementPaymentMeans.Payee.Name[1]",
-                "SpecifiedTradeSettlementPaymentMeans.Payer.BICID[1]", "SpecifiedTradeSettlementPaymentMeans.Payer.GermanBankleitzahlID[1]", "SpecifiedTradeSettlementPaymentMeans.Payer.Name[1]");
+                "SpecifiedTradeSettlementPaymentMeans.Payer.BICID[1]", "SpecifiedTradeSettlementPaymentMeans.Payer.GermanBankleitzahlID[1]", "SpecifiedTradeSettlementPaymentMeans.Payer.Name[1]",
+                "SpecifiedTradeSettlementPaymentMeans.Payee.BICID[1]", "SpecifiedTradeSettlementPaymentMeans.Payee.GermanBankleitzahlID[1]", "SpecifiedTradeSettlementPaymentMeans.Payee.Name[1]");
         
         // ram:ApplicableTradeTax
-        data.addApplicableTradeTax("ApplicableTradeTax.CalculatedAmount[0]", "ApplicableTradeTax.CalculatedAmountCurrencyID[0]",
-            "ApplicableTradeTax.TypeCode[0]", "ApplicableTradeTax.ExemptionReason[0]", "ApplicableTradeTax.BasisAmount[0]",
-            "ApplicableTradeTax.BasisAmountCurrencyID[0]", "ApplicableTradeTax.CategoryCOde[0]", 
-            "ApplicableTradeTax.ApplicablePercent[0]");
-        data.addApplicableTradeTax("ApplicableTradeTax.CalculatedAmount[1]", "ApplicableTradeTax.CalculatedAmountCurrencyID[1]",
-            "ApplicableTradeTax.TypeCode[1]", "ApplicableTradeTax.BasisAmount[1]", "ApplicableTradeTax.BasisAmountCurrencyID[1]",
-            "ApplicableTradeTax.ApplicablePercent[1]");
-        data.addApplicableTradeTax("ApplicableTradeTax.CalculatedAmount[2]", "ApplicableTradeTax.CalculatedAmountCurrencyID[2]",
-            "ApplicableTradeTax.TypeCode[2]", "ApplicableTradeTax.ExemptionReason[2]", "ApplicableTradeTax.BasisAmount[2]", "ApplicableTradeTax.BasisAmountCurrencyID[2]",
-            "ApplicableTradeTax.CategoryCode[2]", "ApplicableTradeTax.ApplicablePercent[2]");
+        data.addApplicableTradeTax("6.00", "USD", "VAT", "ApplicableTradeTax.ExemptionReason[0]", "100.00", "USD", "S", "6.00");
+        data.addApplicableTradeTax("21.00", "USD", "VAT", "ApplicableTradeTax.ExemptionReason[1]", "100.00", "USD", "S", "21.00");
+        
+        data.setBillingStartEnd(sdf.parse("2016/04/01"), DateFormatCode.YYYYMMDD, sdf.parse("2016/04/30"), DateFormatCode.YYYYMMDD);
+        
+        data.addTradeAllowanceCharge("TradeAllowanceCharge.Indicator[0]", "0.1234", "USD", "TradeAllowanceCharge.Reason[0]",
+            new String[]{"VAT", "VAT"}, new String[]{"S", "S"}, new String[]{"6.00", "21.00"});
+        data.addTradeAllowanceCharge("TradeAllowanceCharge.Indicator[1]", "0.0120", "USD", "TradeAllowanceCharge.Reason[1]",
+            new String[]{"VAT", "VAT"}, new String[]{"S", "S"}, new String[]{"0.00", "8.00"});
         
         // SpecifiedTradeSettlementMonetarySummation
         data.setMonetarySummation("SpecifiedTradeSettlementMonetarySummation.LineTotalAmount", "SpecifiedTradeSettlementMonetarySummation.LineTotalAmountCurrencyID",

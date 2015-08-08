@@ -81,8 +81,8 @@ public class BASICInvoiceData implements BASICInvoice {
     protected String deliveryDateFormat;
     protected String paymentReference;
     protected String invoiceCurrencyCode;
-    protected List<String[]> paymentMeansID = new ArrayList<String[]>();
-    protected List<String[]> paymentMeansSchemeAgencyID = new ArrayList<String[]>();
+    protected List<String> paymentMeansID = new ArrayList<String>();
+    protected List<String> paymentMeansSchemeAgencyID = new ArrayList<String>();
     protected List<String> paymentMeansPayeeAccountIBAN = new ArrayList<String>();
     protected List<String> paymentMeansPayeeAccountName = new ArrayList<String>();
     protected List<String> paymentMeansPayeeAccountProprietaryID = new ArrayList<String>();
@@ -241,12 +241,12 @@ public class BASICInvoiceData implements BASICInvoice {
         return invoiceCurrencyCode;
     }
 
-    public String[][] getPaymentMeansID() {
-        return to2DArray(paymentMeansID);
+    public String[] getPaymentMeansID() {
+        return to1DArray(paymentMeansID);
     }
 
-    public String[][] getPaymentMeansSchemeAgencyID() {
-        return to2DArray(paymentMeansSchemeAgencyID);
+    public String[] getPaymentMeansSchemeAgencyID() {
+        return to1DArray(paymentMeansSchemeAgencyID);
     }
 
     public String[] getPaymentMeansPayeeAccountIBAN() {
@@ -453,7 +453,7 @@ public class BASICInvoiceData implements BASICInvoice {
         this.invoiceCurrencyCode = invoiceCurrencyCode;
     }
 
-    public void addPaymentMeans(String schemeAgencyID[], String[] id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
+    public void addPaymentMeans(String schemeAgencyID, String id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
         paymentMeansID.add(id);
         paymentMeansSchemeAgencyID.add(schemeAgencyID);
         paymentMeansPayeeAccountIBAN.add(iban);

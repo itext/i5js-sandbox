@@ -3,7 +3,6 @@
  */
 package zugferd;
 
-import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.TreeMap;
 import zugferd.pojo.Customer;
@@ -45,8 +44,8 @@ public class InvoiceData {
         invoiceData.setBuyerCountryID(customer.getCountryId());
         invoiceData.setPaymentReference(String.format("%09d", invoice.getId()));
         invoiceData.setInvoiceCurrencyCode("EUR");
-        invoiceData.addPaymentMeans(new String[]{""}, new String[]{""}, "BE 41 7360 0661 9710", "", "", "KREDBEBB", "", "KBC");
-        invoiceData.addPaymentMeans(new String[]{""}, new String[]{""}, "BE 56 0015 4298 7888", "", "", "GEBABEBB", "", "BNP Paribas");
+        invoiceData.addPaymentMeans("", "", "BE 41 7360 0661 9710", "", "", "KREDBEBB", "", "KBC");
+        invoiceData.addPaymentMeans("", "", "BE 56 0015 4298 7888", "", "", "GEBABEBB", "", "BNP Paribas");
         Map<Double,Double> taxes = new TreeMap<Double, Double>();
         double tax;
         for (Item item : invoice.getItems()) {

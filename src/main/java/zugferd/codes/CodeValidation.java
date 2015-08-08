@@ -54,9 +54,10 @@ public abstract class CodeValidation {
     
     public abstract boolean isValid(String code);
     
-    public void check(String code) throws InvalidCodeException {
+    public String check(String code) throws InvalidCodeException {
         if (code == null || !isValid(code))
             throw new InvalidCodeException(code, this.getClass().getName());
+        return code;
     }
     
     public boolean isNumeric(String code, int digits) {

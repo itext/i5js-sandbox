@@ -88,7 +88,6 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> paymentMeansTypeCode = new ArrayList<String>();
     protected List<String[]> paymentMeansInformation = new ArrayList<String[]>();
     protected List<String> paymentMeansPayerAccountIBAN = new ArrayList<String>();
-    protected List<String> paymentMeansPayerAccountName = new ArrayList<String>();
     protected List<String> paymentMeansPayerAccountProprietaryID = new ArrayList<String>();
     protected List<String> paymentMeansPayerFinancialInstitutionBIC = new ArrayList<String>();
     protected List<String> paymentMeansPayerFinancialInstitutionGermanBankleitzahlID = new ArrayList<String>();
@@ -567,14 +566,14 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     }
 
     @Override
-    public void addPaymentMeans(String[] schemeAgencyID, String[] id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
+    public void addPaymentMeans(String schemeAgencyID, String id, String iban, String accountname, String proprietaryID, String bic, String germanBankleitzahlID, String institutionname) {
         throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
     }
 
     public void addPaymentMeans(
             String typeCode, String[] information,
-            String[] schemeAgencyID, String[] id,
-            String ibanDebtor, String accountnameDebtor, String proprietaryIDDebtor,
+            String schemeAgencyID, String id,
+            String ibanDebtor, String proprietaryIDDebtor,
             String ibanCreditor, String accountnameCreditor, String proprietaryIDCreditor,
             String bicDebtor, String germanBankleitzahlIDDebtor, String institutionnameDebtor,
             String bicCreditor, String germanBankleitzahlIDCreditor, String institutionnameCreditor
@@ -583,7 +582,6 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         paymentMeansInformation.add(information);
         paymentMeansID.add(id);
         paymentMeansSchemeAgencyID.add(schemeAgencyID);
-        paymentMeansPayerAccountName.add(accountnameDebtor);
         paymentMeansPayerAccountIBAN.add(ibanDebtor);
         paymentMeansPayerAccountProprietaryID.add(proprietaryIDDebtor);
         paymentMeansPayeeAccountIBAN.add(ibanCreditor);

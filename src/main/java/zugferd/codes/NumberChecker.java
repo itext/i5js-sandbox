@@ -28,6 +28,8 @@ public class NumberChecker extends CodeValidation {
         if (code.endsWith("."))
             return false;
         int pos = code.indexOf(".");
+        if (pos < 1)
+            return false;
         String part1 = code.substring(0, pos);
         if (!isNumeric(part1, part1.length()))
             return false;

@@ -70,7 +70,11 @@ import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
 import zugferd.codes.FreeTextSubjectCode;
 import zugferd.codes.GlobalIdentifierCode;
+import zugferd.codes.NumberChecker;
+import zugferd.codes.PaymentMeansCode;
+import zugferd.codes.TaxCategoryCode;
 import zugferd.codes.TaxIDTypeCode;
+import zugferd.codes.TaxTypeCode;
 import zugferd.exceptions.InvalidCodeException;
 
 /**
@@ -168,8 +172,7 @@ public final class InvoiceDOM {
         // TypeCode (required)
         DocumentTypeCode dtCode = new DocumentTypeCode(
                 data instanceof COMFORTInvoice ? DocumentTypeCode.COMFORT : DocumentTypeCode.BASIC);
-        dtCode.check(data.getTypeCode());
-        setContent(element, "ram:TypeCode", data.getTypeCode(), null);
+        setContent(element, "ram:TypeCode", dtCode.check(data.getTypeCode()), null);
         // IssueDateTime (required)
         check(data.getDateTimeFormat(), "HeaderExchangedDocument > DateTimeString");
         setDateTime(element, "udt:DateTimeString", data.getDateTimeFormat(), data.getDateTime());
@@ -188,8 +191,7 @@ public final class InvoiceDOM {
             throws InvalidCodeException {
         if (dateTimeFormat == null) return;
         DateFormatCode dfCode = new DateFormatCode();
-        dfCode.check(dateTimeFormat);
-        setContent(parent, tag, dfCode.convertToString(dateTime, dateTimeFormat), new String[]{"format", dateTimeFormat});
+        setContent(parent, tag, dfCode.convertToString(dateTime, dfCode.check(dateTimeFormat)), new String[]{"format", dateTimeFormat});
     }
     
     /**
@@ -216,9 +218,8 @@ public final class InvoiceDOM {
             Node content = noteNode.getElementsByTagName("ram:Content").item(0);
             content.setTextContent(notes[i]);
             if (notesCodes != null) {
-                ftsCode.check(notesCodes[i]);
                 Node code = noteNode.getElementsByTagName("ram:SubjectCode").item(0);
-                code.setTextContent(notesCodes[i]);
+                code.setTextContent(ftsCode.check(notesCodes[i]));
             }
             parent.insertBefore(noteNode, includedNoteNode);
         }
@@ -276,17 +277,35 @@ public final class InvoiceDOM {
         setContent(element, "ram:PaymentReference", data.getPaymentReference(), null);
         // ram:InvoiceCurrencyCode (required)
         CurrencyCode currCode = new CurrencyCode();
-        currCode.check(data.getInvoiceCurrencyCode());
-        setContent(element, "ram:InvoiceCurrencyCode", data.getInvoiceCurrencyCode(), null);
+        setContent(element, "ram:InvoiceCurrencyCode", currCode.check(data.getInvoiceCurrencyCode()), null);
         // ram:InvoiceeTradeParty (optional)
         if (data instanceof COMFORTInvoice) {
             setInvoiceeTradeParty(element, (COMFORTInvoice)data);
         }
         
         // ram:SpecifiedTradeSettlementPaymentMeans
+        parent = (Element)element.getElementsByTagName("ram:ApplicableSupplyChainTradeSettlement").item(0);
+        processPaymentMeans(parent, data);
         
-        processPaymentMeans(doc, data);
-        processTax(doc, data);
+        // ram:ApplicableTradeTax
+        processTax(parent, data);
+        
+        if (data instanceof COMFORTInvoice) {
+            
+            // ram:BillingSpecifiedPeriod
+            
+            COMFORTInvoice cData = (COMFORTInvoice)data;
+            Element period = (Element)element.getElementsByTagName("ram:BillingSpecifiedPeriod").item(0);
+            Element start = (Element)period.getElementsByTagName("ram:StartDateTime").item(0);
+            setDateTime(start, "udt:DateTimeString", cData.getBillingStartDateTimeFormat(), cData.getBillingStartDateTime());
+            // ContractReferencedDocument (optional)
+            Element end = (Element)period.getElementsByTagName("ram:EndDateTime").item(0);
+            setDateTime(end, "udt:DateTimeString", cData.getBillingEndDateTimeFormat(), cData.getBillingEndDateTime());
+            
+            // ram:SpecifiedTradeAllowanceCharge
+            processSpecifiedTradeAllowanceCharge(parent, cData);
+        }
+        
         check(data.getLineTotalAmount(), "SpecifiedTradeSettlementMonetarySummation > LineTotalAmount");
         check(data.getLineTotalAmountCurrencyID(), "SpecifiedTradeSettlementMonetarySummation > LineTotalAmount . currencyID");
         setNodeContent(doc, "ram:LineTotalAmount", 0, data.getLineTotalAmount(), "currencyID", data.getLineTotalAmountCurrencyID());
@@ -399,8 +418,7 @@ public final class InvoiceDOM {
                 NamedNodeMap attrs = idNode.getAttributes();
                 idNode.setTextContent(globalID[i]);
                 Node schemeID = attrs.getNamedItem("schemeID");
-                giCode.check(globalIDScheme[i]);
-                schemeID.setTextContent(globalIDScheme[i]);
+                schemeID.setTextContent(giCode.check(globalIDScheme[i]));
                 party.insertBefore(idNode, node);
             }
         }
@@ -411,8 +429,7 @@ public final class InvoiceDOM {
         setContent(party, "ram:CityName", cityName, null);
         if (countryID != null) {
             CountryCode cCode = new CountryCode();
-            cCode.check(countryID);
-            setContent(party, "ram:CountryID", countryID, null);
+            setContent(party, "ram:CountryID", cCode.check(countryID), null);
         }
         int n = taxRegistrationID.length;
         if (taxRegistrationSchemeID != null && taxRegistrationSchemeID.length != n)
@@ -425,155 +442,186 @@ public final class InvoiceDOM {
             idNode.setTextContent(taxRegistrationID[i]);
             NamedNodeMap attrs = idNode.getAttributes();
             Node schemeID = attrs.getNamedItem("schemeID");
-            tCode.check(taxRegistrationSchemeID[i]);
-            schemeID.setTextContent(taxRegistrationSchemeID[i]);
+            schemeID.setTextContent(tCode.check(taxRegistrationSchemeID[i]));
             tax.insertBefore(idNode, node);
         }           
     }
     
-    protected void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
-        Node node = doc.getElementsByTagName(tagname).item(idx);
-        if (node == null)
-            return;
-        node.setTextContent(content);
-        int n = attributes.length;
-        if (n == 0) return;
-        String attrName, attrValue;
-        NamedNodeMap attrs = node.getAttributes();
-        Node attr;
-        for (int i = 0; i < n; i++) {
-            attrName = attributes[i];
-            if (++i == n) continue;
-            attrValue = attributes[i];
-            attr = attrs.getNamedItem(attrName);
-            if (attr != null)
-                attr.setTextContent(attrValue);
-        }
-    }
-    
-    protected void setNodeSubContent(Document doc, String tagname, int idx, String[] content, String[] attrs) {
-        if (content.length == 0)
-            return;
-        Node node = doc.getElementsByTagName(tagname).item(idx);
-        for (String text : content) {
-            Node newNode = node.cloneNode(true);
-            NodeList list = newNode.getChildNodes();
-            for (int i = 0; i < list.getLength(); i++) {
-                Node childNode = list.item(i);
-                if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-                    childNode.setTextContent(text);
-                    if (attrs != null && attrs.length <= i) {
-                        Node attr = childNode.getAttributes().item(0);
-                        attr.setTextContent(attrs[i]);
-                    }
-                }
-            }
-            Node parent = node.getParentNode();
-            parent.insertBefore(newNode, node);
-        }
-    }
-
-    protected void setNodeSubContent(Node parent, Node node, String[] content, String[] attrs) {
-        if (content.length == 0)
-            return;
-        int n = content.length;
-        for (int i = 0; i < n; i++) {
-            Node newNode = node.cloneNode(true);
-            NodeList list = newNode.getChildNodes();
-            for (int j = 0; j < list.getLength(); j++) {
-                Node childNode = list.item(j);
-                if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-                    childNode.setTextContent(content[i]);
-                    Node attr = childNode.getAttributes().item(0);
-                    attr.setTextContent(attrs[i]);
-                }
-            }
-            parent.insertBefore(newNode, node);
-        }
-    }
-    
-    protected void processPaymentMeans(Document doc, BASICInvoice data) {
-        String[][] pmID = data.getPaymentMeansID();
-        String[][] pmSchemeAgencyID = data.getPaymentMeansSchemeAgencyID();
+    protected void processPaymentMeans(Element parent, BASICInvoice data) throws InvalidCodeException {
+        String[] pmID = data.getPaymentMeansID();
+        int n = pmID.length;
+        String[] pmTypeCode = new String[n];
+        String[][] pmInformation = new String[n][];
+        String[] pmSchemeAgencyID = data.getPaymentMeansSchemeAgencyID();
+        String[] pmPayerIBAN = new String[n];
+        String[] pmPayerProprietaryID = new String[n];
         String[] pmIBAN = data.getPaymentMeansPayeeAccountIBAN();
         String[] pmAccountName = data.getPaymentMeansPayeeAccountAccountName();
         String[] pmAccountID = data.getPaymentMeansPayeeAccountProprietaryID();
+        String[] pmPayerBIC = new String[n];
+        String[] pmPayerGermanBankleitzahlID = new String[n];
+        String[] pmPayerFinancialInst = new String[n];
         String[] pmBIC = data.getPaymentMeansPayeeFinancialInstitutionBIC();
         String[] pmGermanBankleitzahlID = data.getPaymentMeansPayeeFinancialInstitutionGermanBankleitzahlID();
         String[] pmFinancialInst = data.getPaymentMeansPayeeFinancialInstitutionName();
+        if (data instanceof COMFORTInvoice) {
+            COMFORTInvoice cData = (COMFORTInvoice)data;
+            pmTypeCode = cData.getPaymentMeansTypeCode();
+            pmInformation = cData.getPaymentMeansInformation();
+            pmPayerIBAN = cData.getPaymentMeansPayerAccountIBAN();
+            pmPayerProprietaryID = cData.getPaymentMeansPayerAccountProprietaryID();
+            pmPayerBIC = cData.getPaymentMeansPayerFinancialInstitutionBIC();
+            pmPayerGermanBankleitzahlID = cData.getPaymentMeansPayerFinancialInstitutionGermanBankleitzahlID();
+            pmPayerFinancialInst = cData.getPaymentMeansPayerFinancialInstitutionName();
+        }
+        Node node = parent.getElementsByTagName("ram:SpecifiedTradeSettlementPaymentMeans").item(0);
         for (int i = 0; i < pmID.length; i++) {
-            processPaymentMeans(doc, data,
+            Node newNode = node.cloneNode(true);
+            processPaymentMeans((Element)newNode, data,
+                    pmTypeCode[i],
+                    pmInformation[i],
                     pmID[i],
                     pmSchemeAgencyID[i],
+                    pmPayerIBAN[i],
+                    pmPayerProprietaryID[i],
                     pmIBAN[i],
                     pmAccountName[i],
                     pmAccountID[i],
+                    pmPayerBIC[i],
+                    pmPayerGermanBankleitzahlID[i],
+                    pmPayerFinancialInst[i],
                     pmBIC[i],
                     pmGermanBankleitzahlID[i],
                     pmFinancialInst[i]
             );
+            parent.insertBefore(newNode, node);
         }
     }
     
-    protected void processPaymentMeans(Document doc, BASICInvoice data,
-        String[] id, String[] scheme, String iban, String accName, String accID, String bic, String bank, String inst) {  
-        NodeList l = doc.getElementsByTagName("ram:SpecifiedTradeSettlementPaymentMeans");
-        Element element = (Element) l.item(l.getLength() - 1);
-        Node parent = element.getParentNode();
-        Element newNode = (Element)parent.insertBefore(element.cloneNode(true), element);
-        Node idNode = newNode.getElementsByTagName("ram:ID").item(0);
-        int n = id.length;
-        for (int j = n - 1; j >= 0; j--) {
-            Node c = newNode.insertBefore(idNode.cloneNode(true), idNode.getNextSibling());
-            c.setTextContent(id[j]);
-            c.getAttributes().item(0).setTextContent(scheme[j]);
+    protected void processPaymentMeans(Element parent, BASICInvoice data,
+        String typeCode, String[] information,
+        String id, String scheme,
+        String payerIban, String payerProprietaryID,
+        String iban, String accName, String accID,
+        String payerBic, String payerBank, String payerInst,
+        String bic, String bank, String inst) throws InvalidCodeException {
+        if (typeCode != null) {
+            setContent(parent, "ram:TypeCode", new PaymentMeansCode().check(typeCode), null);
         }
-        Element accNode = (Element)newNode.getElementsByTagName("ram:PayeePartyCreditorFinancialAccount").item(0);
-        Node ibanNode = accNode.getElementsByTagName("ram:IBANID").item(0);
-        ibanNode.setTextContent(iban);
-        Node accNameNode = accNode.getElementsByTagName("ram:AccountName").item(0);
-        accNameNode.setTextContent(accName);
-        Node accIDNode = accNode.getElementsByTagName("ram:ProprietaryID").item(0);
-        accIDNode.setTextContent(accID);
-        Element instNode = (Element)newNode.getElementsByTagName("ram:PayeeSpecifiedCreditorFinancialInstitution").item(0);
-        Node bicNode = instNode.getElementsByTagName("ram:BICID").item(0);
-        bicNode.setTextContent(bic);
-        Node bankNode = instNode.getElementsByTagName("ram:GermanBankleitzahlID").item(0);
-        bankNode.setTextContent(bank);
-        Node nameNode = instNode.getElementsByTagName("ram:Name").item(0);
-        nameNode.setTextContent(inst);
-    }
-    
-    protected void processTax(Document doc, BASICInvoice data) {
-        String[] calculated = data.getTaxCalculatedAmount();
-        String[] calculatedCurr = data.getTaxCalculatedAmountCurrencyID();
-        String[] typeCode = data.getTaxTypeCode();
-        String[] basisAmount = data.getTaxBasisAmount();
-        String[] basisAmountCurr = data.getTaxBasisAmountCurrencyID();
-        String[] percent = data.getTaxApplicablePercent();
-        for (int i = calculated.length - 1; i >= 0; i--) {
-            processTax(doc, calculated[i], calculatedCurr[i],
-                    typeCode[i], basisAmount[i], basisAmountCurr[i], percent[i]);
-        }
-    }
-    
-    protected void processTax(Document doc, String... content) {/*
-        Node node = doc.getElementsByTagName("ram:ApplicableTradeTax").item(0);
-        int counter = 0;
-        Node newNode = node.cloneNode(true);
-        Node childNode;
-        NodeList list = newNode.getChildNodes();
-        for (int i = 0; i < list.getLength(); i++) {
-            childNode = list.item(i);
-            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-                childNode.setTextContent(content[counter++]);
-                if (counter == 1 || counter == 4) {
-                    childNode.getAttributes().item(0).setTextContent(content[counter++]);
-                }
+        if (information != null) {
+            Node node = parent.getElementsByTagName("ram:Information").item(0);
+            for (String info : information) {
+                Node newNode = node.cloneNode(true);
+                newNode.setTextContent(info);
+                parent.insertBefore(newNode, node);
             }
         }
-        Node parent = node.getParentNode();
-        parent.insertBefore(newNode, node);*/
+        setContent(parent, "ram:ID", id, new String[]{"schemeAgencyID", scheme});
+        Element payer = (Element)parent.getElementsByTagName("ram:PayerPartyDebtorFinancialAccount").item(0);
+        setContent(payer, "ram:IBANID", payerIban, null);
+        setContent(payer, "ram:ProprietaryID", payerProprietaryID, null);
+        Element payee = (Element)parent.getElementsByTagName("ram:PayeePartyCreditorFinancialAccount").item(0);
+        setContent(payee, "ram:IBANID", iban, null);
+        setContent(payee, "ram:AccountName", accName, null);
+        setContent(payee, "ram:ProprietaryID", accID, null);
+        payer = (Element)parent.getElementsByTagName("ram:PayerSpecifiedDebtorFinancialInstitution").item(0);
+        setContent(payer, "ram:BICID", payerBic, null);
+        setContent(payer, "ram:GermanBankleitzahlID", payerBank, null);
+        setContent(payer, "ram:Name", payerInst, null);
+        payee = (Element)parent.getElementsByTagName("ram:PayeeSpecifiedCreditorFinancialInstitution").item(0);
+        setContent(payee, "ram:BICID", bic, null);
+        setContent(payee, "ram:GermanBankleitzahlID", bank, null);
+        setContent(payee, "ram:Name", inst, null);
+    }
+    
+    protected void processTax(Element parent, BASICInvoice data) throws InvalidCodeException, DataIncompleteException {
+        String[] calculated = data.getTaxCalculatedAmount();
+        int n = calculated.length;
+        String[] calculatedCurr = data.getTaxCalculatedAmountCurrencyID();
+        String[] typeCode = data.getTaxTypeCode();
+        String[] exemptionReason = new String[n];
+        String[] basisAmount = data.getTaxBasisAmount();
+        String[] basisAmountCurr = data.getTaxBasisAmountCurrencyID();
+        String[] category = new String[n];
+        String[] percent = data.getTaxApplicablePercent();
+        if (data instanceof COMFORTInvoice) {
+            COMFORTInvoice cData = (COMFORTInvoice)data;
+            exemptionReason = cData.getTaxExemptionReason();
+            category = cData.getTaxCategoryCode();
+        }
+        Node node = parent.getElementsByTagName("ram:ApplicableTradeTax").item(0);
+        for (int i = 0; i < n; i++) {
+            Node newNode = node.cloneNode(true);
+            processTax((Element)newNode, calculated[i], calculatedCurr[i], typeCode[i],
+                exemptionReason[i], basisAmount[i], basisAmountCurr[i],
+                category[i], percent[i]);
+            parent.insertBefore(newNode, node);
+        }
+    }
+    
+    protected void processTax(Element parent,
+        String calculatedAmount, String currencyID, String typeCode,
+        String exemptionReason, String basisAmount, String basisAmountCurr,
+        String category, String percent)
+            throws InvalidCodeException, DataIncompleteException {
+        // Calculated amount (required; 2 decimals)
+        NumberChecker dec2 = new NumberChecker(NumberChecker.TWO_DECIMALS);
+        CurrencyCode currCode = new CurrencyCode();
+        check(currCode.check(currencyID), "ApplicableTradeTax > CalculatedAmount > CurrencyID");
+        setContent(parent, "ram:CalculatedAmount", dec2.check(calculatedAmount), new String[]{"currencyID", currencyID});
+        // TypeCode (required)
+        check(typeCode, "ApplicableTradeTax > TypeCode");
+        setContent(parent, "ram:TypeCode", new TaxTypeCode().check(typeCode), null);
+        // exemption reason (optional)
+        setContent(parent, "ram:ExemptionReason", exemptionReason, null);
+        // basis amount (required, 2 decimals)
+        check(currCode.check(basisAmountCurr), "ApplicableTradeTax > BasisAmount > CurrencyID");
+        setContent(parent, "ram:BasisAmount", dec2.check(basisAmount), new String[]{"currencyID", basisAmountCurr});
+        // Category code (optional)
+        if (category != null) {
+            setContent(parent, "ram:CategoryCode", new TaxCategoryCode().check(category), null);
+        }
+        // Applicable percent (required; 2 decimals)
+        setContent(parent, "ram:ApplicablePercent", dec2.check(percent), null);
+    }
+    
+    private void processSpecifiedTradeAllowanceCharge(Element parent, COMFORTInvoice data) throws InvalidCodeException {
+        String[] indicator = data.getTradeAllowanceChargeIndicator();
+        String[] actualAmount = data.getTradeAllowanceChargeActualAmount();
+        String[] actualAmountCurr = data.getTradeAllowanceChargeActualAmountCurrency();
+        String[] reason = data.getTradeAllowanceChargeReason();
+        String[][] typeCode = data.getTradeAllowanceChargeTaxTypeCode();
+        String[][] categoryCode = data.getTradeAllowanceChargeTaxCategoryCode();
+        String[][] percentage = data.getTradeAllowanceChargeTaxApplicablePercent();
+        Node node = (Element)parent.getElementsByTagName("ram:SpecifiedTradeAllowanceCharge").item(0);
+        for (int i = 0; i < indicator.length; i++) {
+            Node newNode = node.cloneNode(true);
+            processSpecifiedTradeAllowanceCharge((Element)newNode, indicator[i],
+                actualAmount[i], actualAmountCurr[i], reason[i],
+                typeCode[i], categoryCode[i], percentage[i]);
+            parent.insertBefore(newNode, node);
+        }
+    }
+    
+    public void processSpecifiedTradeAllowanceCharge(Element parent, String indicator,
+        String actualAmount, String actualAmountCurrency, String reason,
+        String[] typeCode, String[] categoryCode, String[] percent) throws InvalidCodeException {
+        setContent(parent, "udt:Indicator", indicator, null);
+        NumberChecker dec4 = new NumberChecker(NumberChecker.FOUR_DECIMALS);
+        CurrencyCode currCode = new CurrencyCode();
+        setContent(parent, "ram:ActualAmount", dec4.check(actualAmount), new String[]{"currencyID", currCode.check(actualAmountCurrency)});
+        setContent(parent, "ram:Reason", reason, null);
+        Node node = parent.getElementsByTagName("ram:CategoryTradeTax").item(0);
+        TaxTypeCode tCode = new TaxTypeCode();
+        TaxCategoryCode cCode = new TaxCategoryCode();
+        NumberChecker dec2 = new NumberChecker(NumberChecker.TWO_DECIMALS);
+        for (int i = 0; i < typeCode.length; i++) {
+            Element newNode = (Element) node.cloneNode(true);
+            setContent(newNode, "ram:TypeCode", tCode.check(typeCode[i]), null);
+            setContent(newNode, "ram:CategoryCode", cCode.check(categoryCode[i]), null);
+            setContent(newNode, "ram:ApplicablePercent", dec2.check(percent[i]), null);
+            parent.insertBefore(newNode, node);
+        }
     }
     
     protected void processLines(Document doc, BASICInvoice data) throws DataIncompleteException {
@@ -615,6 +663,27 @@ public final class InvoiceDOM {
         }
         Node parent = node.getParentNode();
         parent.insertBefore(newNode, node);
+    }
+    
+    
+    protected void setNodeContent(Document doc, String tagname, int idx, String content, String... attributes) {
+        Node node = doc.getElementsByTagName(tagname).item(idx);
+        if (node == null)
+            return;
+        node.setTextContent(content);
+        int n = attributes.length;
+        if (n == 0) return;
+        String attrName, attrValue;
+        NamedNodeMap attrs = node.getAttributes();
+        Node attr;
+        for (int i = 0; i < n; i++) {
+            attrName = attributes[i];
+            if (++i == n) continue;
+            attrValue = attributes[i];
+            attr = attrs.getNamedItem(attrName);
+            if (attr != null)
+                attr.setTextContent(attrValue);
+        }
     }
     
     public byte[] exportDoc() throws TransformerException {

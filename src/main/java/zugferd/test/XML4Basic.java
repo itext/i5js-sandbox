@@ -64,27 +64,16 @@ public class XML4Basic {
         // ApplicableSupplyChainTradeSettlement
         data.setPaymentReference("ApplicableSupplyChainTradeSettlement.PaymentReference");
         data.setInvoiceCurrencyCode("EUR");
-        String[] scheme1 = { "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0][0]", "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0][1]", "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0][2]" };
-        String[] id1 = { "SpecifiedTradeSettlementPaymentMeans.ID[0][0]", "SpecifiedTradeSettlementPaymentMeans.ID[0][1]",  "SpecifiedTradeSettlementPaymentMeans.ID[0][2]" };
-        data.addPaymentMeans(scheme1, id1,
+        data.addPaymentMeans("SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0]", "SpecifiedTradeSettlementPaymentMeans.ID[0]",
                 "SpecifiedTradeSettlementPaymentMeans.IBANID[0]", "SpecifiedTradeSettlementPaymentMeans.AccountName[0]", "SpecifiedTradeSettlementPaymentMeans.ProprietaryID[0]",
                 "SpecifiedTradeSettlementPaymentMeans.BICID[0]", "SpecifiedTradeSettlementPaymentMeans.GermanBankleitzahlID[0]", "SpecifiedTradeSettlementPaymentMeans.Name[0]");
-        String[] scheme2 = { "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[1][0]", "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[1][1]" };
-        String[] id2 = { "SpecifiedTradeSettlementPaymentMeans.ID[1][0]", "SpecifiedTradeSettlementPaymentMeans.ID[1][1]" };
-        data.addPaymentMeans(scheme2, id2,
+        data.addPaymentMeans("SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[1]", "SpecifiedTradeSettlementPaymentMeans.ID[1]",
                 "SpecifiedTradeSettlementPaymentMeans.IBANID[1]", "SpecifiedTradeSettlementPaymentMeans.AccountName[1]", "SpecifiedTradeSettlementPaymentMeans.ProprietaryID[1]",
                 "SpecifiedTradeSettlementPaymentMeans.BICID[1]", "SpecifiedTradeSettlementPaymentMeans.GermanBankleitzahlID[1]", "SpecifiedTradeSettlementPaymentMeans.Name[1]");
         
         // ram:ApplicableTradeTax
-        data.addApplicableTradeTax("ApplicableTradeTax.CalculatedAmount[0]", "ApplicableTradeTax.CalculatedAmountCurrencyID[0]",
-            "ApplicableTradeTax.TypeCode[0]", "ApplicableTradeTax.BasisAmount[0]", "ApplicableTradeTax.BasisAmountCurrencyID[0]",
-            "ApplicableTradeTax.ApplicablePercent[0]");
-        data.addApplicableTradeTax("ApplicableTradeTax.CalculatedAmount[1]", "ApplicableTradeTax.CalculatedAmountCurrencyID[1]",
-            "ApplicableTradeTax.TypeCode[1]", "ApplicableTradeTax.BasisAmount[1]", "ApplicableTradeTax.BasisAmountCurrencyID[1]",
-            "ApplicableTradeTax.ApplicablePercent[1]");
-        data.addApplicableTradeTax("ApplicableTradeTax.CalculatedAmount[2]", "ApplicableTradeTax.CalculatedAmountCurrencyID[2]",
-            "ApplicableTradeTax.TypeCode[2]", "ApplicableTradeTax.BasisAmount[2]", "ApplicableTradeTax.BasisAmountCurrencyID[2]",
-            "ApplicableTradeTax.ApplicablePercent[2]");
+        data.addApplicableTradeTax("6.00", "EUR", "VAT", "100.00", "EUR", "6.00");
+        data.addApplicableTradeTax("21.00", "EUR", "VAT", "100.00", "EUR", "21.00");
         
         // SpecifiedTradeSettlementMonetarySummation
         data.setMonetarySummation("SpecifiedTradeSettlementMonetarySummation.LineTotalAmount", "SpecifiedTradeSettlementMonetarySummation.LineTotalAmountCurrencyID",
