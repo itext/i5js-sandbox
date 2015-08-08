@@ -60,7 +60,7 @@ public class BASICInvoiceData implements BASICInvoice {
     protected String typeCode;
     protected Date date;
     protected String dateFormat;
-    protected List<String> notes = new ArrayList<String>();
+    protected List<String[]> notes = new ArrayList<String[]>();
     protected String sellerName;
     protected String sellerPostcode;
     protected String sellerLineOne;
@@ -157,8 +157,8 @@ public class BASICInvoiceData implements BASICInvoice {
         return dateFormat;
     }
 
-    public String[] getNotes() {
-        return to1DArray(notes);
+    public String[][] getNotes() {
+        return to2DArray(notes);
     }
 
     public String getSellerName() {
@@ -378,7 +378,7 @@ public class BASICInvoiceData implements BASICInvoice {
         this.dateFormat = dateFormat;
     }
 
-    public void addNote(String note) {
+    public void addNote(String[] note) {
         notes.add(note);
     }
 

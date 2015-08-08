@@ -53,7 +53,7 @@ public interface BASICInvoice {
     public String getTypeCode();
     public Date getDateTime();
     public String getDateTimeFormat();
-    public String[] getNotes();
+    public String[][] getNotes();
     public String getSellerName();
     public String getSellerPostcode();
     public String getSellerLineOne();

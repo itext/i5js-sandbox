@@ -130,6 +130,7 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String[][] getLineItemSettlementTaxCategoryCode();
     public String[][] getLineItemSettlementTaxApplicablePercent();
     public String[] getLineItemLineTotalAmount();
+    public String[] getLineItemLineTotalAmountCurrencyID();
     public String[] getLineItemSpecifiedTradeProductGlobalID();
     public String[] getLineItemSpecifiedTradeProductSchemeID();
     public String[] getLineItemSpecifiedTradeProductSellerAssignedID();

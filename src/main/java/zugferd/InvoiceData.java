@@ -27,7 +27,8 @@ public class InvoiceData {
         invoiceData.setName("INVOICE");
         invoiceData.setTypeCode("380");
         invoiceData.setDate(invoice.getInvoiceDate(), "102");
-        invoiceData.addNote("This is a test invoice.\nNothing on this invoice is real.\nThis invoice is part of a tutorial.");
+        invoiceData.addNote(
+            new String[]{"This is a test invoice.\nNothing on this invoice is real.\nThis invoice is part of a tutorial."});
         invoiceData.setSellerName("Das Company");
         invoiceData.setSellerLineOne("ZUG Business Center");
         invoiceData.setSellerLineTwo("Highway 1");

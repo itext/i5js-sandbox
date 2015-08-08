@@ -39,9 +39,9 @@ public class XML4Comfort {
         data.setName("HeaderExchangedDocument.Name");
         data.setTypeCode(DocumentTypeCode.DEBIT_NOTE_FINANCIAL_ADJUSTMENT);
         data.setDate(sdf.parse("2016/04/01"), DateFormatCode.YYYYMMDD);
-        data.addNote("HeaderExchangedDocument.Note[0]", FreeTextSubjectCode.REGULATORY_INFORMATION);
-        data.addNote("HeaderExchangedDocument.Note[1]", FreeTextSubjectCode.PRICE_CONDITIONS);
-        data.addNote("HeaderExchangedDocument.Note[2]", FreeTextSubjectCode.PAYMENT_INFORMATION);
+        data.addNote(new String[]{"HeaderExchangedDocument.Note[0][0]", "HeaderExchangedDocument.Note[0][1]"}, FreeTextSubjectCode.REGULATORY_INFORMATION);
+        data.addNote(new String[]{"HeaderExchangedDocument.Note[1][0]", "HeaderExchangedDocument.Note[1][1]"}, FreeTextSubjectCode.PRICE_CONDITIONS);
+        data.addNote(new String[]{"HeaderExchangedDocument.Note[2][0]", "HeaderExchangedDocument.Note[2][1]"}, FreeTextSubjectCode.PAYMENT_INFORMATION);
         
         // SpecifiedSupplyChainTradeTransaction
         data.setBuyerReference("BuyerReference");
@@ -153,7 +153,7 @@ public class XML4Comfort {
         data.setDuePayableAmount("1210.00", "USD");
         
         String[][] notes0 = {
-            { "IncludedSupplyChainTradeLineItem[0].AssociatedDocumentLineDocument.IncludedNote.Content[0]",
+            { "IncludedSupplyChainTradeLineItem[0].AssociatedDocumentLineDocument.IncludedNote[0].Content[0]",
               "IncludedSupplyChainTradeLineItem[0].AssociatedDocumentLineDocument.IncludedNote[0].Content[1]",
               "IncludedSupplyChainTradeLineItem[0].AssociatedDocumentLineDocument.IncludedNote[0].Content[2]"},
             { "IncludedSupplyChainTradeLineItem[0].AssociatedDocumentLineDocument.IncludedNote[1].Content[0]",
@@ -193,7 +193,7 @@ public class XML4Comfort {
             "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].ApplicablePercent",
              "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].ApplicablePercent" };
         data.addIncludedSupplyChainTradeLineItem(
-                "IncludedSupplyChainTradeLineItem[0].AssociatedDocumentLineDocument.LineID", notes0,
+                "LINE 1", notes0,
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.ChargeAmount",
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.ChargeAmount.CurrencyID",
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.BasisQuantity",
@@ -207,6 +207,7 @@ public class XML4Comfort {
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeDelivery.BilledQuantity.unitCode",
                 taxTC, taxER, taxCC, taxAP,
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.LineTotalAmount",
+                "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.LineTotalAmountCurrencyID",
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedTradeProduct.GlobalID",
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedTradeProduct.GlobalID.schemeID",
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedTradeProduct.SellerAssignedID",
@@ -216,7 +217,7 @@ public class XML4Comfort {
         String[][] notes1 = {
             { "IncludedSupplyChainTradeLineItem.ram:AssociatedDocumentLineDocument[1].IncludedNote[0].Content[0]",
               "IncludedSupplyChainTradeLineItem.ram:AssociatedDocumentLineDocument[1].IncludedNote[0].Content[1]"},
-            { "IncludedSupplyChainTradeLineItem.ram:AssociatedDocumentLineDocument1].IncludedNote[4].Content[0]" }
+            { "IncludedSupplyChainTradeLineItem.ram:AssociatedDocumentLineDocument[1].IncludedNote[1].Content[0]" }
         };
         String[] indicator1 = {
             "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[0].ChargeIndicator",
@@ -251,7 +252,7 @@ public class XML4Comfort {
             "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].ApplicablePercent",
              "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].ApplicablePercent" };
         data.addIncludedSupplyChainTradeLineItem(
-                "IncludedSupplyChainTradeLineItem[1].AssociatedDocumentLineDocument.LineID", notes1,
+                "LINE 2", notes1,
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.ChargeAmount",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.ChargeAmount.CurrencyID",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.BasisQuantity",
@@ -265,6 +266,7 @@ public class XML4Comfort {
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeDelivery.BilledQuantity.unitCode",
                 taxTC1, taxER1, taxCC1, taxAP1,
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.LineTotalAmount",
+                "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.LineTotalAmountCurrencyID",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.GlobalID",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.GlobalID.schemeID",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.SellerAssignedID",

@@ -34,9 +34,9 @@ public class XML4Basic {
         data.setName("HeaderExchangedDocument.Name");
         data.setTypeCode(DocumentTypeCode.COMMERCIAL_INVOICE);
         data.setDate(sdf.parse("2015/04/01"), DateFormatCode.YYYYMMDD);
-        data.addNote("HeaderExchangedDocument.Note[0]");
-        data.addNote("HeaderExchangedDocument.Note[1]");
-        data.addNote("HeaderExchangedDocument.Note[2]");
+        data.addNote(new String[]{"HeaderExchangedDocument.Note[0][0]", "HeaderExchangedDocument.Note[0][1]"});
+        data.addNote(new String[]{"HeaderExchangedDocument.Note[1][0]", "HeaderExchangedDocument.Note[1][1]"});
+        data.addNote(new String[]{"HeaderExchangedDocument.Note[2][0]", "HeaderExchangedDocument.Note[2][1]"});
         
         // SpecifiedSupplyChainTradeTransaction>
         // Seller

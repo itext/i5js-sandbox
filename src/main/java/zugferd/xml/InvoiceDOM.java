@@ -72,6 +72,7 @@ import zugferd.codes.FreeTextSubjectCode;
 import zugferd.codes.GlobalIdentifierCode;
 import zugferd.codes.NumberChecker;
 import zugferd.codes.PaymentMeansCode;
+import zugferd.codes.QuantityCode;
 import zugferd.codes.TaxCategoryCode;
 import zugferd.codes.TaxIDTypeCode;
 import zugferd.codes.TaxTypeCode;
@@ -182,7 +183,12 @@ public final class InvoiceDOM {
         check(data.getDateTimeFormat(), "HeaderExchangedDocument > DateTimeString");
         setDateTime(element, "udt:DateTimeString", data.getDateTimeFormat(), data.getDateTime());
         // IncludedNote (optional): header level
-        setIncludedNotes(element, FreeTextSubjectCode.HEADER, data);
+        String[][] notes = data.getNotes();
+        String[] notesCodes = null;
+        if (data instanceof COMFORTInvoice) {
+            notesCodes = ((COMFORTInvoice)data).getNotesCodes();
+        }
+        setIncludedNotes(element, FreeTextSubjectCode.HEADER, notes, notesCodes);
     }
     
     /**
@@ -205,26 +211,27 @@ public final class InvoiceDOM {
      * for those notes.
      * @param parent    the parent element of the tag we want to change
      * @param level the level where the notices are added (header or line)
-     * @param data  the invoice data (BASICInvoice and COMFORTInvoice are supported)
+     * @param notes array of notes
+     * @param notesCodes    array of codes for the notes.
+     *          If not null, notes and notesCodes need to have an equal number of elements.
      * @throws zugferd.exceptions.DataIncompleteException
      * @throws zugferd.exceptions.InvalidCodeException
      */
-    protected void setIncludedNotes(Element parent, int level, BASICInvoice data)
+    protected void setIncludedNotes(Element parent, int level, String notes[][], String[] notesCodes)
         throws DataIncompleteException, InvalidCodeException {
         Node includedNoteNode = parent.getElementsByTagName("ram:IncludedNote").item(0);
-        String[] notes = data.getNotes();
         int n = notes.length;
         FreeTextSubjectCode ftsCode = new FreeTextSubjectCode(level);
-        String[] notesCodes = null;
-        if (data instanceof COMFORTInvoice) {
-            notesCodes = ((COMFORTInvoice)data).getNotesCodes();
-            if (n != notesCodes.length)
-                throw new DataIncompleteException("Number of included notes is not equal to number of codes for included notes.");
-        }
+        if (notesCodes != null && n != notesCodes.length)
+            throw new DataIncompleteException("Number of included notes is not equal to number of codes for included notes.");
         for (int i = 0; i < n; i++) {
             Element noteNode = (Element)includedNoteNode.cloneNode(true);
             Node content = noteNode.getElementsByTagName("ram:Content").item(0);
-            content.setTextContent(notes[i]);
+            for (String note : notes[i]) {
+                Node newNode = content.cloneNode(true);
+                newNode.setTextContent(note);
+                noteNode.insertBefore(newNode, content);
+            }
             if (notesCodes != null) {
                 Node code = noteNode.getElementsByTagName("ram:SubjectCode").item(0);
                 code.setTextContent(ftsCode.check(notesCodes[i]));
@@ -273,6 +280,7 @@ public final class InvoiceDOM {
         }
         
         /* ram:ApplicableSupplyChainTradeDelivery */
+        
         // ActualDeliverySupplyChainEvent (optional)
         Element parent = (Element)element.getElementsByTagName("ram:ActualDeliverySupplyChainEvent").item(0);
         setDateTime(parent, "udt:DateTimeString", data.getDeliveryDateTimeFormat(), data.getDeliveryDateTime());
@@ -285,6 +293,7 @@ public final class InvoiceDOM {
         }
         
         /* ram:ApplicableSupplyChainTradeSettlement */
+        
         // ram:PaymentReference (optional)
         setContent(element, "ram:PaymentReference", data.getPaymentReference(), null);
         // ram:InvoiceCurrencyCode (required)
@@ -324,6 +333,7 @@ public final class InvoiceDOM {
             processSpecifiedTradePaymentTerms(parent, cData);
         }
         
+        // ram:SpecifiedTradeSettlementMonetarySummation
         NumberChecker dec2 = new NumberChecker(NumberChecker.TWO_DECIMALS);
         check(dec2.check(data.getLineTotalAmount()), "SpecifiedTradeSettlementMonetarySummation > LineTotalAmount");
         check(currCode.check(data.getLineTotalAmountCurrencyID()), "SpecifiedTradeSettlementMonetarySummation > LineTotalAmount . currencyID");
@@ -349,9 +359,11 @@ public final class InvoiceDOM {
             setContent(element, "ram:DuePayableAmount", cData.getDuePayableAmount(), new String[]{"currencyID", cData.getDuePayableAmountCurrencyID()});
         }
         
-        // TODO
-        
-        processLines(doc, data);
+        /* ram:IncludedSupplyChainTradeLineItem */
+        if (data instanceof COMFORTInvoice)
+            processLinesComfort(element, (COMFORTInvoice)data);
+        else
+            processLinesBasic(element, data);
     }
     
     private void setSellerTradeParty(Element parent, BASICInvoice data)
@@ -719,7 +731,85 @@ public final class InvoiceDOM {
             setDateTime(parent, "udt:DateTimeString", dateTimeFormat, dateTime);
     }
     
-    protected void processLines(Document doc, BASICInvoice data)
+    private void processLinesComfort(Element parent, COMFORTInvoice data)
+            throws DataIncompleteException, InvalidCodeException {
+        String[] lineIDs = data.getLineItemLineID();
+        if (lineIDs.length == 0)
+            throw new DataIncompleteException("You can create an invoice without any line items");
+        String[][][] includedNote = data.getLineItemIncludedNote();
+        String[] grossPriceChargeAmount = data.getLineItemGrossPriceChargeAmount();
+        String[] grossPriceChargeAmountCurrencyID = data.getLineItemGrossPriceChargeAmountCurrencyID();
+        String[] grossPriceBasisQuantity = data.getLineItemGrossPriceBasisQuantity();
+        String[] grossPriceBasisQuantityCode = data.getLineItemGrossPriceBasisQuantityCode();
+        String[][] grossPriceTradeAllowanceChargeIndicator = data.getLineItemGrossPriceTradeAllowanceChargeIndicator();
+        String[][] grossPriceTradeAllowanceChargeActualAmount = data.getLineItemGrossPriceTradeAllowanceChargeActualAmount();
+        String[][] grossPriceTradeAllowanceChargeActualAmountCurrencyID = data.getLineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID();
+        String[][] grossPriceTradeAllowanceChargeReason = data.getLineItemGrossPriceTradeAllowanceChargeReason();
+        String[] netPriceChargeAmount = data.getLineItemNetPriceChargeAmount();
+        String[] netPriceChargeAmountCurrencyID = data.getLineItemNetPriceChargeAmountCurrencyID();
+        String[] netPriceBasisQuantity = data.getLineItemNetPriceBasisQuantity();
+        String[] netPriceBasisQuantityCode = data.getLineItemNetPriceBasisQuantityCode();
+        String[] billedQuantity = data.getLineItemBilledQuantity(); // BASIC
+        String[] billedQuantityUnitCode = data.getLineItemBilledQuantityUnitCode();
+        String[][] settlementTaxTypeCode = data.getLineItemSettlementTaxTypeCode();
+        String[][] settlementTaxExemptionReason = data.getLineItemSettlementTaxExemptionReason();
+        String[][] settlementTaxCategoryCode = data.getLineItemSettlementTaxCategoryCode();
+        String[][] settlementTaxApplicablePercent = data.getLineItemSettlementTaxApplicablePercent();
+        String[] totalAmount = data.getLineItemLineTotalAmount();
+        String[] totalAmountCurrencyID = data.getLineItemLineTotalAmountCurrencyID();
+        String[] specifiedTradeProductGlobalID = data.getLineItemSpecifiedTradeProductGlobalID();
+        String[] specifiedTradeProductSchemeID = data.getLineItemSpecifiedTradeProductSchemeID();
+        String[] specifiedTradeProductSellerAssignedID = data.getLineItemSpecifiedTradeProductSellerAssignedID();
+        String[] specifiedTradeProductBuyerAssignedID = data.getLineItemSpecifiedTradeProductBuyerAssignedID();
+        String[] specifiedTradeProductName = data.getLineItemSpecifiedTradeProductName(); // BASIC
+        String[] specifiedTradeProductDescription = data.getLineItemSpecifiedTradeProductDescription();
+        Node node = parent.getElementsByTagName("ram:IncludedSupplyChainTradeLineItem").item(0);
+        for (int i = 0; i < lineIDs.length; i++) {
+            Node newNode = node.cloneNode(true);
+            processLine((Element)newNode, lineIDs[i], includedNote[i],
+                    grossPriceChargeAmount[i], grossPriceChargeAmountCurrencyID[i],
+                    grossPriceBasisQuantity[i], grossPriceBasisQuantityCode[i],
+                    grossPriceTradeAllowanceChargeIndicator[i],
+                    grossPriceTradeAllowanceChargeActualAmount[i],
+                    grossPriceTradeAllowanceChargeActualAmountCurrencyID[i],
+                    grossPriceTradeAllowanceChargeReason[i],
+                    netPriceChargeAmount[i],
+                    netPriceChargeAmountCurrencyID[i],
+                    netPriceBasisQuantity[i],
+                    netPriceBasisQuantityCode[i]);
+            parent.insertBefore(newNode, node);
+        }
+    }
+    
+    protected void processLine(Element parent, String lineID, String[][] note,
+        String grossPriceChargeAmount, String grossPriceChargeAmountCurrencyID,
+        String grossPriceBasisQuantity, String grossPriceBasisQuantityCode,
+        String[] grossPriceTradeAllowanceChargeIndicator,
+        String[] grossPriceTradeAllowanceChargeActualAmount,
+        String[] grossPriceTradeAllowanceChargeActualAmountCurrencyID,
+        String[] grossPriceTradeAllowanceChargeReason,
+        String netPriceChargeAmount,
+        String netPriceChargeAmountCurrencyID,
+        String netPriceBasisQuantity,
+        String netPriceBasisQuantityCode)
+            throws DataIncompleteException, InvalidCodeException {
+        NumberChecker dec4 = new NumberChecker(NumberChecker.FOUR_DECIMALS);
+        CurrencyCode currCode = new CurrencyCode();
+        QuantityCode qCode = new QuantityCode();
+        Element sub = (Element)parent.getElementsByTagName("ram:AssociatedDocumentLineDocument").item(0);
+        setContent(sub, "ram:LineID", lineID, null);
+        setIncludedNotes(sub, FreeTextSubjectCode.LINE, note, null);
+        if (grossPriceChargeAmount != null) {
+            sub = (Element)parent.getElementsByTagName("ram:GrossPriceProductTradePrice").item(0);
+            setContent(sub, "ram:ChargeAmount", dec4.check(grossPriceChargeAmount),
+                    new String[]{"CurrencyID", currCode.check(grossPriceChargeAmountCurrencyID)});
+            if (grossPriceBasisQuantity != null)
+                setContent(sub, "ram:BasisQuantity", dec4.check(grossPriceBasisQuantity),
+                        new String[]{"CurrencyID", qCode.check(grossPriceBasisQuantityCode)});
+        }
+    }
+    
+    private void processLinesBasic(Element parent, BASICInvoice data)
             throws DataIncompleteException {
         String[] quantity = data.getLineItemBilledQuantity();
         if (quantity.length == 0)
@@ -727,12 +817,12 @@ public final class InvoiceDOM {
         String[] quantityCode = data.getLineItemBilledQuantityUnitCode();
         String[] name = data.getLineItemSpecifiedTradeProductName();
         for (int i = quantity.length - 1; i >= 0; i--) {
-            processLine(doc, quantity[i], quantityCode[i], name[i]);
+            processLine(parent, quantity[i], quantityCode[i], name[i]);
         }
     }
     
-    protected void processLine(Document doc, String quantity, String code, String name) {
-        Node node = doc.getElementsByTagName("ram:IncludedSupplyChainTradeLineItem").item(0);
+    protected void processLine(Element element, String quantity, String code, String name) {
+        Node node = element.getElementsByTagName("ram:IncludedSupplyChainTradeLineItem").item(0);
         Node newNode = node.cloneNode(true);
         Node childNode;
         NodeList list = newNode.getChildNodes();

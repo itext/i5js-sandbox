@@ -137,6 +137,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String[]> lineItemSettlementTaxCategoryCode = new ArrayList<String[]>();
     protected List<String[]> lineItemSettlementTaxApplicablePercent = new ArrayList<String[]>();
     protected List<String> lineItemLineTotalAmount = new ArrayList<String>();
+    protected List<String> lineItemLineTotalAmountCurrencyID = new ArrayList<String>();
     protected List<String> lineItemSpecifiedTradeProductGlobalID = new ArrayList<String>();
     protected List<String> lineItemSpecifiedTradeProductSchemeID = new ArrayList<String>();
     protected List<String> lineItemSpecifiedTradeProductSellerAssignedID = new ArrayList<String>();
@@ -445,6 +446,9 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     public String[] getLineItemLineTotalAmount() {
         return to1DArray(lineItemLineTotalAmount);
     }
+    public String[] getLineItemLineTotalAmountCurrencyID() {
+        return to1DArray(lineItemLineTotalAmountCurrencyID);
+    }
     public String[] getLineItemSpecifiedTradeProductGlobalID() {
         return to1DArray(lineItemSpecifiedTradeProductGlobalID);
     }
@@ -462,11 +466,11 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     }
     
     @Override
-    public void addNote(String note) {
+    public void addNote(String[] note) {
         throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
     }
     
-    public void addNote(String note, String code) {
+    public void addNote(String[] note, String code) {
         notes.add(note);
         notesCodes.add(code);
     }
@@ -672,6 +676,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
             String[] lineItemSettlementTaxCategoryCode,
             String[] lineItemSettlementTaxApplicablePercent,
             String lineItemLineTotalAmount,
+            String lineItemLineTotalAmountCurrencyID,
             String lineItemSpecifiedTradeProductGlobalID,
             String lineItemSpecifiedTradeProductSchemeID,
             String lineItemSpecifiedTradeProductSellerAssignedID,
@@ -699,6 +704,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.lineItemSettlementTaxCategoryCode.add(lineItemSettlementTaxCategoryCode);
         this.lineItemSettlementTaxApplicablePercent.add(lineItemSettlementTaxApplicablePercent);
         this.lineItemLineTotalAmount.add(lineItemLineTotalAmount);
+        this.lineItemLineTotalAmountCurrencyID.add(lineItemLineTotalAmountCurrencyID);
         this.lineItemSpecifiedTradeProductGlobalID.add(lineItemSpecifiedTradeProductGlobalID);
         this.lineItemSpecifiedTradeProductSchemeID.add(lineItemSpecifiedTradeProductSchemeID);
         this.lineItemSpecifiedTradeProductSellerAssignedID.add(lineItemSpecifiedTradeProductSellerAssignedID);
