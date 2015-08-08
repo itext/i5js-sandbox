@@ -15,6 +15,7 @@ import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
 import zugferd.codes.FreeTextSubjectCode;
 import zugferd.codes.GlobalIdentifierCode;
+import zugferd.codes.TaxIDTypeCode;
 import zugferd.xml.COMFORTInvoiceData;
 import zugferd.exceptions.DataIncompleteException;
 import zugferd.exceptions.InvalidCodeException;
@@ -53,10 +54,9 @@ public class XML4Comfort {
         data.setSellerLineOne("SellerTradeParty.PostalTradeAddress.LineOne");
         data.setSellerLineTwo("SellerTradeParty.PostalTradeAddress.LineTwo");
         data.setSellerCityName("SellerTradeParty.PostalTradeAddress.CityName");
-        data.setSellerCountryID("SellerTradeParty.PostalTradeAddress.CountryID");
-        data.addSellerTaxRegistration("SellerTradeParty.SpecifiedTaxRegistration[0]", "SellerTradeParty.SpecifiedTaxRegistration.SchemeID[0]");
-        data.addSellerTaxRegistration("SellerTradeParty.SpecifiedTaxRegistration[1]", "SellerTradeParty.SpecifiedTaxRegistration.SchemeID[1]");
-        data.addSellerTaxRegistration("SellerTradeParty.SpecifiedTaxRegistration[2]", "SellerTradeParty.SpecifiedTaxRegistration.SchemeID[2]");
+        data.setSellerCountryID("DE");
+        data.addSellerTaxRegistration(TaxIDTypeCode.VAT, "SellerTradeParty.SpecifiedTaxRegistration.SchemeID[0]");
+        data.addSellerTaxRegistration(TaxIDTypeCode.FISCAL_NUMBER, "SellerTradeParty.SpecifiedTaxRegistration.SchemeID[1]");
         // Buyer
         data.setBuyerID("BuyerTradeParty.ID");
         data.addBuyerGlobalID(GlobalIdentifierCode.DUNS, "BuyerTradeParty.GlobalID[0]");
@@ -67,17 +67,42 @@ public class XML4Comfort {
         data.setBuyerLineOne("BuyerTradeParty.PostalTradeAddress.LineOne");
         data.setBuyerLineTwo("BuyerTradeParty.PostalTradeAddress.LineTwo");
         data.setBuyerCityName("BuyerTradeParty.PostalTradeAddress.CityName");
-        data.setBuyerCountryID("BuyerTradeParty.PostalTradeAddress.CountryID");
-        data.addBuyerTaxRegistration("BuyerTradeParty.SpecifiedTaxRegistration[0]", "BuyerTradeParty.SpecifiedTaxRegistration.SchemeID[0]");
-        data.addBuyerTaxRegistration("BuyerTradeParty.SpecifiedTaxRegistration[1]", "BuyerTradeParty.SpecifiedTaxRegistration.SchemeID[1]");
-        data.addBuyerTaxRegistration("BuyerTradeParty.SpecifiedTaxRegistration[2]", "BuyerTradeParty.SpecifiedTaxRegistration.SchemeID[2]");
+        data.setBuyerCountryID("BE");
+        data.addBuyerTaxRegistration(TaxIDTypeCode.VAT, "BuyerTradeParty.SpecifiedTaxRegistration.SchemeID[0]");
+        data.addBuyerTaxRegistration(TaxIDTypeCode.FISCAL_NUMBER, "BuyerTradeParty.SpecifiedTaxRegistration.SchemeID[1]");
+        
+        // ApplicableSupplyChainTradeAgreement
+        data.setBuyerOrderReferencedDocumentIssueDateTime(sdf.parse("2016/04/02"), DateFormatCode.YYYYMMDD);
+        data.setBuyerOrderReferencedDocumentID("ApplicableSupplyChainTradeAgreement.BuyerOrderReferencedDocumentID");
+        data.setContractReferencedDocumentIssueDateTime(sdf.parse("2016/04/03"), DateFormatCode.YYYYMMDD);
+        data.setContractReferencedDocumentID("ApplicableSupplyChainTradeAgreement.ContractReferencedDocument");
+        data.setCustomerOrderReferencedDocumentIssueDateTime(sdf.parse("2016/04/04"), DateFormatCode.YYYYMMDD);
+        data.setCustomerOrderReferencedDocumentID("ApplicableSupplyChainTradeAgreement.CustomerOrderReferencedDocument");
         
         // ApplicableSupplyChainTradeDelivery
-        data.setDeliveryDate(sdf.parse("2016/04/02"), DateFormatCode.YYYYMMDD);
+        data.setDeliveryDate(sdf.parse("2016/04/05"), DateFormatCode.YYYYMMDD);
+        data.setDeliveryNoteReferencedDocumentIssueDateTime(sdf.parse("2016/04/06"), DateFormatCode.YYYYMMDD);
+        data.setDeliveryNoteReferencedDocumentID("ApplicableSupplyChainTradeAgreement.DeliveryNoteReferencedDocument");
         
         // ApplicableSupplyChainTradeSettlement
         data.setPaymentReference("ApplicableSupplyChainTradeSettlement.PaymentReference");
-        data.setInvoiceCurrencyCode("ApplicableSupplyChainTradeSettlement.InvoiceCurrencyCode");
+        data.setInvoiceCurrencyCode("USD");
+        
+        data.setInvoiceeID("InvoiceeTradeParty.ID");
+        data.addInvoiceeGlobalID(GlobalIdentifierCode.DUNS, "InvoiceeTradeParty.GlobalID[0]");
+        data.addInvoiceeGlobalID(GlobalIdentifierCode.GTIN, "InvoiceeTradeParty.GlobalID[1]");
+        data.addInvoiceeGlobalID(GlobalIdentifierCode.ODETTE, "InvoiceeTradeParty.GlobalID[2]");
+        data.setInvoiceeName("InvoiceeTradeParty.Name");
+        data.setInvoiceePostcode("InvoiceeTradeParty.PostalTradeAddress.Postcode");
+        data.setInvoiceeLineOne("InvoiceeTradeParty.PostalTradeAddress.LineOne");
+        data.setInvoiceeLineTwo("InvoiceeTradeParty.PostalTradeAddress.LineTwo");
+        data.setInvoiceeCityName("InvoiceeTradeParty.PostalTradeAddress.CityName");
+        data.setInvoiceeCountryID("BE");
+        data.addInvoiceeTaxRegistration(TaxIDTypeCode.VAT, "InvoiceeTradeParty.SpecifiedTaxRegistration.SchemeID[0]");
+        data.addInvoiceeTaxRegistration(TaxIDTypeCode.FISCAL_NUMBER, "InvoiceeTradeParty.SpecifiedTaxRegistration.SchemeID[1]");
+        
+        
+        
         String[] information = { "SpecifiedTradeSettlementPaymentMeans.Information[0]", "SpecifiedTradeSettlementPaymentMeans.Information[1]", "SpecifiedTradeSettlementPaymentMeans.Information[2]" };
         String[] scheme1 = { "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0][0]", "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0][1]", "SpecifiedTradeSettlementPaymentMeans.schemeAgencyID[0][2]" };
         String[] id1 = { "SpecifiedTradeSettlementPaymentMeans.ID[0][0]", "SpecifiedTradeSettlementPaymentMeans.ID[0][1]",  "SpecifiedTradeSettlementPaymentMeans.ID[0][2]" };

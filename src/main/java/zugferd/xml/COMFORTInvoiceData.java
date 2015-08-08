@@ -561,7 +561,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.invoiceeCountryID = invoiceeCountryID;
     }
     
-    public void addInvoiceeTaxRegistrationID(String schemeID, String taxId) {
+    public void addInvoiceeTaxRegistration(String schemeID, String taxId) {
         invoiceeTaxRegistrationSchemeID.add(schemeID);
         invoiceeTaxRegistrationID.add(taxId);
     }

@@ -44,6 +44,8 @@
  */
 package zugferd.codes;
 
+import zugferd.exceptions.InvalidCodeException;
+
 /**
  *
  * @author iText
@@ -51,6 +53,11 @@ package zugferd.codes;
 public abstract class CodeValidation {
     
     public abstract boolean isValid(String code);
+    
+    public void check(String code) throws InvalidCodeException {
+        if (code == null || !isValid(code))
+            throw new InvalidCodeException(code, this.getClass().getName());
+    }
     
     public boolean isNumeric(String code, int digits) {
         if (code.length() != digits) return false;

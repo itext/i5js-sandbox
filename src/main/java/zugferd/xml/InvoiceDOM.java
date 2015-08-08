@@ -64,9 +64,13 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import zugferd.codes.CountryCode;
+import zugferd.codes.CurrencyCode;
 import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
 import zugferd.codes.FreeTextSubjectCode;
+import zugferd.codes.GlobalIdentifierCode;
+import zugferd.codes.TaxIDTypeCode;
 import zugferd.exceptions.InvalidCodeException;
 
 /**
@@ -75,8 +79,7 @@ import zugferd.exceptions.InvalidCodeException;
 public final class InvoiceDOM {
     
     // Profiles that are supported:
-    public static final String BASIC = "resources/zugferd/basic.xml";
-    public static final String COMFORT = "resources/zugferd/comfort.xml";
+    public static final String TEMPLATE = "resources/zugferd/zugferd-template.xml";
     
     // The DOM document
     private Document doc;
@@ -89,110 +92,34 @@ public final class InvoiceDOM {
     public InvoiceDOM(BASICInvoice data)
             throws ParserConfigurationException, SAXException, IOException,
             DataIncompleteException, InvalidCodeException {
-        // Checking the profile and the document type code
-        DocumentTypeCode dtCode;
-        String template;
-        if (data instanceof COMFORTInvoice) {
-            template = COMFORT;
-            dtCode = new DocumentTypeCode(DocumentTypeCode.COMFORT);
-        }
-        else {
-            template = BASIC;
-            dtCode = new DocumentTypeCode(DocumentTypeCode.COMFORT);
-        }
-        if (!dtCode.isValid(data.getTypeCode()))
-            throw new InvalidCodeException(data.getTypeCode(), "document type code");
         // Loading the XML template
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-	doc = docBuilder.parse(template);
+	doc = docBuilder.parse(TEMPLATE);
         // importing the data
-        importData(data);
+        importSpecifiedExchangedDocumentContext(data);
+        importHeaderExchangedDocument(data);
+        importSpecifiedSupplyChainTradeTransaction(data);
     }
     
-    private void importData(BASICInvoice data) throws DataIncompleteException, InvalidCodeException {
-        
-        /* SpecifiedExchangedDocumentContext (required) */
-        
+    /**
+     * Checks if a string is empty and throws a DataIncompleteException if so.
+     * @param   s   the String to check
+     * @param   message the message if an exception is thrown   
+     */
+    protected void check(String s, String message) throws DataIncompleteException {
+        if (s == null || s.trim().length() == 0)
+            throw new DataIncompleteException(message);
+    }
+    
+    /**
+     * Imports the data for the following tag: rsm:SpecifiedExchangedDocumentContext
+     * @param   data    the invoice data
+     */
+    private void importSpecifiedExchangedDocumentContext(BASICInvoice data) {
         Element element = (Element) doc.getElementsByTagName("rsm:SpecifiedExchangedDocumentContext").item(0);
         // TestIndicator (optional)
         setContent(element, "udt:Indicator", data.getTestIndicator() ? "true" : "false", null);
-        
-        /* HeaderExchangedDocument */
-        
-        element = (Element) doc.getElementsByTagName("rsm:HeaderExchangedDocument").item(0);
-        // ID (required)
-        if (isEmpty(data.getId())) 
-            throw new DataIncompleteException("HeaderExchangedDocument > ID");
-        setContent(element, "ram:ID", data.getId(), null);
-        // Name (required)
-        if (isEmpty(data.getName())) 
-            throw new DataIncompleteException("HeaderExchangedDocument > Name");
-        setContent(element, "ram:Name", data.getName(), null);
-        // TypeCode (required; already checked upon creation of the InvoiceDOM)
-        setContent(element, "ram:TypeCode", data.getTypeCode(), null);
-        // IssueDateTime (required)
-        setDateTime(element, "udt:DateTimeString", data.getDateTimeFormat(), data.getDateTime());
-        // IncludedNote (optional): header level
-        setIncludedNotes(element, FreeTextSubjectCode.HEADER, data);
-        
-        /* SpecifiedSupplyChainTradeTransaction */
-        
-        element = (Element) doc.getElementsByTagName("rsm:SpecifiedSupplyChainTradeTransaction").item(0);
-        // buyer reference (optional; comfort only)
-        setBuyerReference(element, data);
-        // SellerTradeParty (required)
-        if (isEmpty(data.getSellerName())) 
-            throw new DataIncompleteException("SpecifiedSupplyChainTradeTransaction > ApplicableSupplyChainTradeAgreement > SellerTradeParty > Name");
-        setSellerTradeParty(element, data);
-        // BuyerTradeParty (required)
-        if (isEmpty(data.getBuyerName())) 
-            throw new DataIncompleteException("SpecifiedSupplyChainTradeTransaction > ApplicableSupplyChainTradeAgreement > BuyerTradeParty > Name");
-        setBuyerTradeParty(element, data);
-        
-        // ApplicableSupplyChainTradeDelivery
-        if (!isEmpty(data.getDeliveryDateTimeFormat())) {
-            Element parent = (Element)element.getElementsByTagName("ram:ActualDeliverySupplyChainEvent").item(0);
-            setDateTime(parent, "udt:DateTimeString", data.getDeliveryDateTimeFormat(), data.getDeliveryDateTime());
-        }
-        // ApplicableSupplyChainTradeSettlement
-        setNodeContent(doc, "ram:PaymentReference", 0, data.getPaymentReference());
-        if (isEmpty(data.getInvoiceCurrencyCode())) 
-            throw new DataIncompleteException("ApplicableSupplyChainTradeSettlement > InvoiceCurrencyCode");
-        setNodeContent(doc, "ram:InvoiceCurrencyCode", 0, data.getInvoiceCurrencyCode());
-        processPaymentMeans(doc, data);
-        processTax(doc, data);
-        if (isEmpty(data.getLineTotalAmount()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > LineTotalAmount");
-        if (isEmpty(data.getLineTotalAmountCurrencyID()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > LineTotalAmount . currencyID");
-        setNodeContent(doc, "ram:LineTotalAmount", 0, data.getLineTotalAmount(), "currencyID", data.getLineTotalAmountCurrencyID());
-        if (isEmpty(data.getChargeTotalAmount()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > ChargeTotalAmount");
-        if (isEmpty(data.getChargeTotalAmountCurrencyID()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > ChargeTotalAmount . currencyID");
-        setNodeContent(doc, "ram:ChargeTotalAmount", 0, data.getChargeTotalAmount(), "currencyID", data.getChargeTotalAmountCurrencyID());
-        if (isEmpty(data.getAllowanceTotalAmount()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > AllowanceTotalAmount");
-        if (isEmpty(data.getAllowanceTotalAmountCurrencyID()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > AllowanceTotalAmount . currencyID");
-        setNodeContent(doc, "ram:AllowanceTotalAmount", 0, data.getAllowanceTotalAmount(), "currencyID", data.getAllowanceTotalAmountCurrencyID());
-        if (isEmpty(data.getTaxBasisTotalAmount()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > TaxBasisTotalAmount");
-        if (isEmpty(data.getTaxBasisTotalAmountCurrencyID()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > TaxBasisTotalAmount . currencyID");
-        setNodeContent(doc, "ram:TaxBasisTotalAmount", 0, data.getTaxBasisTotalAmount(), "currencyID", data.getTaxBasisTotalAmountCurrencyID());
-        if (isEmpty(data.getTaxTotalAmount()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > TaxTotalAmount");
-        if (isEmpty(data.getTaxTotalAmountCurrencyID()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > TaxTotalAmount . currencyID");
-        setNodeContent(doc, "ram:TaxTotalAmount", 0, data.getTaxTotalAmount(), "currencyID", data.getTaxTotalAmountCurrencyID());
-        if (isEmpty(data.getGrandTotalAmount()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > GrandTotalAmount");
-        if (isEmpty(data.getGrandTotalAmountCurrencyID()))
-            throw new DataIncompleteException("SpecifiedTradeSettlementMonetarySummation > GrandTotalAmount . currencyID");
-        setNodeContent(doc, "ram:GrandTotalAmount", 0, data.getGrandTotalAmount(), "currencyID", data.getGrandTotalAmountCurrencyID());
-        processLines(doc, data);
     }
     
     /**
@@ -226,16 +153,42 @@ public final class InvoiceDOM {
     }
     
     /**
+     * Imports the data for the following tag: rsm:HeaderExchangedDocument
+     * @param   data    the invoice data
+     */
+    private void importHeaderExchangedDocument(BASICInvoice data)
+            throws DataIncompleteException, InvalidCodeException {
+        Element element = (Element) doc.getElementsByTagName("rsm:HeaderExchangedDocument").item(0);
+        // ID (required)
+        check(data.getId(), "HeaderExchangedDocument > ID");
+        setContent(element, "ram:ID", data.getId(), null);
+        // Name (required)
+        check(data.getName(), "HeaderExchangedDocument > Name");
+        setContent(element, "ram:Name", data.getName(), null);
+        // TypeCode (required)
+        DocumentTypeCode dtCode = new DocumentTypeCode(
+                data instanceof COMFORTInvoice ? DocumentTypeCode.COMFORT : DocumentTypeCode.BASIC);
+        dtCode.check(data.getTypeCode());
+        setContent(element, "ram:TypeCode", data.getTypeCode(), null);
+        // IssueDateTime (required)
+        check(data.getDateTimeFormat(), "HeaderExchangedDocument > DateTimeString");
+        setDateTime(element, "udt:DateTimeString", data.getDateTimeFormat(), data.getDateTime());
+        // IncludedNote (optional): header level
+        setIncludedNotes(element, FreeTextSubjectCode.HEADER, data);
+    }
+    
+    /**
      * Set the content of a date tag along with the attribute that defines the format.
      * @param parent    the parent element that holds the date tag
      * @param tag       the date tag we want to change
      * @param dateTimeFormat    the format that will be used as an attribute
      * @param dateTime  the actual date
      */
-    protected void setDateTime(Element parent, String tag, String dateTimeFormat, Date dateTime) throws InvalidCodeException {
+    protected void setDateTime(Element parent, String tag, String dateTimeFormat, Date dateTime)
+            throws InvalidCodeException {
+        if (dateTimeFormat == null) return;
         DateFormatCode dfCode = new DateFormatCode();
-        if (!dfCode.isValid(dateTimeFormat))
-            throw new InvalidCodeException(dateTimeFormat, "date / time format code");
+        dfCode.check(dateTimeFormat);
         setContent(parent, tag, dfCode.convertToString(dateTime, dateTimeFormat), new String[]{"format", dateTimeFormat});
     }
     
@@ -243,7 +196,6 @@ public final class InvoiceDOM {
      * Includes notes and (in case of the COMFORT profile) the subject codes
      * for those notes.
      * @param parent    the parent element of the tag we want to change
-     * @param tag   the name of the tag
      * @param level the level where the notices are added (header or line)
      * @param data  the invoice data (BASICInvoice and COMFORTInvoice are supported)
      */
@@ -264,25 +216,106 @@ public final class InvoiceDOM {
             Node content = noteNode.getElementsByTagName("ram:Content").item(0);
             content.setTextContent(notes[i]);
             if (notesCodes != null) {
-                if (!ftsCode.isValid(notesCodes[i]))
-                    throw new InvalidCodeException(notesCodes[i], "included note subject code");
+                ftsCode.check(notesCodes[i]);
                 Node code = noteNode.getElementsByTagName("ram:SubjectCode").item(0);
                 code.setTextContent(notesCodes[i]);
             }
             parent.insertBefore(noteNode, includedNoteNode);
         }
     }
+    /**
+     * Imports the data for the following tag: rsm:SpecifiedSupplyChainTradeTransaction
+     * @param   data    the invoice data
+     */
+    private void importSpecifiedSupplyChainTradeTransaction(BASICInvoice data) throws DataIncompleteException, InvalidCodeException {
+        Element element = (Element) doc.getElementsByTagName("rsm:SpecifiedSupplyChainTradeTransaction").item(0);
+        
+        /* ram:ApplicableSupplyChainTradeAgreement */
+
+        // buyer reference (optional; comfort only)
+        setBuyerReference(element, data);
+        // SellerTradeParty (required)
+        check(data.getSellerName(), "SpecifiedSupplyChainTradeTransaction > ApplicableSupplyChainTradeAgreement > SellerTradeParty > Name");
+        setSellerTradeParty(element, data);
+        // BuyerTradeParty (required)
+        check(data.getBuyerName(), "SpecifiedSupplyChainTradeTransaction > ApplicableSupplyChainTradeAgreement > BuyerTradeParty > Name");
+        setBuyerTradeParty(element, data);
+        
+        /* ram:ApplicableSupplyChainTradeDelivery */
+        
+        if (data instanceof COMFORTInvoice) {
+            COMFORTInvoice cData = (COMFORTInvoice)data;
+            // BuyerOrderReferencedDocument (optional)
+            Element document = (Element)element.getElementsByTagName("ram:BuyerOrderReferencedDocument").item(0);
+            setDateTime(document, "ram:IssueDateTime", cData.getBuyerOrderReferencedDocumentIssueDateTimeFormat(), cData.getBuyerOrderReferencedDocumentIssueDateTime());
+            setContent(document, "ram:ID", cData.getBuyerOrderReferencedDocumentID(), null);
+            // ContractReferencedDocument (optional)
+            document = (Element)element.getElementsByTagName("ram:ContractReferencedDocument").item(0);
+            setDateTime(document, "ram:IssueDateTime", cData.getContractReferencedDocumentIssueDateTimeFormat(), cData.getContractReferencedDocumentIssueDateTime());
+            setContent(document, "ram:ID", cData.getContractReferencedDocumentID(), null);
+            // CustomerOrderReferencedDocument (optional)
+            document = (Element)element.getElementsByTagName("ram:CustomerOrderReferencedDocument").item(0);
+            setDateTime(document, "ram:IssueDateTime", cData.getCustomerOrderReferencedDocumentIssueDateTimeFormat(), cData.getCustomerOrderReferencedDocumentIssueDateTime());
+            setContent(document, "ram:ID", cData.getCustomerOrderReferencedDocumentID(), null);
+        }
+        
+        /* ram:ApplicableSupplyChainTradeDelivery */
+        // ActualDeliverySupplyChainEvent (optional)
+        Element parent = (Element)element.getElementsByTagName("ram:ActualDeliverySupplyChainEvent").item(0);
+        setDateTime(parent, "udt:DateTimeString", data.getDeliveryDateTimeFormat(), data.getDeliveryDateTime());
+        // DeliveryNoteReferencedDocument (optional)
+        if (data instanceof COMFORTInvoice) {
+            COMFORTInvoice cData = (COMFORTInvoice)data;
+            Element document = (Element)element.getElementsByTagName("ram:DeliveryNoteReferencedDocument").item(0);
+            setDateTime(document, "ram:IssueDateTime", cData.getDeliveryNoteReferencedDocumentIssueDateTimeFormat(), cData.getDeliveryNoteReferencedDocumentIssueDateTime());
+            setContent(document, "ram:ID", cData.getDeliveryNoteReferencedDocumentID(), null);
+        }
+        
+        /* ram:ApplicableSupplyChainTradeSettlement */
+        // ram:PaymentReference (optional)
+        setContent(element, "ram:PaymentReference", data.getPaymentReference(), null);
+        // ram:InvoiceCurrencyCode (required)
+        CurrencyCode currCode = new CurrencyCode();
+        currCode.check(data.getInvoiceCurrencyCode());
+        setContent(element, "ram:InvoiceCurrencyCode", data.getInvoiceCurrencyCode(), null);
+        // ram:InvoiceeTradeParty (optional)
+        if (data instanceof COMFORTInvoice) {
+            setInvoiceeTradeParty(element, (COMFORTInvoice)data);
+        }
+        
+        // ram:SpecifiedTradeSettlementPaymentMeans
+        
+        processPaymentMeans(doc, data);
+        processTax(doc, data);
+        check(data.getLineTotalAmount(), "SpecifiedTradeSettlementMonetarySummation > LineTotalAmount");
+        check(data.getLineTotalAmountCurrencyID(), "SpecifiedTradeSettlementMonetarySummation > LineTotalAmount . currencyID");
+        setNodeContent(doc, "ram:LineTotalAmount", 0, data.getLineTotalAmount(), "currencyID", data.getLineTotalAmountCurrencyID());
+        check(data.getChargeTotalAmount(), "SpecifiedTradeSettlementMonetarySummation > ChargeTotalAmount");
+        check(data.getChargeTotalAmountCurrencyID(), "SpecifiedTradeSettlementMonetarySummation > ChargeTotalAmount . currencyID");
+        setNodeContent(doc, "ram:ChargeTotalAmount", 0, data.getChargeTotalAmount(), "currencyID", data.getChargeTotalAmountCurrencyID());
+        check(data.getAllowanceTotalAmount(), "SpecifiedTradeSettlementMonetarySummation > AllowanceTotalAmount");
+        check(data.getAllowanceTotalAmountCurrencyID(), "SpecifiedTradeSettlementMonetarySummation > AllowanceTotalAmount . currencyID");
+        setNodeContent(doc, "ram:AllowanceTotalAmount", 0, data.getAllowanceTotalAmount(), "currencyID", data.getAllowanceTotalAmountCurrencyID());
+        check(data.getTaxBasisTotalAmount(), "SpecifiedTradeSettlementMonetarySummation > TaxBasisTotalAmount");
+        check(data.getTaxBasisTotalAmountCurrencyID(), "SpecifiedTradeSettlementMonetarySummation > TaxBasisTotalAmount . currencyID");
+        setNodeContent(doc, "ram:TaxBasisTotalAmount", 0, data.getTaxBasisTotalAmount(), "currencyID", data.getTaxBasisTotalAmountCurrencyID());
+        check(data.getTaxTotalAmount(), "SpecifiedTradeSettlementMonetarySummation > TaxTotalAmount");
+        check(data.getTaxTotalAmountCurrencyID(), "SpecifiedTradeSettlementMonetarySummation > TaxTotalAmount . currencyID");
+        setNodeContent(doc, "ram:TaxTotalAmount", 0, data.getTaxTotalAmount(), "currencyID", data.getTaxTotalAmountCurrencyID());
+        check(data.getGrandTotalAmount(), "SpecifiedTradeSettlementMonetarySummation > GrandTotalAmount");
+        check(data.getGrandTotalAmountCurrencyID(), "SpecifiedTradeSettlementMonetarySummation > GrandTotalAmount . currencyID");
+        setNodeContent(doc, "ram:GrandTotalAmount", 0, data.getGrandTotalAmount(), "currencyID", data.getGrandTotalAmountCurrencyID());
+        processLines(doc, data);
+    }
     
     protected void setBuyerReference(Element parent, BASICInvoice data) {
         if (data instanceof COMFORTInvoice) {
             String buyerReference = ((COMFORTInvoice) data).getBuyerReference();
-            if (!isEmpty(buyerReference)) {
-                setContent(parent, "ram:BuyerReference", buyerReference, null);
-            }
+            setContent(parent, "ram:BuyerReference", buyerReference, null);
         }
     }
     
-    protected void setSellerTradeParty(Element parent, BASICInvoice data) throws DataIncompleteException {
+    protected void setSellerTradeParty(Element parent, BASICInvoice data) throws DataIncompleteException, InvalidCodeException {
         String id = null;
         String[] globalID = null;
         String[] globalIDScheme = null;
@@ -304,7 +337,7 @@ public final class InvoiceDOM {
                 taxRegistrationID, taxRegistrationSchemeID);
     }
     
-    protected void setBuyerTradeParty(Element parent, BASICInvoice data) throws DataIncompleteException {
+    protected void setBuyerTradeParty(Element parent, BASICInvoice data) throws DataIncompleteException, InvalidCodeException {
         String id = null;
         String[] globalID = null;
         String[] globalIDScheme = null;
@@ -326,11 +359,29 @@ public final class InvoiceDOM {
                 taxRegistrationID, taxRegistrationSchemeID);
     }
     
+    protected void setInvoiceeTradeParty(Element parent, COMFORTInvoice data) throws DataIncompleteException, InvalidCodeException {
+        String name = data.getInvoiceeName();
+        if (name == null) return;
+        String id = data.getInvoiceeID();
+        String[] globalID = data.getInvoiceeGlobalID();
+        String[] globalIDScheme = data.getInvoiceeGlobalSchemeID();
+        String postcode = data.getInvoiceePostcode();
+        String lineOne = data.getInvoiceeLineOne();
+        String lineTwo = data.getInvoiceeLineTwo();
+        String cityName = data.getInvoiceeCityName();
+        String countryID = data.getInvoiceeCountryID();
+        String[] taxRegistrationID = data.getInvoiceeTaxRegistrationID();
+        String[] taxRegistrationSchemeID = data.getInvoiceeTaxRegistrationSchemeID();
+        processTradeParty(parent, "ram:InvoiceeTradeParty", id, globalID, globalIDScheme,
+                name, postcode, lineOne, lineTwo, cityName, countryID,
+                taxRegistrationID, taxRegistrationSchemeID);
+    }
+    
     protected void processTradeParty(Element element, String tagname,
         String id, String[] globalID, String[] globalIDScheme,
         String name, String postcode, String lineOne, String lineTwo,
         String cityName, String countryID,
-        String[] taxRegistrationID, String[] taxRegistrationSchemeID) throws DataIncompleteException {
+        String[] taxRegistrationID, String[] taxRegistrationSchemeID) throws DataIncompleteException, InvalidCodeException {
         Element party = (Element) element.getElementsByTagName(tagname).item(0);
         Node node;
         if (id != null) {
@@ -338,6 +389,7 @@ public final class InvoiceDOM {
             node.setTextContent(id);
         }
         if (globalID != null) {
+            GlobalIdentifierCode giCode = new GlobalIdentifierCode();
             int n = globalID.length;
             if (globalIDScheme == null || globalIDScheme.length != n)
                 throw new DataIncompleteException("Number of global ID schemes is not equal to number of global IDs.");
@@ -347,6 +399,7 @@ public final class InvoiceDOM {
                 NamedNodeMap attrs = idNode.getAttributes();
                 idNode.setTextContent(globalID[i]);
                 Node schemeID = attrs.getNamedItem("schemeID");
+                giCode.check(globalIDScheme[i]);
                 schemeID.setTextContent(globalIDScheme[i]);
                 party.insertBefore(idNode, node);
             }
@@ -356,17 +409,23 @@ public final class InvoiceDOM {
         setContent(party, "ram:LineOne", lineOne, null);
         setContent(party, "ram:LineTwo", lineTwo, null);
         setContent(party, "ram:CityName", cityName, null);
-        setContent(party, "ram:CountryID", countryID, null);
+        if (countryID != null) {
+            CountryCode cCode = new CountryCode();
+            cCode.check(countryID);
+            setContent(party, "ram:CountryID", countryID, null);
+        }
         int n = taxRegistrationID.length;
         if (taxRegistrationSchemeID != null && taxRegistrationSchemeID.length != n)
             throw new DataIncompleteException("Number of tax ID schemes is not equal to number of tax IDs.");
         Element tax = (Element) party.getElementsByTagName("ram:SpecifiedTaxRegistration").item(0);
         node = tax.getElementsByTagName("ram:ID").item(0);
+        TaxIDTypeCode tCode = new TaxIDTypeCode();
         for (int i = 0; i < n; i++) {
             Element idNode = (Element)node.cloneNode(true);
             idNode.setTextContent(taxRegistrationID[i]);
             NamedNodeMap attrs = idNode.getAttributes();
             Node schemeID = attrs.getNamedItem("schemeID");
+            tCode.check(taxRegistrationSchemeID[i]);
             schemeID.setTextContent(taxRegistrationSchemeID[i]);
             tax.insertBefore(idNode, node);
         }           
@@ -584,10 +643,5 @@ public final class InvoiceDOM {
         if (emptyElement || emptyText) {
             node.getParentNode().removeChild(node);
         }
-    }
-    
-    protected boolean isEmpty(String s) {
-        if (s == null) return true;
-        return s.trim().length() == 0;
     }
 }
