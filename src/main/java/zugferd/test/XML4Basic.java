@@ -13,6 +13,7 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
+import zugferd.codes.MeasurementUnitCode;
 import zugferd.codes.TaxIDTypeCode;
 import zugferd.xml.InvoiceDOM;
 import zugferd.xml.BASICInvoiceData;
@@ -83,14 +84,14 @@ public class XML4Basic {
                 "210.00", "EUR",
                 "1210.00", "EUR");
         
-        data.addIncludedSupplyChainTradeLineItem("IncludedSupplyChainTradeLineItem.SpecifiedSupplyChainTradeDelivery.BilledQuantity[0]",
-                "IncludedSupplyChainTradeLineItem.SpecifiedSupplyChainTradeDelivery.BilledQuantity.unitCode[0]",
+        data.addIncludedSupplyChainTradeLineItem("1.0000",
+                MeasurementUnitCode.DAY,
                 "IncludedSupplyChainTradeLineItem.SpecifiedTradeProduct.Name[0]");
-        data.addIncludedSupplyChainTradeLineItem("IncludedSupplyChainTradeLineItem.SpecifiedSupplyChainTradeDelivery.BilledQuantity[1]",
-                "IncludedSupplyChainTradeLineItem.SpecifiedSupplyChainTradeDelivery.BilledQuantity.unitCode[1]",
+        data.addIncludedSupplyChainTradeLineItem("2.0000",
+                MeasurementUnitCode.HR,
                 "IncludedSupplyChainTradeLineItem.SpecifiedTradeProduct.Name[1]");
-        data.addIncludedSupplyChainTradeLineItem("IncludedSupplyChainTradeLineItem.SpecifiedSupplyChainTradeDelivery.BilledQuantity[2]",
-                "IncludedSupplyChainTradeLineItem.SpecifiedSupplyChainTradeDelivery.BilledQuantity.unitCode[2]",
+        data.addIncludedSupplyChainTradeLineItem("3.0000",
+                MeasurementUnitCode.MIN,
                 "IncludedSupplyChainTradeLineItem.SpecifiedTradeProduct.Name[2]");
         
         // Create the XML

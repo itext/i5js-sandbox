@@ -779,7 +779,10 @@ public final class InvoiceDOM {
                     billedQuantity[i], billedQuantityUnitCode[i],
                     settlementTaxTypeCode[i], settlementTaxExemptionReason[i],
                     settlementTaxCategoryCode[i], settlementTaxApplicablePercent[i],
-                    totalAmount[i], totalAmountCurrencyID[i]
+                    totalAmount[i], totalAmountCurrencyID[i],
+                    specifiedTradeProductGlobalID[i], specifiedTradeProductSchemeID[i],
+                    specifiedTradeProductSellerAssignedID[i], specifiedTradeProductBuyerAssignedID[i],
+                    specifiedTradeProductName[i], specifiedTradeProductDescription[i]
             );
             parent.insertBefore(newNode, node);
         }
@@ -797,7 +800,10 @@ public final class InvoiceDOM {
         String billedQuantity, String billedQuantityCode,
         String[] settlementTaxTypeCode, String[] settlementTaxExemptionReason,
         String[] settlementTaxCategoryCode, String[] settlementTaxApplicablePercent,
-        String totalAmount, String totalAmountCurrencyID)
+        String totalAmount, String totalAmountCurrencyID,
+        String specifiedTradeProductGlobalID, String specifiedTradeProductSchemeID,
+        String specifiedTradeProductSellerAssignedID, String specifiedTradeProductBuyerAssignedID,
+        String specifiedTradeProductName, String specifiedTradeProductDescription)
             throws DataIncompleteException, InvalidCodeException {
         NumberChecker dec4 = new NumberChecker(NumberChecker.FOUR_DECIMALS);
         CurrencyCode currCode = new CurrencyCode();
@@ -853,6 +859,15 @@ public final class InvoiceDOM {
             sub.insertBefore(newNode, node);
         }
         setContent(sub, "ram:LineTotalAmount", totalAmount, new String[]{"currencyID", totalAmountCurrencyID});
+        
+        /* ram:SpecifiedTradeProduct */
+        sub = (Element)parent.getElementsByTagName("ram:SpecifiedTradeProduct").item(0);
+        GlobalIdentifierCode giCode = new GlobalIdentifierCode();
+        setContent(sub, "ram:GlobalID", specifiedTradeProductGlobalID, new String[]{"schemeID", giCode.check(specifiedTradeProductSchemeID)});
+        setContent(sub, "ram:SellerAssignedID", specifiedTradeProductSellerAssignedID, null);
+        setContent(sub, "ram:BuyerAssignedID", specifiedTradeProductBuyerAssignedID, null);
+        setContent(sub, "ram:Name", specifiedTradeProductName, null);
+        setContent(sub, "ram:Description", specifiedTradeProductDescription, null);
     }
     
     private void processAppliedTradeAllowanceCharge(Element parent,
@@ -885,45 +900,28 @@ public final class InvoiceDOM {
     }
     
     private void processLinesBasic(Element parent, BASICInvoice data)
-            throws DataIncompleteException {
+            throws DataIncompleteException, InvalidCodeException {
         String[] quantity = data.getLineItemBilledQuantity();
         if (quantity.length == 0)
             throw new DataIncompleteException("You can create an invoice without any line items");
         String[] quantityCode = data.getLineItemBilledQuantityUnitCode();
         String[] name = data.getLineItemSpecifiedTradeProductName();
-        for (int i = quantity.length - 1; i >= 0; i--) {
-            processLine(parent, quantity[i], quantityCode[i], name[i]);
+        Node node = parent.getElementsByTagName("ram:IncludedSupplyChainTradeLineItem").item(0);
+        for (int i = 0; i < quantity.length; i++) {
+            Node newNode = node.cloneNode(true);
+            processLine((Element)newNode, quantity[i], quantityCode[i], name[i]);
+            parent.insertBefore(newNode, node);
         }
     }
     
-    protected void processLine(Element element, String quantity, String code, String name) {
-        Node node = element.getElementsByTagName("ram:IncludedSupplyChainTradeLineItem").item(0);
-        Node newNode = node.cloneNode(true);
-        Node childNode;
-        NodeList list = newNode.getChildNodes();
-        for (int i = 0; i < list.getLength(); i++) {
-            childNode = list.item(i);
-            if ("ram:SpecifiedSupplyChainTradeDelivery".equals(childNode.getNodeName())) {
-                NodeList l = childNode.getChildNodes();
-                for (int j = 0; j < l.getLength(); j++) {
-                    Node grandchildNode = l.item(j);
-                    if (grandchildNode.getNodeType() == Node.ELEMENT_NODE) {
-                        grandchildNode.setTextContent(quantity);
-                        grandchildNode.getAttributes().item(0).setTextContent(code);
-                    }
-                }
-            }
-            else if ("ram:SpecifiedTradeProduct".equals(childNode.getNodeName())) {
-                NodeList l = childNode.getChildNodes();
-                for (int j = 0; j < l.getLength(); j++) {
-                    Node grandchildNode = l.item(j);
-                    if (grandchildNode.getNodeType() == Node.ELEMENT_NODE)
-                        grandchildNode.setTextContent(name);
-                }
-            }
-        }
-        Node parent = node.getParentNode();
-        parent.insertBefore(newNode, node);
+    protected void processLine(Element parent, String quantity, String code, String name) throws InvalidCodeException {
+        Element sub = (Element)parent.getElementsByTagName("ram:SpecifiedSupplyChainTradeDelivery").item(0);
+        NumberChecker dec4 = new NumberChecker(NumberChecker.FOUR_DECIMALS);
+        MeasurementUnitCode qCode = new MeasurementUnitCode();
+        setContent(sub, "ram:BilledQuantity", dec4.check(quantity),
+                new String[]{"unitCode", qCode.check(code)});
+        sub = (Element)parent.getElementsByTagName("ram:SpecifiedTradeProduct").item(0);
+        setContent(sub, "ram:Name", name, null);
     }
     
     public byte[] exportDoc() throws TransformerException {

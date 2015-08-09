@@ -58,7 +58,7 @@ public class MeasurementUnitCode extends CodeValidation {
     public static final String KWH = "KWH"; 
     public static final String SUM = "LS"; 
     public static final String L = "LTR"; 
-    public static final String MIN = "MIM";
+    public static final String MIN = "MIN";
     public static final String MM2 = "MMK"; 
     public static final String MM = "MMT"; 
     public static final String M2 = "MTK"; 
