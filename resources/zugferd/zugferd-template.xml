@@ -195,13 +195,13 @@
 				<ram:BilledQuantity unitCode="" />
 			</ram:SpecifiedSupplyChainTradeDelivery>
 			<ram:SpecifiedSupplyChainTradeSettlement>
+				<ram:ApplicableTradeTax>
+					<ram:TypeCode />
+					<ram:ExemptionReason />
+					<ram:CategoryCode />
+					<ram:ApplicablePercent />
+				</ram:ApplicableTradeTax>
 				<ram:SpecifiedTradeSettlementMonetarySummation>
-					<ram:ApplicableTradeTax>
-						<ram:TypeCode />
-						<ram:ExemptionReason />
-						<ram:CategoryCode />
-						<ram:ApplicablePercent />
-					</ram:ApplicableTradeTax>
 					<ram:LineTotalAmount currencyID="" />
 				</ram:SpecifiedTradeSettlementMonetarySummation>
 			</ram:SpecifiedSupplyChainTradeSettlement>

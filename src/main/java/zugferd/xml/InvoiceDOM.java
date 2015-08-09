@@ -70,6 +70,7 @@ import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
 import zugferd.codes.FreeTextSubjectCode;
 import zugferd.codes.GlobalIdentifierCode;
+import zugferd.codes.MeasurementUnitCode;
 import zugferd.codes.NumberChecker;
 import zugferd.codes.PaymentMeansCode;
 import zugferd.codes.QuantityCode;
@@ -623,7 +624,7 @@ public final class InvoiceDOM {
     
     private void processSpecifiedTradeAllowanceCharge(Element parent, COMFORTInvoice data)
             throws InvalidCodeException {
-        String[] indicator = data.getSpecifiedTradeAllowanceChargeIndicator();
+        Boolean[] indicator = data.getSpecifiedTradeAllowanceChargeIndicator();
         String[] actualAmount = data.getSpecifiedTradeAllowanceChargeActualAmount();
         String[] actualAmountCurr = data.getSpecifiedTradeAllowanceChargeActualAmountCurrency();
         String[] reason = data.getSpecifiedTradeAllowanceChargeReason();
@@ -640,10 +641,10 @@ public final class InvoiceDOM {
         }
     }
     
-    private void processSpecifiedTradeAllowanceCharge(Element parent, String indicator,
+    private void processSpecifiedTradeAllowanceCharge(Element parent, boolean indicator,
         String actualAmount, String actualAmountCurrency, String reason,
         String[] typeCode, String[] categoryCode, String[] percent) throws InvalidCodeException {
-        setContent(parent, "udt:Indicator", indicator, null);
+        setContent(parent, "udt:Indicator", indicator ? "true" : "false", null);
         NumberChecker dec4 = new NumberChecker(NumberChecker.FOUR_DECIMALS);
         CurrencyCode currCode = new CurrencyCode();
         setContent(parent, "ram:ActualAmount", dec4.check(actualAmount), new String[]{"currencyID", currCode.check(actualAmountCurrency)});
@@ -741,7 +742,7 @@ public final class InvoiceDOM {
         String[] grossPriceChargeAmountCurrencyID = data.getLineItemGrossPriceChargeAmountCurrencyID();
         String[] grossPriceBasisQuantity = data.getLineItemGrossPriceBasisQuantity();
         String[] grossPriceBasisQuantityCode = data.getLineItemGrossPriceBasisQuantityCode();
-        String[][] grossPriceTradeAllowanceChargeIndicator = data.getLineItemGrossPriceTradeAllowanceChargeIndicator();
+        Boolean[][] grossPriceTradeAllowanceChargeIndicator = data.getLineItemGrossPriceTradeAllowanceChargeIndicator();
         String[][] grossPriceTradeAllowanceChargeActualAmount = data.getLineItemGrossPriceTradeAllowanceChargeActualAmount();
         String[][] grossPriceTradeAllowanceChargeActualAmountCurrencyID = data.getLineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID();
         String[][] grossPriceTradeAllowanceChargeReason = data.getLineItemGrossPriceTradeAllowanceChargeReason();
@@ -773,10 +774,13 @@ public final class InvoiceDOM {
                     grossPriceTradeAllowanceChargeActualAmount[i],
                     grossPriceTradeAllowanceChargeActualAmountCurrencyID[i],
                     grossPriceTradeAllowanceChargeReason[i],
-                    netPriceChargeAmount[i],
-                    netPriceChargeAmountCurrencyID[i],
-                    netPriceBasisQuantity[i],
-                    netPriceBasisQuantityCode[i]);
+                    netPriceChargeAmount[i], netPriceChargeAmountCurrencyID[i],
+                    netPriceBasisQuantity[i], netPriceBasisQuantityCode[i],
+                    billedQuantity[i], billedQuantityUnitCode[i],
+                    settlementTaxTypeCode[i], settlementTaxExemptionReason[i],
+                    settlementTaxCategoryCode[i], settlementTaxApplicablePercent[i],
+                    totalAmount[i], totalAmountCurrencyID[i]
+            );
             parent.insertBefore(newNode, node);
         }
     }
@@ -784,29 +788,100 @@ public final class InvoiceDOM {
     protected void processLine(Element parent, String lineID, String[][] note,
         String grossPriceChargeAmount, String grossPriceChargeAmountCurrencyID,
         String grossPriceBasisQuantity, String grossPriceBasisQuantityCode,
-        String[] grossPriceTradeAllowanceChargeIndicator,
+        Boolean[] grossPriceTradeAllowanceChargeIndicator,
         String[] grossPriceTradeAllowanceChargeActualAmount,
         String[] grossPriceTradeAllowanceChargeActualAmountCurrencyID,
         String[] grossPriceTradeAllowanceChargeReason,
-        String netPriceChargeAmount,
-        String netPriceChargeAmountCurrencyID,
-        String netPriceBasisQuantity,
-        String netPriceBasisQuantityCode)
+        String netPriceChargeAmount, String netPriceChargeAmountCurrencyID,
+        String netPriceBasisQuantity, String netPriceBasisQuantityCode,
+        String billedQuantity, String billedQuantityCode,
+        String[] settlementTaxTypeCode, String[] settlementTaxExemptionReason,
+        String[] settlementTaxCategoryCode, String[] settlementTaxApplicablePercent,
+        String totalAmount, String totalAmountCurrencyID)
             throws DataIncompleteException, InvalidCodeException {
         NumberChecker dec4 = new NumberChecker(NumberChecker.FOUR_DECIMALS);
         CurrencyCode currCode = new CurrencyCode();
-        QuantityCode qCode = new QuantityCode();
+        MeasurementUnitCode qCode = new MeasurementUnitCode();
+
+        /* ram:AssociatedDocumentLineDocument */
         Element sub = (Element)parent.getElementsByTagName("ram:AssociatedDocumentLineDocument").item(0);
         setContent(sub, "ram:LineID", lineID, null);
         setIncludedNotes(sub, FreeTextSubjectCode.LINE, note, null);
+
+        /* ram:SpecifiedSupplyChainTradeAgreement */
+        // ram:GrossPriceProductTradePrice
         if (grossPriceChargeAmount != null) {
             sub = (Element)parent.getElementsByTagName("ram:GrossPriceProductTradePrice").item(0);
             setContent(sub, "ram:ChargeAmount", dec4.check(grossPriceChargeAmount),
-                    new String[]{"CurrencyID", currCode.check(grossPriceChargeAmountCurrencyID)});
+                    new String[]{"currencyID", currCode.check(grossPriceChargeAmountCurrencyID)});
             if (grossPriceBasisQuantity != null)
                 setContent(sub, "ram:BasisQuantity", dec4.check(grossPriceBasisQuantity),
-                        new String[]{"CurrencyID", qCode.check(grossPriceBasisQuantityCode)});
+                        new String[]{"unitCode", qCode.check(grossPriceBasisQuantityCode)});
+            Node node = sub.getElementsByTagName("ram:AppliedTradeAllowanceCharge").item(0);
+            for (int i = 0; i < grossPriceTradeAllowanceChargeIndicator.length; i++) {
+                Node newNode = node.cloneNode(true);
+                processAppliedTradeAllowanceCharge((Element)newNode,
+                        grossPriceTradeAllowanceChargeIndicator[i],
+                        grossPriceTradeAllowanceChargeActualAmount[i],
+                        grossPriceTradeAllowanceChargeActualAmountCurrencyID[i],
+                        grossPriceTradeAllowanceChargeReason[i]);
+                sub.insertBefore(newNode, node);
+            }
         }
+        // ram:NetPriceProductTradePrice
+        if (netPriceChargeAmount != null) {
+            sub = (Element)parent.getElementsByTagName("ram:NetPriceProductTradePrice").item(0);
+            setContent(sub, "ram:ChargeAmount", dec4.check(netPriceChargeAmount),
+                    new String[]{"currencyID", currCode.check(netPriceChargeAmountCurrencyID)});
+            if (netPriceBasisQuantity != null)
+                setContent(sub, "ram:BasisQuantity", dec4.check(netPriceBasisQuantity),
+                        new String[]{"unitCode", qCode.check(netPriceBasisQuantityCode)});
+        }
+        
+        /* ram:SpecifiedSupplyChainTradeDelivery */
+        sub = (Element)parent.getElementsByTagName("ram:SpecifiedSupplyChainTradeDelivery").item(0);
+        setContent(sub, "ram:BilledQuantity", dec4.check(billedQuantity),
+                new String[]{"unitCode", qCode.check(billedQuantityCode)});
+        
+        /* ram:SpecifiedSupplyChainTradeSettlement */
+        sub = (Element)parent.getElementsByTagName("ram:SpecifiedSupplyChainTradeSettlement").item(0);
+        Node node = sub.getElementsByTagName("ram:ApplicableTradeTax").item(0);
+        for (int i = 0; i < settlementTaxApplicablePercent.length; i++) {
+            Node newNode = node.cloneNode(true);
+            processTax((Element) newNode, settlementTaxTypeCode[i], settlementTaxExemptionReason[i],
+                settlementTaxCategoryCode[i], settlementTaxApplicablePercent[i]);
+            sub.insertBefore(newNode, node);
+        }
+        setContent(sub, "ram:LineTotalAmount", totalAmount, new String[]{"currencyID", totalAmountCurrencyID});
+    }
+    
+    private void processAppliedTradeAllowanceCharge(Element parent,
+            boolean indicator, String actualAmount,  String currencyID, String reason) throws DataIncompleteException, InvalidCodeException {
+        setContent(parent, "udt:Indicator", indicator ? "true" : "false", null);
+        NumberChecker dec4 = new NumberChecker(NumberChecker.FOUR_DECIMALS);
+        check(dec4.check(actualAmount), "AppliedTradeAllowanceCharge > ActualAmount");
+        CurrencyCode currCode = new CurrencyCode();
+        setContent(parent, "ram:ActualAmount", actualAmount, new String[]{"currencyID", currCode.check(currencyID)});
+        setContent(parent, "ram:Reason", reason, null);
+    }
+    
+    private void processTax(Element parent,
+        String typeCode, String exemptionReason,
+        String category, String percent)
+            throws InvalidCodeException, DataIncompleteException {
+        // Calculated amount (required; 2 decimals)
+        NumberChecker dec2 = new NumberChecker(NumberChecker.TWO_DECIMALS);
+        // TypeCode (required)
+        check(typeCode, "ApplicableTradeTax > TypeCode");
+        setContent(parent, "ram:TypeCode", new TaxTypeCode().check(typeCode), null);
+        // exemption reason (optional)
+        setContent(parent, "ram:ExemptionReason", exemptionReason, null);
+        // Category code (optional)
+        if (category != null) {
+            setContent(parent, "ram:CategoryCode", new TaxCategoryCode().check(category), null);
+        }
+        // Applicable percent (required; 2 decimals)
+        setContent(parent, "ram:ApplicablePercent", dec2.check(percent), null);
     }
     
     private void processLinesBasic(Element parent, BASICInvoice data)

@@ -15,6 +15,7 @@ import zugferd.codes.DateFormatCode;
 import zugferd.codes.DocumentTypeCode;
 import zugferd.codes.FreeTextSubjectCode;
 import zugferd.codes.GlobalIdentifierCode;
+import zugferd.codes.MeasurementUnitCode;
 import zugferd.codes.PaymentMeansCode;
 import zugferd.codes.TaxIDTypeCode;
 import zugferd.xml.COMFORTInvoiceData;
@@ -123,9 +124,9 @@ public class XML4Comfort {
         
         data.setBillingStartEnd(sdf.parse("2016/04/01"), DateFormatCode.YYYYMMDD, sdf.parse("2016/04/30"), DateFormatCode.YYYYMMDD);
         
-        data.addSpecifiedTradeAllowanceCharge("TradeAllowanceCharge.Indicator[0]", "0.1234", "USD", "TradeAllowanceCharge.Reason[0]",
+        data.addSpecifiedTradeAllowanceCharge(true, "0.1234", "USD", "TradeAllowanceCharge.Reason[0]",
             new String[]{"VAT", "VAT"}, new String[]{"S", "S"}, new String[]{"6.00", "21.00"});
-        data.addSpecifiedTradeAllowanceCharge("TradeAllowanceCharge.Indicator[1]", "0.0120", "USD", "TradeAllowanceCharge.Reason[1]",
+        data.addSpecifiedTradeAllowanceCharge(false, "0.0120", "USD", "TradeAllowanceCharge.Reason[1]",
             new String[]{"VAT", "VAT"}, new String[]{"S", "S"}, new String[]{"0.00", "8.00"});
         
         data.addSpecifiedLogisticsServiceCharge(
@@ -160,54 +161,36 @@ public class XML4Comfort {
               "IncludedSupplyChainTradeLineItem[0].AssociatedDocumentLineDocument.IncludedNote[1].Content[1]"},
             { "IncludedSupplyChainTradeLineItem[0].AssociatedDocumentLineDocument.IncludedNote[2].Content[0]" }
         };
-        String[] indicator = {
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[0].ChargeIndicator",
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[1].ChargeIndicator",
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[2].ChargeIndicator"
-        };
-        String[] actualamount = {
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[0].ActualAmount",
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[1].ActualAmount",
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[2].ActualAmount"
-        };
-        String[] actualamountCurr = {
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[0].ActualAmount.CurrencyID",
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[1].ActualAmount.CurrencyID",
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[2].ActualAmount.CurrencyID"
-        };
+        Boolean[] indicator = { true, false, true };
+        String[] actualamount = { "1.0000", "2.0000", "3.0000" };
+        String[] actualamountCurr = { "USD", "USD", "USD" };
         String[] reason = {
             "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[0].Reason",
             "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[1].Reason",
             "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[2].Reason"
         };
-        String[] taxTC = {
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].TypeCode",
-             "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].TypeCode" };
+        String[] taxTC = { "VAT", "VAT" };
         String[] taxER = {
             "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].ExemptionReason",
              "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].ExemptionReason" };
-        String[] taxCC = {
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].CategoryCode",
-             "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].CategoryCode" };
-        String[] taxAP = {
-            "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].ApplicablePercent",
-             "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].ApplicablePercent" };
+        String[] taxCC = { "S", "S" };
+        String[] taxAP = { "12.00", "18.00" };
         data.addIncludedSupplyChainTradeLineItem(
                 "LINE 1", notes0,
-                "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.ChargeAmount",
-                "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.ChargeAmount.CurrencyID",
-                "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.BasisQuantity",
-                "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.BasisQuantity.unitCode",
+                "10.0000",
+                "USD",
+                "1.0000",
+                MeasurementUnitCode.ITEM,
                 indicator, actualamount, actualamountCurr, reason,
-                "IncludedSupplyChainTradeLineItem[0].NetPriceProductTradePrice.ChargeAmount",
-                "IncludedSupplyChainTradeLineItem[0].NetPriceProductTradePrice.ChargeAmount.CurrencyID",
-                "IncludedSupplyChainTradeLineItem[0].NetPriceProductTradePrice.BasisQuantity",
-                "IncludedSupplyChainTradeLineItem[0].NetPriceProductTradePrice.BasisQuantity.unitCode",
-                "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeDelivery.BilledQuantity",
-                "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeDelivery.BilledQuantity.unitCode",
+                "6.0000",
+                "USD",
+                "80.0001",
+                MeasurementUnitCode.L,
+                "1.0000",
+                MeasurementUnitCode.HR,
                 taxTC, taxER, taxCC, taxAP,
-                "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.LineTotalAmount",
-                "IncludedSupplyChainTradeLineItem[0].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.LineTotalAmountCurrencyID",
+                "5.00",
+                "USD",
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedTradeProduct.GlobalID",
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedTradeProduct.GlobalID.schemeID",
                 "IncludedSupplyChainTradeLineItem[0].SpecifiedTradeProduct.SellerAssignedID",
@@ -219,54 +202,34 @@ public class XML4Comfort {
               "IncludedSupplyChainTradeLineItem.ram:AssociatedDocumentLineDocument[1].IncludedNote[0].Content[1]"},
             { "IncludedSupplyChainTradeLineItem.ram:AssociatedDocumentLineDocument[1].IncludedNote[1].Content[0]" }
         };
-        String[] indicator1 = {
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[0].ChargeIndicator",
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[1].ChargeIndicator",
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[2].ChargeIndicator"
-        };
-        String[] actualamount1 = {
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[0].ActualAmount",
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[1].ActualAmount",
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[2].ActualAmount"
-        };
-        String[] actualamountCurr1 = {
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[0].ActualAmount.CurrencyID",
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[1].ActualAmount.CurrencyID",
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[2].ActualAmount.CurrencyID"
-        };
+        Boolean[] indicator1 = { false, true, false };
+        String[] actualamount1 = { "4.0000", "5.0000", "6.0000" };
+        String[] actualamountCurr1 = { "USD", "USD", "USD" };
         String[] reason1 = {
             "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[0].Reason",
             "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[1].Reason",
             "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.AppliedTradeAllowanceCharge[2].Reason"
         };
-        String[] taxTC1 = {
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].TypeCode",
-             "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].TypeCode" };
-        String[] taxER1 = {
+       String[] taxER1 = {
             "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].ExemptionReason",
              "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].ExemptionReason" };
-        String[] taxCC1 = {
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].CategoryCode",
-             "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].CategoryCode" };
-        String[] taxAP1 = {
-            "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[0].ApplicablePercent",
-             "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.ApplicableTradeTax[1].ApplicablePercent" };
+        String[] taxAP1 = { "13.00", "17.00" };
         data.addIncludedSupplyChainTradeLineItem(
                 "LINE 2", notes1,
-                "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.ChargeAmount",
-                "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.ChargeAmount.CurrencyID",
-                "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.BasisQuantity",
-                "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeAgreement.GrossPriceProductTradePrice.BasisQuantity.unitCode",
+                "20.0000",
+                "USD",
+                "10.0000",
+                MeasurementUnitCode.KG,
                 indicator1, actualamount1, actualamountCurr1, reason1,
-                "IncludedSupplyChainTradeLineItem[1].NetPriceProductTradePrice.ChargeAmount",
-                "IncludedSupplyChainTradeLineItem[1].NetPriceProductTradePrice.ChargeAmount.CurrencyID",
-                "IncludedSupplyChainTradeLineItem[1].NetPriceProductTradePrice.BasisQuantity",
-                "IncludedSupplyChainTradeLineItem[1].NetPriceProductTradePrice.BasisQuantity.unitCode",
-                "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeDelivery.BilledQuantity",
-                "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeDelivery.BilledQuantity.unitCode",
-                taxTC1, taxER1, taxCC1, taxAP1,
-                "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.LineTotalAmount",
-                "IncludedSupplyChainTradeLineItem[1].SpecifiedSupplyChainTradeSettlement.SpecifiedTradeSettlementMonetarySummation.LineTotalAmountCurrencyID",
+                "30.0000",
+                "USD",
+                "15.0000",
+                MeasurementUnitCode.M,
+                "57.0000",
+                MeasurementUnitCode.DAY,
+                taxTC, taxER1, taxCC, taxAP1,
+                "15.00",
+                "USD",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.GlobalID",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.GlobalID.schemeID",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.SellerAssignedID",

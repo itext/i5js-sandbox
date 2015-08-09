@@ -115,9 +115,22 @@ public class BASICInvoiceData implements BASICInvoice {
         return (String[]) list.toArray(new String[list.size()]);
     }
     
+    protected Boolean[] to1DArrayB(List<Boolean> list) {
+        return (Boolean[]) list.toArray(new Boolean[list.size()]);
+    }
+    
     protected String[][] to2DArray(List<String[]> list) {
         int n = list.size();
         String[][] array = new String[n][];
+        for (int i = 0; i < n; i++) {
+            array[i] = list.get(i);
+        }
+        return array;
+    }
+    
+    protected Boolean[][] to2DArrayB(List<Boolean[]> list) {
+        int n = list.size();
+        Boolean[][] array = new Boolean[n][];
         for (int i = 0; i < n; i++) {
             array[i] = list.get(i);
         }

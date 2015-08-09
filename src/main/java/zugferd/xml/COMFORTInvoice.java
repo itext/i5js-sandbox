@@ -91,7 +91,7 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String getBillingStartDateTimeFormat();
     public Date getBillingEndDateTime();
     public String getBillingEndDateTimeFormat();
-    public String[] getSpecifiedTradeAllowanceChargeIndicator();
+    public Boolean[] getSpecifiedTradeAllowanceChargeIndicator();
     public String[] getSpecifiedTradeAllowanceChargeActualAmount();
     public String[] getSpecifiedTradeAllowanceChargeActualAmountCurrency();
     public String[] getSpecifiedTradeAllowanceChargeReason();
@@ -117,7 +117,7 @@ public interface COMFORTInvoice extends BASICInvoice {
     public String[] getLineItemGrossPriceChargeAmountCurrencyID();
     public String[] getLineItemGrossPriceBasisQuantity();
     public String[] getLineItemGrossPriceBasisQuantityCode();
-    public String[][] getLineItemGrossPriceTradeAllowanceChargeIndicator();
+    public Boolean[][] getLineItemGrossPriceTradeAllowanceChargeIndicator();
     public String[][] getLineItemGrossPriceTradeAllowanceChargeActualAmount();
     public String[][] getLineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID();
     public String[][] getLineItemGrossPriceTradeAllowanceChargeReason();

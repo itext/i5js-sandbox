@@ -98,7 +98,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected String billingStartDateTimeFormat;
     protected Date billingEndDateTime;
     protected String billingEndDateTimeFormat;
-    protected List<String> tradeAllowanceChargeIndicator = new ArrayList<String>();
+    protected List<Boolean> tradeAllowanceChargeIndicator = new ArrayList<Boolean>();
     protected List<String> tradeAllowanceChargeActualAmount = new ArrayList<String>();
     protected List<String> tradeAllowanceChargeActualAmountCurrency = new ArrayList<String>();
     protected List<String> tradeAllowanceChargeReason = new ArrayList<String>();
@@ -124,7 +124,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     protected List<String> lineItemGrossPriceChargeAmountCurrencyID = new ArrayList<String>();
     protected List<String> lineItemGrossPriceBasisQuantity = new ArrayList<String>();
     protected List<String> lineItemGrossPriceBasisQuantityCode = new ArrayList<String>();
-    protected List<String[]> lineItemGrossPriceTradeAllowanceChargeIndicator = new ArrayList<String[]>();
+    protected List<Boolean[]> lineItemGrossPriceTradeAllowanceChargeIndicator = new ArrayList<Boolean[]>();
     protected List<String[]> lineItemGrossPriceTradeAllowanceChargeActualAmount = new ArrayList<String[]>();
     protected List<String[]> lineItemGrossPriceTradeAllowanceChargeActualAmountCurrencyID = new ArrayList<String[]>();
     protected List<String[]> lineItemGrossPriceTradeAllowanceChargeReason = new ArrayList<String[]>();
@@ -319,8 +319,8 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         return billingEndDateTimeFormat;
     }
     
-    public String[] getSpecifiedTradeAllowanceChargeIndicator() {
-        return to1DArray(tradeAllowanceChargeIndicator);
+    public Boolean[] getSpecifiedTradeAllowanceChargeIndicator() {
+        return to1DArrayB(tradeAllowanceChargeIndicator);
     }
     
     public String[] getSpecifiedTradeAllowanceChargeActualAmount() {
@@ -406,8 +406,8 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     public String[] getLineItemGrossPriceBasisQuantityCode() {
         return to1DArray(lineItemGrossPriceBasisQuantityCode);
     }
-    public String[][] getLineItemGrossPriceTradeAllowanceChargeIndicator() {
-        return to2DArray(lineItemGrossPriceTradeAllowanceChargeIndicator);
+    public Boolean[][] getLineItemGrossPriceTradeAllowanceChargeIndicator() {
+        return to2DArrayB(lineItemGrossPriceTradeAllowanceChargeIndicator);
     }
     public String[][] getLineItemGrossPriceTradeAllowanceChargeActualAmount() {
         return to2DArray(lineItemGrossPriceTradeAllowanceChargeActualAmount);
@@ -620,7 +620,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
         this.billingEndDateTimeFormat = billingEndDateTimeFormat;
     }
     
-    public void addSpecifiedTradeAllowanceCharge(String indicator, String actualAmount, String actualAmountCurrency,
+    public void addSpecifiedTradeAllowanceCharge(Boolean indicator, String actualAmount, String actualAmountCurrency,
             String reason, String[] typeCodes, String[] categoryCodes, String[] applicablePercent) {
         this.tradeAllowanceChargeIndicator.add(indicator);
         this.tradeAllowanceChargeActualAmount.add(actualAmount);
@@ -664,7 +664,7 @@ public class COMFORTInvoiceData extends BASICInvoiceData implements COMFORTInvoi
     public void addIncludedSupplyChainTradeLineItem(String id, String[][] notes,
             String grossPriceChargeAmount, String grossPriceChargeAmountCurrencyID,
             String grossPriceBasisQuantity, String grossPriceBasisQuantityCode,
-            String[] grossPriceTradeAllowanceChargeIndicator,
+            Boolean[] grossPriceTradeAllowanceChargeIndicator,
             String[] grossPriceTradeAllowanceChargeActualAmount,
             String[] grossPriceTradeAllowanceChargeActualAmountCurrencyID,
             String[] grossPriceTradeAllowanceChargeReason,
