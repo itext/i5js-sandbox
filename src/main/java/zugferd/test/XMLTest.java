@@ -5,6 +5,10 @@
  */
 package zugferd.test;
 
+import com.itextpdf.text.zugferd.InvoiceDOM;
+import com.itextpdf.text.zugferd.exceptions.DataIncompleteException;
+import com.itextpdf.text.zugferd.exceptions.InvalidCodeException;
+import com.itextpdf.text.zugferd.profiles.BasicProfile;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,12 +16,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 import zugferd.InvoiceData;
-import zugferd.xml.InvoiceDOM;
-import zugferd.xml.BASICInvoice;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.PojoFactory;
-import zugferd.exceptions.DataIncompleteException;
-import zugferd.exceptions.InvalidCodeException;
 
 /**
  *
@@ -28,12 +28,12 @@ public class XMLTest {
         PojoFactory factory = PojoFactory.getInstance();
         List<Invoice> invoices = factory.getInvoices();
         InvoiceData invoiceData = new InvoiceData();
-        BASICInvoice basic;
+        BasicProfile basic;
         InvoiceDOM dom;
         for (Invoice invoice : invoices) {
             basic = invoiceData.importInvoice(invoice);
             dom = new InvoiceDOM(basic);
-            byte[] xml = dom.exportDoc();
+            byte[] xml = dom.toXML();
             System.out.println(new String(xml));
         }
         factory.close();

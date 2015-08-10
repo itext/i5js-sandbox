@@ -25,6 +25,10 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.xml.xmp.PdfAXmpWriter;
+import com.itextpdf.text.zugferd.InvoiceDOM;
+import com.itextpdf.text.zugferd.exceptions.DataIncompleteException;
+import com.itextpdf.text.zugferd.exceptions.InvalidCodeException;
+import com.itextpdf.text.zugferd.profiles.BasicProfile;
 import com.itextpdf.xmp.XMPException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,10 +46,6 @@ import zugferd.pojo.Invoice;
 import zugferd.pojo.Item;
 import zugferd.pojo.PojoFactory;
 import zugferd.pojo.Product;
-import zugferd.xml.BASICInvoice;
-import zugferd.xml.InvoiceDOM;
-import zugferd.exceptions.DataIncompleteException;
-import zugferd.exceptions.InvalidCodeException;
 
 /**
  *
@@ -88,7 +88,7 @@ public class PdfTest {
     public void createPdf(Invoice invoice) throws ParserConfigurationException, SAXException, TransformerException, IOException, DocumentException, XMPException, ParseException, DataIncompleteException, InvalidCodeException {
         String dest = String.format(DEST, invoice.getId());
         InvoiceData invoiceData = new InvoiceData();
-        BASICInvoice basic = invoiceData.importInvoice(invoice);
+        BasicProfile basic = invoiceData.importInvoice(invoice);
         
         // step 1
         Document document = new Document();
@@ -154,10 +154,10 @@ public class PdfTest {
         for (Item item : invoice.getItems()) {
             product = item.getProduct();
             table.addCell(getCell(product.getName(), Element.ALIGN_LEFT, font12));
-            table.addCell(getCell(InvoiceData.format(InvoiceData.round(product.getPrice())), Element.ALIGN_RIGHT, font12));
+            table.addCell(getCell(InvoiceData.format2dec(InvoiceData.round(product.getPrice())), Element.ALIGN_RIGHT, font12));
             table.addCell(getCell(String.valueOf(item.getQuantity()), Element.ALIGN_RIGHT, font12));
-            table.addCell(getCell(InvoiceData.format(InvoiceData.round(item.getCost())), Element.ALIGN_RIGHT, font12));
-            table.addCell(getCell(InvoiceData.format(InvoiceData.round(product.getVat())), Element.ALIGN_RIGHT, font12));
+            table.addCell(getCell(InvoiceData.format2dec(InvoiceData.round(item.getCost())), Element.ALIGN_RIGHT, font12));
+            table.addCell(getCell(InvoiceData.format2dec(InvoiceData.round(product.getVat())), Element.ALIGN_RIGHT, font12));
         }
         document.add(table);
         
@@ -175,7 +175,7 @@ public class PdfTest {
         PdfDictionary parameters = new PdfDictionary();
         parameters.put(PdfName.MODDATE, new PdfDate());
         PdfFileSpecification fileSpec = writer.addFileAttachment(
-                "ZUGFeRD invoice", dom.exportDoc(), null,
+                "ZUGFeRD invoice", dom.toXML(), null,
                 "ZUGFeRD-invoice.xml", "application/xml",
                 AFRelationshipValue.Alternative, parameters);
         PdfArray array = new PdfArray();
@@ -230,7 +230,7 @@ public class PdfTest {
             table.addCell(getCell(base[i], Element.ALIGN_RIGHT, font12));
             table.addCell(getCell(tax[i], Element.ALIGN_RIGHT, font12));
             double total = Double.parseDouble(base[i]) + Double.parseDouble(tax[i]);
-            table.addCell(getCell(InvoiceData.format(InvoiceData.round(total)), Element.ALIGN_RIGHT, font12));
+            table.addCell(getCell(InvoiceData.format2dec(InvoiceData.round(total)), Element.ALIGN_RIGHT, font12));
             table.addCell(getCell(currency[i], Element.ALIGN_LEFT, font12));
         }
         PdfPCell cell = getCell("", Element.ALIGN_LEFT, font12b);

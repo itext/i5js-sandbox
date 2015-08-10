@@ -5,20 +5,20 @@
  */
 package zugferd.test;
 
+import com.itextpdf.text.zugferd.InvoiceDOM;
+import com.itextpdf.text.zugferd.checkers.basic.DateFormatCode;
+import com.itextpdf.text.zugferd.checkers.basic.DocumentTypeCode;
+import com.itextpdf.text.zugferd.checkers.basic.MeasurementUnitCode;
+import com.itextpdf.text.zugferd.checkers.basic.TaxIDTypeCode;
+import com.itextpdf.text.zugferd.exceptions.DataIncompleteException;
+import com.itextpdf.text.zugferd.exceptions.InvalidCodeException;
+import com.itextpdf.text.zugferd.profiles.BasicProfileImp;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
-import zugferd.codes.DateFormatCode;
-import zugferd.codes.DocumentTypeCode;
-import zugferd.codes.MeasurementUnitCode;
-import zugferd.codes.TaxIDTypeCode;
-import zugferd.xml.InvoiceDOM;
-import zugferd.xml.BASICInvoiceData;
-import zugferd.exceptions.DataIncompleteException;
-import zugferd.exceptions.InvalidCodeException;
 
 /**
  * @author iText
@@ -26,7 +26,7 @@ import zugferd.exceptions.InvalidCodeException;
 public class XML4Basic {
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, DataIncompleteException, TransformerException, InvalidCodeException, ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        BASICInvoiceData data = new BASICInvoiceData();
+        BasicProfileImp data = new BasicProfileImp();
         // SpecifiedExchangedDocumentContext
         data.setTest(true);
         
@@ -96,7 +96,7 @@ public class XML4Basic {
         
         // Create the XML
         InvoiceDOM dom = new InvoiceDOM(data);
-        byte[] xml = dom.exportDoc();
+        byte[] xml = dom.toXML();
         System.out.println(new String(xml));
     }
 }

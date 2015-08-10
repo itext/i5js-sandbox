@@ -5,23 +5,23 @@
  */
 package zugferd.test;
 
+import com.itextpdf.text.zugferd.InvoiceDOM;
+import com.itextpdf.text.zugferd.checkers.basic.DateFormatCode;
+import com.itextpdf.text.zugferd.checkers.basic.DocumentTypeCode;
+import com.itextpdf.text.zugferd.checkers.basic.MeasurementUnitCode;
+import com.itextpdf.text.zugferd.checkers.basic.TaxIDTypeCode;
+import com.itextpdf.text.zugferd.checkers.comfort.FreeTextSubjectCode;
+import com.itextpdf.text.zugferd.checkers.comfort.GlobalIdentifierCode;
+import com.itextpdf.text.zugferd.checkers.comfort.PaymentMeansCode;
+import com.itextpdf.text.zugferd.exceptions.DataIncompleteException;
+import com.itextpdf.text.zugferd.exceptions.InvalidCodeException;
+import com.itextpdf.text.zugferd.profiles.ComfortProfileImp;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
-import zugferd.codes.DateFormatCode;
-import zugferd.codes.DocumentTypeCode;
-import zugferd.codes.FreeTextSubjectCode;
-import zugferd.codes.GlobalIdentifierCode;
-import zugferd.codes.MeasurementUnitCode;
-import zugferd.codes.PaymentMeansCode;
-import zugferd.codes.TaxIDTypeCode;
-import zugferd.xml.COMFORTInvoiceData;
-import zugferd.exceptions.DataIncompleteException;
-import zugferd.exceptions.InvalidCodeException;
-import zugferd.xml.InvoiceDOM;
 
 /**
  *
@@ -31,7 +31,7 @@ public class XML4Comfort {
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, DataIncompleteException, TransformerException, InvalidCodeException, ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         
-        COMFORTInvoiceData data = new COMFORTInvoiceData();
+        ComfortProfileImp data = new ComfortProfileImp();
         // SpecifiedExchangedDocumentContext
         data.setTest(true);
                     
@@ -237,7 +237,7 @@ public class XML4Comfort {
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.Name",
                 "IncludedSupplyChainTradeLineItem[1].SpecifiedTradeProduct.Description");
         InvoiceDOM dom = new InvoiceDOM(data);
-        byte[] xml = dom.exportDoc();
+        byte[] xml = dom.toXML();
         System.out.println(new String(xml));
     }
 }

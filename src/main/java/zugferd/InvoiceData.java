@@ -3,13 +3,13 @@
  */
 package zugferd;
 
+import com.itextpdf.text.zugferd.profiles.BasicProfile;
+import com.itextpdf.text.zugferd.profiles.BasicProfileImp;
 import java.util.Map;
 import java.util.TreeMap;
 import zugferd.pojo.Customer;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.Item;
-import zugferd.xml.BASICInvoice;
-import zugferd.xml.BASICInvoiceData;
 
 /**
  *
@@ -20,8 +20,8 @@ public class InvoiceData {
     public InvoiceData() {
     }
     
-    public BASICInvoice importInvoice(Invoice invoice) {
-        BASICInvoiceData invoiceData = new BASICInvoiceData();
+    public BasicProfile importInvoice(Invoice invoice) {
+        BasicProfileImp invoiceData = new BasicProfileImp();
         invoiceData.setTest(true);
         invoiceData.setId(String.format("I/%05d", invoice.getId()));
         invoiceData.setName("INVOICE");
@@ -57,7 +57,7 @@ public class InvoiceData {
             else {
                 taxes.put(tax, item.getCost());
             }
-            invoiceData.addIncludedSupplyChainTradeLineItem(String.valueOf(item.getQuantity()), "C62", item.getProduct().getName());
+            invoiceData.addIncludedSupplyChainTradeLineItem(format4dec(item.getQuantity()), "C62", item.getProduct().getName());
         }
         double total, tA;
         double ltN = 0;
@@ -70,14 +70,14 @@ public class InvoiceData {
             tA = round((100 * total) / (100 + tax));
             ttA += (total - tA);
             ltN += tA;
-            invoiceData.addApplicableTradeTax(format(total - tA), "EUR", "VAT", format(tA), "EUR", format(tax));
+            invoiceData.addApplicableTradeTax(format2dec(total - tA), "EUR", "VAT", format2dec(tA), "EUR", format2dec(tax));
         }
-        invoiceData.setMonetarySummation(format(ltN), "EUR",
-            format(0), "EUR",
-            format(0), "EUR",
-            format(ltN), "EUR",
-            format(ttA), "EUR",
-            format(gtA), "EUR");
+        invoiceData.setMonetarySummation(format2dec(ltN), "EUR",
+            format2dec(0), "EUR",
+            format2dec(0), "EUR",
+            format2dec(ltN), "EUR",
+            format2dec(ttA), "EUR",
+            format2dec(gtA), "EUR");
         return invoiceData;
     }
     
@@ -87,8 +87,12 @@ public class InvoiceData {
         return (double) tmp / 100;
     }
     
-    public static String format(double d) {
+    public static String format2dec(double d) {
         return String.format("%.2f", d);
+    }
+    
+    public static String format4dec(double d) {
+        return String.format("%.4f", d);
     }
     
 }
