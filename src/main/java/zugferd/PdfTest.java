@@ -5,6 +5,7 @@
  */
 package zugferd;
 
+import zugferd.data.InvoiceData;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -88,7 +89,7 @@ public class PdfTest {
     public void createPdf(Invoice invoice) throws ParserConfigurationException, SAXException, TransformerException, IOException, DocumentException, XMPException, ParseException, DataIncompleteException, InvalidCodeException {
         String dest = String.format(DEST, invoice.getId());
         InvoiceData invoiceData = new InvoiceData();
-        BasicProfile basic = invoiceData.importInvoice(invoice);
+        BasicProfile basic = invoiceData.createBasicProfileData(invoice);
         
         // step 1
         Document document = new Document();

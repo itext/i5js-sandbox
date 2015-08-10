@@ -15,7 +15,7 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
-import zugferd.InvoiceData;
+import zugferd.data.InvoiceData;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.PojoFactory;
 
@@ -31,7 +31,7 @@ public class XMLTest {
         BasicProfile basic;
         InvoiceDOM dom;
         for (Invoice invoice : invoices) {
-            basic = invoiceData.importInvoice(invoice);
+            basic = invoiceData.createComfortProfileData(invoice);
             dom = new InvoiceDOM(basic);
             byte[] xml = dom.toXML();
             System.out.println(new String(xml));
