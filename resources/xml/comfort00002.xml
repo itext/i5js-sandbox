@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<rsm:CrossIndustryDocument xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:12" xmlns:rsm="urn:ferd:CrossIndustryDocument:invoice:1p0" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <rsm:SpecifiedExchangedDocumentContext>
+        <ram:TestIndicator>
+            <udt:Indicator>true</udt:Indicator>
+        </ram:TestIndicator>
+        <ram:GuidelineSpecifiedDocumentContextParameter>
+            <ram:ID>urn:ferd:CrossIndustryDocument:invoice:1p0:comfort</ram:ID>
+        </ram:GuidelineSpecifiedDocumentContextParameter>
+    </rsm:SpecifiedExchangedDocumentContext>
+    <rsm:HeaderExchangedDocument>
+        <ram:ID>I/00002</ram:ID>
+        <ram:Name>INVOICE</ram:Name>
+        <ram:TypeCode>380</ram:TypeCode>
+        <ram:IssueDateTime>
+            <udt:DateTimeString format="102">20150401</udt:DateTimeString>
+        </ram:IssueDateTime>
+        <ram:IncludedNote>
+            <ram:Content>This is a test invoice.
+Nothing on this invoice is real.
+This invoice is part of a tutorial.</ram:Content>
+            <ram:SubjectCode>REG</ram:SubjectCode>
+        </ram:IncludedNote>
+    </rsm:HeaderExchangedDocument>
+    <rsm:SpecifiedSupplyChainTradeTransaction>
+        <ram:ApplicableSupplyChainTradeAgreement>
+            <ram:SellerTradeParty>
+                <ram:Name>Das Company</ram:Name>
+                <ram:PostalTradeAddress>
+                    <ram:PostcodeCode>9000</ram:PostcodeCode>
+                    <ram:LineOne>ZUG Business Center</ram:LineOne>
+                    <ram:LineTwo>Highway 1</ram:LineTwo>
+                    <ram:CityName>Ghent</ram:CityName>
+                    <ram:CountryID>BE</ram:CountryID>
+                </ram:PostalTradeAddress>
+                <ram:SpecifiedTaxRegistration>
+                    <ram:ID schemeID="FC">201/113/40209</ram:ID>
+                    <ram:ID schemeID="VA">BE123456789</ram:ID>
+                </ram:SpecifiedTaxRegistration>
+            </ram:SellerTradeParty>
+            <ram:BuyerTradeParty>
+                <ram:Name>Heiniger, Julia</ram:Name>
+                <ram:PostalTradeAddress>
+                    <ram:PostcodeCode>9000</ram:PostcodeCode>
+                    <ram:LineOne>358 College Av.</ram:LineOne>
+                    <ram:CityName>Ghent</ram:CityName>
+                    <ram:CountryID>BE</ram:CountryID>
+                </ram:PostalTradeAddress>
+            </ram:BuyerTradeParty>
+        </ram:ApplicableSupplyChainTradeAgreement>
+        <ram:ApplicableSupplyChainTradeSettlement>
+            <ram:PaymentReference>000000002</ram:PaymentReference>
+            <ram:InvoiceCurrencyCode>EUR</ram:InvoiceCurrencyCode>
+            <ram:SpecifiedTradeSettlementPaymentMeans>
+                <ram:TypeCode>42</ram:TypeCode>
+                <ram:Information>This is the preferred bank account.</ram:Information>
+                <ram:PayeePartyCreditorFinancialAccount>
+                    <ram:IBANID>BE 41 7360 0661 9710</ram:IBANID>
+                </ram:PayeePartyCreditorFinancialAccount>
+                <ram:PayeeSpecifiedCreditorFinancialInstitution>
+                    <ram:BICID>KREDBEBB</ram:BICID>
+                    <ram:Name>KBC</ram:Name>
+                </ram:PayeeSpecifiedCreditorFinancialInstitution>
+            </ram:SpecifiedTradeSettlementPaymentMeans>
+            <ram:SpecifiedTradeSettlementPaymentMeans>
+                <ram:TypeCode>42</ram:TypeCode>
+                <ram:Information>Use this as an alternative account.</ram:Information>
+                <ram:PayeePartyCreditorFinancialAccount>
+                    <ram:IBANID>BE 56 0015 4298 7888</ram:IBANID>
+                </ram:PayeePartyCreditorFinancialAccount>
+                <ram:PayeeSpecifiedCreditorFinancialInstitution>
+                    <ram:BICID>GEBABEBB</ram:BICID>
+                    <ram:Name>BNP Paribas</ram:Name>
+                </ram:PayeeSpecifiedCreditorFinancialInstitution>
+            </ram:SpecifiedTradeSettlementPaymentMeans>
+            <ram:ApplicableTradeTax>
+                <ram:CalculatedAmount currencyID="EUR">1.02</ram:CalculatedAmount>
+                <ram:TypeCode>VAT</ram:TypeCode>
+                <ram:BasisAmount currencyID="EUR">16.98</ram:BasisAmount>
+                <ram:CategoryCode>S</ram:CategoryCode>
+                <ram:ApplicablePercent>6.00</ram:ApplicablePercent>
+            </ram:ApplicableTradeTax>
+            <ram:ApplicableTradeTax>
+                <ram:CalculatedAmount currencyID="EUR">238.64</ram:CalculatedAmount>
+                <ram:TypeCode>VAT</ram:TypeCode>
+                <ram:BasisAmount currencyID="EUR">1136.36</ram:BasisAmount>
+                <ram:CategoryCode>S</ram:CategoryCode>
+                <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+            </ram:ApplicableTradeTax>
+            <ram:SpecifiedTradeSettlementMonetarySummation>
+                <ram:LineTotalAmount currencyID="EUR">1153.34</ram:LineTotalAmount>
+                <ram:ChargeTotalAmount currencyID="EUR">0.00</ram:ChargeTotalAmount>
+                <ram:AllowanceTotalAmount currencyID="EUR">0.00</ram:AllowanceTotalAmount>
+                <ram:TaxBasisTotalAmount currencyID="EUR">1153.34</ram:TaxBasisTotalAmount>
+                <ram:TaxTotalAmount currencyID="EUR">239.66</ram:TaxTotalAmount>
+                <ram:GrandTotalAmount currencyID="EUR">1393.00</ram:GrandTotalAmount>
+            </ram:SpecifiedTradeSettlementMonetarySummation>
+        </ram:ApplicableSupplyChainTradeSettlement>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>1</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">13.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">1.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">13.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>4</ram:SellerAssignedID>
+                <ram:Name>Mosquito Net</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>2</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">5.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">3.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">15.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>25</ram:SellerAssignedID>
+                <ram:Name>Running hat</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>3</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">2.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">9.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>6.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">18.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>11</ram:SellerAssignedID>
+                <ram:Name>Bottled water (1 bottle)</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>4</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">85.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">1.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">85.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>19</ram:SellerAssignedID>
+                <ram:Name>Walking boots</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>5</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">1.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">1.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">1.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>38</ram:SellerAssignedID>
+                <ram:Name>Golf ball</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>6</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">3.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">4.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">12.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>30</ram:SellerAssignedID>
+                <ram:Name>Socks (3 pair)</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>7</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">25.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">8.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">200.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>43</ram:SellerAssignedID>
+                <ram:Name>Fins</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>8</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">3.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">5.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">15.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>30</ram:SellerAssignedID>
+                <ram:Name>Socks (3 pair)</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>9</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">55.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">2.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">110.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>39</ram:SellerAssignedID>
+                <ram:Name>Golf club: putter</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>10</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">7.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">7.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">49.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>18</ram:SellerAssignedID>
+                <ram:Name>Hiking sandals</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>11</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">330.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">1.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">330.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>49</ram:SellerAssignedID>
+                <ram:Name>Bicycle</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>12</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">115.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">2.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">230.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>42</ram:SellerAssignedID>
+                <ram:Name>Wetsuit</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>13</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">5.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">1.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">5.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>21</ram:SellerAssignedID>
+                <ram:Name>Running cap</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>14</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">4.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">1.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">4.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>12</ram:SellerAssignedID>
+                <ram:Name>Duffle bag</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>15</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">250.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">1.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">250.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>48</ram:SellerAssignedID>
+                <ram:Name>Kajak</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>16</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">40.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">1.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">40.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>0</ram:SellerAssignedID>
+                <ram:Name>Table tennis bat</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>17</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedSupplyChainTradeAgreement>
+                <ram:GrossPriceProductTradePrice>
+                    <ram:ChargeAmount currencyID="EUR">8.0000</ram:ChargeAmount>
+                </ram:GrossPriceProductTradePrice>
+            </ram:SpecifiedSupplyChainTradeAgreement>
+            <ram:SpecifiedSupplyChainTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">2.0000</ram:BilledQuantity>
+            </ram:SpecifiedSupplyChainTradeDelivery>
+            <ram:SpecifiedSupplyChainTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ApplicablePercent>21.00</ram:ApplicablePercent>
+                </ram:ApplicableTradeTax>
+                <ram:SpecifiedTradeSettlementMonetarySummation>
+                    <ram:LineTotalAmount currencyID="EUR">16.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementMonetarySummation>
+            </ram:SpecifiedSupplyChainTradeSettlement>
+            <ram:SpecifiedTradeProduct>
+                <ram:SellerAssignedID>36</ram:SellerAssignedID>
+                <ram:Name>Golf cap</ram:Name>
+            </ram:SpecifiedTradeProduct>
+        </ram:IncludedSupplyChainTradeLineItem>
+    </rsm:SpecifiedSupplyChainTradeTransaction>
+</rsm:CrossIndustryDocument>
