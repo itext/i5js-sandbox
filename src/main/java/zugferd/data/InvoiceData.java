@@ -97,7 +97,7 @@ public class InvoiceData {
             tA = round((100 * total) / (100 + tax));
             ttA += (total - tA);
             ltN += tA;
-            profileImp.addApplicableTradeTax(format2dec(total - tA), "EUR", "VAT", format2dec(tA), "EUR", format2dec(tax));
+            profileImp.addApplicableTradeTax(format2dec(total - tA), "EUR", TaxTypeCode.VALUE_ADDED_TAX, format2dec(tA), "EUR", format2dec(tax));
         }
         profileImp.setMonetarySummation(format2dec(ltN), "EUR",
             format2dec(0), "EUR",

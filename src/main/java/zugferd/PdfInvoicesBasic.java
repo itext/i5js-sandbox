@@ -49,11 +49,12 @@ import zugferd.pojo.PojoFactory;
 import zugferd.pojo.Product;
 
 /**
- *
- * @author iText
+ * Reads invoice data from a test database and creates ZUGFeRD invoices
+ * (Basic profile).
+ * @author Bruno Lowagie
  */
-public class PdfTest {
-    public static final String DEST = "results/zugferd/Invoice%05d.pdf";
+public class PdfInvoicesBasic {
+    public static final String DEST = "results/zugferd/basic%05d.pdf";
     public static final String ICC = "resources/data/sRGB_CS_profile.icm";
     public static final String FONT = "resources/fonts/OpenSans-Regular.ttf";
     public static final String FONTB = "resources/fonts/OpenSans-Bold.ttf";
@@ -67,7 +68,7 @@ public class PdfTest {
     public static void main(String[] args) throws IOException, DocumentException, ParserConfigurationException, SQLException, SAXException, TransformerException, XMPException, ParseException, DataIncompleteException, InvalidCodeException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
-        PdfTest app = new PdfTest();
+        PdfInvoicesBasic app = new PdfInvoicesBasic();
         PojoFactory factory = PojoFactory.getInstance();
         List<Invoice> invoices = factory.getInvoices();
         for (Invoice invoice : invoices) {
@@ -76,7 +77,7 @@ public class PdfTest {
         factory.close();
     }
     
-    public PdfTest() throws DocumentException, IOException {
+    public PdfInvoicesBasic() throws DocumentException, IOException {
         BaseFont bf = BaseFont.createFont(FONT, BaseFont.WINANSI, BaseFont.EMBEDDED);
         BaseFont bfb = BaseFont.createFont(FONTB, BaseFont.WINANSI, BaseFont.EMBEDDED);
         font10 = new Font(bf, 10);

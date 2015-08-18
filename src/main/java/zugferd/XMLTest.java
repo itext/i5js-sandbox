@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zugferd.test;
+package zugferd;
 
 import com.itextpdf.text.zugferd.InvoiceDOM;
 import com.itextpdf.text.zugferd.exceptions.DataIncompleteException;
 import com.itextpdf.text.zugferd.exceptions.InvalidCodeException;
 import com.itextpdf.text.zugferd.profiles.BasicProfile;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,11 +22,14 @@ import zugferd.pojo.Invoice;
 import zugferd.pojo.PojoFactory;
 
 /**
- *
- * @author iText
+ * @author  Bruno Lowagie
  */
 public class XMLTest {
+    public static final String DEST = "results/zugferd/comfort%05d.xml";
+    
     public static void main(String[] args) throws SQLException, ParserConfigurationException, SAXException, IOException, TransformerException, DataIncompleteException, InvalidCodeException {
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
         PojoFactory factory = PojoFactory.getInstance();
         List<Invoice> invoices = factory.getInvoices();
         InvoiceData invoiceData = new InvoiceData();
@@ -34,7 +39,10 @@ public class XMLTest {
             basic = invoiceData.createComfortProfileData(invoice);
             dom = new InvoiceDOM(basic);
             byte[] xml = dom.toXML();
-            System.out.println(new String(xml));
+            FileOutputStream fos = new FileOutputStream(String.format(DEST, invoice.getId()));
+            fos.write(xml);
+            fos.flush();
+            fos.close();
         }
         factory.close();
     }
