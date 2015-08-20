@@ -25,7 +25,6 @@ import com.itextpdf.text.zugferd.exceptions.DataIncompleteException;
 import com.itextpdf.text.zugferd.exceptions.InvalidCodeException;
 import com.itextpdf.text.zugferd.profiles.ComfortProfile;
 import com.itextpdf.tool.xml.XMLWorker;
-import com.itextpdf.tool.xml.XMLWorkerFontProvider;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.itextpdf.tool.xml.css.CssFile;
 import com.itextpdf.tool.xml.css.StyleAttrCSSResolver;
