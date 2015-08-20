@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xsl:stylesheet exclude-result-prefixes="#all" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:12" xmlns:rsm="urn:ferd:CrossIndustryDocument:invoice:1p0" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:15" version="1.0">
     <xsl:output method="xml" indent="yes" encoding="UTF-8" />
-	<xsl:template match="/rsm:CrossIndustryDocument"><html><body><xsl:apply-templates /></body></html></xsl:template>
+	<xsl:template match="/rsm:CrossIndustryDocument">
+	<html>
+	<head><link rel="stylesheet" type="text/css" href="invoice.css" /></head>
+	<body><xsl:apply-templates /></body></html></xsl:template>
 
     <xsl:template match="rsm:SpecifiedExchangedDocumentContext" />
     <xsl:template match="rsm:HeaderExchangedDocument"><h1 id="header"><xsl:value-of select="ram:Name" /><xsl:text> </xsl:text><xsl:value-of select="ram:ID" /></h1>

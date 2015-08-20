@@ -9,8 +9,12 @@ import com.itextpdf.text.zugferd.exceptions.InvalidCodeException;
 import com.itextpdf.text.zugferd.profiles.ComfortProfile;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Writer;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,10 +35,13 @@ import zugferd.pojo.PojoFactory;
 public class HtmlInvoicesComfort {
     public static final String DEST = "results/zugferd/html/comfort%05d.html";
     public static final String XSL = "resources/zugferd/invoice.xsl";
+    public static final String CSS = "resources/zugferd/invoice.css";
     
     public static void main(String[] args) throws SQLException, IOException, ParserConfigurationException, SAXException, DataIncompleteException, InvalidCodeException, TransformerException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
+        File css = new File(CSS);
+        copyFile(css, new File(file.getParentFile(), css.getName()));
         HtmlInvoicesComfort app = new HtmlInvoicesComfort();
         PojoFactory factory = PojoFactory.getInstance();
         List<Invoice> invoices = factory.getInvoices();
@@ -54,5 +61,15 @@ public class HtmlInvoicesComfort {
         transformer.transform(xml, new StreamResult(writer));
         writer.flush();
         writer.close();
+    }
+    
+    private static void copyFile(File source, File dest) throws IOException {
+        InputStream input = new FileInputStream(source);
+        OutputStream output = new FileOutputStream(dest);
+        byte[] buf = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = input.read(buf)) > 0) {
+            output.write(buf, 0, bytesRead);
+        }
     }
 }
