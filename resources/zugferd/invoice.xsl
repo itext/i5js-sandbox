@@ -27,7 +27,7 @@
 		<xsl:for-each select="ram:IncludedSupplyChainTradeLineItem">
 		<tr>
 		<td align="Right"><xsl:value-of select="ram:AssociatedDocumentLineDocument/ram:LineID" />.</td>
-		<td><xsl:value-of select="ram:SpecifiedTradeProduct/ram:Name" /></td>
+		<td class="bold"><xsl:value-of select="ram:SpecifiedTradeProduct/ram:Name" /></td>
 		<td align="Right"><xsl:call-template name="twodecimals"><xsl:with-param name="number" select="ram:SpecifiedSupplyChainTradeAgreement/ram:GrossPriceProductTradePrice/ram:ChargeAmount" /></xsl:call-template></td>
 		<td align="Right"><xsl:call-template name="twodecimals"><xsl:with-param name="number" select="ram:SpecifiedSupplyChainTradeDelivery/ram:BilledQuantity" /></xsl:call-template></td>
 		<td align="Right"><xsl:value-of select="ram:SpecifiedSupplyChainTradeSettlement/ram:SpecifiedTradeSettlementMonetarySummation/ram:LineTotalAmount" /></td>
@@ -36,7 +36,7 @@
 		<xsl:with-param name="basis" select="ram:SpecifiedSupplyChainTradeSettlement/ram:SpecifiedTradeSettlementMonetarySummation/ram:LineTotalAmount" />
 		<xsl:with-param name="tax" select="ram:SpecifiedSupplyChainTradeSettlement/ram:ApplicableTradeTax/ram:ApplicablePercent" />
 		</xsl:call-template></td>
-		<td align="Right"><xsl:call-template name="calcWithTax">
+		<td align="Right" class="bold"><xsl:call-template name="calcWithTax">
 		<xsl:with-param name="basis" select="ram:SpecifiedSupplyChainTradeSettlement/ram:SpecifiedTradeSettlementMonetarySummation/ram:LineTotalAmount" />
 		<xsl:with-param name="tax" select="ram:SpecifiedSupplyChainTradeSettlement/ram:ApplicableTradeTax/ram:ApplicablePercent" />
 		</xsl:call-template></td>
