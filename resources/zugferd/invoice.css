@@ -1,0 +1,12 @@
+#header { color: #008080; text-align: right; font-size: 18pt }
+#date { text-align: right; font-size: 16pt }
+#addresses { margin-top: 20pt; font-size: 11pt; }
+#products { margin-top: 10pt; border: 3px solid #008080; }
+#totals { margin-top: 10pt; border: 3px solid #008080; }
+#wireinfo { margin-top: 10pt; margin-left: 72pt; }
+.name { color: #008080; }
+.total { font-weight: bold; color: #008080; }
+.headerrow { background-color: #008080; color: #FFFFFF; }
+.wireheader { font-weight: bold; text-align: left; }
+th { padding: 2pt; font-weight: bold; text-align: center; }
+td { padding: 2pt; }

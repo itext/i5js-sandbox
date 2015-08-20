@@ -24,8 +24,8 @@ import zugferd.pojo.PojoFactory;
 /**
  * @author  Bruno Lowagie
  */
-public class XMLTest {
-    public static final String DEST = "results/zugferd/comfort%05d.xml";
+public class XmlInvoicesComfort {
+    public static final String DEST = "results/zugferd/xml/comfort%05d.xml";
     
     public static void main(String[] args) throws SQLException, ParserConfigurationException, SAXException, IOException, TransformerException, DataIncompleteException, InvalidCodeException {
         File file = new File(DEST);
@@ -33,11 +33,11 @@ public class XMLTest {
         PojoFactory factory = PojoFactory.getInstance();
         List<Invoice> invoices = factory.getInvoices();
         InvoiceData invoiceData = new InvoiceData();
-        BasicProfile basic;
+        BasicProfile comfort;
         InvoiceDOM dom;
         for (Invoice invoice : invoices) {
-            basic = invoiceData.createComfortProfileData(invoice);
-            dom = new InvoiceDOM(basic);
+            comfort = invoiceData.createComfortProfileData(invoice);
+            dom = new InvoiceDOM(comfort);
             byte[] xml = dom.toXML();
             FileOutputStream fos = new FileOutputStream(String.format(DEST, invoice.getId()));
             fos.write(xml);

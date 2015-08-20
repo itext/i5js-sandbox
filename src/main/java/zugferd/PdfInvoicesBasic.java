@@ -54,7 +54,7 @@ import zugferd.pojo.Product;
  * @author Bruno Lowagie
  */
 public class PdfInvoicesBasic {
-    public static final String DEST = "results/zugferd/basic%05d.pdf";
+    public static final String DEST = "results/zugferd/pdf/basic%05d.pdf";
     public static final String ICC = "resources/data/sRGB_CS_profile.icm";
     public static final String FONT = "resources/fonts/OpenSans-Regular.ttf";
     public static final String FONTB = "resources/fonts/OpenSans-Bold.ttf";
@@ -142,16 +142,17 @@ public class PdfInvoicesBasic {
         document.add(table);
         
         // line items
-        table = new PdfPTable(5);
+        table = new PdfPTable(6);
         table.setWidthPercentage(100);
         table.setSpacingBefore(10);
         table.setSpacingAfter(10);
-        table.setWidths(new int[]{5, 2, 2, 2, 1});
+        table.setWidths(new int[]{7, 2, 1, 2, 2, 2});
         table.addCell(getCell("Item:", Element.ALIGN_LEFT, font12b));
         table.addCell(getCell("Price:", Element.ALIGN_LEFT, font12b));
-        table.addCell(getCell("Quantity:", Element.ALIGN_LEFT, font12b));
+        table.addCell(getCell("Qty:", Element.ALIGN_LEFT, font12b));
         table.addCell(getCell("Subtotal:", Element.ALIGN_LEFT, font12b));
         table.addCell(getCell("VAT:", Element.ALIGN_LEFT, font12b));
+        table.addCell(getCell("Total:", Element.ALIGN_LEFT, font12b));
         Product product;
         for (Item item : invoice.getItems()) {
             product = item.getProduct();
@@ -160,6 +161,9 @@ public class PdfInvoicesBasic {
             table.addCell(getCell(String.valueOf(item.getQuantity()), Element.ALIGN_RIGHT, font12));
             table.addCell(getCell(InvoiceData.format2dec(InvoiceData.round(item.getCost())), Element.ALIGN_RIGHT, font12));
             table.addCell(getCell(InvoiceData.format2dec(InvoiceData.round(product.getVat())), Element.ALIGN_RIGHT, font12));
+            table.addCell(getCell(
+                InvoiceData.format2dec(InvoiceData.round(item.getCost() + ((item.getCost() * product.getVat()) / 100))),
+                Element.ALIGN_RIGHT, font12));
         }
         document.add(table);
         

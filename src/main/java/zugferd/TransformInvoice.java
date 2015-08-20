@@ -15,7 +15,7 @@ import javax.xml.transform.stream.StreamSource;
  * @author Bruno Lowagie (iText Software)
  */
 public class TransformInvoice {
-    public static final String XSL = "resources/xml/invoice.xsl";
+    public static final String XSL = "resources/zugferd/invoice.xsl";
     public static final String XML = "resources/xml/comfort00002.xml";
     
     public static void main(String[] args) throws TransformerException {
