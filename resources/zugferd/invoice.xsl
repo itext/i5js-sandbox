@@ -96,7 +96,7 @@
 		<span class="name"><xsl:value-of select="ram:Name" /></span><br />
 		<xsl:value-of select="ram:PostalTradeAddress/ram:LineOne" /><br />
 		<xsl:value-of select="ram:PostalTradeAddress/ram:LineTwo" /><br />
-		<xsl:value-of select="ram:PostalTradeAddress/ram:CountryID" />-<xsl:value-of select="ram:PostalTradeAddress/ram:PostcodeCode" /><xsl:text> </xsl:text><xsl:value-of select="ram:PostalTradeAddress/ram:CityName" />
+		<xsl:value-of select="ram:PostalTradeAddress/ram:CountryID" />-<xsl:value-of select="ram:PostalTradeAddress/ram:PostcodeCode" /><xsl:text> </xsl:text><xsl:value-of select="ram:PostalTradeAddress/ram:CityName" /><br />
 		<xsl:for-each select="ram:SpecifiedTaxRegistration/ram:ID">
 			<xsl:value-of select="@schemeID" />: <xsl:value-of select="." /><br />
 		</xsl:for-each>
