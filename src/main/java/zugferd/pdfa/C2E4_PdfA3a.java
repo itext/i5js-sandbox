@@ -22,14 +22,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  * Creates a PDF that conforms with PDF/A-3 Level A.
  */
+@WrapToTest
 public class C2E4_PdfA3a {
 
     /** The resulting PDF. */
-    public static final String DEST = "results/javaone/edition2014/part3/quickbrownfox4.pdf";
+    public static final String DEST = "results/zugferd/pdfa/quickbrownfox4.pdf";
     /** An image resource. */
     public static final String FOX = "resources/images/fox.bmp";
     /** An image resource. */
