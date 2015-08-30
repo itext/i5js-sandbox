@@ -36,12 +36,15 @@ public class HtmlInvoicesComfort {
     public static final String DEST = "results/zugferd/html/comfort%05d.html";
     public static final String XSL = "resources/zugferd/invoice.xsl";
     public static final String CSS = "resources/zugferd/invoice.css";
+    public static final String LOGO = "resources/zugferd/logo.png";
     
     public static void main(String[] args) throws SQLException, IOException, ParserConfigurationException, SAXException, DataIncompleteException, InvalidCodeException, TransformerException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
         File css = new File(CSS);
         copyFile(css, new File(file.getParentFile(), css.getName()));
+        File logo = new File(LOGO);
+        copyFile(logo, new File(file.getParentFile(), logo.getName()));
         HtmlInvoicesComfort app = new HtmlInvoicesComfort();
         PojoFactory factory = PojoFactory.getInstance();
         List<Invoice> invoices = factory.getInvoices();

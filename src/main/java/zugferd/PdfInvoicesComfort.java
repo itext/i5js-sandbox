@@ -3,11 +3,14 @@
  */
 package zugferd;
 
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.ExceptionConverter;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontProvider;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.AFRelationshipValue;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.ICC_Profile;
@@ -37,6 +40,7 @@ import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
 import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
+import com.itextpdf.tool.xml.pipeline.html.ImageProvider;
 import com.itextpdf.xmp.XMPException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -47,7 +51,11 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -89,6 +97,38 @@ public class PdfInvoicesComfort {
             }
             font.setColor(color);
             return font;
+        }
+    }
+    
+    class MyImageProvider implements ImageProvider {
+
+        protected Map<String,Image> cache = new HashMap<String,Image>();
+        
+        public Image retrieve(String src) {
+            Image img = cache.get(src);
+            try {
+                if (img == null) {
+                    img = Image.getInstance(getImageRootPath() + src);
+                    store(src, img);
+                }
+            } catch (BadElementException ex) {
+                throw new ExceptionConverter(ex);
+            } catch (IOException ex) {
+                throw new ExceptionConverter(ex);
+            }
+            return img;
+        }
+
+        public String getImageRootPath() {
+            return "resources/zugferd/";
+        }
+
+        public void store(String src, Image img) {
+            cache.put(src, img);
+        }
+
+        public void reset() {
+            cache = new HashMap<String,Image>();
         }
     }
     
@@ -140,6 +180,7 @@ public class PdfInvoicesComfort {
         CssAppliers cssAppliers = new CssAppliersImpl(new MyFontProvider());
         HtmlPipelineContext htmlContext = new HtmlPipelineContext(cssAppliers);
         htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
+        htmlContext.setImageProvider(new MyImageProvider());
         
         // Pipelines
         PdfWriterPipeline pdf = new PdfWriterPipeline(document, writer);

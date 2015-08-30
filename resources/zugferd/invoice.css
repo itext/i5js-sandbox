@@ -1,5 +1,5 @@
-#header { color: #008080; text-align: right; font-size: 18pt; font-weight: bold; }
-#date { text-align: right; font-size: 16pt; }
+#header { color: #008080; font-size: 18pt; font-weight: bold; }
+#date { font-size: 16pt; }
 #addresses { margin-top: 20pt; font-size: 11pt; }
 #products { margin-top: 10pt; border: 3px solid #008080; }
 #totals { margin-top: 10pt; border: 3px solid #008080; }
