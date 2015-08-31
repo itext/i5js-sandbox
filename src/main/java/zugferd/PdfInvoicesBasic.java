@@ -105,7 +105,7 @@ public class PdfInvoicesBasic {
         
         // header
         Paragraph p;
-        p = new Paragraph(basic.getName(), font14);
+        p = new Paragraph(basic.getName() + " " + basic.getId(), font14);
         p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
         p = new Paragraph(convertDate(basic.getDateTime(), "MMM dd, yyyy"), font12);
