@@ -141,13 +141,13 @@ public class PdfInvoicesComfort {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
         PdfInvoicesComfort app = new PdfInvoicesComfort();
-        PojoFactory pojofactory = PojoFactory.getInstance();
-        List<Invoice> invoices = pojofactory.getInvoices();
-        InvoiceData invoiceData = new InvoiceData();
-        ComfortProfile comfort;
         StreamSource xsl = new StreamSource(new File(XSL));
         TransformerFactory factory = TransformerFactory.newInstance();
         Transformer transformer = factory.newTransformer(xsl);
+        ComfortProfile comfort;
+        InvoiceData invoiceData = new InvoiceData();
+        PojoFactory pojofactory = PojoFactory.getInstance();
+        List<Invoice> invoices = pojofactory.getInvoices();
         for (Invoice invoice : invoices) {
             comfort = invoiceData.createComfortProfileData(invoice);
             InvoiceDOM dom = new InvoiceDOM(comfort);
@@ -162,6 +162,7 @@ public class PdfInvoicesComfort {
         Document document = new Document();
         // step 2
         PdfAWriter writer = PdfAWriter.getInstance(document, new FileOutputStream(dest), PdfAConformanceLevel.ZUGFeRDComfort);
+        writer.setTagged();
         writer.setPdfVersion(PdfWriter.VERSION_1_7);
         writer.createXmpMetadata();
         writer.getXmpWriter().setProperty(PdfAXmpWriter.zugferdSchemaNS, PdfAXmpWriter.zugferdDocumentFileName, "ZUGFeRD-invoice.xml");
