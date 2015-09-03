@@ -4,7 +4,7 @@
 	<xsl:template match="/rsm:CrossIndustryDocument">
 	<html>
 	<head><link rel="stylesheet" type="text/css" href="invoice.css" /></head>
-	<body><img src="logo.png" /><br /><xsl:apply-templates /></body></html></xsl:template>
+	<body><img src="logo.png" alt="Das Company - logo" /><br /><xsl:apply-templates /></body></html></xsl:template>
 
     <xsl:template match="rsm:SpecifiedExchangedDocumentContext" />
     <xsl:template match="rsm:HeaderExchangedDocument"><h1 id="header"><xsl:value-of select="ram:Name" /><xsl:text> </xsl:text><xsl:value-of select="ram:ID" /></h1>
