@@ -47,14 +47,16 @@ package sandbox;
 import com.itextpdf.testutils.CompareTool;
 import com.itextpdf.text.log.Logger;
 import com.itextpdf.text.log.LoggerFactory;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
-import javax.management.OperationsException;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import javax.management.OperationsException;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public /*abstract*/ class GenericTest {
 	

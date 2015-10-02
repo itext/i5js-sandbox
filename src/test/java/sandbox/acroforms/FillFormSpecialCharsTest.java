@@ -8,6 +8,7 @@ package sandbox.acroforms;
 
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
+
 import org.junit.Assert;
 
 import sandbox.GenericTest;

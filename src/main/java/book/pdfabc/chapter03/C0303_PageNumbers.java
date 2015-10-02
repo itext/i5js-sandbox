@@ -5,11 +5,11 @@
  */
 package book.pdfabc.chapter03;
 
-import java.io.IOException;
-
 import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
+
+import java.io.IOException;
 
 public class C0303_PageNumbers {
     public static final String SRC = "resources/pdfs/primes.pdf";

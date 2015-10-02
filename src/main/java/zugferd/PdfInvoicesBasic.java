@@ -3,7 +3,6 @@
  */
 package zugferd;
 
-import zugferd.data.InvoiceData;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -29,6 +28,7 @@ import com.itextpdf.text.zugferd.exceptions.DataIncompleteException;
 import com.itextpdf.text.zugferd.exceptions.InvalidCodeException;
 import com.itextpdf.text.zugferd.profiles.BasicProfile;
 import com.itextpdf.xmp.XMPException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -38,9 +38,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+
 import org.xml.sax.SAXException;
+
+import zugferd.data.InvoiceData;
 import zugferd.pojo.Invoice;
 import zugferd.pojo.Item;
 import zugferd.pojo.PojoFactory;

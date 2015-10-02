@@ -6,18 +6,18 @@
  */
 package sandbox.stamper;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import sandbox.WrapToTest;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfNumber;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import sandbox.WrapToTest;
 
 @WrapToTest
 public class ScaleRotate {

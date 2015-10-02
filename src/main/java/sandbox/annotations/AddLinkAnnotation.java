@@ -1,17 +1,17 @@
 package sandbox.annotations;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import sandbox.WrapToTest;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfAnnotation;
 import com.itextpdf.text.pdf.PdfDestination;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import sandbox.WrapToTest;
 
 @WrapToTest
 public class AddLinkAnnotation {

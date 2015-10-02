@@ -5,8 +5,6 @@
  */
 package book.pdfabc.chapter03;
 
-import java.io.IOException;
-
 import com.itextpdf.text.pdf.PdfArray;
 import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfIndirectReference;
@@ -15,6 +13,8 @@ import com.itextpdf.text.pdf.PdfNumber;
 import com.itextpdf.text.pdf.PdfObject;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfString;
+
+import java.io.IOException;
 
 public class C0301_TrailerInfo {
 	

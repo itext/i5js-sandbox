@@ -8,12 +8,12 @@
  */
 package javaone.edition14.part4.helper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.itextpdf.text.pdf.parser.ImageRenderInfo;
 import com.itextpdf.text.pdf.parser.RenderListener;
 import com.itextpdf.text.pdf.parser.TextRenderInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation of the RenderListener interface that generates a list

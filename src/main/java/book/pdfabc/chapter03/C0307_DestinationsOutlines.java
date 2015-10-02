@@ -5,17 +5,17 @@
  */
 package book.pdfabc.chapter03;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.itextpdf.text.pdf.PdfArray;
 import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.SimpleBookmark;
 import com.itextpdf.text.pdf.SimpleNamedDestination;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class C0307_DestinationsOutlines {
     public static final String SRC = "resources/pdfs/primes.pdf";

@@ -1,11 +1,5 @@
 package sandbox.objects;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import sandbox.WrapToTest;
-
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Annotation;
 import com.itextpdf.text.Document;
@@ -20,6 +14,12 @@ import com.itextpdf.text.pdf.PdfNumber;
 import com.itextpdf.text.pdf.PdfPageLabels;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import sandbox.WrapToTest;
 
 @WrapToTest
 public class PageLabels {

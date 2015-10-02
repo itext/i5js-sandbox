@@ -1,9 +1,5 @@
 package sandbox.images;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
@@ -14,6 +10,11 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.parser.PdfImageObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import sandbox.WrapToTest;
 
 @WrapToTest

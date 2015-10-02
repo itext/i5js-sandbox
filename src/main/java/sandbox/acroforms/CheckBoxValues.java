@@ -6,10 +6,10 @@
  */
 package sandbox.acroforms;
 
-import java.io.IOException;
-
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
+
+import java.io.IOException;
 
 public class CheckBoxValues {
 

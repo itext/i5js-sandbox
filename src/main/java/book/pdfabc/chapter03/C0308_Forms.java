@@ -5,12 +5,12 @@
  */
 package book.pdfabc.chapter03;
 
-import java.io.File;
-import java.io.IOException;
-
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.XfaForm;
+
+import java.io.File;
+import java.io.IOException;
 
 public class C0308_Forms {
     public static final String SRC1 = "resources/pdfs/pages.pdf";

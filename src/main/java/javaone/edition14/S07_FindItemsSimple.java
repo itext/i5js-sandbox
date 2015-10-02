@@ -8,6 +8,13 @@
  */
 package javaone.edition14;
 
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
+import com.itextpdf.text.pdf.parser.PdfReaderContentParser;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,13 +22,6 @@ import java.util.List;
 
 import javaone.edition14.part4.helper.MyItem;
 import javaone.edition14.part4.helper.MyRenderListenerSimple;
-
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.parser.PdfReaderContentParser;
 
 /**
  * In this first example that parses a PDF to discover its structure,

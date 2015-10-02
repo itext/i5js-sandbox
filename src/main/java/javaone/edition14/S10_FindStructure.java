@@ -8,6 +8,9 @@
  */
 package javaone.edition14;
 
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfReader;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,9 +20,6 @@ import java.util.List;
 import javaone.edition14.part4.helper.Line;
 import javaone.edition14.part4.helper.MyItem;
 import javaone.edition14.part4.helper.Structure;
-
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfReader;
 
 /**
  * In this second example that parses a PDF to discover its structure,

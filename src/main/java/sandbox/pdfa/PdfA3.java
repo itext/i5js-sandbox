@@ -1,15 +1,5 @@
 package sandbox.pdfa;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.StringTokenizer;
-
-import sandbox.WrapToTest;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -25,6 +15,16 @@ import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfFileSpecification;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfPTable;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+import sandbox.WrapToTest;
 
 @WrapToTest
 public class PdfA3 {

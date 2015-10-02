@@ -7,10 +7,6 @@ package sandbox.annotations;
 import com.itextpdf.awt.geom.AffineTransform;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
@@ -25,6 +21,10 @@ import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class AddLinkAnnotation4 {
 

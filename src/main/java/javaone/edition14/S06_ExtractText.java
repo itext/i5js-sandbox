@@ -8,13 +8,13 @@
  */
 package javaone.edition14;
 
-import java.io.IOException;
-
-import javaone.edition14.part2.ContentStreams;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
+
+import java.io.IOException;
+
+import javaone.edition14.part2.ContentStreams;
 
 /**
  *

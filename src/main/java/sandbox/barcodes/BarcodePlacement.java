@@ -6,10 +6,6 @@ package sandbox.barcodes;
 
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
@@ -19,6 +15,10 @@ import com.itextpdf.text.pdf.BarcodePDF417;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class BarcodePlacement {
     public static final String DEST = "results/barcodes/barcode_placement.pdf";

@@ -14,11 +14,13 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfStream;
 import com.itextpdf.text.pdf.parser.PdfImageObject;
+
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 public class ReplaceImage {

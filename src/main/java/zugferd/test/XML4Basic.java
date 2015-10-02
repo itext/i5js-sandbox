@@ -13,11 +13,14 @@ import com.itextpdf.text.zugferd.checkers.basic.TaxIDTypeCode;
 import com.itextpdf.text.zugferd.exceptions.DataIncompleteException;
 import com.itextpdf.text.zugferd.exceptions.InvalidCodeException;
 import com.itextpdf.text.zugferd.profiles.BasicProfileImp;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+
 import org.xml.sax.SAXException;
 
 /**

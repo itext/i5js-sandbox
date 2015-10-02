@@ -5,12 +5,6 @@
  */
 package book.pdfabc.chapter04;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import sandbox.WrapToTest;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -19,6 +13,12 @@ import com.itextpdf.text.pdf.PdfShading;
 import com.itextpdf.text.pdf.PdfShadingPattern;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.ShadingColor;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import sandbox.WrapToTest;
 
 @WrapToTest
 public class C0407_Shading {

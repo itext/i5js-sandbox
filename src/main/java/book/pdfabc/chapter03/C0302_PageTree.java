@@ -5,13 +5,13 @@
  */
 package book.pdfabc.chapter03;
 
-import java.io.IOException;
-
 import com.itextpdf.text.pdf.PdfArray;
 import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfIndirectReference;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
+
+import java.io.IOException;
 
 public class C0302_PageTree {
 

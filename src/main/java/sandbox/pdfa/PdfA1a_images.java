@@ -5,11 +5,6 @@
  */
 package sandbox.pdfa;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -22,6 +17,11 @@ import com.itextpdf.text.pdf.PdfAConformanceLevel;
 import com.itextpdf.text.pdf.PdfAWriter;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfString;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class PdfA1a_images {
     final float MARGIN_OF_ONE_CM = 28.8f;

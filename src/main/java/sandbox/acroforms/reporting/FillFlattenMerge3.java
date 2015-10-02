@@ -14,7 +14,6 @@ import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
-import sandbox.WrapToTest;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,6 +23,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+import sandbox.WrapToTest;
 
 @WrapToTest(compareRenders = true)
 public class FillFlattenMerge3 {

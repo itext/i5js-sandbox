@@ -4,13 +4,13 @@
  */
 package sandbox.acroforms;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class FlattenSignature {
 

@@ -8,14 +8,19 @@
  */
 package sandbox.objects;
 
-import com.itextpdf.text.*;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.TabSettings;
 import com.itextpdf.text.pdf.PdfWriter;
-import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import sandbox.WrapToTest;
 
 @WrapToTest
 public class Tabs {

@@ -11,10 +11,6 @@ package javaone.edition14.part4.helper;
 import com.itextpdf.awt.geom.Point;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.parser.ImageRenderInfo;
-import com.itextpdf.text.pdf.parser.LineSegment;
-import com.itextpdf.text.pdf.parser.Matrix;
-import com.itextpdf.text.pdf.parser.TextRenderInfo;
 
 /**
  * Abstract class that is used as a superclass for specific item classes

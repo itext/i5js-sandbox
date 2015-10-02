@@ -5,10 +5,6 @@
 package sandbox.objects;
 
 import com.itextpdf.text.Chunk;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -17,6 +13,10 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 import com.itextpdf.text.pdf.draw.VerticalPositionMark;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class UnderlineParagraphWithTwoParts {
     public static final String DEST = "results/objects/underline_paragraph_with_two_parts.pdf";

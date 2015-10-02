@@ -4,14 +4,14 @@
  */
 package sandbox.merge;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.log.LoggerFactory;
 import com.itextpdf.text.log.SysoLogger;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.util.SmartPdfSplitter;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MergeAndCount {
 

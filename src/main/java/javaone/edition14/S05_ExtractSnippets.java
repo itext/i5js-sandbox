@@ -8,13 +8,6 @@
  */
 package javaone.edition14;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javaone.edition14.part2.ContentStreams;
-import javaone.edition14.part2.MyTextRenderListener;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfDictionary;
 import com.itextpdf.text.pdf.PdfName;
@@ -22,6 +15,13 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.ContentByteUtils;
 import com.itextpdf.text.pdf.parser.PdfContentStreamProcessor;
 import com.itextpdf.text.pdf.parser.RenderListener;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javaone.edition14.part2.ContentStreams;
+import javaone.edition14.part2.MyTextRenderListener;
 
 /**
  * Extracts snippets of text from different Hello World examples

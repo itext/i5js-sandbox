@@ -4,9 +4,6 @@
  */
 package sandbox.merge;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
@@ -15,6 +12,9 @@ import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class CutAndPaste {
 

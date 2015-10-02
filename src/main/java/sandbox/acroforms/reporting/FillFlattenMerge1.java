@@ -6,7 +6,6 @@ import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
-import sandbox.WrapToTest;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -15,6 +14,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
+
+import sandbox.WrapToTest;
 
 @WrapToTest(compareRenders = true)
 public class FillFlattenMerge1 {

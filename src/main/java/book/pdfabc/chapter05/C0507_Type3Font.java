@@ -5,10 +5,6 @@
  */
 package book.pdfabc.chapter05;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -17,6 +13,10 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.Type3Font;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class C0507_Type3Font {
     

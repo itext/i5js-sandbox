@@ -4,10 +4,6 @@
  */
 package sandbox.annotations;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Rectangle;
@@ -16,6 +12,10 @@ import com.itextpdf.text.pdf.PdfBorderArray;
 import com.itextpdf.text.pdf.PdfDestination;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class AddImageLink {
 

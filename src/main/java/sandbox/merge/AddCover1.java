@@ -5,13 +5,13 @@
 package sandbox.merge;
 
 import com.itextpdf.text.Document;
-import java.io.IOException;
-
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
+
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class AddCover1 {
 

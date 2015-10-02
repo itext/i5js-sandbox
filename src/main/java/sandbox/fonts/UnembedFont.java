@@ -3,12 +3,6 @@
  */
 package sandbox.fonts;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
-import sandbox.WrapToTest;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -20,6 +14,12 @@ import com.itextpdf.text.pdf.PdfObject;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import sandbox.WrapToTest;
 
 @WrapToTest
 public class UnembedFont {

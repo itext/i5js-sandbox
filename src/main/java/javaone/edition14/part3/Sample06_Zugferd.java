@@ -8,17 +8,13 @@
  */
 package javaone.edition14.part3;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.pdf.AFRelationshipValue;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.ICC_Profile;
@@ -32,7 +28,11 @@ import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.xml.xmp.PdfAXmpWriter;
 import com.itextpdf.xmp.XMPException;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Creates a PDF that conforms with the ZUGFeRD standard.

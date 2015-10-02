@@ -4,11 +4,12 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
-import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import sandbox.WrapToTest;
 
 @WrapToTest(compareRenders = true)
 public class FlattenForm {

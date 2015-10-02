@@ -13,6 +13,7 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.parser.LineSegment;
 import com.itextpdf.text.pdf.parser.TextRenderInfo;
+
 import java.util.HashMap;
 
 /**
