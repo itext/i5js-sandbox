@@ -14,7 +14,9 @@ import com.itextpdf.text.pdf.PushbuttonField;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class CreateJapaneseButton {
     
     public static final String DEST = "results/acroforms/japanese_button.pdf";
