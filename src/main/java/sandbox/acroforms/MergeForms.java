@@ -8,7 +8,9 @@ import com.itextpdf.text.pdf.PdfReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class MergeForms {
 
     public static final String SRC1 = "resources/pdfs/subscribe.pdf";

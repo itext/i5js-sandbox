@@ -16,7 +16,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ReadOnlyField {
     
     public static final String DEST = "results/acroforms/multilineField.pdf";

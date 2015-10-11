@@ -15,7 +15,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class RenameField {
 
     public static final String SRC = "resources/pdfs/subscribe.pdf";

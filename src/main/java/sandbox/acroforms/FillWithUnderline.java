@@ -17,7 +17,9 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class FillWithUnderline {
 
     public static final String SRC = "resources/pdfs/form.pdf";

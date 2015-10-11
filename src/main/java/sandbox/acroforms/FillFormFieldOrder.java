@@ -13,7 +13,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class FillFormFieldOrder {
     
     public static final String SRC = "resources/pdfs/calendar_example.pdf";
