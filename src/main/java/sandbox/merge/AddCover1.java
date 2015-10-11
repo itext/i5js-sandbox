@@ -12,7 +12,9 @@ import com.itextpdf.text.pdf.PdfReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class AddCover1 {
 
     /** The original PDF file. */

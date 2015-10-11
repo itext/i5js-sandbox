@@ -18,7 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class MergeWithOutlines {
 
     public static final String SRC1 = "resources/pdfs/hello.pdf";
