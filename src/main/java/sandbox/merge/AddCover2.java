@@ -22,7 +22,7 @@ public class AddCover2 {
     public static final String COVER
         = "resources/pdfs/hero.pdf";
     /** The original PDF file. */
-    public static final String RESOURCE
+    public static final String SRC
         = "resources/pdfs/pages.pdf";
 
     /** The resulting PDF file. */
@@ -60,7 +60,7 @@ public class AddCover2 {
         throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
-        new AddCover2().manipulatePdf(RESOURCE, DEST);
+        new AddCover2().manipulatePdf(SRC, DEST);
     }
 }
 
