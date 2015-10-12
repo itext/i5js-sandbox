@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ArrayToTable {
 
     public static final String DEST = "results/tables/array_to_table.pdf";

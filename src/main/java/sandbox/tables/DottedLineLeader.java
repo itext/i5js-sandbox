@@ -17,7 +17,9 @@ import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class DottedLineLeader {
     
     public static final String DEST = "results/tables/dotted_line_leader.pdf";

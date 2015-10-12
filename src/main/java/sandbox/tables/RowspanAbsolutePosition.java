@@ -18,7 +18,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class RowspanAbsolutePosition {
     public static final String DEST = "results/tables/write_selected_colspan.pdf";
     public static final String IMG = "resources/images/berlin2013.jpg";

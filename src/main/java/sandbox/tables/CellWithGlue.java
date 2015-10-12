@@ -17,11 +17,13 @@ import com.itextpdf.text.pdf.draw.VerticalPositionMark;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author Bruno Lowagie (iText Software)
  */
+@WrapToTest
 public class CellWithGlue {
 
     public static final String DEST = "results/tables/cell_with_glue.pdf";

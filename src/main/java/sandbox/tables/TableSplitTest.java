@@ -21,7 +21,9 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class TableSplitTest {
     public static final String DEST = "results/tables/split_test.pdf";
      

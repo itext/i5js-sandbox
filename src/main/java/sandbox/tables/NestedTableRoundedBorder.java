@@ -17,10 +17,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  * @author Bruno Lowagie (iText Software)
  */
+@WrapToTest
 public class NestedTableRoundedBorder {
     class RoundRectangle implements PdfPCellEvent {
         public void cellLayout(PdfPCell cell, Rectangle rect,

@@ -17,7 +17,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ImageNextToText {
     public static final String DEST = "results/tables/image_next_to_text.pdf";
     public static final String IMG1 = "resources/images/javaone2013.jpg";

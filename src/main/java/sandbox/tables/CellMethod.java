@@ -18,7 +18,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class CellMethod {
     public static final String DEST = "results/tables/cell_method.pdf";
     public static final String FONT = "resources/fonts/FreeSans.ttf";
