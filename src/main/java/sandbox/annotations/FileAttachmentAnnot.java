@@ -16,12 +16,10 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import sandbox.WrapToTest;
 
 /**
  * @author Bruno Lowagie (iText Software)
  */
-@WrapToTest
 public class FileAttachmentAnnot {
     public static final String DEST = "results/annotations/file_attachment.pdf";
     public static final String PATH = "resources/misc/test.docx";
