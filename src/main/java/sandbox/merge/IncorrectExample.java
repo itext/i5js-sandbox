@@ -11,9 +11,11 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  * This example is named IncorrectExample because this is not how you would
@@ -23,14 +25,15 @@ import java.io.IOException;
  * circumstances are very particular and using this example in those
  * circumstances is justified.
  */
+@WrapToTest
 public class IncorrectExample {
 
     /** The original PDF file. */
-    public static final String RESOURCE
+    public static final String SRC
         = "resources/pdfs/pages.pdf";
 
     /** The resulting PDF file. */
-    public static final String RESULT
+    public static final String DEST
         = "results/merge/pages_changed.pdf";
     
     /**
@@ -91,7 +94,9 @@ public class IncorrectExample {
      */
     public static void main(String[] args)
         throws IOException, DocumentException {
-        new IncorrectExample().manipulatePdf(RESOURCE, RESULT);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new IncorrectExample().manipulatePdf(SRC, DEST);
     }
 }
 

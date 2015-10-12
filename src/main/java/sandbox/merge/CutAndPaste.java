@@ -12,18 +12,21 @@ import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class CutAndPaste {
 
     /** The original PDF file. */
-    public static final String RESOURCE
+    public static final String SRC
         = "resources/pdfs/page229.pdf";
 
     /** The resulting PDF file. */
-    public static final String RESULT
+    public static final String DEST
         = "results/merge/page229_cut-paste.pdf";
     
     /**
@@ -77,7 +80,9 @@ public class CutAndPaste {
      */
     public static void main(String[] args)
         throws IOException, DocumentException {
-        new CutAndPaste().manipulatePdf(RESOURCE, RESULT);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new CutAndPaste().manipulatePdf(SRC, DEST);
     }
 }
 

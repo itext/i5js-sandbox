@@ -20,7 +20,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class NUpWithLink {
     public static final String SRC1 = "resources/pdfs/links1.pdf";
     public static final String SRC2 = "resources/pdfs/links2.pdf";

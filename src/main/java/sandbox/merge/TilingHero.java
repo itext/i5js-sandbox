@@ -10,18 +10,21 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class TilingHero {
 
     /** The original PDF file. */
-    public static final String RESOURCE
+    public static final String SRC
         = "resources/pdfs/hero.pdf";
 
     /** The resulting PDF file. */
-    public static final String RESULT
+    public static final String DEST
         = "results/merge/superman.pdf";
     
     /**
@@ -72,7 +75,9 @@ public class TilingHero {
      */
     public static void main(String[] args)
         throws IOException, DocumentException {
-        new TilingHero().manipulatePdf(RESOURCE, RESULT);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new TilingHero().manipulatePdf(SRC, DEST);
     }
 }
 

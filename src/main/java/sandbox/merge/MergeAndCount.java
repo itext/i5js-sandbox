@@ -9,18 +9,21 @@ import com.itextpdf.text.log.LoggerFactory;
 import com.itextpdf.text.log.SysoLogger;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.util.SmartPdfSplitter;
+import java.io.File;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class MergeAndCount {
 
     /** The original PDF file. */
-    public static final String RESOURCE
+    public static final String SRC
         = "resources/pdfs/Wrong.pdf";
 
     /** The resulting PDF file. */
-    public static final String RESULT
+    public static final String DEST
         = "results/merge/pages_counted.pdf";
     
     /**
@@ -51,7 +54,9 @@ public class MergeAndCount {
     public static void main(String[] args)
         throws IOException, DocumentException {
         LoggerFactory.getInstance().setLogger(new SysoLogger());
-        new MergeAndCount().manipulatePdf(RESOURCE, RESULT);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new MergeAndCount().manipulatePdf(SRC, DEST);
     }
 }
 

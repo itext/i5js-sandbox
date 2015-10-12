@@ -15,7 +15,9 @@ import com.itextpdf.text.pdf.PdfString;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ChangeAuthor {
     public static final String SRC = "resources/pdfs/page229_annotations.pdf";
     public static final String DEST = "results/interactive/page229_changed_author.pdf";
