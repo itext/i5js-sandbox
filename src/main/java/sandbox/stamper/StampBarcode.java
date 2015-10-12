@@ -18,10 +18,12 @@ import com.itextpdf.text.pdf.PdfTemplate;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  * Example that shows how to watermark a less simple PDF.
  */
+@WrapToTest
 public class StampBarcode {
     /** The original PDF file. */
     public static final String SRC

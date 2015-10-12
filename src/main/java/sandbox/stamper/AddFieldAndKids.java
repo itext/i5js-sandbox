@@ -15,7 +15,9 @@ import com.itextpdf.text.pdf.TextField;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class AddFieldAndKids {
 
     public static final String SRC = "resources/pdfs/hello.pdf";

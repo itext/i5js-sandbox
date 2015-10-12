@@ -14,7 +14,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ChangeBookmarks {
 
     public static final String SRC = "resources/pdfs/bookmarks.pdf";

@@ -15,11 +15,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author Bruno Lowagie (iText Software)
  */
+@WrapToTest
 public class ReorderPages {
     public static final String DEST = "results/stamper/reordered.pdf";
     public static void main(String[] args) throws IOException, DocumentException {

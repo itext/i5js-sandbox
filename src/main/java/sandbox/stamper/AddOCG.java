@@ -19,7 +19,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class AddOCG {
 
     public static final String SRC = "resources/pdfs/hello.pdf";
