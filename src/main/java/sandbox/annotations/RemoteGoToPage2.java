@@ -6,27 +6,25 @@
  */
 package sandbox.annotations;
 
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfAction;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
-public class RemoteGoToPage {
+@WrapToTest
+public class RemoteGoToPage2 {
     public static final String DEST = "results/annotations/subdir/abc2.pdf";
-    public static final String SRC = "results/annotations/xyz2.pdf";
     
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
-        RemoteGoToPage app = new RemoteGoToPage();
+        RemoteGoToPage2 app = new RemoteGoToPage2();
         app.createPdf(DEST);
-        app.createPdf2(SRC);
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {
@@ -48,16 +46,5 @@ public class RemoteGoToPage {
         document1.newPage();
         document1.add(new Paragraph("page 7"));
         document1.close();
-    }
-    
-    public void createPdf2(String src) throws IOException, DocumentException {
-        // second document (with a link to the first one)
-        Document document2 = new Document();
-        PdfWriter.getInstance(document2, new FileOutputStream(src));
-        document2.open();
-        Chunk chunk = new Chunk("Link");
-        chunk.setAction(new PdfAction("subdir/abc2.pdf", 6));
-        document2.add(chunk);
-        document2.close();
     }
 }

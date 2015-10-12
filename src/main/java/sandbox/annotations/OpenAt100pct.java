@@ -17,11 +17,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author Bruno Lowagie (iText Software)
  */
+@WrapToTest
 public class OpenAt100pct {
     
     public static final String DEST = "results/annotations/open100pct.pdf";

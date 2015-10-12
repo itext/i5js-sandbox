@@ -18,10 +18,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  * @author Bruno Lowagie (iText Software)
  */
+@WrapToTest
 public class ImagesLinksTable {
     public static final String DEST = "results/annotations/images_links_table.pdf";
     public static final String IMG = "resources/images/info.png";

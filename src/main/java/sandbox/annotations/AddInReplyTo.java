@@ -17,7 +17,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class AddInReplyTo {
 
     public static final String SRC = "resources/pdfs/hello_sticky_note.pdf";
