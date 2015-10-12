@@ -14,7 +14,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class BorderForParagraph {
     public static final String DEST = "results/events/paragraph_with_border.pdf";
     

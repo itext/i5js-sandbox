@@ -22,7 +22,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class CreateTOCinColumn {
     
     public static final String DEST = "results/events/columns_with_toc.pdf";

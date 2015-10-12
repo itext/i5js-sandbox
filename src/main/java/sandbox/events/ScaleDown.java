@@ -18,6 +18,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  * This solution is suboptimal as it throws away all interactivity.
@@ -26,6 +27,7 @@ import java.io.IOException;
  * only have to scale up, you should try the example that was written in
  * answer to http://stackoverflow.com/questions/21871027/rotating-in-itextsharp-while-preserving-comment-location-orientation
  */
+@WrapToTest
 public class ScaleDown {
     
     public static final String SRC = "resources/pdfs/orientations.pdf";
