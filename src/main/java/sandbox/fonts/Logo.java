@@ -15,7 +15,9 @@ import com.itextpdf.text.pdf.Type3Font;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class Logo {
     
     /** The resulting PDF file. */

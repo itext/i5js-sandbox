@@ -18,14 +18,14 @@ import java.io.IOException;
 import sandbox.WrapToTest;
 
 @WrapToTest
-public class RemoteGoToPage1 {
-    public static final String DEST = "results/annotations/xyz2.pdf";
+public class RemoteGoto {
+    public static final String SRC = "results/annotations/xyz.pdf";
     
     public static void main(String[] args) throws IOException, DocumentException {
-        File file = new File(DEST);
+        File file = new File(SRC);
         file.getParentFile().mkdirs();
-        RemoteGoToPage1 app = new RemoteGoToPage1();
-        app.createPdf(DEST);
+        RemoteGoto app = new RemoteGoto();
+        app.createPdf(SRC);
     }
     
     public void createPdf(String src) throws IOException, DocumentException {
@@ -34,7 +34,7 @@ public class RemoteGoToPage1 {
         PdfWriter.getInstance(document2, new FileOutputStream(src));
         document2.open();
         Chunk chunk = new Chunk("Link");
-        chunk.setAction(new PdfAction("subdir/abc2.pdf", 6));
+        chunk.setAction(PdfAction.gotoRemotePage("subdir/abc.pdf", "dest", false,  true));
         document2.add(chunk);
         document2.close();
     }

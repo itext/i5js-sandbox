@@ -15,11 +15,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
+@WrapToTest
 public class RupeeSymbol {
 
     public static final String DEST = "results/fonts/rupee.pdf";
