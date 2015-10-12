@@ -22,7 +22,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class PdfA1a_images {
     final float MARGIN_OF_ONE_CM = 28.8f;
     public static final String DEST = "results/pdfa/pdf_a1a_images.pdf";

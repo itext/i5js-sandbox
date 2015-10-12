@@ -18,7 +18,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class RemoveContentInRectangle {
 
     public static final String SRC = "resources/pdfs/page229.pdf";

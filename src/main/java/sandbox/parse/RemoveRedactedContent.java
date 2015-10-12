@@ -13,7 +13,9 @@ import com.itextpdf.text.pdf.pdfcleanup.PdfCleanUpProcessor;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class RemoveRedactedContent {
 
     public static final String SRC = "resources/pdfs/page229_redacted.pdf";
