@@ -15,7 +15,9 @@ import com.itextpdf.text.pdf.VerticalText;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class VTExample {
 
     public static final String DEST = "results/objects/vertical_text.pdf";

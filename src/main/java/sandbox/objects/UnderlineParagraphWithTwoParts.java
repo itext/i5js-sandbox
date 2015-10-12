@@ -17,7 +17,9 @@ import com.itextpdf.text.pdf.draw.VerticalPositionMark;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class UnderlineParagraphWithTwoParts {
     public static final String DEST = "results/objects/underline_paragraph_with_two_parts.pdf";
     public static final Chunk GLUE = new Chunk(new VerticalPositionMark());
