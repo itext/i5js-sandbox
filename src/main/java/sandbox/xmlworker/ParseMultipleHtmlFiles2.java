@@ -17,11 +17,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
+@WrapToTest
 public class ParseMultipleHtmlFiles2 {
     public static final String[] HTML = {
         "resources/xml/page1.html",

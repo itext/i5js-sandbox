@@ -9,7 +9,9 @@ import com.itextpdf.tool.xml.pipeline.WritableElement;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class D01_CustomElementHandler {
 
     public static final String SRC = "resources/xml/walden.html";

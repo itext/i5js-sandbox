@@ -14,7 +14,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ParseHtml3 {
     public static final String DEST = "results/xmlworker/html_3.pdf";
     

@@ -27,11 +27,13 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
+@WrapToTest
 public class ParseHtmlTable2 {
     public static final String DEST = "results/xmlworker/html_table_2.pdf";
     public static final String CSS = "tr { text-align: center; } th { background-color: lightgreen; padding: 3px; } td {background-color: lightblue;  padding: 3px; }";

@@ -14,7 +14,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class FillXFA2 {
 
     public static final String SRC = "resources/pdfs/xfa_form_poland.pdf";

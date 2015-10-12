@@ -25,7 +25,9 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ParseHtml4 {
     
     class Base64ImageProvider extends AbstractImageProvider {

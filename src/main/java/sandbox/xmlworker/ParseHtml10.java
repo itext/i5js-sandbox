@@ -25,11 +25,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
+@WrapToTest
 public class ParseHtml10 {
     public static final String DEST = "results/xmlworker/hebrew.pdf";
     public static final String HTML = "resources/xml/hebrew.html";

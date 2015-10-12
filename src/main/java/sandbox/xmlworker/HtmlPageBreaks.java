@@ -13,11 +13,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
+@WrapToTest
 public class HtmlPageBreaks {
     public static final String DEST = "results/xmlworker/page_breaks.pdf";
     public static final String HTML = "resources/xml/page_breaks.html";

@@ -27,11 +27,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author Bruno Lowagie (iText Software)
  */
+@WrapToTest
 public class NestedListHtml {
     
     public static final String HTML = "resources/xml/list.html";

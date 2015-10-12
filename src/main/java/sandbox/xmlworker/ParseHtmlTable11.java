@@ -13,7 +13,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ParseHtmlTable11 {
     public static final String DEST = "results/xmlworker/html_table_11.pdf";
     public static final String HTML = "resources/xml/table11.html";

@@ -15,7 +15,9 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class HtmlContentForCell2 {
     
     public static final String HTML = "<ul><li>Overview&#160;line1</li>"

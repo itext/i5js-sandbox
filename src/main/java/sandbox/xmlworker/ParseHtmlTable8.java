@@ -25,7 +25,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ParseHtmlTable8 {
     public static final String DEST = "results/xmlworker/html_table_8.pdf";
     public static final String HTML = "resources/xml/table5_css.html";

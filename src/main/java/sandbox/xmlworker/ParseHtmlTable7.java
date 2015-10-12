@@ -13,11 +13,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
+@WrapToTest
 public class ParseHtmlTable7 {
     public static final String DEST = "results/xmlworker/html_table_7.pdf";
     public static final String HTML = "resources/xml/table4_css.html";

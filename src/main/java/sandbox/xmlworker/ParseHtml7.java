@@ -29,11 +29,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
+@WrapToTest
 public class ParseHtml7 {
     public static final String DEST = "results/xmlworker/arabic.pdf";
     public static final String HTML = "resources/xml/arabic.html";

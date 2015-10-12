@@ -16,11 +16,13 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
+@WrapToTest
 public class ParseHtml {
     public static final String DEST = "results/xmlworker/html_1.pdf";
     
