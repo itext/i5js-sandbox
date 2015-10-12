@@ -16,11 +16,13 @@ import java.awt.Graphics2D;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
+@WrapToTest
 public class LargeTemplate {
     
     public static final String DEST = "results/graphics2d/large_template.pdf";    

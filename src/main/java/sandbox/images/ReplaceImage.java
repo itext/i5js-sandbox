@@ -22,7 +22,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class ReplaceImage {
     
     public static final String SRC = "resources/pdfs/image.pdf";

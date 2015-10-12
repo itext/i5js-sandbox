@@ -17,7 +17,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class MakeJpgMask {
     public static final String IMAGE = "resources/images/javaone2013.jpg";
     public static final String MASK = "resources/images/berlin2013.jpg";
@@ -30,7 +32,7 @@ public class MakeJpgMask {
     }
     public void createPdf(String dest) throws IOException, DocumentException {
         Document document = new Document(PageSize.A4.rotate());
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         Image image = Image.getInstance(IMAGE);
         Image mask = makeBlackAndWhitePng(MASK);

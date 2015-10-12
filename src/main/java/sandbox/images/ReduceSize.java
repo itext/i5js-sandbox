@@ -22,10 +22,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import sandbox.WrapToTest;
 
 /**
  * @author Bruno Lowagie (iText Software)
  */
+@WrapToTest
 public class ReduceSize {
     
     public static final String SRC = "resources/pdfs/single_image.pdf";
