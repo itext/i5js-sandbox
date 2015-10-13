@@ -24,12 +24,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import sandbox.WrapToTest;
-
 /**
  * Creates a PDF that conforms with PDF/A-3 Level A.
  */
-@WrapToTest
 public class C2E4_PdfA3a {
 
     /** The resulting PDF. */
