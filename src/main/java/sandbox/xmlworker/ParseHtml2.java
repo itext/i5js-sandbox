@@ -15,9 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import sandbox.WrapToTest;
 
-@WrapToTest
 public class ParseHtml2 {
     public static final String DEST = "results/xmlworker/html_2.pdf";
     

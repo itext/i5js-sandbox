@@ -13,13 +13,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import sandbox.WrapToTest;
 
 /**
  *
  * @author iText
  */
-@WrapToTest
 public class ParseHtml6 {
     public static final String DEST = "results/xmlworker/brasil.pdf";
     public static final String HTML = "resources/xml/brasil.html";
