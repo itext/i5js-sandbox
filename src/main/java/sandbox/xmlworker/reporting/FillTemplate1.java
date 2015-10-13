@@ -10,9 +10,7 @@ import com.itextpdf.tool.xml.html.Tags;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import sandbox.WrapToTest;
 
-@WrapToTest
 public class FillTemplate1 {
 
     public static final String DEST = "results/xmlworker/report1.pdf";
