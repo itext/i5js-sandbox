@@ -50,7 +50,6 @@ public class ParseHtml11 {
         // step 4
         XMLWorkerFontProvider fontImp = new XMLWorkerFontProvider(XMLWorkerFontProvider.DONTLOOKFORFONTS);
         fontImp.register(FONT);
-        FontFactory.setFontImp(fontImp);
         XMLWorkerHelper.getInstance().parseXHtml(writer, document,
                 new FileInputStream(HTML), null, Charset.forName("UTF-8"), fontImp);
         // step 5
