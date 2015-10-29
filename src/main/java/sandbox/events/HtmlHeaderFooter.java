@@ -1,6 +1,6 @@
 /**
  * This example was written by Bruno Lowagie in answer to the following question:
- * http://stackoverflow.com/questions/22122340/creating-table-with-2-rows-in-pdf-footer-using-itext
+ * http://stackoverflow.com/questions/33394158/add-header-to-pdf-from-html-using-itext
  */
 package sandbox.events;
 
