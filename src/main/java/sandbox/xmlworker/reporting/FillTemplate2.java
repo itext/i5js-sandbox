@@ -8,11 +8,13 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.ElementList;
 import com.itextpdf.tool.xml.html.Tags;
+import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+@WrapToTest
 public class FillTemplate2 {
 
     public static final String DEST = "results/xmlworker/report2.pdf";

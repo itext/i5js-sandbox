@@ -15,6 +15,7 @@ import com.itextpdf.tool.xml.html.table.Table;
 import com.itextpdf.tool.xml.html.table.TableData;
 import com.itextpdf.tool.xml.html.table.TableRow;
 import com.itextpdf.tool.xml.html.table.TableRowElement;
+import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@WrapToTest
 public class FillTemplate4 {
     
     public static final String DEST = "results/xmlworker/report4.pdf";

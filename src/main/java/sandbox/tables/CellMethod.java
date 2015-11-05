@@ -14,11 +14,13 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+@WrapToTest
 public class CellMethod {
     public static final String DEST = "results/tables/cell_method.pdf";
     public static final String FONT = "resources/fonts/FreeSans.ttf";

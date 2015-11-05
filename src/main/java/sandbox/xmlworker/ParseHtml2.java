@@ -7,7 +7,9 @@ package sandbox.xmlworker;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerFontProvider;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
+import sandbox.WrapToTest;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -16,9 +18,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
+//without @WrapToTest annotation, because there are no Windows fonts on the linux server (Times New Roman)
 public class ParseHtml2 {
     public static final String DEST = "results/xmlworker/html_2.pdf";
-    
+
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
@@ -47,10 +50,10 @@ public class ParseHtml2 {
                 "<td style='background-color:red;'>Javascript HowTo</td></tr>" +
                 "<tr><td>Powerbuilder HowTo</td></tr></table></p>" +
                 "</body></html>";
-        
+
         XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
         InputStream is = new ByteArrayInputStream(str.getBytes("UTF-8"));
-        worker.parseXHtml(writer, document, is, Charset.forName("UTF-8"));
+        worker.parseXHtml(writer, document, is, Charset.forName("UTF-8"), new XMLWorkerFontProvider("resources/fonts/"));
         // step 5
         document.close();
     }

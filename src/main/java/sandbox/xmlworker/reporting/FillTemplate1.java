@@ -6,15 +6,17 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.ElementList;
 import com.itextpdf.tool.xml.html.Tags;
+import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+@WrapToTest
 public class FillTemplate1 {
 
     public static final String DEST = "results/xmlworker/report1.pdf";
-    public static final String PDF = "resources/pdfs/stationery.pdf";
+    public static final String PDF =  "resources/pdfs/stationery.pdf";
     public static final String HTML = "resources/xml/movies.html";
     public static final String CSS = "resources/xml/style1.css";
     

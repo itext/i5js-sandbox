@@ -18,6 +18,7 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfString;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,6 +27,7 @@ import java.io.IOException;
 /**
  * Creates an accessible PDF with images and text.
  */
+@WrapToTest
 public class PdfUA {
 
     /** The resulting PDF. */

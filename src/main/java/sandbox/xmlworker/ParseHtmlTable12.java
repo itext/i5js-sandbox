@@ -6,14 +6,19 @@ package sandbox.xmlworker;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerFontProvider;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
+import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
+//without @WrapToTest annotation, because there are no Windows fonts on the linux server (Calibri)
 public class ParseHtmlTable12 {
     public static final String DEST = "results/xmlworker/html_table_12.pdf";
     public static final String HTML = "resources/xml/table12.html";
@@ -38,7 +43,7 @@ public class ParseHtmlTable12 {
         document.open();
         // step 4
         XMLWorkerHelper.getInstance().parseXHtml(writer, document,
-                new FileInputStream(HTML));
+                new FileInputStream(HTML), Charset.forName("cp1252"),new XMLWorkerFontProvider("resources/fonts/"));
         // step 5
         document.close();
     }

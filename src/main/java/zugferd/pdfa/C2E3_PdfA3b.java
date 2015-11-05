@@ -16,6 +16,7 @@ import com.itextpdf.text.pdf.ICC_Profile;
 import com.itextpdf.text.pdf.PdfAConformanceLevel;
 import com.itextpdf.text.pdf.PdfAWriter;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,6 +26,7 @@ import java.io.IOException;
 /**
  * Creates a PDF that conforms with PDF/A-3 Level B.
  */
+@WrapToTest
 public class C2E3_PdfA3b {
 
     /** The resulting PDF. */

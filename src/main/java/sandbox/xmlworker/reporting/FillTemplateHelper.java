@@ -39,7 +39,9 @@ import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -114,12 +116,22 @@ public class FillTemplateHelper extends PdfPageEventHelper {
     public Rectangle getBody() {
         return body;
     }
-        
+
+    public String getToday() {
+        return today;
+    }
+
+    public void setToday(String today) {
+        this.today = today;
+    }
+
     @Override
     public void onOpenDocument(PdfWriter writer, Document document) {
         background = writer.getImportedPage(reader, 1);
         total = writer.getDirectContent().createTemplate(30, 15);
-        today = DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(new Date());
+        Calendar c = Calendar.getInstance();
+        c.set(2015, 9, 13);
+        today = DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(c.getTime());
     }
     
     @Override
@@ -177,7 +189,8 @@ public class FillTemplateHelper extends PdfPageEventHelper {
         // XML Worker
         XMLWorker worker = new XMLWorker(css, true);
         XMLParser p = new XMLParser(worker);
-        p.parse(new FileInputStream(content));
+
+        p.parse(new FileInputStream(content),Charset.forName("cp1252"));
         return elements;
     }
 }

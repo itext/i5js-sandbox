@@ -9,22 +9,26 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerFontProvider;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
+import sandbox.WrapToTest;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 /**
  *
  * @author iText
  */
+//without @WrapToTest annotation, because there are no Windows fonts on the linux server (Calibri)
 public class ParseHtmlTable6 {
     public static final String DEST = "results/xmlworker/html_table_6.pdf";
     public static final String HTML = "resources/xml/paragj.html";
-    
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
@@ -48,7 +52,7 @@ public class ParseHtmlTable6 {
         document.open();
         // step 4
         XMLWorkerHelper.getInstance().parseXHtml(writer, document,
-                new FileInputStream(HTML));
+                new FileInputStream(HTML),Charset.forName("cp1252"),new XMLWorkerFontProvider("resources/fonts/"));
         // step 5
         document.close();
     }
