@@ -16,6 +16,7 @@ import com.itextpdf.text.pdf.PdfSmartCopy;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfStream;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -44,6 +45,8 @@ public class MergeAndAddFont {
     public static final String MERGED_C2 = "results/fonts/testC_merged2.pdf";
     
     public static void main(String[] args) throws DocumentException, IOException {
+        File file = new File(MERGED_A1);
+        file.getParentFile().mkdirs();
         MergeAndAddFont app = new MergeAndAddFont();
         for (int i = 0; i < FILE_A.length; i++) {
             app.createPdf(FILE_A[i], CONTENT[i], true, true);
