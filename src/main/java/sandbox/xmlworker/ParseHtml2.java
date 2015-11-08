@@ -9,7 +9,6 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerFontProvider;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
-import sandbox.WrapToTest;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
