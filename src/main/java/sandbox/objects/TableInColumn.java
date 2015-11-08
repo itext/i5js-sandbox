@@ -11,6 +11,7 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,16 +19,18 @@ import java.io.IOException;
 import sandbox.WrapToTest;
 
 @WrapToTest
-public class LosingRowContent {
+public class TableInColumn {
 
-    public static final String DEST = "results/objects/losing_row_content.pdf";
+    public static final String DEST = "results/objects/table_in_column.pdf";
     
     private int status = ColumnText.START_COLUMN;
     private float y_position = 0;
     
     public static void main(String[] args) throws IOException, DocumentException {
         LoggerFactory.getInstance().setLogger(new SysoLogger());
-        new LosingRowContent().createPdf(DEST);
+        File file = new File(DEST);
+        file.getParentFile().mkdirs();
+        new TableInColumn().createPdf(DEST);
     }
 
     public void createPdf(String dest) throws IOException, DocumentException {
