@@ -29,6 +29,7 @@ public class PageOrientations {
             this.orientation = orientation;
         }
         
+        @Override
         public void onStartPage(PdfWriter writer, Document document) {
             writer.addPageDictEntry(PdfName.ROTATE, orientation);
         }

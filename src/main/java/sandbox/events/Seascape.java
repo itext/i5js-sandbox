@@ -23,6 +23,7 @@ public class Seascape {
     public static final String DEST = "results/events/seascape.pdf";
     
     public class Rotate extends PdfPageEventHelper {
+        @Override
         public void onStartPage(PdfWriter writer, Document document) {
             writer.addPageDictEntry(PdfName.ROTATE, PdfPage.SEASCAPE);
         }

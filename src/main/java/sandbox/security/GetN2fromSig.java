@@ -1,6 +1,5 @@
 /*
- * Example written by Bruno Lowagie in answer to:
- * http://stackoverflow.com/questions/27867868/how-can-i-decrypt-a-pdf-document-with-the-owner-password
+ * Example written by Bruno Lowagie.
  */
 package sandbox.security;
 

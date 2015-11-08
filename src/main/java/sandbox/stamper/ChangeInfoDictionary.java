@@ -35,10 +35,10 @@ public class ChangeInfoDictionary {
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
         Map<String, String> info = reader.getInfo();
         info.put("Special Character: \u00e4", "\u00e4");
-        StringBuffer buf = new StringBuffer();
-        buf.append((char) 0xc3);
-        buf.append((char) 0xa4);
-        info.put(buf.toString(), "\u00e4");
+        StringBuilder sb = new StringBuilder();
+        sb.append((char) 0xc3);
+        sb.append((char) 0xa4);
+        info.put(sb.toString(), "\u00e4");
         stamper.setMoreInfo(info);
         stamper.close();
         reader.close();

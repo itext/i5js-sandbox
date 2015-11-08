@@ -62,6 +62,7 @@ public class CenterColumnVertically {
      * @param  p         the Paragraph we want to add
      * @param  simulate  do we add the paragraph for real?
      * @return the Y coordinate of the end of the text
+     * @throws com.itextpdf.text.DocumentException
      */
     public float drawColumnText(PdfContentByte canvas, Rectangle rect, Paragraph p, boolean simulate) throws DocumentException {
         ColumnText ct = new ColumnText(canvas);
