@@ -29,17 +29,25 @@ public class CounterDemo {
     public class MyCounter implements Counter {
 
         public static final String LOG = "results/logging/counter.txt";
-        protected String name;
         protected FileWriter writer;
+        protected String yourClass;
+        protected String iTextClass;
         
-        private MyCounter(Class<?> klass) throws IOException {
-            this.name = klass.getName();
+        public MyCounter(Class<?> klass) throws IOException {
+            this.yourClass = klass.getName();
             writer = new FileWriter(LOG, true);
+        }
+        
+        private MyCounter(Class<?> klass, String yourClass, FileWriter writer)
+            throws IOException {
+            this.yourClass = yourClass;
+            this.iTextClass = klass.getName();
+            this.writer = writer;
         }
         
         public Counter getCounter(Class<?> klass) {
             try {
-                return new MyCounter(klass);
+                return new MyCounter(klass, yourClass, writer);
             } catch (IOException e) {
                 throw new ExceptionConverter(e);
             }
@@ -49,7 +57,8 @@ public class CounterDemo {
             if (writer == null)
                 throw new RuntimeException("No writer defined!");
             try {
-                writer.write(String.format("[%s] %s: %s read\n", name, new Date().toString(), l));
+                writer.write(String.format(
+                    "[%s:%s] %s: %s read\n", yourClass, iTextClass, new Date().toString(), l));
                 writer.flush();
             } catch (IOException e) {
                 throw new ExceptionConverter(e);
@@ -60,7 +69,8 @@ public class CounterDemo {
             if (writer == null)
                 throw new RuntimeException("No writer defined!");
             try {
-                writer.write(String.format("[%s] %s: %s written\n", name, new Date().toString(), l));
+                writer.write(String.format(
+                    "[%s:%s] %s: %s written\n", yourClass, iTextClass, new Date().toString(), l));
                 writer.flush();
             } catch (IOException e) {
                 throw new ExceptionConverter(e);
