@@ -4,7 +4,6 @@
  */
 package sandbox.objects;
 
-import com.itextpdf.awt.geom.AffineTransform;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -25,10 +24,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  * @author Bruno Lowagie (iText Software)
  */
+@WrapToTest
 public class RotatedText {
     
     public static final String DEST = "results/objects/rotated_text.pdf";
