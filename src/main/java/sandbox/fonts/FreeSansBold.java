@@ -41,7 +41,7 @@ public class FreeSansBold {
         document.add(p);
         BaseFont bfbold = BaseFont.createFont(FONTBOLD, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         Font bold = new Font(bfbold, 12);
-        p = new Paragraph("FreeSans not bold: \u0110", bold);
+        p = new Paragraph("FreeSans bold: \u0110", bold);
         document.add(p);
         document.close();
     }
