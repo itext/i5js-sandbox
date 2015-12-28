@@ -7,8 +7,6 @@ package sandbox.tables;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -26,8 +24,6 @@ public class SimpleTable13 {
         {"Pascal Einstein W. Alfi", "BBB"},
         {"St. John", "CCC"}
     };
-    
-    protected Font font;
 
     public static void main(String[] args) throws IOException,
             DocumentException {
@@ -36,7 +32,6 @@ public class SimpleTable13 {
         new SimpleTable13().createPdf(DEST);
     }
     public void createPdf(String dest) throws IOException, DocumentException {
-        font = new Font(FontFamily.HELVETICA, 10);
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
