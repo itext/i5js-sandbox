@@ -33,13 +33,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import sandbox.WrapToTest;
 
 /**
  * @author iText
  */
+@WrapToTest
 public class BarcodeTagExample {
-    
-    
     
     public static final String HTML = "resources/xml/barcode.html";
     public static final String DEST = "results/xmlworker/barcode.pdf";
