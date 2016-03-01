@@ -1,6 +1,6 @@
 /**
  * Example written by Bruno Lowagie in answer to the following question:
- * http://stackoverflow.com/questions/33795772/itext-not-generating-expected-pdf-format
+ * http://stackoverflow.com/questions/35429441
  */
 package sandbox.xmlworker;
 
