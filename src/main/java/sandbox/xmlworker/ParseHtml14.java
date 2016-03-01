@@ -18,13 +18,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 // No @WrapToTest because Windows fonts are used
-public class ParseHtml13 {
-    public static final String DEST = "results/xmlworker/test-herin.pdf";
+public class ParseHtml14 {
+    public static final String DEST = "results/xmlworker/test-herin2.pdf";
     
     public static void main(String[] args) throws IOException, DocumentException {
         File file = new File(DEST);
         file.getParentFile().mkdirs();
-        new ParseHtml13().createPdf(DEST);
+        new ParseHtml14().createPdf(DEST);
     }
         
     /**
@@ -42,16 +42,13 @@ public class ParseHtml13 {
         // step 3
         document.open();
         // step 4
-        String html = "<div><span class=\"bluetextwhitebackground\">zzz</span></div>"
-            + "<div>"
-            + "<span class=\"bluetextwhitebackground\">Test</span> "
-            + "<span class=\"redtext\">Description</span> "
-            + "<span class=\"italicpurple\">Other Color</span>"
-            + "</div>";
-        String css = ".bluetextwhitebackground { font-family: times; color: white; background: blue}"
-                + ".redtext { font-family: times; color: red; }"
-                + ".italicpurple { font-family: times; font-style: italic; color: purple }";
-        ElementList elements = XMLWorkerHelper.parseToElementList(html, css);
+        String html = "<b style=\"font-family: Arial, Verdana; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; color: rgb(204, 255, 255); background-color: rgb(51, 102, 255);\">zzz&nbsp;</b>"
+                + "<div style=\"font-family: Arial, Verdana; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;\"><b style=\"color: rgb(204, 255, 255); background-color: rgb(51, 102, 255);\"><br /></b></div>"
+                + "<div><b style=\"font-family: Arial, Verdana; font-size: 10pt; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; color: rgb(204, 255, 255); background-color: rgb(51, 102, 255);\">Test &nbsp;</b> &nbsp; "
+                + "<span style=\"color: rgb(255, 0, 0);\">&nbsp;<span style=\"font-weight: bold;\">Description</span> &nbsp;</span>"
+                + "<span style=\"color: rgb(153, 51, 153); font-style: italic;\">Other Color</span>"
+                + "</div>";
+        ElementList elements = XMLWorkerHelper.parseToElementList(html, null);
         PdfPTable table = new PdfPTable(1);
         PdfPCell cell = new PdfPCell();
         for (Element e : elements) {
