@@ -52,7 +52,6 @@ public class RoundedCorners {
     }
     
     public void createPdf(String dest) throws IOException, DocumentException {
-        RoundedCorners app = new RoundedCorners();
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
