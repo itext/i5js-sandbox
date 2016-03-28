@@ -56,7 +56,6 @@ public class TableBorder {
             PdfContentByte cb = canvases[PdfPTable.LINECANVAS];
             cb.rectangle(x1, y1, x2 - x1, y2 - y1);
             cb.stroke();
-            cb.resetRGBColorStroke();
         }
     }
 }
