@@ -17,11 +17,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
 /**
  *
  * @author Bruno Lowagie (iText Software)
  */
+@WrapToTest
 public class NestedTables4 {
     
     public static final String DEST = "results/tables/nested_tables4.pdf";
