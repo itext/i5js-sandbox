@@ -62,7 +62,7 @@ public class PdfA1A {
             PdfPTable table = new PdfPTable(3);
             try {
                 table.setWidths(new int[]{24, 24, 2});
-                table.setTotalWidth(527);
+                table.setTotalWidth(770);
                 table.getDefaultCell().setFixedHeight(20);
                 table.getDefaultCell().setBorder(Rectangle.BOTTOM);
                 table.addCell(new Phrase("Test", font));
@@ -83,8 +83,8 @@ public class PdfA1A {
         @Override
         public void onCloseDocument(PdfWriter writer, Document document) {
             ColumnText.showTextAligned(t, Element.ALIGN_LEFT,
-                new Phrase(String.valueOf(writer.getPageNumber() - 1), font),
-                2, 2, 0);
+                new Phrase(String.valueOf(writer.getPageNumber()), font),
+                2, 4, 0);
         }
     }
     
