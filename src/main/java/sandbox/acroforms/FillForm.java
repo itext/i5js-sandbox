@@ -18,7 +18,7 @@ import java.io.IOException;
 public class FillForm {
     
     public static final String SRC = "resources/pdfs/CertificateOfExcellence.pdf";
-    public static final String DEST = "results/acroforms/certificate_ravindra.pdf";
+    public static final String DEST = "results/acroforms/certificate.pdf";
     
     public static void main(String[] args) throws DocumentException, IOException {
         File file = new File(DEST);
@@ -30,7 +30,7 @@ public class FillForm {
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(dest));
         AcroFields form = stamper.getAcroFields();
         form.setField("course", "Copying and Pasting from StackOverflow");
-        form.setField("name", "Ravindra Ranwala");
+        form.setField("name", "Some dude on StackOverflow");
         form.setField("date", "April 10, 2016");
         form.setField("description",
             "In this course, people consistently ignore the existing documentation completely. "
