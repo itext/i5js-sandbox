@@ -93,11 +93,10 @@ public class MergeAndAddFont {
         for (int i = 0; i < files.length; i++) {
             reader[i] = new PdfReader(files[i]);
             copy.addDocument(reader[i]);
-        }
-        document.close();
-        for (int i = 0; i < reader.length; i++) {
+            copy.freeReader(reader[i]);
             reader[i].close();
         }
+        document.close();
     }
     
     private void embedFont(String merged, String fontfile, String result) throws IOException, DocumentException {
