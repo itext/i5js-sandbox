@@ -1,6 +1,6 @@
 /**
  * This code sample was written by Bruno Lowagie in answer to this question:
- * http://stackoverflow.com/questions/29561417/draw-lines-on-image-in-pdf-using-itextsharp
+ * http://stackoverflow.com/questions/38027783
  */
 package sandbox.images;
 
