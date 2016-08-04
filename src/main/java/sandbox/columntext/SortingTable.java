@@ -23,10 +23,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import sandbox.WrapToTest;
 
 /**
  * @author iText
  */
+@WrapToTest
 public class SortingTable {
         
     public static final String DEST = "results/columntext/optionaltables.pdf";
