@@ -14,6 +14,8 @@ import com.itextpdf.text.pdf.PdfStamper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Locale;
+
 import sandbox.WrapToTest;
 
 @WrapToTest
@@ -44,7 +46,7 @@ public class ClipPdf {
             float lly = media.getAsNumber(1).floatValue() + 200;
             float w = media.getAsNumber(2).floatValue() - media.getAsNumber(0).floatValue() - 400;
             float h = media.getAsNumber(3).floatValue() - media.getAsNumber(1).floatValue() - 400;
-            String command = String.format(
+            String command = String.format(Locale.ROOT,
                     "\nq %.2f %.2f %.2f %.2f re W n\nq\n",
                     llx, lly, w, h);
             stamper.getUnderContent(p).setLiteral(command);
