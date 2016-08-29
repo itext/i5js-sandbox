@@ -1,3 +1,9 @@
+/**
+ * Example written for JavaOne 2016.
+ * Differences between iText 5 and iText 7 are discussed in the JavaOne talk
+ * "Oops, I broke my API" by Raf Hens and Bruno Lowagie.
+ * This is the iText 5 version of one of the examples.
+ */
 package javaone.edition16;
 
 import com.itextpdf.text.BaseColor;
@@ -12,7 +18,9 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class HelloWorldStyles {
 
     public static final String DEST

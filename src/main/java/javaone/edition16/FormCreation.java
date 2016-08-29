@@ -1,3 +1,9 @@
+/**
+ * Example written for JavaOne 2016.
+ * Differences between iText 5 and iText 7 are discussed in the JavaOne talk
+ * "Oops, I broke my API" by Raf Hens and Bruno Lowagie.
+ * This is the iText 5 version of one of the examples.
+ */
 package javaone.edition16;
 
 import com.itextpdf.text.BaseColor;
@@ -11,7 +17,9 @@ import com.itextpdf.text.pdf.TextField;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import sandbox.WrapToTest;
 
+@WrapToTest
 public class FormCreation {
 
     public static final String SRC = "resources/pdfs/hello.pdf";
