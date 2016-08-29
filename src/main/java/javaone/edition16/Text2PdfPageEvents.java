@@ -77,7 +77,7 @@ public class Text2PdfPageEvents {
         
     }
     
-    public static final String SRC
+    public static final String TEXT
         = "resources/text/jekyll_hyde.txt";
     public static final String DEST
         = "results/javaone/edition16/text2pdf_page_events.pdf";
@@ -96,7 +96,7 @@ public class Text2PdfPageEvents {
         MyPageEvents events = new MyPageEvents();
         writer.setPageEvent(events);
         document.open();
-        BufferedReader br = new BufferedReader(new FileReader(SRC));
+        BufferedReader br = new BufferedReader(new FileReader(TEXT));
         String line;
         Paragraph p;
         Font normal = new Font(FontFamily.TIMES_ROMAN, 12);

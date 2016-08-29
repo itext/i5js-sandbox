@@ -25,7 +25,7 @@ import sandbox.WrapToTest;
 @WrapToTest
 public class Text2PdfColumns {
 
-    public static final String SRC
+    public static final String TEXT
         = "resources/text/jekyll_hyde.txt";
     public static final String DEST
         = "results/javaone/edition16/text2pdf_columns.pdf";
@@ -48,7 +48,7 @@ public class Text2PdfColumns {
             new Rectangle(305, 36, 559, 806)
         };
         
-        BufferedReader br = new BufferedReader(new FileReader(SRC));
+        BufferedReader br = new BufferedReader(new FileReader(TEXT));
         String line;
         Paragraph p;
         Font normal = new Font(FontFamily.TIMES_ROMAN, 12);

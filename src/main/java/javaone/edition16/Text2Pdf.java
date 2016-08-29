@@ -23,7 +23,7 @@ import sandbox.WrapToTest;
 @WrapToTest
 public class Text2Pdf {
 
-    public static final String SRC
+    public static final String TEXT
         = "resources/text/jekyll_hyde.txt";
     public static final String DEST
         = "results/javaone/edition16/text2pdf.pdf";
@@ -40,7 +40,7 @@ public class Text2Pdf {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
-        BufferedReader br = new BufferedReader(new FileReader(SRC));
+        BufferedReader br = new BufferedReader(new FileReader(TEXT));
         String line;
         Paragraph p;
         Font normal = new Font(FontFamily.TIMES_ROMAN, 12);
