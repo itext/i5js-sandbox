@@ -30,9 +30,10 @@ public class HelloWorld {
     }
 
     public void createPdf(String dest)
-	throws DocumentException, IOException {
+	    throws DocumentException, IOException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(dest));
+        PdfWriter.getInstance(
+            document, new FileOutputStream(dest));
         document.open();
         document.add(new Paragraph("Hello World!"));
         document.close();

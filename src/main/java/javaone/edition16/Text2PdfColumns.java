@@ -43,11 +43,6 @@ public class Text2PdfColumns {
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));
         document.open();
         ColumnText ct = new ColumnText(writer.getDirectContent());
-        Rectangle[] columns = {
-            new Rectangle(36, 36, 290, 806),
-            new Rectangle(305, 36, 559, 806)
-        };
-        
         BufferedReader br = new BufferedReader(new FileReader(TEXT));
         String line;
         Paragraph p;
@@ -60,6 +55,9 @@ public class Text2PdfColumns {
             title = line.isEmpty();
             ct.addElement(p);
         }
+        Rectangle[] columns = {
+            new Rectangle(36, 36, 290, 806), new Rectangle(305, 36, 559, 806)
+        };
         int c = 0;
         int status = ColumnText.START_COLUMN;
         while (ColumnText.hasMoreText(status)) {
