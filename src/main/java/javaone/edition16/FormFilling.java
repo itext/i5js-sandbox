@@ -36,6 +36,7 @@ public class FormFilling {
         AcroFields fields = stamper.getAcroFields();
         fields.setFieldProperty("text", "textcolor", BaseColor.BLUE, null);
         fields.setFieldProperty("text", "bordercolor", BaseColor.RED, null);
+        fields.setFieldProperty("text", "fontsize", 14, null);
         fields.setField("text", "Field Text");
         stamper.close();
         reader.close();

@@ -39,6 +39,7 @@ public class FormCreation {
         tf.setBorderColor(BaseColor.BLUE);
         tf.setBorderWidth(2);
         tf.setTextColor(BaseColor.RED);
+        tf.setFontSize(12);
         tf.setText("Text field");
         PdfFormField field = tf.getTextField();
         stamper.addAnnotation(field, 1);
