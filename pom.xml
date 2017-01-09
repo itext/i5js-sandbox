@@ -129,6 +129,14 @@
         </plugins>
     </build>
 
+    <repositories>
+      <repository>
+        <id>itext</id>
+        <name>iText Repository - snapshots</name>
+        <url>https://repo.itextsupport.com/snapshot/</url>
+      </repository>
+    </repositories>
+
     <profiles>
         <profile>
             <id>java8-disable-strict-javadoc</id>
