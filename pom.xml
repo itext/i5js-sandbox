@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>sandbox</artifactId>
-    <version>5.5.11-SNAPSHOT</version>
+    <version>5.5.12-SNAPSHOT</version>
 
     <name>iText Examples (Sandbox)</name>
     <description>iText Examples (Sandbox)</description>
